@@ -116,7 +116,7 @@ public class EnergyRequestRegistry implements ITickHandler
 		int[] set = new int[] {id, te.xCoord, te.yCoord, te.zCoord, te.worldObj.provider.dimensionId };
 		for(int i = 0;i < checked.size();i++)
 		{
-			if(i <= this.checked.size())
+			if(i < this.checked.size())
 			{
 				int[] dat = checked.get(i);
 				if(checked == null)
