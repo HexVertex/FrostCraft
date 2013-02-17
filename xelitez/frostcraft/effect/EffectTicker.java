@@ -54,15 +54,19 @@ public class EffectTicker implements ITickHandler
 	}
 	
 	public static void addEffect(EntityLiving entity, PotionEffect effect, Object... firingEntity)
-	{
+	{	
+		if(entity.worldObj.isRemote)
+		{
+			return;
+		}
 		entity.addPotionEffect(effect);
 		Entity fireentity = null;
-		if(firingEntity != null && firingEntity.length >= 1 && firingEntity[1] instanceof Entity)
+		if(firingEntity != null && firingEntity.length >= 2 && firingEntity[1] instanceof Entity)
 		{
 			fireentity = (Entity) firingEntity[1];
 		}
 		Entity source = null;
-		if(firingEntity != null && firingEntity.length >= 2 && firingEntity[0] instanceof Entity)
+		if(firingEntity != null && firingEntity.length >= 1 && firingEntity[0] instanceof Entity)
 		{
 			source = (Entity) firingEntity[0];
 		}
@@ -218,7 +222,7 @@ public class EffectTicker implements ITickHandler
 			}
 			if(this.potionId == FCPotion.frostBurn.id)
 			{
-				if(entity != null && !entity.isDead && entity.getActivePotionEffect(FCPotion.freeze) != null);
+				if(entity != null && !entity.isDead && entity.getActivePotionEffect(FCPotion.frostBurn) != null);
 				{
 					if(entity == null)
 					{

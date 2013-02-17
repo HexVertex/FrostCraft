@@ -66,21 +66,21 @@ public class FrostExplosion
                     var19 /= var34;
                     double var33 = (double)this.worldObj.getBlockDensity(var31, var32.boundingBox);
                     double var35 = (1.0D - var13) * var33;
-                    EffectTicker.addEffect(var32, new PotionEffect(FCPotion.freeze.id, 20));
+                    EffectTicker.addEffect(var32, new PotionEffect(FCPotion.freeze.id, var32 instanceof EntityPlayer ? 20 : 40));
                     if(this.exploder instanceof EntityFrostShot)
                     {
                     	if(((EntityFrostShot) this.exploder).shootingEntity != null)
                     	{
-                    		EffectTicker.addEffect(var32, new PotionEffect(FCPotion.frostBurn.id, 60, 1), this.exploder, ((EntityFrostShot) this.exploder).shootingEntity);
+                    		EffectTicker.addEffect(var32, new PotionEffect(FCPotion.frostBurn.id, 80, 1), this.exploder, ((EntityFrostShot) this.exploder).shootingEntity);
                     	}
                     	else
                     	{
-                    		EffectTicker.addEffect(var32, new PotionEffect(FCPotion.frostBurn.id, 60, 1), this.exploder, this.exploder);
+                    		EffectTicker.addEffect(var32, new PotionEffect(FCPotion.frostBurn.id, 80, 1), this.exploder, this.exploder);
                     	}
                     }
                     else
                     {
-                    	EffectTicker.addEffect(var32, new PotionEffect(FCPotion.frostBurn.id, 60, 1), this.exploder, this.exploder);
+                    	EffectTicker.addEffect(var32, new PotionEffect(FCPotion.frostBurn.id, 80, 1), this.exploder, this.exploder);
                     }
                 }
             }

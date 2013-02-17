@@ -91,15 +91,15 @@ public class Version implements IXEZUpdate
     	}
     	catch (MalformedURLException e)
     	{
-    		FrostCraft.instance.fcLog.info("Unable to check for updates");
+    		FCLog.info("Unable to check for updates");
     	}
     	catch (ConnectException e)
     	{
-    		FrostCraft.instance.fcLog.info("Unable to connect to update page");
+    		FCLog.info("Unable to connect to update page");
     	}
     	catch (IOException e)
     	{
-    		FrostCraft.instance.fcLog.info("Unable to check for updates");
+    		FCLog.info("Unable to check for updates");
     	}
 			
     	for (int i = 0; i < strings.size(); i++)
@@ -159,7 +159,7 @@ public class Version implements IXEZUpdate
     			
     			if (FMLCommonHandler.instance().getSide() == Side.SERVER)
     			{
-    				FrostCraft.instance.fcLog.info("A new version of FrostCraft is available(" + newVersion + ")");
+    				FCLog.info("A new version of FrostCraft is available(" + newVersion + ")");
     			}
     			
     			if (mB != minorBuild && !ignoremB)

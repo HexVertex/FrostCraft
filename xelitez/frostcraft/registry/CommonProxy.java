@@ -28,6 +28,8 @@ public class CommonProxy implements IGuiHandler
 				return new ContainerFrostGenerator(player.inventory, (TileEntityFrostGenerator)te);
 			case 3:
 				return new ContainerFreezer(player.inventory, (TileEntityFreezer)te);
+			case 4:
+				return new ContainerFrostEnforcer(player.inventory, (TileEntityFrostEnforcer)te);
 			}
 		}
 		return null;

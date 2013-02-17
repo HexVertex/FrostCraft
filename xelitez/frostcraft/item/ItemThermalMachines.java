@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 
 public class ItemThermalMachines extends ItemBlock
 {
-	String[] name = new String[] {"ThermalPump", "FrostFurnace", "FrostGenerator", "Freezer"};
+	String[] name = new String[] {"ThermalPump", "FrostFurnace", "FrostGenerator", "Freezer", "FrostEnforcer"};
 	
 	public ItemThermalMachines(int par1)
 	{
@@ -58,6 +58,9 @@ public class ItemThermalMachines extends ItemBlock
     			par3List.add("\u00a7oIt's a FREEZER!!!");
     			par3List.add("\u00a7oDo you really need info about this?");
     			break;
+    		case 4:
+    			par3List.add("\u00a7oA Frost Enforcer enforces certain tools");
+    			par3List.add("\u00a7oto become more efficient and durable");
     		}
     	}
     }

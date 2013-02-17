@@ -1,6 +1,6 @@
 package xelitez.frostcraft.network;
 
-import xelitez.frostcraft.WorldAccess;
+import xelitez.frostcraft.world.WorldAccess;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.NetLoginHandler;
 import net.minecraft.network.packet.NetHandler;
@@ -11,7 +11,6 @@ import cpw.mods.fml.common.network.Player;
 
 public class NetworkManager implements IConnectionHandler
 {
-	private WorldAccess access = new WorldAccess();
 	@Override
 	public void playerLoggedIn(Player player, NetHandler netHandler,
 			INetworkManager manager) {
@@ -50,7 +49,6 @@ public class NetworkManager implements IConnectionHandler
 	public void clientLoggedIn(NetHandler clientHandler,
 			INetworkManager manager, Packet1Login login) 
 	{
-		access.setWorldAndLoadRenderers();
 	}
 
 }

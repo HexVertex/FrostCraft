@@ -53,6 +53,8 @@ public class EntityFrostArrow extends Entity implements IProjectile
     private int ticksInGround;
     private int ticksInAir = 0;
     private double damage = 2.0D;
+    private int time = 0;
+    private int frost = 0;
 
     /** The amount of knockback an frostArrow applies when it hits a mob. */
     private int knockbackStrength;
@@ -325,11 +327,6 @@ public class EntityFrostArrow extends Entity implements IProjectile
                     {
                         var21 = DamageSource.causeThrownDamage(this, this.shootingEntity);
                     }
-
-                    if (this.isBurning() && !(var4.entityHit instanceof EntityEnderman))
-                    {
-                        var4.entityHit.setFire(5);
-                    }
                     
                     if (var4.entityHit.attackEntityFrom(var21, var23))
                     {
@@ -338,8 +335,8 @@ public class EntityFrostArrow extends Entity implements IProjectile
                             EntityLiving var24 = (EntityLiving)var4.entityHit;
                             if(this.canFreeze)
                             {
-                            	EffectTicker.addEffect(var24, new PotionEffect(FCPotion.freeze.id, 20));
-                            	EffectTicker.addEffect(var24, new PotionEffect(FCPotion.frostBurn.id, 50), this, this.shootingEntity);
+                            	EffectTicker.addEffect(var24, new PotionEffect(FCPotion.freeze.id, var24 instanceof EntityPlayer ? 20 + 10 * time: 40 + 10 * time));
+                            	EffectTicker.addEffect(var24, new PotionEffect(FCPotion.frostBurn.id, 50, frost), this, this.shootingEntity);
 
                             	if (!this.worldObj.isRemote)
                             	{
@@ -629,5 +626,15 @@ public class EntityFrostArrow extends Entity implements IProjectile
 	public void setCanFreeze(boolean b) 
 	{
 		this.canFreeze = b;
+	}
+	
+	public void setFreezeLevel(int l)
+	{
+		this.time = l;
+	}
+	
+	public void setFrost(int l)
+	{
+		this.frost = l;
 	}
 }

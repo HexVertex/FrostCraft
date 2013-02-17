@@ -228,6 +228,16 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
     				frontTexture = 8;
     			}
     			break;
+    		case 4:
+    			if(tet.isActive)
+    			{
+    				frontTexture = 5;
+    			}
+    			else
+    			{
+    				frontTexture = 6;
+    			}
+    			break;
     		}
     		return par5 != var6 ? this.blockIndexInTexture : frontTexture;
     	}
@@ -250,6 +260,9 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
         	break;
         case 3:
         	frontTexture = 8;
+        	break;
+        case 4:
+        	frontTexture = 6;
         	break;
         default:
         	frontTexture = 13;
@@ -366,6 +379,31 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
 	                par1World.spawnParticle("snow", (double)(var7 + var11), (double)var8, (double)(var9 + var10), 0.0D, 0.0D, 0.0D); 
 	            }
 	        }
+	        if(tet.isActive && meta == 4)
+	        {
+	            float var7 = (float)par2 + 0.5F;
+	            float var8 = (float)par3 + 0.3F + par5Random.nextFloat() * 12.0F / 16.0F;
+	            float var9 = (float)par4 + 0.5F;
+	            float var10 = 0.55F;
+	            float var11 = par5Random.nextFloat() * 0.8F - 0.4F;
+	
+	            if (tet.front == 4)
+	            {
+	                par1World.spawnParticle("snow", (double)(var7 - var10), (double)var8, (double)(var9 + var11), 0.0D, 0.0D, 0.0D);
+	            }
+	            else if (tet.front == 5)
+	            {
+	                par1World.spawnParticle("snow", (double)(var7 + var10), (double)var8, (double)(var9 + var11), 0.0D, 0.0D, 0.0D);
+	            }
+	            else if (tet.front == 2)
+	            {
+	                par1World.spawnParticle("snow", (double)(var7 + var11), (double)var8, (double)(var9 - var10), 0.0D, 0.0D, 0.0D);
+	            }
+	            else if (tet.front == 3)
+	            {
+	                par1World.spawnParticle("snow", (double)(var7 + var11), (double)var8, (double)(var9 + var10), 0.0D, 0.0D, 0.0D); 
+	            }
+	        }
     	}
     }
     
@@ -404,7 +442,7 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
     
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
     {
-        for (int var4 = 0; var4 < 4; ++var4)
+        for (int var4 = 0; var4 < 5; ++var4)
         {
             par3List.add(new ItemStack(par1, 1, var4));
         }
@@ -435,6 +473,9 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
         		break;
         	case 3:
         		par5EntityPlayer.openGui(FrostCraft.instance, 3, par1World, par2, par3, par4);
+        		break;
+        	case 4:
+        		par5EntityPlayer.openGui(FrostCraft.instance, 4, par1World, par2, par3, par4);
         		break;
         	}
 
@@ -473,6 +514,8 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
 			return new TileEntityFrostGenerator();
 		case 3:
 			return new TileEntityFreezer();
+		case 4:
+			return new TileEntityFrostEnforcer();
 		default:
 			return new TileEntityThermalMachines();
 		}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import xelitez.frostcraft.registry.IdMap;
 import xelitez.frostcraft.registry.CreativeTabs;
+import xelitez.frostcraft.enchantment.FrostEnchantment;
 import xelitez.frostcraft.entity.EntityFrostArrow;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -74,6 +75,20 @@ public class ItemFrostBow extends ItemBow
             if (var11 > 0)
             {
                 var8.setCanFreeze(false);
+            }
+            
+            int var12 = EnchantmentHelper.getEnchantmentLevel(FrostEnchantment.freeze.effectId, par1ItemStack);
+            
+            if(var12 > 0)
+            {
+            	var8.setFreezeLevel(var12);
+            }
+            
+            int var13 = EnchantmentHelper.getEnchantmentLevel(FrostEnchantment.frostBurn.effectId, par1ItemStack);
+            
+            if(var13 > 0)
+            {
+            	var8.setFrost(var13);
             }
 
             par1ItemStack.damageItem(1, par3EntityPlayer);

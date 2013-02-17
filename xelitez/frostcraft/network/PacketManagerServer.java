@@ -2,6 +2,7 @@ package xelitez.frostcraft.network;
 
 import java.util.logging.Level;
 
+import xelitez.frostcraft.FCLog;
 import xelitez.frostcraft.FrostCraft;
 import xelitez.frostcraft.tileentity.TileEntityThermalMachines;
 
@@ -51,7 +52,7 @@ public class PacketManagerServer implements IPacketHandler{
         }
         else
         {
-        	FrostCraft.instance.fcLog.log(Level.INFO, "FrostCraft packet recieved with invalid id");
+        	FCLog.log(Level.INFO, "FrostCraft packet recieved with invalid id");
         }
         
 	}

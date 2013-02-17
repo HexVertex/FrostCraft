@@ -25,7 +25,7 @@ public class RenderFrostBow implements IItemRenderer{
 	@Override
 	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
 			ItemRendererHelper helper) {
-		return true;
+		return false;
 	}
 
 	@Override
@@ -34,12 +34,7 @@ public class RenderFrostBow implements IItemRenderer{
 		float f;
 		if(type == ItemRenderType.EQUIPPED)
 		{
-            f = 0.625F;
-            GL11.glTranslatef(0.0F, 0.125F, 0.3125F);
-            GL11.glRotatef(-20.0F, 0.0F, 1.0F, 0.0F);
-            GL11.glScalef(f, -f, f);
-            GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
-            GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
+            GL11.glTranslatef(0.15F, -0.25F, 0.165F);
             Tessellator var5 = Tessellator.instance;
             EntityLiving entity = (EntityLiving)data[1];
             int texture = 0;
@@ -52,18 +47,8 @@ public class RenderFrostBow implements IItemRenderer{
             float var8 = ((float)(var6 % 16 * 16) + 15.99F) / 256.0F;
             float var9 = ((float)(var6 / 16 * 16) + 0.0F) / 256.0F;
             float var10 = ((float)(var6 / 16 * 16) + 15.99F) / 256.0F;
-            float var11 = 0.0F;
-            float var12 = 0.3F;
-            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-            GL11.glTranslatef(-var11, -var12, 0.0F);
-            float var13 = 1.5F;
-            GL11.glScalef(var13, var13, var13);
-            GL11.glRotatef(50.0F, 0.0F, 1.0F, 0.0F);
-            GL11.glRotatef(335.0F, 0.0F, 0.0F, 1.0F);
-            GL11.glTranslatef(-0.9375F, -0.0625F, 0.0F);
-            ItemRenderer.renderItemIn2D(var5, var8, var9, var7, var10, 0.0625F);
-
-            if (item != null && item.hasEffect() && texture == 0)
+			ItemRenderer.renderItemIn2D(var5, var8, var9, var7, var10, 0.0625F);
+            if (item != null && item.hasEffect())
             {
                 GL11.glDepthFunc(GL11.GL_EQUAL);
                 GL11.glDisable(GL11.GL_LIGHTING);
@@ -93,7 +78,6 @@ public class RenderFrostBow implements IItemRenderer{
                 GL11.glEnable(GL11.GL_LIGHTING);
                 GL11.glDepthFunc(GL11.GL_LEQUAL);
             }
-
 		}
 	}
 

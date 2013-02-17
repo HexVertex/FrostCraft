@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
 import net.minecraft.nbt.NBTTagList;
@@ -232,7 +233,10 @@ public class EntityFrostShot extends Entity
                 this.onImpact(var3);
             }
  
-            
+            this.posX += this.motionX;
+            this.posY += this.motionY;
+            this.posZ += this.motionZ;
+            float var16 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
 
             while (this.rotationPitch - this.prevRotationPitch >= 180.0F)
             {
@@ -280,10 +284,6 @@ public class EntityFrostShot extends Entity
         {
         	tickCounter++;
         }
-    	if(this.worldObj.isRemote)
-    	{
-    		System.out.println(this.rotationPitch);
-    	}
         spawnParticles();
         this.worldObj.playSoundEffect(this.posX, this.posY, this.posZ, "mob.blaze.breathe", 0.15F, 20F);
     }
@@ -291,8 +291,11 @@ public class EntityFrostShot extends Entity
     private void spawnParticles()
     {
     	double var1 = 0.1D;
-    	this.worldObj.spawnParticle("snow", this.posX, this.posY, this.posZ, (double)DegMath.sin(-(this.rotationYaw - 90.0f)) * (double)DegMath.cos(this.rotationPitch + 90.0f) * var1, (double)DegMath.sin(this.rotationPitch + 90.0f) * var1, (double)DegMath.cos(-(this.rotationYaw - 90.0f)) * (double)DegMath.cos(this.rotationPitch + 90.0f) * var1);
-    	this.worldObj.spawnParticle("snow", this.posX, this.posY, this.posZ, (double)DegMath.sin(-(this.rotationYaw - 90.0f)) * (double)DegMath.cos(this.rotationPitch - 90.0f) * var1, (double)DegMath.sin(this.rotationPitch - 90.0f) * var1, (double)DegMath.cos(-(this.rotationYaw - 90.0f)) * (double)DegMath.cos(this.rotationPitch - 90.0f) * var1);
+    	this.worldObj.spawnParticle("snow", this.posX, this.posY, this.posZ, (double)DegMath.cos(-(this.rotationYaw + 90.0f)) * (double)DegMath.cos(-this.rotationPitch + 90.0f) * var1, (double)DegMath.sin(-this.rotationPitch + 90.0f) * var1, (double)DegMath.sin(-(this.rotationYaw + 90.0f)) * (double)DegMath.cos(-this.rotationPitch + 90.0f) * var1);
+    	this.worldObj.spawnParticle("snow", this.posX, this.posY, this.posZ, (double)DegMath.cos(-(this.rotationYaw + 90.0f)) * (double)DegMath.cos(-this.rotationPitch - 90.0f) * var1, (double)DegMath.sin(-this.rotationPitch - 90.0f) * var1, (double)DegMath.sin(-(this.rotationYaw + 90.0f)) * (double)DegMath.cos(-this.rotationPitch - 90.0f) * var1);
+    	this.worldObj.spawnParticle("snow", this.posX, this.posY, this.posZ, (double)DegMath.cos(-(this.rotationYaw)) * var1, 0.0D, (double)DegMath.sin(-(this.rotationYaw)) * var1);
+    	this.worldObj.spawnParticle("snow", this.posX, this.posY, this.posZ, (double)DegMath.cos(-(this.rotationYaw + 180.0f)) * var1, 0.0D, (double)DegMath.sin(-(this.rotationYaw + 180.0f)) * var1);
+    	this.worldObj.spawnParticle("snow", this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
     }
 
     /**
@@ -312,14 +315,14 @@ public class EntityFrostShot extends Entity
         {
             if (par1MovingObjectPosition.entityHit != null)
             {
-                EffectTicker.addEffect(par1MovingObjectPosition.entityHit, new PotionEffect(FCPotion.freeze.id, 20));
+                EffectTicker.addEffect(par1MovingObjectPosition.entityHit, new PotionEffect(FCPotion.freeze.id, par1MovingObjectPosition.entityHit instanceof EntityPlayer ? 20 : 40));
                 if(this.shootingEntity != null)
                 {
-                	EffectTicker.addEffect(par1MovingObjectPosition.entityHit, new PotionEffect(FCPotion.frostBurn.id, 60, 1), this, this.shootingEntity);
+                	EffectTicker.addEffect(par1MovingObjectPosition.entityHit, new PotionEffect(FCPotion.frostBurn.id, 80, 1), this, this.shootingEntity);
                 }
                 else
                 {
-                	EffectTicker.addEffect(par1MovingObjectPosition.entityHit, new PotionEffect(FCPotion.frostBurn.id, 60, 1), this, this);
+                	EffectTicker.addEffect(par1MovingObjectPosition.entityHit, new PotionEffect(FCPotion.frostBurn.id, 80, 1), this, this);
                 }
             }
             this.worldObj.playSoundEffect(this.posX, this.posY, this.posZ, "random.explode", 1.25F, 1.5F);

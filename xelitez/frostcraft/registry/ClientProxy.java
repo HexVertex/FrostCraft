@@ -33,6 +33,8 @@ public class ClientProxy extends CommonProxy
 				return new GuiFrostGenerator(player.inventory, (TileEntityFrostGenerator)te);
 			case 3:
 				return new GuiFreezer(player.inventory, (TileEntityFreezer)te);
+			case 4:
+				return new GuiFrostEnforcer(player.inventory, (TileEntityFrostEnforcer)te);
 			}
 		}
 		return null;

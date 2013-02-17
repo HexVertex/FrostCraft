@@ -44,13 +44,16 @@ public class EnergyRequestRegistry implements ITickHandler
 		}
 		for(int i = 0;i < ids.size();i++)
 		{
-			int[] id = ids.get(i);
-			if(id[0] == par1)
+			if(i < ids.size())
 			{
-				par1++;
-				return getAvailableId(par1);
+				int[] id = ids.get(i);
+				if(id != null && id[0] == par1)
+				{
+					par1++;
+					return getAvailableId(par1);
+				}
 			}
-		}
+		}	
 		return par1;
 	}
 	
@@ -91,15 +94,18 @@ public class EnergyRequestRegistry implements ITickHandler
 	{
 		for(int i = 0;i < ids.size();i++)
 		{
-			int[] id = ids.get(i);
-			if(id != null && id[2] == te.xCoord && id[3] == te.yCoord && id[4] == te.zCoord && id[5] == te.worldObj.provider.dimensionId)
+			if(i < ids.size())
 			{
-				if(this.getNumberOfPipesInQueue(id[0]) <= 0)
+				int[] id = ids.get(i);
+				if(id != null && id[2] == te.xCoord && id[3] == te.yCoord && id[4] == te.zCoord && id[5] == te.worldObj.provider.dimensionId)
 				{
-					this.removeAll(id[0]);
-					return false;
+					if(this.getNumberOfPipesInQueue(id[0]) <= 0)
+					{
+						this.removeAll(id[0]);
+						return false;
+					}
+					return true;
 				}
-				return true;
 			}
 		}
 		return false;
@@ -110,13 +116,16 @@ public class EnergyRequestRegistry implements ITickHandler
 		int[] set = new int[] {id, te.xCoord, te.yCoord, te.zCoord, te.worldObj.provider.dimensionId };
 		for(int i = 0;i < checked.size();i++)
 		{
-			int[] dat = checked.get(i);
-			if(checked == null)
+			if(i <= this.checked.size())
 			{
-				checked.set(i, set);
-				return;
+				int[] dat = checked.get(i);
+				if(checked == null)
+				{
+					checked.set(i, set);
+					return;
+				}
 			}
-		}
+		}	
 		checked.add(set);
 	}
 	

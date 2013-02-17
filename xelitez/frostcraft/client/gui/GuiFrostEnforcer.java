@@ -2,20 +2,20 @@ package xelitez.frostcraft.client.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import xelitez.frostcraft.inventory.ContainerFreezer;
-import xelitez.frostcraft.tileentity.TileEntityFreezer;
+import xelitez.frostcraft.inventory.ContainerFrostEnforcer;
+import xelitez.frostcraft.tileentity.TileEntityFrostEnforcer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
 
-public class GuiFreezer extends GuiContainer
+public class GuiFrostEnforcer extends GuiContainer
 {
-	private TileEntityFreezer tile;
+	private TileEntityFrostEnforcer furnaceInventory;
 
-    public GuiFreezer(InventoryPlayer par1InventoryPlayer, TileEntityFreezer par2TileEntityFreezer)
+    public GuiFrostEnforcer(InventoryPlayer par1InventoryPlayer, TileEntityFrostEnforcer par2TileEntityFrostEnforcer)
     {
-        super(new ContainerFreezer(par1InventoryPlayer, par2TileEntityFreezer));
-        this.tile = par2TileEntityFreezer;
+        super(new ContainerFrostEnforcer(par1InventoryPlayer, par2TileEntityFrostEnforcer));
+        this.furnaceInventory = par2TileEntityFrostEnforcer;
     }
 
     /**
@@ -23,7 +23,7 @@ public class GuiFreezer extends GuiContainer
      */
     protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
-        this.fontRenderer.drawString("Freezer", 68, 6, 4210752);
+        this.fontRenderer.drawString("Frost Enforcer", 53, 6, 4210752);
         this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
 
@@ -32,7 +32,7 @@ public class GuiFreezer extends GuiContainer
      */
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
     {
-        int var4 = this.mc.renderEngine.getTexture("/xelitez/frostcraft/textures/freezer.png");
+        int var4 = this.mc.renderEngine.getTexture("/xelitez/frostcraft/textures/frostenforcer.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(var4);
         int var5 = (this.width - this.xSize) / 2;
@@ -40,13 +40,13 @@ public class GuiFreezer extends GuiContainer
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
         int var7;
 
-        if (this.tile.isFreezing())
+        if (this.furnaceInventory.isEnforcing())
         {
-            var7 = this.tile.getStorageRemainingScaled(12);
-            this.drawTexturedModalRect(var5 + 54, var6 + 48 - var7, 176, 12 - var7, 14, var7 + 2);
+            var7 = this.furnaceInventory.getStorageRemainingScaled(12);
+            this.drawTexturedModalRect(var5 + 57, var6 + 36 + 13 - var7, 176, 12 - var7, 14, var7 + 2);
         }
 
-        var7 = this.tile.getFreezeProgressScaled(24);
-        this.drawTexturedModalRect(var5 + 75, var6 + 34, 176, 14, var7 + 1, 16);
+        var7 = this.furnaceInventory.getEnforcingProgressScaled(24);
+        this.drawTexturedModalRect(var5 + 79, var6 + 34, 176, 14, var7 + 1, 16);
     }
 }

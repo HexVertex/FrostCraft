@@ -3,6 +3,7 @@ package xelitez.frostcraft.item;
 import java.util.List;
 
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -10,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import xelitez.frostcraft.FrostCraft;
+import xelitez.frostcraft.enchantment.FrostEnchantment;
 import xelitez.frostcraft.entity.EntityFrostShot;
 import xelitez.frostcraft.interfaces.IChargeable;
 import xelitez.frostcraft.registry.CreativeTabs;
@@ -75,6 +77,13 @@ public class ItemFrostGun extends ItemBase implements IChargeable
     {
         par3List.add(new ItemStack(par1, 1, 0));
         par3List.add(new ItemStack(par1, 1, 1024));
+        for(Enchantment enchant : Enchantment.enchantmentsList)
+        {
+        	if(enchant != null && enchant instanceof FrostEnchantment)
+        	{
+        		par3List.add(Item.field_92053_bW.func_92057_a(new EnchantmentData(enchant, enchant.getMaxLevel())));
+        	}
+        }
     }
     
     @Override
