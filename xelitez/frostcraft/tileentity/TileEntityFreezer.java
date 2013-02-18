@@ -63,7 +63,7 @@ public class TileEntityFreezer extends TileEntityThermalMachines implements ISid
     
     public int getFreezeProgressScaled(int par1)
     {
-        return this.freezeTime * par1 / 1200;
+        return this.freezeTime * par1 / 300;
     }
     
     public int getStorageRemainingScaled(int par1)
@@ -90,7 +90,7 @@ public class TileEntityFreezer extends TileEntityThermalMachines implements ISid
                 ++this.freezeTime;
                 --this.storage;
 
-                if (this.freezeTime == 1200)
+                if (this.freezeTime == 300)
                 {
                     this.freezeTime = 0;
                     this.freezeItem();

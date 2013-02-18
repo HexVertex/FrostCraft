@@ -1,6 +1,7 @@
 package xelitez.frostcraft;
 
 import java.io.File;
+import java.net.URLClassLoader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,7 +24,7 @@ import xelitez.frostcraft.registry.CommonProxy;
 import xelitez.frostcraft.registry.IdMap;
 import xelitez.frostcraft.registry.RecipeRegistry;
 import xelitez.frostcraft.world.WorldAccess;
-import xelitez.updateutility.UpdateRegistry;
+import xelitez.frostcraft.world.WorldTicker;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
@@ -39,6 +40,8 @@ import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.FMLInjectionData;
+import cpw.mods.fml.relauncher.ReflectionHelper;
+import cpw.mods.fml.relauncher.RelaunchClassLoader;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(	
@@ -149,6 +152,7 @@ public class FrostCraft
     	NetworkRegistry.instance().registerGuiHandler(instance, proxy);
     	TickRegistry.registerTickHandler(EnergyRequestRegistry.getInstance(), Side.SERVER);
     	TickRegistry.registerTickHandler(EffectTicker.instance(), Side.SERVER);
+    	TickRegistry.registerTickHandler(new WorldTicker(), Side.SERVER);
     	NetworkRegistry.instance().registerConnectionHandler(new NetworkManager());
     	RecipeRegistry.registry().registerRecipes();
     	MinecraftForge.EVENT_BUS.register(new EventListener());
@@ -168,15 +172,14 @@ public class FrostCraft
 				}
 			}
 		}
-		UpdateRegistry.addMod(this.instance, this.version);
         try
         {
             if (checkForUpdates)
             {
-                UpdateRegistry.addMod(this.instance, this.version);
+                version.checkForUpdates();
             }
         }
-        catch (Exception E)
+        catch (Throwable E)
         {
         	FCLog.log(Level.SEVERE, "FrostCraft failed to check for updates", E);
         }

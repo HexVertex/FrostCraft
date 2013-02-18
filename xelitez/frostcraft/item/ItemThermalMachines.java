@@ -23,7 +23,7 @@ public class ItemThermalMachines extends ItemBlock
 	
     public int getIconFromDamage(int par1)
     {
-        return IdMap.BlockThermalMachines.getBlockTextureFromSideAndMetadata(2, par1);
+        return IdMap.blockThermalMachines.getBlockTextureFromSideAndMetadata(2, par1);
     }
     
     public int getMetadata(int par1)
@@ -33,7 +33,7 @@ public class ItemThermalMachines extends ItemBlock
     
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
     {
-    	if(par1ItemStack.itemID == IdMap.BlockThermalMachines.blockID)
+    	if(par1ItemStack.itemID == IdMap.blockThermalMachines.blockID)
     	{
     		switch(par1ItemStack.getItemDamage())
     		{

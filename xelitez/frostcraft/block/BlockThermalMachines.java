@@ -43,7 +43,7 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
 	
     public int idDropped(int par1, Random par2Random, int par3)
     {
-    	return IdMap.BlockThermalMachines.blockID;
+    	return IdMap.blockThermalMachines.blockID;
     }
     
     public int damageDropped(int par1)

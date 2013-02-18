@@ -18,9 +18,16 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class WorldGenIcicles implements IWorldGenerator
 {
-	public static List<BiomeGenBase> biomeList = new ArrayList<BiomeGenBase>();
+	public List<BiomeGenBase> biomeList = new ArrayList<BiomeGenBase>();
 	
-	static
+	private static WorldGenIcicles instance = new WorldGenIcicles();
+	
+	public static WorldGenIcicles getInstance()
+	{
+		return instance;
+	}
+	
+	public WorldGenIcicles()
 	{
 		biomeList.add(BiomeGenBase.frozenOcean);
 		biomeList.add(BiomeGenBase.frozenRiver);
@@ -30,7 +37,7 @@ public class WorldGenIcicles implements IWorldGenerator
 		biomeList.add(BiomeGenBase.taigaHills);
 	}
 	
-	private List<Integer> getPossibleYPos(World world, int x, int z)
+	public static List<Integer> getPossibleYPos(World world, int x, int z)
 	{
 		List<Integer> list = new ArrayList<Integer>();
 		for(int i = 30;i < world.getActualHeight() - 60;i++)
@@ -63,7 +70,7 @@ public class WorldGenIcicles implements IWorldGenerator
 						index = list.size() - 1;
 					}
 					posY = list.get(index);
-					world.setBlockWithNotify(posX, posY, posZ, IdMap.BlockIcicle.blockID);
+					world.setBlockWithNotify(posX, posY, posZ, IdMap.blockIcicle.blockID);
 				}
 			}
 		}

@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -37,6 +38,10 @@ public class BlockIcicle extends BlockBase
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         this.checkIcicleChange(par1World, par2, par3, par4);
+        if (par1World.getSavedLightValue(EnumSkyBlock.Block, par2, par3, par4) > 11)
+        {
+            par1World.setBlockWithNotify(par2, par3, par4, 0);
+        }
     }
     
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)

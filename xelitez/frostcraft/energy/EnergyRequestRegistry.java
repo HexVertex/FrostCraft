@@ -133,12 +133,15 @@ public class EnergyRequestRegistry implements ITickHandler
 	{
 		for(int i = 0;i < checked.size();i++)
 		{
-			int[] check = checked.get(i);
-			if(check != null && check[0] == id)
+			if(i < checked.size())
 			{
-				if(te.xCoord == check[1] && te.yCoord == check[2] && te.zCoord == check[3] && te.worldObj.provider.dimensionId == check[4])
+				int[] check = checked.get(i);
+				if(check != null && check[0] == id)
 				{
-					return true;
+					if(te.xCoord == check[1] && te.yCoord == check[2] && te.zCoord == check[3] && te.worldObj.provider.dimensionId == check[4])
+					{
+						return true;
+					}
 				}
 			}
 		}
@@ -150,10 +153,13 @@ public class EnergyRequestRegistry implements ITickHandler
 		int count = 0;
 		for(int i = 0;i < queue.size();i++)
 		{
-			int[] dat = queue.get(i);
-			if(dat != null && dat[4] == dim)
+			if(i < queue.size())
 			{
-				count++;
+				int[] dat = queue.get(i);
+				if(dat != null && dat[4] == dim)
+				{
+					count++;
+				}
 			}
 		}
 		return count;
@@ -166,11 +172,17 @@ public class EnergyRequestRegistry implements ITickHandler
 			int[] set = new int[] {id, te.xCoord, te.yCoord, te.zCoord, te.worldObj.provider.dimensionId};
 			for(int i = 0;i < queue.size();i++)
 			{
-				int[] dat = queue.get(i);
-				if(dat == null)
+				if(i < queue.size())
 				{
-					queue.set(i, set);
-					return true;
+					int[] dat = queue.get(i);
+					if(dat == null)
+					{
+						if(i < queue.size())
+						{
+							queue.set(i, set);
+							return true;
+						}
+					}
 				}
 			}
 			queue.add(set);
@@ -183,11 +195,14 @@ public class EnergyRequestRegistry implements ITickHandler
 	{
 		for(int i = 0;i < queue.size();i++)
 		{
-			int[] dat = queue.get(i);
-			if(dat != null && dat[0] == id && dat[1] == x && dat[2] == y && dat[3] == z && dat[4] == dim)
+			if(i < queue.size())
 			{
-				queue.remove(i);
-				return;
+				int[] dat = queue.get(i);
+				if(dat != null && dat[0] == id && dat[1] == x && dat[2] == y && dat[3] == z && dat[4] == dim)
+				{
+					queue.remove(i);
+					return;
+				}
 			}
 		}
 	}
@@ -196,10 +211,13 @@ public class EnergyRequestRegistry implements ITickHandler
 	{
 		for(int i = 0;i < queue.size();i++)
 		{
-			int[] dat = queue.get(i);
-			if(dat != null && dat[1] == x && dat[2] == y && dat[3] == z && dat[4] == dim)
+			if(i < queue.size())
 			{
-				this.removePipeFromQueue(x, y, z, dim, dat[0]);
+				int[] dat = queue.get(i);
+				if(dat != null && dat[1] == x && dat[2] == y && dat[3] == z && dat[4] == dim)
+				{
+					this.removePipeFromQueue(x, y, z, dim, dat[0]);
+				}
 			}
 		}
 	}
@@ -208,10 +226,13 @@ public class EnergyRequestRegistry implements ITickHandler
 	{
 		for(int i = 0;i < queue.size();i++)
 		{
-			int[] dat = queue.get(i);
-			if(dat != null && dat[0] == id && dat[1] == te.xCoord && dat[2] == te.yCoord && dat[3] == te.zCoord && dat[4] == te.worldObj.provider.dimensionId)
+			if(i < queue.size())
 			{
-				return true;
+				int[] dat = queue.get(i);
+				if(dat != null && dat[0] == id && dat[1] == te.xCoord && dat[2] == te.yCoord && dat[3] == te.zCoord && dat[4] == te.worldObj.provider.dimensionId)
+				{
+					return true;
+				}
 			}
 		}
 		return false;
@@ -222,10 +243,13 @@ public class EnergyRequestRegistry implements ITickHandler
 		int count = 0;
 		for(int i = 0;i < queue.size();i++)
 		{
-			int[] dat = queue.get(i);
-			if(dat != null && dat[0] == id)
+			if(i < queue.size())
 			{
-				count++;
+				int[] dat = queue.get(i);
+				if(dat != null && dat[0] == id)
+				{
+					count++;
+				}
 			}
 		}
 		return count;
@@ -242,12 +266,15 @@ public class EnergyRequestRegistry implements ITickHandler
 	{
 		for(int i = 0;i < queue.size();i++)
 		{
-			int[] dat = queue.get(i);
-			if(dat != null && dat[0] == id)
+			if(i < queue.size())
 			{
-				queue.remove(i);
-				this.removeQueue(id);
-				return;
+				int[] dat = queue.get(i);
+				if(dat != null && dat[0] == id)
+				{
+					queue.remove(i);
+					this.removeQueue(id);
+					return;
+				}
 			}
 		}
 	}
@@ -256,11 +283,14 @@ public class EnergyRequestRegistry implements ITickHandler
 	{
 		for(int i = 0;i < ids.size();i++)
 		{
-			int[] dat = ids.get(i);
-			if(dat != null && dat[0] == id)
+			if(i < ids.size())
 			{
-				ids.remove(i);
-				return;
+				int[] dat = ids.get(i);
+				if(dat != null && dat[0] == id)
+				{
+					ids.remove(i);
+					return;
+				}
 			}
 		}
 	}
@@ -269,12 +299,15 @@ public class EnergyRequestRegistry implements ITickHandler
 	{
 		for(int i = 0;i < checked.size();i++)
 		{
-			int[] dat = checked.get(i);
-			if(dat != null && dat[0] == id)
+			if(i < checked.size())
 			{
-				checked.remove(i);
-				this.removeChecked(id);
-				return;
+				int[] dat = checked.get(i);
+				if(dat != null && dat[0] == id)
+				{
+					checked.remove(i);
+					this.removeChecked(id);
+					return;
+				}
 			}
 		}
 	}
@@ -292,21 +325,24 @@ public class EnergyRequestRegistry implements ITickHandler
 		{
 			for(int i = 0;i < INSTANCE.queue.size();i++)
 			{
-				int[] dat = (int[])INSTANCE.queue.get(i);
-				if(dat != null && dat[4] == world.provider.dimensionId)
+				if(i < queue.size())
 				{
-					TileEntityThermalPipe te = (TileEntityThermalPipe)world.getBlockTileEntity(dat[1], dat[2], dat[3]);
-					if(te != null)
+					int[] dat = (int[])INSTANCE.queue.get(i);
+					if(dat != null && dat[4] == world.provider.dimensionId)
 					{
-						INSTANCE.setPipeChecked(te, dat[0]);
-						INSTANCE.queue.remove(i);
-						te.check(dat[0]);
+						TileEntityThermalPipe te = (TileEntityThermalPipe)world.getBlockTileEntity(dat[1], dat[2], dat[3]);
+						if(te != null)
+						{
+							INSTANCE.setPipeChecked(te, dat[0]);
+							INSTANCE.queue.remove(i);
+							te.check(dat[0]);
+						}
+						else
+						{
+							INSTANCE.queue.remove(i);
+						}
+						break;
 					}
-					else
-					{
-						INSTANCE.queue.remove(i);
-					}
-					break;
 				}
 			}
 		}

@@ -2,6 +2,7 @@ package xelitez.frostcraft.enchantment;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import xelitez.frostcraft.item.ItemFrostBlade;
+import xelitez.frostcraft.item.ItemFrostEnforced;
 import xelitez.frostcraft.item.ItemFrostHoe;
 import xelitez.frostcraft.item.ItemFrostTool;
 import net.minecraft.enchantment.Enchantment;
@@ -49,13 +50,13 @@ public class FrostEnchantment extends Enchantment
 	
     public boolean func_92037_a(ItemStack stack)
     {
-        if(stack.getItem() instanceof ItemFrostBlade || stack.getItem() instanceof ItemFrostTool || stack.getItem() instanceof ItemFrostHoe) return true;
+        if(stack.getItem() instanceof ItemFrostBlade || stack.getItem() instanceof ItemFrostTool || stack.getItem() instanceof ItemFrostHoe || stack.getItem() instanceof ItemFrostEnforced) return true;
         return false;
     }
 	
     public boolean canApplyAtEnchantingTable(ItemStack stack)
     {
-        if(stack.getItem() instanceof ItemFrostBlade || stack.getItem() instanceof ItemFrostTool || stack.getItem() instanceof ItemFrostHoe) return true;
+        if(stack.getItem() instanceof ItemFrostBlade || stack.getItem() instanceof ItemFrostTool || stack.getItem() instanceof ItemFrostHoe || stack.getItem() instanceof ItemFrostEnforced) return true;
         return false;
     }
 

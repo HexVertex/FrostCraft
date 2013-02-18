@@ -69,7 +69,10 @@ public class RenderFrostTool implements IItemRenderer{
 					index = 6;
 					break;			
 				}
+                GL11.glEnable(GL11.GL_BLEND);
+                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 				renderer.renderTexturedQuad(0, 0, index % 16 * 16, index / 16 * 16, 16, 16);
+                GL11.glDisable(GL11.GL_BLEND);
 			}
 		}
 		if(type == ItemRenderType.EQUIPPED)
@@ -141,37 +144,10 @@ public class RenderFrostTool implements IItemRenderer{
 	            var9 = ((float)(index / 16 * 16) + 0.0F) / 256.0F;
 	            var10 = ((float)(index / 16 * 16) + 15.99F) / 256.0F;
 	            GL11.glTranslatef(0.0F, 0.0F, 0.015625F);
+                GL11.glEnable(GL11.GL_BLEND);
+                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 				ItemRenderer.renderItemIn2D(tes, var8, var9, var7, var10, 0.09375F);
-	            if (item != null && item.hasEffect())
-	            {
-	                GL11.glDepthFunc(GL11.GL_EQUAL);
-	                GL11.glDisable(GL11.GL_LIGHTING);
-	                FMLClientHandler.instance().getClient().renderEngine.bindTexture(FMLClientHandler.instance().getClient().renderEngine.getTexture("%blur%/misc/glint.png"));
-	                GL11.glEnable(GL11.GL_BLEND);
-	                GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
-	                float var14 = 0.76F;
-	                GL11.glColor4f(0.5F * var14, 0.25F * var14, 0.8F * var14, 1.0F);
-	                GL11.glMatrixMode(GL11.GL_TEXTURE);
-	                GL11.glPushMatrix();
-	                float var15 = 0.125F;
-	                GL11.glScalef(var15, var15, var15);
-	                float var16 = (float)(Minecraft.getSystemTime() % 3000L) / 3000.0F * 8.0F;
-	                GL11.glTranslatef(var16, 0.0F, 0.0F);
-	                GL11.glRotatef(-50.0F, 0.0F, 0.0F, 1.0F);
-	                ItemRenderer.renderItemIn2D(tes, 0.0F, 0.0F, 1.0F, 1.0F, 0.09375F);
-	                GL11.glPopMatrix();
-	                GL11.glPushMatrix();
-	                GL11.glScalef(var15, var15, var15);
-	                var16 = (float)(Minecraft.getSystemTime() % 4873L) / 4873.0F * 8.0F;
-	                GL11.glTranslatef(-var16, 0.0F, 0.0F);
-	                GL11.glRotatef(10.0F, 0.0F, 0.0F, 1.0F);
-	                ItemRenderer.renderItemIn2D(tes, 0.0F, 0.0F, 1.0F, 1.0F, 0.09375F);
-	                GL11.glPopMatrix();
-	                GL11.glMatrixMode(GL11.GL_MODELVIEW);
-	                GL11.glDisable(GL11.GL_BLEND);
-	                GL11.glEnable(GL11.GL_LIGHTING);
-	                GL11.glDepthFunc(GL11.GL_LEQUAL);
-	            }
+                GL11.glDisable(GL11.GL_BLEND);
 			}
 		}
 		if(type == ItemRenderType.ENTITY)
@@ -244,37 +220,10 @@ public class RenderFrostTool implements IItemRenderer{
 	            var9 = ((float)(index / 16 * 16) + 0.0F) / 256.0F;
 	            var10 = ((float)(index / 16 * 16) + 15.99F) / 256.0F;
 	            GL11.glTranslatef(0.0F, 0.0F, 0.015625F);
+                GL11.glEnable(GL11.GL_BLEND);
+                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 				ItemRenderer.renderItemIn2D(tes, var8, var9, var7, var10, 0.09375F);
-	            if (item != null && item.hasEffect())
-	            {
-	                GL11.glDepthFunc(GL11.GL_EQUAL);
-	                GL11.glDisable(GL11.GL_LIGHTING);
-	                RenderManager.instance.renderEngine.bindTexture(RenderManager.instance.renderEngine.getTexture("%blur%/misc/glint.png"));
-	                GL11.glEnable(GL11.GL_BLEND);
-	                GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
-	                float var21 = 0.76F;
-	                GL11.glColor4f(0.5F * var21, 0.25F * var21, 0.8F * var21, 1.0F);
-	                GL11.glMatrixMode(GL11.GL_TEXTURE);
-	                GL11.glPushMatrix();
-	                float var22 = 0.125F;
-	                GL11.glScalef(var22, var22, var22);
-	                float var23 = (float)(Minecraft.getSystemTime() % 3000L) / 3000.0F * 8.0F;
-	                GL11.glTranslatef(var23, 0.0F, 0.0F);
-	                GL11.glRotatef(-50.0F, 0.0F, 0.0F, 1.0F);
-	                ItemRenderer.renderItemIn2D(tes, 0.0F, 0.0F, 1.0F, 1.0F, 0.09375F);
-	                GL11.glPopMatrix();
-	                GL11.glPushMatrix();
-	                GL11.glScalef(var22, var22, var22);
-	                var23 = (float)(Minecraft.getSystemTime() % 4873L) / 4873.0F * 8.0F;
-	                GL11.glTranslatef(-var23, 0.0F, 0.0F);
-	                GL11.glRotatef(10.0F, 0.0F, 0.0F, 1.0F);
-	                ItemRenderer.renderItemIn2D(tes, 0.0F, 0.0F, 1.0F, 1.0F, 0.09375F);
-	                GL11.glPopMatrix();
-	                GL11.glMatrixMode(GL11.GL_MODELVIEW);
-	                GL11.glDisable(GL11.GL_BLEND);
-	                GL11.glEnable(GL11.GL_LIGHTING);
-	                GL11.glDepthFunc(GL11.GL_LEQUAL);
-	            }
+                GL11.glDisable(GL11.GL_BLEND);
 			}
 		}
 	}

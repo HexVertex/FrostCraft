@@ -42,6 +42,11 @@ public class ItemFrostEnforced extends Item
 		this.renderType = type;
 	}
 	
+    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+    {
+    	return parentItem.onItemUse(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6, par7, par8, par9, par10);
+    }
+	
 	public ItemFrostEnforced(int id, Item parent, EnumRenderType type)
 	{
 		this(id, parent, -1, type);
@@ -115,6 +120,11 @@ public class ItemFrostEnforced extends Item
     public EnumRenderType getRenderType()
     {
     	return renderType;
+    }
+    
+    public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
+    {
+    	return this.parentItem.getIsRepairable(par1ItemStack, par2ItemStack);
     }
     
     public String getTextureFile()

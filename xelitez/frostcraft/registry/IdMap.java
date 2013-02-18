@@ -88,9 +88,9 @@ public class IdMap
 	public static int IdFrostHoe;
 	public static int IdIcicle;
 	
-	public static Block BlockThermalPipe;
-	public static Block BlockThermalMachines;
-	public static Block BlockIcicle;
+	public static Block blockThermalPipe;
+	public static Block blockThermalMachines;
+	public static Block blockIcicle;
 	
 	public static Item itemFrostBow;
 	public static Item itemFrostGun;
@@ -118,19 +118,19 @@ public class IdMap
 	 */
 	public void initialiseBlocks()
 	{
-		BlockThermalPipe = new BlockThermalPipe(IdThermalPipe, Material.iron).setHardness(0.4F).setStepSound(Block.soundMetalFootstep).setBlockName("ThermalPipe");
-		BlockThermalMachines = new BlockThermalMachines(IdThermalMachines, Material.iron).setHardness(2.5F).setStepSound(Block.soundMetalFootstep).setBlockName("ThermalMachines").setCreativeTab(CreativeTabs.FCMechanical);
-		BlockIcicle = new BlockIcicle(IdBlockIcicle, Material.ice).setHardness(0.2F).setStepSound(Block.soundGlassFootstep).setBlockName("Icicle");
-		GameRegistry.registerBlock(BlockThermalPipe, "ThermalPipe");
-		GameRegistry.registerBlock(BlockThermalMachines, ItemThermalMachines.class, "ThermalPump");
-		GameRegistry.registerBlock(BlockIcicle, "Icicle");
-		LanguageRegistry.addName(BlockThermalPipe, "Thermal Pipe");
-		LanguageRegistry.addName(new ItemStack(BlockThermalMachines, 1, 0), "Thermal Pump");
-		LanguageRegistry.addName(new ItemStack(BlockThermalMachines, 1, 1), "Frost Furnace");
-		LanguageRegistry.addName(new ItemStack(BlockThermalMachines, 1, 2), "Frost Generator");
-		LanguageRegistry.addName(new ItemStack(BlockThermalMachines, 1, 3), "Freezer");
-		LanguageRegistry.addName(new ItemStack(BlockThermalMachines, 1, 4), "Frost Enforcer");
-		LanguageRegistry.addName(BlockIcicle, "BlockIcicle");
+		blockThermalPipe = new BlockThermalPipe(IdThermalPipe, Material.iron).setHardness(0.4F).setStepSound(Block.soundMetalFootstep).setBlockName("ThermalPipe");
+		blockThermalMachines = new BlockThermalMachines(IdThermalMachines, Material.iron).setHardness(2.5F).setStepSound(Block.soundMetalFootstep).setBlockName("ThermalMachines").setCreativeTab(CreativeTabs.FCMechanical);
+		blockIcicle = new BlockIcicle(IdBlockIcicle, Material.ice).setHardness(0.2F).setStepSound(Block.soundGlassFootstep).setBlockName("Icicle");
+		GameRegistry.registerBlock(blockThermalPipe, "ThermalPipe");
+		GameRegistry.registerBlock(blockThermalMachines, ItemThermalMachines.class, "ThermalPump");
+		GameRegistry.registerBlock(blockIcicle, "Icicle");
+		LanguageRegistry.addName(blockThermalPipe, "Thermal Pipe");
+		LanguageRegistry.addName(new ItemStack(blockThermalMachines, 1, 0), "Thermal Pump");
+		LanguageRegistry.addName(new ItemStack(blockThermalMachines, 1, 1), "Frost Furnace");
+		LanguageRegistry.addName(new ItemStack(blockThermalMachines, 1, 2), "Frost Generator");
+		LanguageRegistry.addName(new ItemStack(blockThermalMachines, 1, 3), "Freezer");
+		LanguageRegistry.addName(new ItemStack(blockThermalMachines, 1, 4), "Frost Enforcer");
+		LanguageRegistry.addName(blockIcicle, "Icicle");
 	}
 	
 	/**
@@ -200,6 +200,11 @@ public class IdMap
 		LanguageRegistry.addName(itemIcicle, "Icicle");
 		LanguageRegistry.addName(new ItemStack(itemCraftingItems.itemID, 1, 0), "Iceball");
 		LanguageRegistry.addName(new ItemStack(itemCraftingItems.itemID, 1, 1), "Ice-Covered String");
+		LanguageRegistry.addName(new ItemStack(itemCraftingItems.itemID, 1, 2), "CFU Handler");
+		LanguageRegistry.addName(new ItemStack(itemCraftingItems.itemID, 1, 3), "Frost Transformer");
+		LanguageRegistry.addName(new ItemStack(itemCraftingItems.itemID, 1, 4), "Compressor");
+		LanguageRegistry.addName(new ItemStack(itemCraftingItems.itemID, 1, 5), "Frost Sprayer");
+		LanguageRegistry.addName(new ItemStack(itemCraftingItems.itemID, 1, 6), "CFU Storage Handler");
 	}
 
 	/**
@@ -222,7 +227,7 @@ public class IdMap
 	
 	public void initialiseWorld()
 	{
-		GameRegistry.registerWorldGenerator(new WorldGenIcicles());
+		GameRegistry.registerWorldGenerator(WorldGenIcicles.getInstance());
 	}
 	
 	public void initialiseEnfrocerItems()
@@ -282,7 +287,7 @@ public class IdMap
 				this.EnforcedTools[i] = new ItemFrostEnforced(this.enforcerToolStartId + i, item, type).setItemName("Enforced" + item.getItemName());
 				GameRegistry.registerItem(this.EnforcedTools[i], "Enforced" + item.getItemName());
 				LanguageRegistry.addName(this.EnforcedTools[i], "Enforced " + StatCollector.translateToLocal(item.getStatName()));
-				RecipeRegistry.addEnforcerRecipe(item, new ItemStack(this.EnforcedTools[i]));
+				RecipeRegistry.addEnforcerRecipe(item, new ItemStack(this.EnforcedTools[i]), true);
 				break;
 			}
 		}
