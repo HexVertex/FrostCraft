@@ -18,6 +18,13 @@ import net.minecraft.world.World;
 @SideOnly(Side.CLIENT)
 public class WorldAccess implements IWorldAccess
 {
+	private static WorldAccess instance = new WorldAccess();
+	
+	public static WorldAccess instance()
+	{
+		return instance;
+	}
+	
 	private Minecraft mc = FMLClientHandler.instance().getClient();
 	private WorldClient theWorld;
 	

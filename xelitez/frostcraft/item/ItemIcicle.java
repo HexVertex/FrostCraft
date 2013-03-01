@@ -27,7 +27,7 @@ public class ItemIcicle extends ItemBase
         	((EntityPlayer) par3EntityLiving).inventory.consumeInventoryItem(par1ItemStack.itemID);
         }
         EffectTicker.addEffect(par2EntityLiving, new PotionEffect(FCPotion.freeze.id, 40));
-        EffectTicker.addEffect(par2EntityLiving, new PotionEffect(FCPotion.frostBurn.id, 40), par3EntityLiving);
+        EffectTicker.addEffect(par2EntityLiving, new PotionEffect(FCPotion.frostburn.id, 40), par3EntityLiving);
         return true;
     }
     

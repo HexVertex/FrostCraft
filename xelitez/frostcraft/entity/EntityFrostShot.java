@@ -318,11 +318,11 @@ public class EntityFrostShot extends Entity
                 EffectTicker.addEffect(par1MovingObjectPosition.entityHit, new PotionEffect(FCPotion.freeze.id, par1MovingObjectPosition.entityHit instanceof EntityPlayer ? 20 : 40));
                 if(this.shootingEntity != null)
                 {
-                	EffectTicker.addEffect(par1MovingObjectPosition.entityHit, new PotionEffect(FCPotion.frostBurn.id, 80, 1), this, this.shootingEntity);
+                	EffectTicker.addEffect(par1MovingObjectPosition.entityHit, new PotionEffect(FCPotion.frostburn.id, 80, 1), this, this.shootingEntity);
                 }
                 else
                 {
-                	EffectTicker.addEffect(par1MovingObjectPosition.entityHit, new PotionEffect(FCPotion.frostBurn.id, 80, 1), this, this);
+                	EffectTicker.addEffect(par1MovingObjectPosition.entityHit, new PotionEffect(FCPotion.frostburn.id, 80, 1), this, this);
                 }
             }
             this.worldObj.playSoundEffect(this.posX, this.posY, this.posZ, "random.explode", 1.25F, 1.5F);

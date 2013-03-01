@@ -336,7 +336,7 @@ public class EntityFrostArrow extends Entity implements IProjectile
                             if(this.canFreeze)
                             {
                             	EffectTicker.addEffect(var24, new PotionEffect(FCPotion.freeze.id, var24 instanceof EntityPlayer ? 20 + 10 * time: 40 + 10 * time));
-                            	EffectTicker.addEffect(var24, new PotionEffect(FCPotion.frostBurn.id, 50, frost), this, this.shootingEntity);
+                            	EffectTicker.addEffect(var24, new PotionEffect(FCPotion.frostburn.id, 50, frost), this, this.shootingEntity);
 
                             	if (!this.worldObj.isRemote)
                             	{

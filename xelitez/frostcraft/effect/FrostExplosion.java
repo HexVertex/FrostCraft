@@ -71,16 +71,16 @@ public class FrostExplosion
                     {
                     	if(((EntityFrostShot) this.exploder).shootingEntity != null)
                     	{
-                    		EffectTicker.addEffect(var32, new PotionEffect(FCPotion.frostBurn.id, 80, 1), this.exploder, ((EntityFrostShot) this.exploder).shootingEntity);
+                    		EffectTicker.addEffect(var32, new PotionEffect(FCPotion.frostburn.id, 80, 1), this.exploder, ((EntityFrostShot) this.exploder).shootingEntity);
                     	}
                     	else
                     	{
-                    		EffectTicker.addEffect(var32, new PotionEffect(FCPotion.frostBurn.id, 80, 1), this.exploder, this.exploder);
+                    		EffectTicker.addEffect(var32, new PotionEffect(FCPotion.frostburn.id, 80, 1), this.exploder, this.exploder);
                     	}
                     }
                     else
                     {
-                    	EffectTicker.addEffect(var32, new PotionEffect(FCPotion.frostBurn.id, 80, 1), this.exploder, this.exploder);
+                    	EffectTicker.addEffect(var32, new PotionEffect(FCPotion.frostburn.id, 80, 1), this.exploder, this.exploder);
                     }
                 }
             }

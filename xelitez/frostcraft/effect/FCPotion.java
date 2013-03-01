@@ -1,5 +1,6 @@
 package xelitez.frostcraft.effect;
 
+import xelitez.frostcraft.registry.Settings;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -9,7 +10,7 @@ import net.minecraftforge.client.ForgeHooksClient;
 public class FCPotion extends Potion
 {
 	public static FCPotion freeze;
-	public static FCPotion frostBurn;
+	public static FCPotion frostburn;
 	
 	private int statusIconIndex = -1;
     private String name = "";
@@ -32,8 +33,8 @@ public class FCPotion extends Potion
 	
 	public static void RegisterPotionEffects()
 	{
-		freeze = addPotion(getPotionId(), true, 8171462).setPotionName("Frozen").setFCIconIndex(0, 0).setUseable();
-		frostBurn = addPotion(getPotionId(), true, 8171462).setPotionName("Frostburn").setFCIconIndex(1, 0).setUseable();
+		freeze = addPotion(Settings.potionFreezeId != -1 ? Settings.potionFreezeId : getPotionId(), true, 8171462).setPotionName("Frozen").setFCIconIndex(0, 0).setUseable();
+		frostburn = addPotion(Settings.potionFrostburnId != -1 ? Settings.potionFrostburnId :getPotionId(), true, 8171462).setPotionName("Frostburn").setFCIconIndex(1, 0).setUseable();
 	}
 	
 	private static int getPotionId()

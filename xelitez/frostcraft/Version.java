@@ -10,6 +10,8 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import xelitez.frostcraft.registry.Settings;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 
@@ -21,9 +23,6 @@ public class Version
     public static int minorBuild = 0;
     public static String MC = "MC:1.4.7";
 
-	public boolean checkForUpdates;
-    public static boolean ignoremB = true;
-    public static boolean ignoreMC = false;
     public static String newVersion;
     public static boolean available = false;
     public static String color = "";
@@ -35,29 +34,17 @@ public class Version
 
     private static String produceVersion(int var1, int var2, int var3, int var4)
     {
-        boolean var5 = var2 != 0;
-        boolean var6 = var3 != 0;
-        boolean var7 = var4 != 0;
         StringBuilder Str1 = new StringBuilder();
         Str1.append(var1);
 
-        if (var5)
-        {
-            Str1.append(".");
-            Str1.append(var2);
-        }
+        Str1.append(".");
+        Str1.append(var2);
 
-        if (var6)
-        {
-            Str1.append(".");
-            Str1.append(var3);
-        }
-
-        if (var7)
-        {
-            Str1.append(".");
-            Str1.append(var4);
-        }
+        Str1.append(".");
+        Str1.append(var3);
+            
+        Str1.append(".");
+        Str1.append(var4);
 
         return Str1.toString();
     }
@@ -94,14 +81,17 @@ public class Version
 		    	catch (MalformedURLException e)
 		    	{
 		    		FCLog.info("Unable to check for updates");
+		    		return;
 		    	}
 		    	catch (ConnectException e)
 		    	{
 		    		FCLog.info("Unable to connect to update page");
+		    		return;
 		    	}
 		    	catch (IOException e)
 		    	{
 		    		FCLog.info("Unable to check for updates");
+		    		return;
 		    	}
 					
 		    	for (int i = 0; i < strings.size(); i++)
@@ -149,7 +139,7 @@ public class Version
 					
 		    	if ((!getVersion().matches(produceVersion(MV, mV, MB, mB)) || !MC.matches("MC:" + NMC)) && !produceVersion(MV, mV, MB, mB).matches("0"))
 		    	{
-		    		if ((ignoreMC && MC.matches("MC:" + NMC) || (!ignoreMC && !MC.matches("MC:" + NMC))) || ((ignoremB && !produceVersion(MV, mV, MB, 0).matches(produceVersion(majorVersion, minorVersion, majorBuild, 0))) || (!ignoremB && !getVersion().matches(produceVersion(MV, mV, MB, mB)))))
+		    		if ((Settings.ignoreMC && MC.matches("MC:" + NMC) || (!Settings.ignoreMC && !MC.matches("MC:" + NMC))) || ((Settings.ignoremB && !produceVersion(MV, mV, MB, 0).matches(produceVersion(majorVersion, minorVersion, majorBuild, 0))) || (!Settings.ignoremB && !getVersion().matches(produceVersion(MV, mV, MB, mB)))))
 		    		{
 		    			available = true;
 		    			newVersion = produceVersion(MV, mV, MB, mB);
@@ -164,7 +154,7 @@ public class Version
 		    				FCLog.info("A new version of FrostCraft is available(" + newVersion + ")");
 		    			}
 		    			
-		    			if (mB != minorBuild && !ignoremB)
+		    			if (mB != minorBuild)
 		    			{
 		    				color = "\u00a7b";
 		    			}
@@ -184,7 +174,7 @@ public class Version
 		    				color = "\u00a73";
 		    			}
 		    			
-		    			if (!MC.matches("MC:" + NMC) && !ignoreMC)
+		    			if (!MC.matches("MC:" + NMC) && !Settings.ignoreMC)
 		    			{
 		    				color = "\u00a75";
 		    			}

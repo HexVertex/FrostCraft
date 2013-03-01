@@ -27,10 +27,10 @@ public class ItemFrostHoe extends ItemHoe
         {
         	EffectTicker.addEffect(par2EntityLiving, new PotionEffect(FCPotion.freeze.id, 10 * var1, 0), par3EntityLiving);
         }
-        int var2 = EnchantmentHelper.getEnchantmentLevel(FrostEnchantment.frostBurn.effectId, par1ItemStack);
+        int var2 = EnchantmentHelper.getEnchantmentLevel(FrostEnchantment.frostburn.effectId, par1ItemStack);
         if(var2 > 0)
         {
-        	EffectTicker.addEffect(par2EntityLiving, new PotionEffect(FCPotion.frostBurn.id, 60, var2 - 1), par3EntityLiving);
+        	EffectTicker.addEffect(par2EntityLiving, new PotionEffect(FCPotion.frostburn.id, 60, var2 - 1), par3EntityLiving);
         }
         return true;
     }

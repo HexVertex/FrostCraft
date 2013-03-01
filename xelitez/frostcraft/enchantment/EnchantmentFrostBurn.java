@@ -4,9 +4,9 @@ import xelitez.frostcraft.item.ItemFrostBow;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.item.ItemStack;
 
-public class EnchantmentFrostBurn extends FrostEnchantment{
+public class EnchantmentFrostburn extends FrostEnchantment{
 
-	protected EnchantmentFrostBurn(int par1, int par2,
+	protected EnchantmentFrostburn(int par1, int par2,
 			EnumEnchantmentType par3EnumEnchantmentType) 
 	{
 		super(par1, par2, par3EnumEnchantmentType);

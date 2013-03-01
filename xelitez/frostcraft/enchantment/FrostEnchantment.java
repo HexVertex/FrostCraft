@@ -5,6 +5,7 @@ import xelitez.frostcraft.item.ItemFrostBlade;
 import xelitez.frostcraft.item.ItemFrostEnforced;
 import xelitez.frostcraft.item.ItemFrostHoe;
 import xelitez.frostcraft.item.ItemFrostTool;
+import xelitez.frostcraft.registry.Settings;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.item.Item;
@@ -18,7 +19,7 @@ import net.minecraftforge.common.EnumHelper;
 public class FrostEnchantment extends Enchantment
 {
 	public static Enchantment freeze;
-	public static Enchantment frostBurn;
+	public static Enchantment frostburn;
 	
 	public static final EnumEnchantmentType frost = EnumHelper.addEnchantmentType("frost");
 
@@ -42,10 +43,10 @@ public class FrostEnchantment extends Enchantment
 	
 	public static void registerFrostEnchantments()
 	{
-		freeze = new EnchantmentFreeze(getFreeID(), 5, frost).setName("Freeze");
-		frostBurn = new EnchantmentFrostBurn(getFreeID(), 5, frost).setName("FrostBurn");
+		freeze = new EnchantmentFreeze(Settings.enchantmentFreezeId != -1 ? Settings.enchantmentFreezeId : getFreeID(), 5, frost).setName("Freeze");
+		frostburn = new EnchantmentFrostburn(Settings.enchantmentFrostburnId != -1 ? Settings.enchantmentFrostburnId : getFreeID(), 5, frost).setName("Frostburn");
 		LanguageRegistry.instance().addStringLocalization(freeze.getName(), "Freeze");
-		LanguageRegistry.instance().addStringLocalization(frostBurn.getName(), "FrostBurn");
+		LanguageRegistry.instance().addStringLocalization(frostburn.getName(), "Frostburn");
 	}
 	
     public boolean func_92037_a(ItemStack stack)

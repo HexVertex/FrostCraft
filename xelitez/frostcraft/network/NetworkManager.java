@@ -1,5 +1,6 @@
 package xelitez.frostcraft.network;
 
+import xelitez.frostcraft.Version;
 import xelitez.frostcraft.world.WorldAccess;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.NetLoginHandler;
@@ -49,6 +50,10 @@ public class NetworkManager implements IConnectionHandler
 	public void clientLoggedIn(NetHandler clientHandler,
 			INetworkManager manager, Packet1Login login) 
 	{
+        if (Version.available)
+        {
+            clientHandler.getPlayer().addChatMessage("A new version of the \u00a7bFrostCraft mod\u00a7f is available (" + Version.color + Version.newVersion + "\u00a7f).");
+        }
 	}
 
 }

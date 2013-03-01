@@ -1,5 +1,6 @@
 package xelitez.frostcraft;
 
+import xelitez.frostcraft.world.WorldAccess;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.world.World;
 import net.minecraftforge.event.Event;
@@ -18,7 +19,7 @@ public class EventListener implements IEventListener
 			World world = ((WorldEvent.Load)event).world;
 			if(world.isRemote)
 			{
-				FrostCraft.access.setWorldAndLoadRenderers((WorldClient)world);
+				WorldAccess.instance().setWorldAndLoadRenderers((WorldClient)world);
 			}
 		}
 		

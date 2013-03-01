@@ -5,6 +5,7 @@ import xelitez.frostcraft.block.*;
 import xelitez.frostcraft.item.*;
 import xelitez.frostcraft.entity.*;
 import xelitez.frostcraft.enums.*;
+import xelitez.frostcraft.client.model.ModelFairy;
 import xelitez.frostcraft.client.render.*;
 import xelitez.frostcraft.tileentity.*;
 import xelitez.frostcraft.world.*;
@@ -21,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.WorldType;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -58,9 +60,7 @@ public class IdMap
 	public int defaultIdIcicle = 2319;
 	
 	public int defaultEnforcerToolStartId = 2400;
-	public int defaultMaxEnforcedItems = 25;
 	public int enforcerToolStartId;
-	public int MaxEnfrocerItems;
 	public Item[] EnforcedTools;
 	
 	public static int IdThermalPipe;
@@ -112,6 +112,8 @@ public class IdMap
 	public static Item itemFrostAxe;
 	public static Item itemFrostHoe;
 	public static Item itemIcicle;
+	
+	public static WorldType worldTypeWinterland;
 	
 	/**
 	 * Initialise all FrostCraft Blocks and additions
@@ -223,16 +225,19 @@ public class IdMap
 		EntityRegistry.registerModEntity(EntityFrostArrow.class, "FrostArrow", 0, FrostCraft.instance, 64, 20, false);
 		EntityRegistry.registerGlobalEntityID(EntityFrostShot.class, "FrostShot", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntityFrostShot.class, "FrostShot", 1, FrostCraft.instance, 64, 20, false);
+		//EntityRegistry.registerGlobalEntityID(EntityFairy.class, "IceFairy", EntityRegistry.findGlobalUniqueEntityId(), 0x0000FF, 0x00FFFF);
+		//EntityRegistry.registerModEntity(EntityFairy.class, "IceFairy", 2, FrostCraft.instance, 64, 20, true);
 	}
 	
 	public void initialiseWorld()
 	{
 		GameRegistry.registerWorldGenerator(WorldGenIcicles.getInstance());
+		worldTypeWinterland = new WorldTypeWinterLand(Settings.EndlessWinterID != -1 ? Settings.EndlessWinterID : WorldTypeBase.getFreeId(), "Endless Winter");
 	}
 	
 	public void initialiseEnfrocerItems()
 	{
-		this.EnforcedTools = new Item[this.MaxEnfrocerItems];
+		this.EnforcedTools = new Item[Settings.MaxEnfrocerItems];
 		boolean isLeft = true;
 		for(int i = 0;i < Item.itemsList.length;i++)
 		{
@@ -303,5 +308,6 @@ public class IdMap
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostArrow.class, new RenderFrostArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostShot.class, new RenderFrostShot(0.5f));
 		MinecraftForgeClient.registerItemRenderer(this.itemFrostBow.itemID, new RenderFrostBow());
+		RenderingRegistry.registerEntityRenderingHandler(EntityFairy.class, new RenderFairy(new ModelFairy(0.0F, "/xelitez/frostcraft/textures/icefairywings.png"), 1.0F, 1.0F));
 	}
 }

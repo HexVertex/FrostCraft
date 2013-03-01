@@ -1,5 +1,6 @@
 package xelitez.frostcraft.item;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import xelitez.frostcraft.effect.EffectTicker;
 import xelitez.frostcraft.effect.FCPotion;
@@ -31,11 +32,17 @@ public class ItemFrostEnforced extends Item
 		this.maxStackSize = 1;
 		if(customTexture != -1)
 		{
-			this.setIconIndex(customTexture);
+			if(FMLCommonHandler.instance().getSide().isClient())
+			{
+				this.setIconIndex(customTexture);
+			}
 		}
 		else
 		{
-			this.setIconIndex(parent.getIconIndex(new ItemStack(id, 1, 0)));
+			if(FMLCommonHandler.instance().getSide().isClient())
+			{
+				this.setIconIndex(parent.getIconIndex(new ItemStack(id, 1, 0)));
+			}
 		}
 		this.setMaxDamage(parent.getMaxDamage() + 400);
 		this.setCreativeTab(CreativeTabs.FCEquipment);
@@ -64,10 +71,10 @@ public class ItemFrostEnforced extends Item
         {
         	EffectTicker.addEffect(par2EntityLiving, new PotionEffect(FCPotion.freeze.id, 5 * var1, 0), par3EntityLiving);
         }
-        int var2 = EnchantmentHelper.getEnchantmentLevel(FrostEnchantment.frostBurn.effectId, par1ItemStack);
+        int var2 = EnchantmentHelper.getEnchantmentLevel(FrostEnchantment.frostburn.effectId, par1ItemStack);
         if(var2 > 0)
         {
-        	EffectTicker.addEffect(par2EntityLiving, new PotionEffect(FCPotion.frostBurn.id, 60, var2 - 1), par3EntityLiving);
+        	EffectTicker.addEffect(par2EntityLiving, new PotionEffect(FCPotion.frostburn.id, 60, var2 - 1), par3EntityLiving);
         }
     	return parentItem.hitEntity(par1ItemStack, par2EntityLiving, par3EntityLiving);
     }

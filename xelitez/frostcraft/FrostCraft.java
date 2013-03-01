@@ -1,7 +1,10 @@
 package xelitez.frostcraft;
 
 import java.io.File;
+import java.lang.reflect.Method;
 import java.net.URLClassLoader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,12 +26,14 @@ import xelitez.frostcraft.network.PacketManagerServer;
 import xelitez.frostcraft.registry.CommonProxy;
 import xelitez.frostcraft.registry.IdMap;
 import xelitez.frostcraft.registry.RecipeRegistry;
+import xelitez.frostcraft.registry.Settings;
 import xelitez.frostcraft.world.WorldAccess;
 import xelitez.frostcraft.world.WorldTicker;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.Mod.*;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -69,12 +74,11 @@ public class FrostCraft
 	
 	public Version version = new Version();
 	
-	public static WorldAccess access = new WorldAccess();
-	
 	@PreInit
     public void preload(FMLPreInitializationEvent evt)
     {
-		evt.getModMetadata().version = Version.getVersion();
+		evt.getModMetadata().name = "FrostCraft";
+		evt.getModMetadata().version = Version.getVersion() + "-Alpha for " + version.MC;
 		
 		if(evt.getSide().isClient())
 		{
@@ -88,8 +92,21 @@ public class FrostCraft
 		{
 			C.load();
 			
-			map.MaxEnfrocerItems = C.get(C.CATEGORY_GENERAL, "MaxEnforcerItems", map.defaultMaxEnforcedItems).getInt(map.defaultMaxEnforcedItems);
+			C.addCustomCategoryComment(C.CATEGORY_GENERAL, "IDs that are -1 will be given the next free id possible");
+			
+			Settings.MaxEnfrocerItems = C.get(C.CATEGORY_GENERAL, "MaxEnforcerItems", Settings.defaultMaxEnforcedItems).getInt(Settings.defaultMaxEnforcedItems);
 			map.enforcerToolStartId = C.get("Equipment", "EnforcerToolsStartId", map.defaultEnforcerToolStartId).getInt(map.defaultEnforcerToolStartId);
+			
+			// Start getting world configuration
+			Settings.EndlessWinterID = C.get("World", "EndlessWinterId", Settings.EndlessWinterID).getInt();
+			
+			// Start getting potion configuration
+			Settings.potionFreezeId = C.get("Potion", "PotionFreezeId", Settings.potionFreezeId).getInt();
+			Settings.potionFrostburnId = C.get("Potion", "PotionFrostburnId", Settings.potionFrostburnId).getInt();
+			
+			// Start getting enchantments configuration
+			Settings.enchantmentFreezeId = C.get("Enchantments", "EnchantmentFreezeId", Settings.enchantmentFreezeId).getInt();
+			Settings.enchantmentFrostburnId = C.get("Enchantments", "EnchantmentFrostburnId", Settings.enchantmentFrostburnId).getInt();
 
 			// Start getting configuration settings of Item/Block Id's
 			map.IdThermalPipe = C.get("Mechanical", "ThermalPipeId", map.defaultIdThermalPipe).getInt(map.defaultIdThermalPipe);
@@ -122,9 +139,9 @@ public class FrostCraft
             Property update = C.get("Updates", "Check for updates", true);
             Property ignoreMinorBuilds = C.get("Updates", "Ignore minor builds", true);
             Property ignoreOtherMCVersions = C.get("Updates", "Ignore other MC versions", false);
-            version.checkForUpdates = update.getBoolean(false);
-            version.ignoremB = ignoreMinorBuilds.getBoolean(true);
-            version.ignoreMC = ignoreOtherMCVersions.getBoolean(false);
+            Settings.checkForUpdates = update.getBoolean(true);
+            Settings.ignoremB = ignoreMinorBuilds.getBoolean(true);
+            Settings.ignoreMC = ignoreOtherMCVersions.getBoolean(false);
 		}
 		catch(Exception e)
 		{
@@ -174,14 +191,27 @@ public class FrostCraft
 		}
         try
         {
-            if (checkForUpdates)
+            if (Settings.checkForUpdates)
+            {
+            	if(true)
+            	{
+            		throw new Exception();
+            	}
+                @SuppressWarnings("unused")
+				Class<? extends Object> clazz = Class.forName("xelitez.updateutilitty.UpdateRegistry");
+                Method registermod = clazz.getDeclaredMethod("RegisterMod", ModContainer.class);
+                registermod.invoke(null, this);
+            }
+        }
+        catch (Exception E)
+        {
+        	FCLog.log(Level.INFO, "FrostCraft failed to register to the XEZUpdateUtility");
+        	FCLog.log(Level.INFO, "It isn't required but you should download it if possible");
+            if (Settings.checkForUpdates)
             {
                 version.checkForUpdates();
             }
         }
-        catch (Throwable E)
-        {
-        	FCLog.log(Level.SEVERE, "FrostCraft failed to check for updates", E);
-        }
+        proxy.registerSidedElements();
     }
 }

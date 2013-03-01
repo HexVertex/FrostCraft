@@ -70,7 +70,7 @@ public class RenderFrostTool implements IItemRenderer{
 					break;			
 				}
                 GL11.glEnable(GL11.GL_BLEND);
-                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_COLOR);
 				renderer.renderTexturedQuad(0, 0, index % 16 * 16, index / 16 * 16, 16, 16);
                 GL11.glDisable(GL11.GL_BLEND);
 			}
@@ -145,7 +145,7 @@ public class RenderFrostTool implements IItemRenderer{
 	            var10 = ((float)(index / 16 * 16) + 15.99F) / 256.0F;
 	            GL11.glTranslatef(0.0F, 0.0F, 0.015625F);
                 GL11.glEnable(GL11.GL_BLEND);
-                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_COLOR);
 				ItemRenderer.renderItemIn2D(tes, var8, var9, var7, var10, 0.09375F);
                 GL11.glDisable(GL11.GL_BLEND);
 			}
@@ -221,7 +221,7 @@ public class RenderFrostTool implements IItemRenderer{
 	            var10 = ((float)(index / 16 * 16) + 15.99F) / 256.0F;
 	            GL11.glTranslatef(0.0F, 0.0F, 0.015625F);
                 GL11.glEnable(GL11.GL_BLEND);
-                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_COLOR);
 				ItemRenderer.renderItemIn2D(tes, var8, var9, var7, var10, 0.09375F);
                 GL11.glDisable(GL11.GL_BLEND);
 			}

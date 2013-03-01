@@ -84,7 +84,7 @@ public class ItemFrostBow extends ItemBow
             	var8.setFreezeLevel(var12);
             }
             
-            int var13 = EnchantmentHelper.getEnchantmentLevel(FrostEnchantment.frostBurn.effectId, par1ItemStack);
+            int var13 = EnchantmentHelper.getEnchantmentLevel(FrostEnchantment.frostburn.effectId, par1ItemStack);
             
             if(var13 > 0)
             {

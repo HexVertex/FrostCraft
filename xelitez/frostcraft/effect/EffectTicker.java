@@ -220,9 +220,9 @@ public class EffectTicker implements ITickHandler
 					entity.motionZ = 0.0D;
 				}
 			}
-			if(this.potionId == FCPotion.frostBurn.id)
+			if(this.potionId == FCPotion.frostburn.id)
 			{
-				if(entity != null && !entity.isDead && entity.getActivePotionEffect(FCPotion.frostBurn) != null);
+				if(entity != null && !entity.isDead && entity.getActivePotionEffect(FCPotion.frostburn) != null);
 				{
 					if(entity == null)
 					{
