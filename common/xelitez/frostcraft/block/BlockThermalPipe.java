@@ -1,13 +1,11 @@
 package xelitez.frostcraft.block;
 
-import java.util.Random;
-
 import xelitez.frostcraft.energy.EnergyRequestRegistry;
 import xelitez.frostcraft.enums.ConnectionTypes;
 import xelitez.frostcraft.interfaces.IConnect;
-import xelitez.frostcraft.interfaces.IConnect;
 import xelitez.frostcraft.registry.CreativeTabs;
 import xelitez.frostcraft.tileentity.TileEntityThermalPipe;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -45,12 +43,12 @@ public class BlockThermalPipe extends BlockBase implements IConnect{
 	
 	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) 
 	{
-    	boolean canConnectTop = this.blocksList[par1IBlockAccess.getBlockId(par2, par3 + 1, par4)] instanceof IConnect && ((IConnect)this.blocksList[par1IBlockAccess.getBlockId(par2, par3 + 1, par4)]).getConnectionType() == this.getConnectionType();
-    	boolean canConnectBottom = this.blocksList[par1IBlockAccess.getBlockId(par2, par3 - 1, par4)] instanceof IConnect && ((IConnect)this.blocksList[par1IBlockAccess.getBlockId(par2, par3 - 1, par4)]).getConnectionType() == this.getConnectionType();
-        boolean canConnectLeft = this.blocksList[par1IBlockAccess.getBlockId(par2 + 1, par3, par4)] instanceof IConnect && ((IConnect)this.blocksList[par1IBlockAccess.getBlockId(par2 + 1, par3, par4)]).getConnectionType() == this.getConnectionType();
-        boolean canConnectRight = this.blocksList[par1IBlockAccess.getBlockId(par2 - 1, par3, par4)] instanceof IConnect && ((IConnect)this.blocksList[par1IBlockAccess.getBlockId(par2 - 1, par3, par4)]).getConnectionType() == this.getConnectionType();
-        boolean canConnectFront = this.blocksList[par1IBlockAccess.getBlockId(par2, par3, par4 + 1)] instanceof IConnect && ((IConnect)this.blocksList[par1IBlockAccess.getBlockId(par2, par3, par4 + 1)]).getConnectionType() == this.getConnectionType();
-        boolean canConnectBack = this.blocksList[par1IBlockAccess.getBlockId(par2, par3, par4 - 1)] instanceof IConnect && ((IConnect)this.blocksList[par1IBlockAccess.getBlockId(par2, par3, par4 - 1)]).getConnectionType() == this.getConnectionType();
+    	boolean canConnectTop = Block.blocksList[par1IBlockAccess.getBlockId(par2, par3 + 1, par4)] instanceof IConnect && ((IConnect)Block.blocksList[par1IBlockAccess.getBlockId(par2, par3 + 1, par4)]).getConnectionType() == this.getConnectionType();
+    	boolean canConnectBottom = Block.blocksList[par1IBlockAccess.getBlockId(par2, par3 - 1, par4)] instanceof IConnect && ((IConnect)Block.blocksList[par1IBlockAccess.getBlockId(par2, par3 - 1, par4)]).getConnectionType() == this.getConnectionType();
+        boolean canConnectLeft = Block.blocksList[par1IBlockAccess.getBlockId(par2 + 1, par3, par4)] instanceof IConnect && ((IConnect)Block.blocksList[par1IBlockAccess.getBlockId(par2 + 1, par3, par4)]).getConnectionType() == this.getConnectionType();
+        boolean canConnectRight = Block.blocksList[par1IBlockAccess.getBlockId(par2 - 1, par3, par4)] instanceof IConnect && ((IConnect)Block.blocksList[par1IBlockAccess.getBlockId(par2 - 1, par3, par4)]).getConnectionType() == this.getConnectionType();
+        boolean canConnectFront = Block.blocksList[par1IBlockAccess.getBlockId(par2, par3, par4 + 1)] instanceof IConnect && ((IConnect)Block.blocksList[par1IBlockAccess.getBlockId(par2, par3, par4 + 1)]).getConnectionType() == this.getConnectionType();
+        boolean canConnectBack = Block.blocksList[par1IBlockAccess.getBlockId(par2, par3, par4 - 1)] instanceof IConnect && ((IConnect)Block.blocksList[par1IBlockAccess.getBlockId(par2, par3, par4 - 1)]).getConnectionType() == this.getConnectionType();
         float minX = 0.3125F;
         float minY = 0.3125F;
         float minZ = 0.3125F;
@@ -93,12 +91,12 @@ public class BlockThermalPipe extends BlockBase implements IConnect{
 	
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
-    	boolean canConnectTop = this.blocksList[par1World.getBlockId(par2, par3 + 1, par4)] instanceof IConnect && ((IConnect)this.blocksList[par1World.getBlockId(par2, par3 + 1, par4)]).getConnectionType() == this.getConnectionType();
-    	boolean canConnectBottom = this.blocksList[par1World.getBlockId(par2, par3 - 1, par4)] instanceof IConnect && ((IConnect)this.blocksList[par1World.getBlockId(par2, par3 - 1, par4)]).getConnectionType() == this.getConnectionType();
-        boolean canConnectLeft = this.blocksList[par1World.getBlockId(par2 + 1, par3, par4)] instanceof IConnect && ((IConnect)this.blocksList[par1World.getBlockId(par2 + 1, par3, par4)]).getConnectionType() == this.getConnectionType();
-        boolean canConnectRight = this.blocksList[par1World.getBlockId(par2 - 1, par3, par4)] instanceof IConnect && ((IConnect)this.blocksList[par1World.getBlockId(par2 - 1, par3, par4)]).getConnectionType() == this.getConnectionType();
-        boolean canConnectFront = this.blocksList[par1World.getBlockId(par2, par3, par4 + 1)] instanceof IConnect && ((IConnect)this.blocksList[par1World.getBlockId(par2, par3, par4 + 1)]).getConnectionType() == this.getConnectionType();
-        boolean canConnectBack = this.blocksList[par1World.getBlockId(par2, par3, par4 - 1)] instanceof IConnect && ((IConnect)this.blocksList[par1World.getBlockId(par2, par3, par4 - 1)]).getConnectionType() == this.getConnectionType();
+    	boolean canConnectTop = Block.blocksList[par1World.getBlockId(par2, par3 + 1, par4)] instanceof IConnect && ((IConnect)Block.blocksList[par1World.getBlockId(par2, par3 + 1, par4)]).getConnectionType() == this.getConnectionType();
+    	boolean canConnectBottom = Block.blocksList[par1World.getBlockId(par2, par3 - 1, par4)] instanceof IConnect && ((IConnect)Block.blocksList[par1World.getBlockId(par2, par3 - 1, par4)]).getConnectionType() == this.getConnectionType();
+        boolean canConnectLeft = Block.blocksList[par1World.getBlockId(par2 + 1, par3, par4)] instanceof IConnect && ((IConnect)Block.blocksList[par1World.getBlockId(par2 + 1, par3, par4)]).getConnectionType() == this.getConnectionType();
+        boolean canConnectRight = Block.blocksList[par1World.getBlockId(par2 - 1, par3, par4)] instanceof IConnect && ((IConnect)Block.blocksList[par1World.getBlockId(par2 - 1, par3, par4)]).getConnectionType() == this.getConnectionType();
+        boolean canConnectFront = Block.blocksList[par1World.getBlockId(par2, par3, par4 + 1)] instanceof IConnect && ((IConnect)Block.blocksList[par1World.getBlockId(par2, par3, par4 + 1)]).getConnectionType() == this.getConnectionType();
+        boolean canConnectBack = Block.blocksList[par1World.getBlockId(par2, par3, par4 - 1)] instanceof IConnect && ((IConnect)Block.blocksList[par1World.getBlockId(par2, par3, par4 - 1)]).getConnectionType() == this.getConnectionType();
         float minX = 0.3125F;
         float minY = 0.3125F;
         float minZ = 0.3125F;

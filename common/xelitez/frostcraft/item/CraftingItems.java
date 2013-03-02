@@ -3,7 +3,6 @@ package xelitez.frostcraft.item;
 import java.util.List;
 
 import xelitez.frostcraft.registry.CreativeTabs;
-import xelitez.frostcraft.registry.IdMap;
 import net.minecraft.item.ItemStack;
 
 public class CraftingItems extends ItemBase
@@ -18,7 +17,8 @@ public class CraftingItems extends ItemBase
         this.setHasSubtypes(true);
 	}
 	
-    public void getSubItems(int par1, net.minecraft.creativetab.CreativeTabs par2CreativeTabs, List par3List)
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public void getSubItems(int par1, net.minecraft.creativetab.CreativeTabs par2CreativeTabs, List par3List)
     {
     	for(int i = 0;i < 7;i++)
     	{

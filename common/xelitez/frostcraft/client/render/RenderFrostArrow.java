@@ -1,6 +1,5 @@
 package xelitez.frostcraft.client.render;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.Tessellator;
@@ -10,10 +9,7 @@ import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import xelitez.frostcraft.FrostCraft;
-import xelitez.frostcraft.client.particle.EntitySnowFX;
 import xelitez.frostcraft.entity.EntityFrostArrow;
-import xelitez.frostcraft.registry.IdMap;
 
 @SideOnly(Side.CLIENT)
 public class RenderFrostArrow extends Render

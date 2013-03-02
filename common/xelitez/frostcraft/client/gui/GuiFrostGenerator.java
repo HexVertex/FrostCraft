@@ -7,7 +7,6 @@ import xelitez.frostcraft.tileentity.TileEntityFrostGenerator;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.StatCollector;
 
 public class GuiFrostGenerator extends GuiContainer

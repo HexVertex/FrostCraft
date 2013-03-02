@@ -3,7 +3,6 @@ package xelitez.frostcraft.network;
 import java.util.logging.Level;
 
 import xelitez.frostcraft.FCLog;
-import xelitez.frostcraft.FrostCraft;
 import xelitez.frostcraft.entity.EntityFrostArrow;
 import xelitez.frostcraft.tileentity.TileEntityThermalMachines;
 
@@ -15,7 +14,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 

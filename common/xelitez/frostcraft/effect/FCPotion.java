@@ -4,7 +4,6 @@ import xelitez.frostcraft.registry.Settings;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
 import net.minecraftforge.client.ForgeHooksClient;
 
 public class FCPotion extends Potion

@@ -1,7 +1,6 @@
 package xelitez.frostcraft.item;
 
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import xelitez.frostcraft.effect.EffectTicker;
 import xelitez.frostcraft.effect.FCPotion;
 import xelitez.frostcraft.enchantment.FrostEnchantment;
@@ -16,8 +15,6 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.StatCollector;
-import net.minecraft.util.StringTranslate;
 import net.minecraft.world.World;
 
 public class ItemFrostEnforced extends Item

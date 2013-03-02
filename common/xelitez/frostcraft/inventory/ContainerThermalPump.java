@@ -8,10 +8,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-
 import xelitez.frostcraft.interfaces.IChargeable;
-import xelitez.frostcraft.tileentity.TileEntityFrostFurnace;
 import xelitez.frostcraft.tileentity.TileEntityThermalPump;
 
 public class ContainerThermalPump extends Container

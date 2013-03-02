@@ -5,12 +5,8 @@ import xelitez.frostcraft.energy.IIsSource;
 import xelitez.frostcraft.registry.BiomeRegistry;
 import xelitez.frostcraft.energy.EnergyRequestRegistry;
 import xelitez.frostcraft.interfaces.IChargeable;
-import xelitez.frostcraft.registry.IdMap;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -24,7 +20,7 @@ public class TileEntityThermalPump extends TileEntityThermalMachines implements 
 	
 	public void calculateValue()
 	{
-		double Bvalue = (double)BiomeRegistry.getInstance().getBiomeValue(worldObj, xCoord, zCoord);
+		double Bvalue = (double)BiomeRegistry.getBiomeValue(worldObj, xCoord, zCoord);
 		double value = Bvalue * 1.50;
 		value += Bvalue * ((double)yCoord * 1.0 / 256.0);
 		long time = worldObj.getWorldTime();

@@ -12,7 +12,6 @@ import xelitez.frostcraft.world.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemHoe;
@@ -24,10 +23,7 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.MinecraftForge;
-
 import cpw.mods.fml.client.registry.*;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -307,7 +303,7 @@ public class IdMap
 		RenderingRegistry.registerBlockHandler(2200, new RendererThermalPipe());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostArrow.class, new RenderFrostArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostShot.class, new RenderFrostShot(0.5f));
-		MinecraftForgeClient.registerItemRenderer(this.itemFrostBow.itemID, new RenderFrostBow());
+		MinecraftForgeClient.registerItemRenderer(IdMap.itemFrostBow.itemID, new RenderFrostBow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFairy.class, new RenderFairy(new ModelFairy(0.0F, "/xelitez/frostcraft/textures/icefairywings.png"), 1.0F, 1.0F));
 	}
 }

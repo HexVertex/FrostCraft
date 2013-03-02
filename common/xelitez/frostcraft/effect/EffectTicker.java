@@ -9,7 +9,6 @@ import xelitez.frostcraft.damage.EntityDamageSourceIndirectFrost;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -39,7 +38,7 @@ public class EffectTicker implements ITickHandler
 	
 	public boolean hasEntityEffect(EntityLiving entity, Potion potion)
 	{
-		for(int i = 0;i< this.entities.size();i++)
+		for(int i = 0;i< EffectTicker.entities.size();i++)
 		{
 			Effect effect = entities.get(i);
 			if(effect.entity.entityId == entity.entityId)
@@ -108,7 +107,7 @@ public class EffectTicker implements ITickHandler
 		{
 			peffect = peffect.setSource(source);
 		}
-		instance.entities.add(peffect);
+		EffectTicker.entities.add(peffect);
 	}
 	
 	public void removeEffects(int dim)

@@ -3,18 +3,12 @@ package xelitez.frostcraft.energy;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.logging.Level;
-
 import xelitez.frostcraft.tileentity.TileEntityThermalMachines;
 import xelitez.frostcraft.tileentity.TileEntityThermalPipe;
-import xelitez.frostcraft.registry.IdMap;
-
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 
 public class EnergyRequestRegistry implements ITickHandler
 {
@@ -118,7 +112,6 @@ public class EnergyRequestRegistry implements ITickHandler
 		{
 			if(i < this.checked.size())
 			{
-				int[] dat = checked.get(i);
 				if(checked == null)
 				{
 					checked.set(i, set);

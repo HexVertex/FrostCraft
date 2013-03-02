@@ -3,8 +3,6 @@ package xelitez.frostcraft.block;
 import java.util.List;
 import java.util.Random;
 
-import cpw.mods.fml.client.FMLClientHandler;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -15,7 +13,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -183,7 +180,6 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
     	if(tet != null)
     	{
     		int var6 = tet.front;
-    		boolean var7 = tet.isActive;
     		int var8 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
     		int frontTexture = 0;
     		switch(var8)
@@ -440,7 +436,8 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
     	}
     }
     
-    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
     {
         for (int var4 = 0; var4 < 5; ++var4)
         {

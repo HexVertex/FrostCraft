@@ -4,18 +4,15 @@ import java.util.List;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import xelitez.frostcraft.FrostCraft;
 import xelitez.frostcraft.enchantment.FrostEnchantment;
 import xelitez.frostcraft.entity.EntityFrostShot;
 import xelitez.frostcraft.interfaces.IChargeable;
 import xelitez.frostcraft.registry.CreativeTabs;
-import xelitez.frostcraft.registry.IdMap;
 
 public class ItemFrostGun extends ItemBase implements IChargeable
 {
@@ -72,7 +69,8 @@ public class ItemFrostGun extends ItemBase implements IChargeable
         return par1ItemStack;
     }
     
-    @Override
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
     public void getSubItems(int par1, net.minecraft.creativetab.CreativeTabs par2CreativeTabs, List par3List)
     {
         par3List.add(new ItemStack(par1, 1, 0));

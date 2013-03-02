@@ -1,7 +1,6 @@
 package xelitez.frostcraft.registry;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StringTranslate;
 
 public class CreativeTabs extends net.minecraft.creativetab.CreativeTabs
 {

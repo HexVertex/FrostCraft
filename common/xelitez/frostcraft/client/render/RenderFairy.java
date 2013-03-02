@@ -7,7 +7,6 @@ import xelitez.frostcraft.entity.EntityFairy;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.monster.EntityGiantZombie;
 
 public class RenderFairy extends RenderLiving
 {

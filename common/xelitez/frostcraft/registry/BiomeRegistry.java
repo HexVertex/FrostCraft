@@ -11,7 +11,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class BiomeRegistry 
 {
-	private static List biomeValues = new ArrayList();
+	private static List<Object[]> biomeValues = new ArrayList<Object[]>();
 	
 	private static final BiomeRegistry reg = new BiomeRegistry();
 	

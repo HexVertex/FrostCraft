@@ -7,8 +7,6 @@ import xelitez.frostcraft.tileentity.TileEntityFrostFurnace;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ContainerFurnace;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.StatCollector;
 
 public class GuiFrostFurnace extends GuiContainer

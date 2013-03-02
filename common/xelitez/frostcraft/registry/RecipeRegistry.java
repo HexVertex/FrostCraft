@@ -21,7 +21,7 @@ public class RecipeRegistry
 	public static HashMap<List<Integer>, ItemStack> enforcerRecipes = new HashMap<List<Integer>, ItemStack>();
 	public static HashMap<Integer, ItemStack> enforcerIdOnlyRecipes = new HashMap<Integer, ItemStack>();
 	
-	public static List frostFuel = new ArrayList();
+	public static List<Object[]> frostFuel = new ArrayList<Object[]>();
 	
 	public static RecipeRegistry registry()
 	{
@@ -30,34 +30,34 @@ public class RecipeRegistry
 	
 	public void registerRecipes()
 	{
-		this.addFrostValue(Item.snowball, 25);
-		this.addFrostValue(Item.bucketWater, 50);
-		this.addFrostValue(Item.bucketMilk, 10);
-		this.addFrostValue(Block.snow, 33);
-		this.addFrostValue(Block.ice, 200);
-		this.addFrostValue(Block.blockSnow, 100);
-		this.addFrostValue(IdMap.itemCraftingItems, 0, 125);
-		this.addFrostValue(IdMap.itemIcicle, 150);
+		RecipeRegistry.addFrostValue(Item.snowball, 25);
+		RecipeRegistry.addFrostValue(Item.bucketWater, 50);
+		RecipeRegistry.addFrostValue(Item.bucketMilk, 10);
+		RecipeRegistry.addFrostValue(Block.snow, 33);
+		RecipeRegistry.addFrostValue(Block.ice, 200);
+		RecipeRegistry.addFrostValue(Block.blockSnow, 100);
+		RecipeRegistry.addFrostValue(IdMap.itemCraftingItems, 0, 125);
+		RecipeRegistry.addFrostValue(IdMap.itemIcicle, 150);
 		
-		this.addFreezerRecipe(Item.bucketWater, new ItemStack(Block.ice, 2), 0.25F);
-		this.addFreezerRecipe(Item.snowball, new ItemStack(IdMap.itemCraftingItems, 1, 0), 0.40F);
-		this.addFreezerRecipe(Item.silk, new ItemStack(IdMap.itemCraftingItems, 1, 1), 0.33F);
-		this.addFreezerRecipe(IdMap.itemCompiledFrostBlade, new ItemStack(IdMap.itemFrozenFrostBlade), 1.0F);
-		this.addFreezerRecipe(IdMap.itemCompiledFrostSpade, new ItemStack(IdMap.itemFrozenFrostSpade), 1.0F);
-		this.addFreezerRecipe(IdMap.itemCompiledFrostPickaxe, new ItemStack(IdMap.itemFrozenFrostPickaxe), 1.0F);
-		this.addFreezerRecipe(IdMap.itemCompiledFrostAxe, new ItemStack(IdMap.itemFrozenFrostAxe), 1.0F);
-		this.addFreezerRecipe(IdMap.itemCompiledFrostHoe, new ItemStack(IdMap.itemFrozenFrostHoe), 1.0F);
+		RecipeRegistry.addFreezerRecipe(Item.bucketWater, new ItemStack(Block.ice, 2), 0.25F);
+		RecipeRegistry.addFreezerRecipe(Item.snowball, new ItemStack(IdMap.itemCraftingItems, 1, 0), 0.40F);
+		RecipeRegistry.addFreezerRecipe(Item.silk, new ItemStack(IdMap.itemCraftingItems, 1, 1), 0.33F);
+		RecipeRegistry.addFreezerRecipe(IdMap.itemCompiledFrostBlade, new ItemStack(IdMap.itemFrozenFrostBlade), 1.0F);
+		RecipeRegistry.addFreezerRecipe(IdMap.itemCompiledFrostSpade, new ItemStack(IdMap.itemFrozenFrostSpade), 1.0F);
+		RecipeRegistry.addFreezerRecipe(IdMap.itemCompiledFrostPickaxe, new ItemStack(IdMap.itemFrozenFrostPickaxe), 1.0F);
+		RecipeRegistry.addFreezerRecipe(IdMap.itemCompiledFrostAxe, new ItemStack(IdMap.itemFrozenFrostAxe), 1.0F);
+		RecipeRegistry.addFreezerRecipe(IdMap.itemCompiledFrostHoe, new ItemStack(IdMap.itemFrozenFrostHoe), 1.0F);
 		
-		this.addEnforcerRecipe(IdMap.itemCompiledFrostBlade, new ItemStack(IdMap.itemFrostBlade), true);
-		this.addEnforcerRecipe(IdMap.itemCompiledFrostSpade, new ItemStack(IdMap.itemFrostSpade), true);
-		this.addEnforcerRecipe(IdMap.itemCompiledFrostPickaxe, new ItemStack(IdMap.itemFrostPickaxe), true);
-		this.addEnforcerRecipe(IdMap.itemCompiledFrostAxe, new ItemStack(IdMap.itemFrostAxe), true);
-		this.addEnforcerRecipe(IdMap.itemCompiledFrostHoe, new ItemStack(IdMap.itemFrostHoe), true);
-		this.addEnforcerRecipe(IdMap.itemFrozenFrostBlade, new ItemStack(IdMap.itemFrostBlade), true);
-		this.addEnforcerRecipe(IdMap.itemFrozenFrostSpade, new ItemStack(IdMap.itemFrostSpade), true);
-		this.addEnforcerRecipe(IdMap.itemFrozenFrostPickaxe, new ItemStack(IdMap.itemFrostPickaxe), true);
-		this.addEnforcerRecipe(IdMap.itemFrozenFrostAxe, new ItemStack(IdMap.itemFrostAxe), true);
-		this.addEnforcerRecipe(IdMap.itemFrozenFrostHoe, new ItemStack(IdMap.itemFrostHoe), true);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemCompiledFrostBlade, new ItemStack(IdMap.itemFrostBlade), true);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemCompiledFrostSpade, new ItemStack(IdMap.itemFrostSpade), true);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemCompiledFrostPickaxe, new ItemStack(IdMap.itemFrostPickaxe), true);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemCompiledFrostAxe, new ItemStack(IdMap.itemFrostAxe), true);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemCompiledFrostHoe, new ItemStack(IdMap.itemFrostHoe), true);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemFrozenFrostBlade, new ItemStack(IdMap.itemFrostBlade), true);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemFrozenFrostSpade, new ItemStack(IdMap.itemFrostSpade), true);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemFrozenFrostPickaxe, new ItemStack(IdMap.itemFrostPickaxe), true);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemFrozenFrostAxe, new ItemStack(IdMap.itemFrostAxe), true);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemFrozenFrostHoe, new ItemStack(IdMap.itemFrostHoe), true);
 		
 		GameRegistry.addRecipe(new ItemStack(IdMap.itemCompiledFrostBlade), new Object[] {"I", "C", "X", 'I', IdMap.itemIcicle, 'C', Block.ice, 'X', Item.stick} );
 		GameRegistry.addRecipe(new ItemStack(IdMap.itemCompiledFrostAxe), new Object[] {"BC", "IX", " X", 'B', new ItemStack(IdMap.itemCraftingItems, 1, 0), 'C', Block.ice, 'I', IdMap.itemIcicle, 'X', Item.stick});
@@ -90,22 +90,22 @@ public class RecipeRegistry
 	
 	public static void addFrostValue(Block block, int time)
 	{
-		instance.addFrostValue(new ItemStack(block.blockID, 1, 0), time);
+		RecipeRegistry.addFrostValue(new ItemStack(block.blockID, 1, 0), time);
 	}
 	
 	public static void addFrostValue(Block block, int meta, int time)
 	{
-		instance.addFrostValue(new ItemStack(block.blockID, 1, meta), time);
+		RecipeRegistry.addFrostValue(new ItemStack(block.blockID, 1, meta), time);
 	}
 	
 	public static void addFrostValue(Item item, int time)
 	{
-		instance.addFrostValue(new ItemStack(item.itemID, 1, 0), time);
+		RecipeRegistry.addFrostValue(new ItemStack(item.itemID, 1, 0), time);
 	}
 	
 	public static void addFrostValue(Item item, int meta, int time)
 	{
-		instance.addFrostValue(new ItemStack(item.itemID, 1, meta), time);
+		RecipeRegistry.addFrostValue(new ItemStack(item.itemID, 1, meta), time);
 	}
 	
 	public int getFrostTime(ItemStack par1)
@@ -130,42 +130,42 @@ public class RecipeRegistry
 	
 	public static void addFreezerRecipe(Block block, ItemStack result)
 	{
-		instance.addFreezerRecipe(new ItemStack(block.blockID, 1, 0), result, 0.0F);
+		RecipeRegistry.addFreezerRecipe(new ItemStack(block.blockID, 1, 0), result, 0.0F);
 	}
 	
 	public static void addFreezerRecipe(Block block, int meta, ItemStack result)
 	{
-		instance.addFreezerRecipe(new ItemStack(block.blockID, 1, meta), result, 0.0F);
+		RecipeRegistry.addFreezerRecipe(new ItemStack(block.blockID, 1, meta), result, 0.0F);
 	}
 	
 	public static void addFreezerRecipe(Block block, ItemStack result, float exp)
 	{
-		instance.addFreezerRecipe(new ItemStack(block.blockID, 1, 0), result, exp);
+		RecipeRegistry.addFreezerRecipe(new ItemStack(block.blockID, 1, 0), result, exp);
 	}
 	
 	public static void addFreezerRecipe(Block block, int meta, ItemStack result, float exp)
 	{
-		instance.addFreezerRecipe(new ItemStack(block.blockID, 1, meta), result, exp);
+		RecipeRegistry.addFreezerRecipe(new ItemStack(block.blockID, 1, meta), result, exp);
 	}
 	
 	public static void addFreezerRecipe(Item item, ItemStack result)
 	{
-		instance.addFreezerRecipe(new ItemStack(item.itemID, 1, 0), result, 0.0F);
+		RecipeRegistry.addFreezerRecipe(new ItemStack(item.itemID, 1, 0), result, 0.0F);
 	}
 	
 	public static void addFreezerRecipe(Item item, int meta, ItemStack result)
 	{
-		instance.addFreezerRecipe(new ItemStack(item.itemID, 1, meta), result, 0.0F);
+		RecipeRegistry.addFreezerRecipe(new ItemStack(item.itemID, 1, meta), result, 0.0F);
 	}
 	
 	public static void addFreezerRecipe(Item item, ItemStack result, float exp)
 	{
-		instance.addFreezerRecipe(new ItemStack(item.itemID, 1, 0), result, exp);
+		RecipeRegistry.addFreezerRecipe(new ItemStack(item.itemID, 1, 0), result, exp);
 	}
 	
 	public static void addFreezerRecipe(Item item, int meta, ItemStack result, float exp)
 	{
-		instance.addFreezerRecipe(new ItemStack(item.itemID, 1, meta), result, exp);
+		RecipeRegistry.addFreezerRecipe(new ItemStack(item.itemID, 1, meta), result, exp);
 	}
 	
 	public ItemStack getFreezingResult(ItemStack item)
@@ -174,9 +174,9 @@ public class RecipeRegistry
 		{
 			return null;
 		}
-		if(this.freezerRecipes.containsKey(Arrays.asList(item.itemID, item.getItemDamage())))
+		if(RecipeRegistry.freezerRecipes.containsKey(Arrays.asList(item.itemID, item.getItemDamage())))
 		{
-			return this.freezerRecipes.get(Arrays.asList(item.itemID, item.getItemDamage()));
+			return RecipeRegistry.freezerRecipes.get(Arrays.asList(item.itemID, item.getItemDamage()));
 		}
 		else
 		{
@@ -190,9 +190,9 @@ public class RecipeRegistry
 		{
 			return 0.0f;
 		}
-		if(this.freezerExperiences.containsKey(Arrays.asList(item.itemID, item.getItemDamage())))
+		if(RecipeRegistry.freezerExperiences.containsKey(Arrays.asList(item.itemID, item.getItemDamage())))
 		{
-			return this.freezerExperiences.get(Arrays.asList(item.itemID, item.getItemDamage()));
+			return RecipeRegistry.freezerExperiences.get(Arrays.asList(item.itemID, item.getItemDamage()));
 		}
 		else
 		{
@@ -214,22 +214,22 @@ public class RecipeRegistry
 	
 	public static void addEnforcerRecipe(Block block, ItemStack result, boolean idOnly)
 	{
-		instance.addEnforcerRecipe(new ItemStack(block.blockID, 1, 0), result, idOnly);
+		RecipeRegistry.addEnforcerRecipe(new ItemStack(block.blockID, 1, 0), result, idOnly);
 	}
 	
 	public static void addEnforcerRecipe(Block block, int meta, ItemStack result, boolean idOnly)
 	{
-		instance.addEnforcerRecipe(new ItemStack(block.blockID, 1, meta), result, idOnly);
+		RecipeRegistry.addEnforcerRecipe(new ItemStack(block.blockID, 1, meta), result, idOnly);
 	}
 	
 	public static void addEnforcerRecipe(Item item, ItemStack result, boolean idOnly)
 	{
-		instance.addEnforcerRecipe(new ItemStack(item.itemID, 1, 0), result, idOnly);
+		RecipeRegistry.addEnforcerRecipe(new ItemStack(item.itemID, 1, 0), result, idOnly);
 	}
 	
 	public static void addEnforcerRecipe(Item item, int meta, ItemStack result, boolean idOnly)
 	{
-		instance.addEnforcerRecipe(new ItemStack(item.itemID, 1, meta), result, idOnly);
+		RecipeRegistry.addEnforcerRecipe(new ItemStack(item.itemID, 1, meta), result, idOnly);
 	}
 	
 	public ItemStack getEnforcingResult(ItemStack item)
@@ -238,13 +238,13 @@ public class RecipeRegistry
 		{
 			return null;
 		}
-		if(this.enforcerRecipes.containsKey(Arrays.asList(item.itemID, item.getItemDamage())))
+		if(RecipeRegistry.enforcerRecipes.containsKey(Arrays.asList(item.itemID, item.getItemDamage())))
 		{
-			return this.enforcerRecipes.get(Arrays.asList(item.itemID, item.getItemDamage()));
+			return RecipeRegistry.enforcerRecipes.get(Arrays.asList(item.itemID, item.getItemDamage()));
 		}
-		else if(this.enforcerIdOnlyRecipes.containsKey(item.itemID))
+		else if(RecipeRegistry.enforcerIdOnlyRecipes.containsKey(item.itemID))
 		{
-			return this.enforcerIdOnlyRecipes.get(item.itemID);
+			return RecipeRegistry.enforcerIdOnlyRecipes.get(item.itemID);
 		}
 		else
 		{

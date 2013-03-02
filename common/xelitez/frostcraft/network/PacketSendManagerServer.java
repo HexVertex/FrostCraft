@@ -6,13 +6,10 @@ import java.io.IOException;
 
 import xelitez.frostcraft.entity.EntityFrostArrow;
 import xelitez.frostcraft.tileentity.TileEntityThermalMachines;
-import xelitez.frostcraft.tileentity.TileEntityThermalPump;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.tileentity.TileEntity;
 
 public class PacketSendManagerServer
 {

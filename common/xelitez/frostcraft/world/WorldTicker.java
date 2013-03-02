@@ -7,7 +7,6 @@ import java.util.Random;
 
 import xelitez.frostcraft.registry.IdMap;
 
-import net.minecraft.block.Block;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
@@ -30,7 +29,7 @@ public class WorldTicker implements ITickHandler
 	public void tickEnd(EnumSet<TickType> type, Object... tickData) 
 	{
 		World world = (World)tickData[0];
-        Iterator var3 = world.activeChunkSet.iterator();
+        Iterator<?> var3 = world.activeChunkSet.iterator();
         while (var3.hasNext())
         {
             ChunkCoordIntPair var4 = (ChunkCoordIntPair)var3.next();

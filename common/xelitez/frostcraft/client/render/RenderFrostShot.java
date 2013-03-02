@@ -3,12 +3,8 @@ package xelitez.frostcraft.client.render;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
-import xelitez.frostcraft.FrostCraft;
 import xelitez.frostcraft.entity.EntityFrostShot;
 import xelitez.frostcraft.registry.IdMap;
-import xelitez.util.DegMath;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 

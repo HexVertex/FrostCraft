@@ -2,14 +2,10 @@ package xelitez.frostcraft.registry;
 
 import java.util.Random;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import xelitez.frostcraft.client.particle.EntitySnowFX;
 import xelitez.frostcraft.client.gui.*;
 import xelitez.frostcraft.tileentity.*;
-import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class ClientProxy extends CommonProxy

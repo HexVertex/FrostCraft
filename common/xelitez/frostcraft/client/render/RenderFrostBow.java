@@ -1,8 +1,6 @@
 package xelitez.frostcraft.client.render;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
 import cpw.mods.fml.client.FMLClientHandler;
 
 import net.minecraft.client.Minecraft;
@@ -31,7 +29,6 @@ public class RenderFrostBow implements IItemRenderer{
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) 
 	{
-		float f;
 		if(type == ItemRenderType.EQUIPPED)
 		{
             GL11.glTranslatef(0.15F, -0.25F, 0.165F);

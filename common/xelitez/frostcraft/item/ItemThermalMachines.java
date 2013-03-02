@@ -3,11 +3,8 @@ package xelitez.frostcraft.item;
 import java.util.List;
 
 import xelitez.frostcraft.registry.IdMap;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockCloth;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 
 public class ItemThermalMachines extends ItemBlock
@@ -31,7 +28,8 @@ public class ItemThermalMachines extends ItemBlock
         return par1;
     }
     
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
     {
     	if(par1ItemStack.itemID == IdMap.blockThermalMachines.blockID)
     	{

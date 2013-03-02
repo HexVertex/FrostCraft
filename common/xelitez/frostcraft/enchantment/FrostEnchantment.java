@@ -8,12 +8,7 @@ import xelitez.frostcraft.item.ItemFrostTool;
 import xelitez.frostcraft.registry.Settings;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
 import net.minecraftforge.common.EnumHelper;
 
 public class FrostEnchantment extends Enchantment

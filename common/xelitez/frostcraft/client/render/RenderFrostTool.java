@@ -3,17 +3,12 @@ package xelitez.frostcraft.client.render;
 import org.lwjgl.opengl.GL11;
 
 import xelitez.frostcraft.item.ItemFrostEnforced;
-import xelitez.frostcraft.enums.EnumRenderType;
-
 import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.IItemRenderer;

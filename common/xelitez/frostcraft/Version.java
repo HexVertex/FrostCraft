@@ -57,7 +57,7 @@ public class Version
     	{
     		public void run()
     		{
-		    	List strings = new ArrayList();
+		    	List<String> strings = new ArrayList<String>();
 		    	int MV = 0;
 		    	int mV = 0;
 		    	int MB = 0;
@@ -66,7 +66,7 @@ public class Version
 					
 		    	try
 		    	{
-		    		URL url = new URL("https://raw.github.com/XEZKalvin/FrostCraft/master/minecraft/xelitez/frostcraft/Version.java");
+		    		URL url = new URL("https://raw.github.com/XEZKalvin/FrostCraft/master/common/xelitez/frostcraft/Version.java");
 		    		URLConnection connect = url.openConnection();
 		    		connect.setConnectTimeout(5000);
 		    		connect.setReadTimeout(5000);
@@ -144,43 +144,18 @@ public class Version
 		    		if ((Settings.ignoreMC && MC.matches("MC:" + NMC) || (!Settings.ignoreMC && !MC.matches("MC:" + NMC))) || ((Settings.ignoremB && !produceVersion(MV, mV, MB, 0).matches(produceVersion(majorVersion, minorVersion, majorBuild, 0))) || (!Settings.ignoremB && !getVersion().matches(produceVersion(MV, mV, MB, mB)))))
 		    		{
 		    			available = true;
-		    			newVersion = produceVersion(MV, mV, MB, mB);
-		    			
-		    			if (!NMC.matches(""))
-		    			{
-		    				newVersion = newVersion + " for MC:" + NMC;
-		    			}
-		    			
-		    			if (FMLCommonHandler.instance().getSide() == Side.SERVER && registered)
-		    			{
-		    				FCLog.info("A new version of FrostCraft is available(" + newVersion + ")");
-		    			}
-		    			
-		    			if (mB != minorBuild)
-		    			{
-		    				color = "\u00a7b";
-		    			}
-		    			
-		    			if (MB != majorBuild)
-		    			{
-		    				color = "\u00a7a";
-		    			}
-		    			
-		    			if (mV != minorVersion)
-		    			{
-		    				color = "\u00a7e";
-		    			}
-		    			
-		    			if (MV != majorVersion)
-		    			{
-		    				color = "\u00a73";
-		    			}
-		    			
-		    			if (!MC.matches("MC:" + NMC) && !Settings.ignoreMC)
-		    			{
-		    				color = "\u00a75";
-		    			}
 		    		}
+		    	}
+		    	newVersion = produceVersion(MV, mV, MB, mB);
+		    			
+		    	if (!NMC.matches(""))
+		    	{
+		    		newVersion = newVersion + " for MC:" + NMC;
+		    	}
+		    	
+		    	if (FMLCommonHandler.instance().getSide() == Side.SERVER && registered)
+		    	{
+		    		FCLog.info("A new version of FrostCraft is available(" + newVersion + ")");
 		    	}
 		    }	
     	}.start();

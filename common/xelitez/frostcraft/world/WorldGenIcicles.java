@@ -13,7 +13,6 @@ import net.minecraft.block.BlockLeaves;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.ForgeDirection;
 
 public class WorldGenIcicles implements IWorldGenerator
@@ -60,7 +59,7 @@ public class WorldGenIcicles implements IWorldGenerator
 			int posZ = chunkZ * 16 + random.nextInt(16);
 			if(biomeList.contains(world.getBiomeGenForCoords(chunkX * 16, chunkZ * 16)))
 			{
-				List<Integer> list = this.getPossibleYPos(world, posX, posZ);
+				List<Integer> list = WorldGenIcicles.getPossibleYPos(world, posX, posZ);
 				int posY;
 				if(list.size() > 0)
 				{

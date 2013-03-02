@@ -1,13 +1,6 @@
 package xelitez.frostcraft.client.model;
 
-import java.lang.reflect.Method;
-import java.util.logging.Level;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.FMLClientHandler;
-
-import xelitez.frostcraft.FCLog;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

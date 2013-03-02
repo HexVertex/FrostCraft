@@ -2,8 +2,6 @@ package xelitez.frostcraft.entity;
 
 import java.util.List;
 
-import xelitez.frostcraft.FrostCraft;
-import xelitez.frostcraft.damage.EntityDamageSourceIndirectFrost;
 import xelitez.frostcraft.effect.EffectTicker;
 import xelitez.frostcraft.effect.FCPotion;
 import xelitez.frostcraft.effect.FrostExplosion;
@@ -197,7 +195,7 @@ public class EntityFrostShot extends Entity
             }
 
             Entity var4 = null;
-            List var5 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+            List<?> var5 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
             double var6 = 0.0D;
 
             for (int var8 = 0; var8 < var5.size(); ++var8)
@@ -236,7 +234,7 @@ public class EntityFrostShot extends Entity
             this.posX += this.motionX;
             this.posY += this.motionY;
             this.posZ += this.motionZ;
-            float var16 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
+            MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
 
             while (this.rotationPitch - this.prevRotationPitch >= 180.0F)
             {
@@ -256,7 +254,7 @@ public class EntityFrostShot extends Entity
             this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2F;
             this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
             spawnParticles();
-            float var17 = this.getMotionFactor();
+            this.getMotionFactor();
 
             if (this.isInWater())
             {
@@ -265,8 +263,6 @@ public class EntityFrostShot extends Entity
                     float var18 = 0.25F;
                     this.worldObj.spawnParticle("bubble", this.posX - this.motionX * (double)var18, this.posY - this.motionY * (double)var18, this.posZ - this.motionZ * (double)var18, this.motionX, this.motionY, this.motionZ);
                 }
-
-                var17 = 0.8F;
             }
             this.setPosition(this.posX, this.posY, this.posZ);
         }

@@ -3,7 +3,6 @@ package xelitez.frostcraft.damage;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.StatCollector;
 
 public class EntityDamageSourceIndirectFrost extends EntityDamageSource

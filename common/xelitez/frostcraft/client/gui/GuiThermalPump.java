@@ -2,9 +2,7 @@ package xelitez.frostcraft.client.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import xelitez.frostcraft.inventory.ContainerFrostFurnace;
 import xelitez.frostcraft.inventory.ContainerThermalPump;
-import xelitez.frostcraft.tileentity.TileEntityFrostFurnace;
 import xelitez.frostcraft.tileentity.TileEntityThermalPump;
 
 import net.minecraft.util.StatCollector;

@@ -2,18 +2,13 @@ package xelitez.frostcraft.effect;
 
 import java.util.List;
 
-import xelitez.frostcraft.FrostCraft;
-import xelitez.frostcraft.damage.EntityDamageSourceIndirectFrost;
 import xelitez.frostcraft.entity.EntityFrostShot;
 
-import net.minecraft.enchantment.EnchantmentProtection;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class FrostExplosion 
@@ -44,8 +39,7 @@ public class FrostExplosion
         int var29 = MathHelper.floor_double(this.explosionY + (double)this.explosionSize + 1.0D);
         int var7 = MathHelper.floor_double(this.explosionZ - (double)this.explosionSize - 1.0D);
         int var30 = MathHelper.floor_double(this.explosionZ + (double)this.explosionSize + 1.0D);
-        List var9 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this.exploder, AxisAlignedBB.getAABBPool().addOrModifyAABBInPool((double)var3, (double)var5, (double)var7, (double)var4, (double)var29, (double)var30));
-        Vec3 var31 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.explosionX, this.explosionY, this.explosionZ);
+        List<?> var9 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this.exploder, AxisAlignedBB.getAABBPool().addOrModifyAABBInPool((double)var3, (double)var5, (double)var7, (double)var4, (double)var29, (double)var30));
 
         for (int var11 = 0; var11 < var9.size(); ++var11)
         {
@@ -64,8 +58,6 @@ public class FrostExplosion
                     var15 /= var34;
                     var17 /= var34;
                     var19 /= var34;
-                    double var33 = (double)this.worldObj.getBlockDensity(var31, var32.boundingBox);
-                    double var35 = (1.0D - var13) * var33;
                     EffectTicker.addEffect(var32, new PotionEffect(FCPotion.freeze.id, var32 instanceof EntityPlayer ? 20 : 40));
                     if(this.exploder instanceof EntityFrostShot)
                     {

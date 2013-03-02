@@ -2,19 +2,11 @@ package xelitez.frostcraft;
 
 import java.io.File;
 import java.lang.reflect.Method;
-import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Property;
-import xelitez.frostcraft.block.BlockThermalPipe;
 import xelitez.frostcraft.client.render.RenderFrostTool;
 import xelitez.frostcraft.effect.EffectTicker;
 import xelitez.frostcraft.effect.FCPotion;
@@ -28,26 +20,17 @@ import xelitez.frostcraft.registry.CommonProxy;
 import xelitez.frostcraft.registry.IdMap;
 import xelitez.frostcraft.registry.RecipeRegistry;
 import xelitez.frostcraft.registry.Settings;
-import xelitez.frostcraft.world.WorldAccess;
 import xelitez.frostcraft.world.WorldTicker;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.Mod.*;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
-import cpw.mods.fml.common.network.NetworkMod.NULL;
 import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.FMLInjectionData;
-import cpw.mods.fml.relauncher.ReflectionHelper;
-import cpw.mods.fml.relauncher.RelaunchClassLoader;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(	
@@ -68,7 +51,6 @@ public class FrostCraft
 	
 	private Configuration C;
 	private IdMap map = new IdMap();
-	private boolean checkForUpdates;
 	
 	@SidedProxy(clientSide = "xelitez.frostcraft.registry.ClientProxy", serverSide = "xelitez.frostcraft.registry.CommonProxy")
 	public static CommonProxy proxy = new CommonProxy();
@@ -79,7 +61,7 @@ public class FrostCraft
     public void preload(FMLPreInitializationEvent evt)
     {
 		evt.getModMetadata().name = "FrostCraft";
-		evt.getModMetadata().version = Version.getVersion() + "-Alpha for " + version.MC;
+		evt.getModMetadata().version = Version.getVersion() + "-Alpha for " + Version.MC;
 		
 		if(evt.getSide().isClient())
 		{
@@ -93,9 +75,9 @@ public class FrostCraft
 		{
 			C.load();
 			
-			C.addCustomCategoryComment(C.CATEGORY_GENERAL, "IDs that are -1 will be given the next free id possible");
+			C.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, "IDs that are -1 will be given the next free id possible");
 			
-			Settings.MaxEnfrocerItems = C.get(C.CATEGORY_GENERAL, "MaxEnforcerItems", Settings.defaultMaxEnforcedItems).getInt(Settings.defaultMaxEnforcedItems);
+			Settings.MaxEnfrocerItems = C.get(Configuration.CATEGORY_GENERAL, "MaxEnforcerItems", Settings.defaultMaxEnforcedItems).getInt(Settings.defaultMaxEnforcedItems);
 			map.enforcerToolStartId = C.get("Equipment", "EnforcerToolsStartId", map.defaultEnforcerToolStartId).getInt(map.defaultEnforcerToolStartId);
 			
 			// Start getting world configuration
@@ -110,31 +92,31 @@ public class FrostCraft
 			Settings.enchantmentFrostburnId = C.get("Enchantments", "EnchantmentFrostburnId", Settings.enchantmentFrostburnId).getInt();
 
 			// Start getting configuration settings of Item/Block Id's
-			map.IdThermalPipe = C.get("Mechanical", "ThermalPipeId", map.defaultIdThermalPipe).getInt(map.defaultIdThermalPipe);
-			map.IdThermalMachines = C.get("Mechanical", "ThermalPumpId", map.defaultIdThermalMachines).getInt(map.defaultIdThermalMachines);
+			IdMap.IdThermalPipe = C.get("Mechanical", "ThermalPipeId", map.defaultIdThermalPipe).getInt(map.defaultIdThermalPipe);
+			IdMap.IdThermalMachines = C.get("Mechanical", "ThermalPumpId", map.defaultIdThermalMachines).getInt(map.defaultIdThermalMachines);
 			
-			map.IdFrostBow = C.get("Equipment", "FrostBowId", map.defaultIdFrostBow).getInt(map.defaultIdFrostBow);
-			map.IdFrostGun = C.get("Equipment", "FrostGunId", map.defaultIdFrostGun).getInt(map.defaultIdFrostGun);
-			map.IdCompiledFrostBlade = C.get("Equipment", "CompiledFrostBladeId", map.defaultIdCompiledFrostBlade).getInt(map.defaultIdCompiledFrostBlade);
-			map.IdCompiledFrostSpade = C.get("Equipment", "CompiledFrostSpadeId", map.defaultIdCompiledFrostSpade).getInt(map.defaultIdCompiledFrostSpade);
-			map.IdCompiledFrostPickaxe = C.get("Equipment", "CompiledFrostPickaxeId", map.defaultIdCompiledFrostPickaxe).getInt(map.defaultIdCompiledFrostPickaxe);
-			map.IdCompiledFrostAxe = C.get("Equipment", "CompiledFrostAxeId", map.defaultIdCompiledFrostAxe).getInt(map.defaultIdCompiledFrostAxe);
-			map.IdCompiledFrostHoe = C.get("Equipment", "CompiledFrostHoeId", map.defaultIdCompiledFrostHoe).getInt(map.defaultIdCompiledFrostHoe);
-			map.IdFrozenFrostBlade = C.get("Equipment", "FrozenFrostBladeId", map.defaultIdFrozenFrostBlade).getInt(map.defaultIdFrozenFrostBlade);
-			map.IdFrozenFrostSpade = C.get("Equipment", "FrozenFrostSpadeId", map.defaultIdFrozenFrostSpade).getInt(map.defaultIdFrozenFrostSpade);
-			map.IdFrozenFrostPickaxe = C.get("Equipment", "FrozenFrostPickaxeId", map.defaultIdFrozenFrostPickaxe).getInt(map.defaultIdFrozenFrostPickaxe);
-			map.IdFrozenFrostAxe = C.get("Equipment", "FrozenFrostAxeId", map.defaultIdFrozenFrostAxe).getInt(map.defaultIdFrozenFrostAxe);
-			map.IdFrozenFrostHoe = C.get("Equipment", "FrozenFrostHoeId", map.defaultIdFrozenFrostHoe).getInt(map.defaultIdFrozenFrostHoe);
-			map.IdFrostBlade = C.get("Equipment", "FrostBladeId", map.defaultIdFrostBlade).getInt(map.defaultIdFrostBlade);
-			map.IdFrostSpade = C.get("Equipment", "FrostSpadeId", map.defaultIdFrostSpade).getInt(map.defaultIdFrostSpade);
-			map.IdFrostPickaxe = C.get("Equipment", "FrostPickaxeId", map.defaultIdFrostPickaxe).getInt(map.defaultIdFrostPickaxe);
-			map.IdFrostAxe = C.get("Equipment", "FrostAxeId", map.defaultIdFrostAxe).getInt(map.defaultIdFrostAxe);
-			map.IdFrostHoe = C.get("Equipment", "FrostHoeId", map.defaultIdFrostHoe).getInt(map.defaultIdFrostHoe);
+			IdMap.IdFrostBow = C.get("Equipment", "FrostBowId", map.defaultIdFrostBow).getInt(map.defaultIdFrostBow);
+			IdMap.IdFrostGun = C.get("Equipment", "FrostGunId", map.defaultIdFrostGun).getInt(map.defaultIdFrostGun);
+			IdMap.IdCompiledFrostBlade = C.get("Equipment", "CompiledFrostBladeId", map.defaultIdCompiledFrostBlade).getInt(map.defaultIdCompiledFrostBlade);
+			IdMap.IdCompiledFrostSpade = C.get("Equipment", "CompiledFrostSpadeId", map.defaultIdCompiledFrostSpade).getInt(map.defaultIdCompiledFrostSpade);
+			IdMap.IdCompiledFrostPickaxe = C.get("Equipment", "CompiledFrostPickaxeId", map.defaultIdCompiledFrostPickaxe).getInt(map.defaultIdCompiledFrostPickaxe);
+			IdMap.IdCompiledFrostAxe = C.get("Equipment", "CompiledFrostAxeId", map.defaultIdCompiledFrostAxe).getInt(map.defaultIdCompiledFrostAxe);
+			IdMap.IdCompiledFrostHoe = C.get("Equipment", "CompiledFrostHoeId", map.defaultIdCompiledFrostHoe).getInt(map.defaultIdCompiledFrostHoe);
+			IdMap.IdFrozenFrostBlade = C.get("Equipment", "FrozenFrostBladeId", map.defaultIdFrozenFrostBlade).getInt(map.defaultIdFrozenFrostBlade);
+			IdMap.IdFrozenFrostSpade = C.get("Equipment", "FrozenFrostSpadeId", map.defaultIdFrozenFrostSpade).getInt(map.defaultIdFrozenFrostSpade);
+			IdMap.IdFrozenFrostPickaxe = C.get("Equipment", "FrozenFrostPickaxeId", map.defaultIdFrozenFrostPickaxe).getInt(map.defaultIdFrozenFrostPickaxe);
+			IdMap.IdFrozenFrostAxe = C.get("Equipment", "FrozenFrostAxeId", map.defaultIdFrozenFrostAxe).getInt(map.defaultIdFrozenFrostAxe);
+			IdMap.IdFrozenFrostHoe = C.get("Equipment", "FrozenFrostHoeId", map.defaultIdFrozenFrostHoe).getInt(map.defaultIdFrozenFrostHoe);
+			IdMap.IdFrostBlade = C.get("Equipment", "FrostBladeId", map.defaultIdFrostBlade).getInt(map.defaultIdFrostBlade);
+			IdMap.IdFrostSpade = C.get("Equipment", "FrostSpadeId", map.defaultIdFrostSpade).getInt(map.defaultIdFrostSpade);
+			IdMap.IdFrostPickaxe = C.get("Equipment", "FrostPickaxeId", map.defaultIdFrostPickaxe).getInt(map.defaultIdFrostPickaxe);
+			IdMap.IdFrostAxe = C.get("Equipment", "FrostAxeId", map.defaultIdFrostAxe).getInt(map.defaultIdFrostAxe);
+			IdMap.IdFrostHoe = C.get("Equipment", "FrostHoeId", map.defaultIdFrostHoe).getInt(map.defaultIdFrostHoe);
 			
-			map.IdParticleItem = C.get("Misc", "DummyParticleItemId", map.defaultIdParticleItem).getInt(map.defaultIdParticleItem);
-			map.IdCraftingItems = C.get("Misc", "CraftingItemsId", map.defaultIdCraftingItems).getInt(map.defaultIdCraftingItems);
-			map.IdIcicle = C.get("Misc", "IcicleId", map.defaultIdIcicle).getInt(map.defaultIdIcicle);
-			map.IdBlockIcicle = C.get("Misc", "BlockIcicleId", map.defaultIdBlockIcicle).getInt(map.defaultIdBlockIcicle);
+			IdMap.IdParticleItem = C.get("Misc", "DummyParticleItemId", map.defaultIdParticleItem).getInt(map.defaultIdParticleItem);
+			IdMap.IdCraftingItems = C.get("Misc", "CraftingItemsId", map.defaultIdCraftingItems).getInt(map.defaultIdCraftingItems);
+			IdMap.IdIcicle = C.get("Misc", "IcicleId", map.defaultIdIcicle).getInt(map.defaultIdIcicle);
+			IdMap.IdBlockIcicle = C.get("Misc", "BlockIcicleId", map.defaultIdBlockIcicle).getInt(map.defaultIdBlockIcicle);
 			
 			// Getting configuration about update checker
             Property update = C.get("Updates", "Check for updates", true);
@@ -181,7 +163,7 @@ public class FrostCraft
 				Class<? extends Object> clazz = Class.forName("xelitez.updateutility.UpdateRegistry");
                 Method registermod = clazz.getDeclaredMethod("addMod", Object.class, Object.class);
                 registermod.invoke(null, this, new Update());
-                version.registered = true;
+                Version.registered = true;
             }
         }
         catch (Exception E)

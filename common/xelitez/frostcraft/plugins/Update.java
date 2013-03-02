@@ -1,6 +1,7 @@
 package xelitez.frostcraft.plugins;
 
 import xelitez.frostcraft.FrostCraft;
+import xelitez.frostcraft.Version;
 import xelitez.frostcraft.registry.Settings;
 import xelitez.updateutility.IXEZUpdate;
 
@@ -10,13 +11,13 @@ public class Update implements IXEZUpdate
 	@Override
 	public String getCurrentVersion() 
 	{
-		return FrostCraft.instance.version.getVersion() + " for " + FrostCraft.instance.version.MC;
+		return Version.getVersion() + " for " + Version.MC;
 	}
 
 	@Override
 	public String getNewVersion() 
 	{
-		return FrostCraft.instance.version.newVersion;
+		return Version.newVersion;
 	}
 
 	@Override
@@ -34,7 +35,7 @@ public class Update implements IXEZUpdate
 	@Override
 	public boolean isUpdateAvailable() 
 	{
-		return FrostCraft.instance.version.available;
+		return Version.available;
 	}
 
 	@Override

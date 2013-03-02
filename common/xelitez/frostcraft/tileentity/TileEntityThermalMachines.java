@@ -1,17 +1,12 @@
 package xelitez.frostcraft.tileentity;
 
-import java.util.logging.Level;
-
 import xelitez.frostcraft.energy.EnergyRequestRegistry;
 import xelitez.frostcraft.energy.IIsSource;
-import xelitez.frostcraft.enums.ConnectionTypes;
 import xelitez.frostcraft.interfaces.IConnect;
 import xelitez.frostcraft.network.PacketSendManagerServer;
-import xelitez.frostcraft.registry.BiomeRegistry;
 import xelitez.frostcraft.registry.IdMap;
 
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.FMLLog;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

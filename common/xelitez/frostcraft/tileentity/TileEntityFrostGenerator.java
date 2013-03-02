@@ -4,16 +4,12 @@ import xelitez.frostcraft.block.BlockThermalMachines;
 import xelitez.frostcraft.energy.EnergyRequestRegistry;
 import xelitez.frostcraft.energy.IIsSource;
 import xelitez.frostcraft.interfaces.IChargeable;
-import xelitez.frostcraft.network.PacketSendManagerServer;
 import xelitez.frostcraft.registry.RecipeRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFurnace;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.ISidedInventory;
 

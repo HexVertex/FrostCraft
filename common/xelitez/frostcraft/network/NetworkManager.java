@@ -1,7 +1,6 @@
 package xelitez.frostcraft.network;
 
 import xelitez.frostcraft.Version;
-import xelitez.frostcraft.world.WorldAccess;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.NetLoginHandler;
 import net.minecraft.network.packet.NetHandler;
