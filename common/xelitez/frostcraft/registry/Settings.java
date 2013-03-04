@@ -3,7 +3,7 @@ package xelitez.frostcraft.registry;
 public class Settings 
 {
 	public static boolean checkForUpdates = false;
-	public static boolean ignoremB = true;
+	public static boolean ignoremB = false;
 	public static boolean ignoreMC = false;
 	
 	public static int defaultMaxEnforcedItems = 25;

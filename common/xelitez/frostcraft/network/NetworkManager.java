@@ -11,6 +11,7 @@ import cpw.mods.fml.common.network.Player;
 
 public class NetworkManager implements IConnectionHandler
 {
+	private boolean notify = false;
 	@Override
 	public void playerLoggedIn(Player player, NetHandler netHandler,
 			INetworkManager manager) {
@@ -49,6 +50,11 @@ public class NetworkManager implements IConnectionHandler
 	public void clientLoggedIn(NetHandler clientHandler,
 			INetworkManager manager, Packet1Login login) 
 	{
+    	if (Version.notify && !this.notify && !Version.registered)
+    	{
+    		clientHandler.getPlayer().addChatMessage("\u00a7eFrostcraft failed to register to the XEliteZ UpdateUtility. You should download it if you can. You can disable this message in the config file.");
+    		this.notify = true;
+    	}
         if (!Version.registered && Version.available)
         {
             clientHandler.getPlayer().addChatMessage("A new version of the \u00a7bFrostCraft mod\u00a7f is available (" + Version.color + Version.newVersion + "\u00a7f).");
