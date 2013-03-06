@@ -229,7 +229,7 @@ public class EffectTicker implements ITickHandler
 						counter++;
 						return;
 					}
-					if(counter <= 1) 
+					if(counter == 10) 
 					{
 						int damage = this.level + 1;
 						DamageSource var1 = null;
