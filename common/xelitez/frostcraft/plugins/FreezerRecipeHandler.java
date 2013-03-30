@@ -185,7 +185,7 @@ public class FreezerRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public String getGuiTexture() 
 	{
-		return "/xelitez/frostcraft/textures/freezer.png";
+		return "/mods/FrostCraft/textures/freezer.png";
 	}
 	
 	public void drawExtras(GuiContainerManager gui, int recipe)

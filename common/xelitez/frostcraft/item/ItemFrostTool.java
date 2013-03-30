@@ -14,7 +14,6 @@ import net.minecraft.potion.PotionEffect;
 
 public class ItemFrostTool extends ItemTool
 {
-
 	protected ItemFrostTool(int par1, int par2,
 			EnumToolMaterial par3EnumToolMaterial, Block[] par4ArrayOfBlock) 
 	{
@@ -36,11 +35,6 @@ public class ItemFrostTool extends ItemTool
         	EffectTicker.addEffect(par2EntityLiving, new PotionEffect(FCPotion.frostburn.id, 60, var2 - 1), par3EntityLiving);
         }
         return true;
-    }
-	
-    public String getTextureFile()
-    {
-        return "/xelitez/frostcraft/textures/Items_0.png";
     }
 
 }

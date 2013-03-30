@@ -325,33 +325,33 @@ public class EntityFrostArrow extends Entity implements IProjectile
                     
                     if (var4.entityHit.attackEntityFrom(var21, var23))
                     {
+                        if(this.canFreeze)
+                        {
+                        	EffectTicker.addEffect(var4.entityHit, new PotionEffect(FCPotion.freeze.id, var4.entityHit instanceof EntityPlayer ? 20 + 5 * time: 40 + 10 * time));
+                        	EffectTicker.addEffect(var4.entityHit, new PotionEffect(FCPotion.frostburn.id, 51, frost), this, this.shootingEntity);
+                        }
                         if (var4.entityHit instanceof EntityLiving)
                         {
-                            EntityLiving var24 = (EntityLiving)var4.entityHit;
-                            if(this.canFreeze)
-                            {
-                            	EffectTicker.addEffect(var24, new PotionEffect(FCPotion.freeze.id, var24 instanceof EntityPlayer ? 20 + 10 * time: 40 + 10 * time));
-                            	EffectTicker.addEffect(var24, new PotionEffect(FCPotion.frostburn.id, 50, frost), this, this.shootingEntity);
-
-                            	if (!this.worldObj.isRemote)
-                            	{
-                            		var24.setArrowCountInEntity(var24.getArrowCountInEntity() + 1);
-                            	}
-
-                            	if (this.knockbackStrength > 0)
-                            	{
-                            		var26 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
-                            		
-                            		if (var26 > 0.0F)
-                            		{
-                            			var4.entityHit.addVelocity(this.motionX * (double)this.knockbackStrength * 0.6000000238418579D / (double)var26, 0.1D, this.motionZ * (double)this.knockbackStrength * 0.6000000238418579D / (double)var26);
-                            		}
-                            	}
-                            }
+                        	EntityLiving var24 = (EntityLiving)var4.entityHit;
+                        	
+                        	if (!this.worldObj.isRemote)
+                        	{
+                        		var24.setArrowCountInEntity(var24.getArrowCountInEntity() + 1);
+                        	}
+                        	
+                        	if (this.knockbackStrength > 0)
+                        	{
+                        		var26 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
+                        		
+                        		if (var26 > 0.0F)
+                        		{
+                        			var4.entityHit.addVelocity(this.motionX * (double)this.knockbackStrength * 0.6000000238418579D / (double)var26, 0.1D, this.motionZ * (double)this.knockbackStrength * 0.6000000238418579D / (double)var26);
+                        		}
+                        	}
 
                             if (this.shootingEntity != null)
                             {
-                                EnchantmentThorns.func_92044_a(this.shootingEntity, var24, this.rand);
+                                EnchantmentThorns.func_92096_a(this.shootingEntity, var24, this.rand);
                             }
 
                             if (this.shootingEntity != null && var4.entityHit != this.shootingEntity && var4.entityHit instanceof EntityPlayer && this.shootingEntity instanceof EntityPlayerMP)

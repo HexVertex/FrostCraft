@@ -7,12 +7,12 @@ import xelitez.frostcraft.energy.EnergyRequestRegistry;
 import xelitez.frostcraft.interfaces.IChargeable;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public class TileEntityThermalPump extends TileEntityThermalMachines implements IIsSource, IInventory
+public class TileEntityThermalPump extends TileEntityThermalMachines implements IIsSource, ISidedInventory
 {
 	public ItemStack[] item = new ItemStack[1];
 	
@@ -56,7 +56,7 @@ public class TileEntityThermalPump extends TileEntityThermalMachines implements 
 			return false;
 		}
 		int[] dat = EnergyRequestRegistry.getInstance().getRequestData(id);
-		if(dat != null && dat[1] <= this.storage)
+		if(dat != null && dat[1] <= this.storage && !this.worldObj.isRemote)
 		{
 			if(Block.blocksList[worldObj.getBlockId(dat[2], dat[3], dat[4])] instanceof BlockThermalMachines && worldObj.getBlockTileEntity(dat[2], dat[3], dat[4]) instanceof TileEntityThermalMachines)
 			{
@@ -246,5 +246,35 @@ public class TileEntityThermalPump extends TileEntityThermalMachines implements 
 	public void closeChest() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean isInvNameLocalized() 
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) 
+	{
+		return itemstack.getItem() instanceof IChargeable;
+	}
+
+	@Override
+	public int[] getSizeInventorySide(int var1) 
+	{
+		return new int[] {0};
+	}
+
+	@Override
+	public boolean func_102007_a(int i, ItemStack itemstack, int j) 
+	{
+		return isStackValidForSlot(i, itemstack);
+	}
+
+	@Override
+	public boolean func_102008_b(int i, ItemStack itemstack, int j) 
+	{
+		return itemstack.getItem() instanceof IChargeable ? ((IChargeable)itemstack.getItem()).getMaxCharge() == (itemstack.getItemDamage() + ((IChargeable)itemstack.getItem()).getMaxCharge()) : true;
 	}
 }

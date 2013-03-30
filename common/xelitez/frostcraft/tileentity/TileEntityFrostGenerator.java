@@ -7,11 +7,10 @@ import xelitez.frostcraft.interfaces.IChargeable;
 import xelitez.frostcraft.registry.RecipeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.common.ISidedInventory;
 
 public class TileEntityFrostGenerator extends TileEntityThermalMachines implements IIsSource, ISidedInventory
 {
@@ -30,7 +29,7 @@ public class TileEntityFrostGenerator extends TileEntityThermalMachines implemen
 	public boolean handleRequest(int id) 
 	{
 		int[] dat = EnergyRequestRegistry.getInstance().getRequestData(id);
-		if(dat != null && dat[1] <= this.storage)
+		if(dat != null && dat[1] <= this.storage && !this.worldObj.isRemote)
 		{
 			if(Block.blocksList[worldObj.getBlockId(dat[2], dat[3], dat[4])] instanceof BlockThermalMachines && worldObj.getBlockTileEntity(dat[2], dat[3], dat[4]) instanceof TileEntityThermalMachines)
 			{
@@ -278,16 +277,37 @@ public class TileEntityFrostGenerator extends TileEntityThermalMachines implemen
 	}
 
 	@Override
-	public int getStartInventorySide(ForgeDirection side) 
+	public boolean isInvNameLocalized() 
 	{
-		if(side == ForgeDirection.DOWN) return 0;
-		return 1;
+		return false;
 	}
 
+
 	@Override
-	public int getSizeInventorySide(ForgeDirection side) 
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) 
 	{
-		return 1;
+		return (i == 0 && itemstack.getItem() instanceof IChargeable) || (i == 1 && RecipeRegistry.registry().getFrostTime(itemstack) != 0);
+	}
+
+
+	@Override
+	public int[] getSizeInventorySide(int i) 
+	{
+		return i == 0 ? new int[] {0, 1} : (i == 1 ? new int[] {0} : new int[] {1});
+	}
+
+
+	@Override
+	public boolean func_102007_a(int i, ItemStack itemstack, int j) 
+	{
+		return isStackValidForSlot(i, itemstack);
+	}
+
+
+	@Override
+	public boolean func_102008_b(int i, ItemStack itemstack, int j) 
+	{
+		return (i == 0 && itemstack.getItem() instanceof IChargeable ? ((IChargeable)itemstack.getItem()).getMaxCharge() == (itemstack.getItemDamage() + ((IChargeable)itemstack.getItem()).getMaxCharge()) : true) || (i == 1 && RecipeRegistry.registry().getFrostTime(itemstack) == 0);
 	}
 
 }

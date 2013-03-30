@@ -1,12 +1,11 @@
 package xelitez.frostcraft.tileentity;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.common.ISidedInventory;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -307,15 +306,32 @@ public class TileEntityFrostFurnace extends TileEntityThermalMachines implements
     public void closeChest() {}
 
 	@Override
-	public int getStartInventorySide(ForgeDirection side) 
+	public boolean isInvNameLocalized() 
 	{
-		if(side == ForgeDirection.UP) return 0;
-		return 1;
+		return false;
 	}
 
 	@Override
-	public int getSizeInventorySide(ForgeDirection side) 
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) 
 	{
-		return 1;
+		return i == 1 ? false : true;
+	}
+
+	@Override
+	public int[] getSizeInventorySide(int i) 
+	{
+		return i == 0 ? new int[] {1} : new int[] {0};
+	}
+
+	@Override
+	public boolean func_102007_a(int i, ItemStack itemstack, int j) 
+	{
+		return isStackValidForSlot(i, itemstack);
+	}
+
+	@Override
+	public boolean func_102008_b(int i, ItemStack itemstack, int j) 
+	{
+		return i == 1 || (i == 0 && FurnaceRecipes.smelting().getSmeltingResult(itemstack) == null);
 	}
 }

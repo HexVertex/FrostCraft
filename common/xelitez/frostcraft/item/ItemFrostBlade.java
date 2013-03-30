@@ -42,7 +42,7 @@ public class ItemFrostBlade extends ItemSword
     
     public String getTextureFile()
     {
-        return "/xelitez/frostcraft/textures/Items_0.png";
+        return "/mods/FrostCraft/textures/Items_0.png";
     }
 
 }

@@ -13,6 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
@@ -41,14 +42,15 @@ public class PacketManagerClient implements IPacketHandler{
                 int dimension = dat.readInt();
                 if(world.provider.dimensionId == dimension)
                 {
-                	TileEntityThermalMachines tet = (TileEntityThermalMachines)world.getBlockTileEntity(coords[0], coords[1], coords[2]);
-                	if(tet != null)
+                	TileEntity te = world.getBlockTileEntity(coords[0], coords[1], coords[2]);
+                	if(te != null && te instanceof TileEntityThermalMachines)
                 	{
+                		TileEntityThermalMachines tet = (TileEntityThermalMachines)te;
                 		tet.front = dat.readInt();
                 		tet.isActive = dat.readBoolean();
-                		tet.hasData = true;
+                		tet.setHasData();
                 	}
-                	world.markBlockForUpdate(coords[0], coords[1], coords[2]);
+                	world.markBlockForRenderUpdate(coords[0], coords[1], coords[2]);
                 	return;
                 }
             case 2:

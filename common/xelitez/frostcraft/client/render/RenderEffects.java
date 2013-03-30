@@ -6,7 +6,6 @@ import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import xelitez.frostcraft.client.particle.EntitySnowFX;
-import xelitez.frostcraft.registry.IdMap;
 
 public class RenderEffects 
 {
@@ -29,7 +28,7 @@ public class RenderEffects
                     double var21 = (double)var16 + (rand.nextDouble() - rand.nextDouble()) * 0.5D;
                     double var23 = (double)MathHelper.sqrt_double(var17 * var17 + var19 * var19 + var21 * var21) / 0.25D + rand.nextGaussian() * 0.05D;
                     EntitySnowFX fx = new EntitySnowFX(world, var8, var10, var12, var17 / var23, var19 / var23, var21 / var23, 1.75f);
-                    er.addEffect(fx, IdMap.itemParticleItem);
+                    er.addEffect(fx);
 
                     if (var14 != -size && var14 != size && var15 != -size && var15 != size)
                     {

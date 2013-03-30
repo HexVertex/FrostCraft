@@ -36,10 +36,4 @@ public class ClientProxy extends CommonProxy
 		return null;
 	}
 	
-	@Override
-	public void registerSidedElements()
-	{
-		
-	}
-	
 }

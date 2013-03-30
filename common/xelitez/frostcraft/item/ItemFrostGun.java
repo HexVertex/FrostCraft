@@ -26,6 +26,7 @@ public class ItemFrostGun extends ItemBase implements IChargeable
 		this.setCreativeTab(CreativeTabs.FCEquipment);
 	}
 	
+	@Override
     public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, int par4)
     {
         int var6 = this.getMaxItemUseDuration(par1ItemStack) - par4;
@@ -44,21 +45,25 @@ public class ItemFrostGun extends ItemBase implements IChargeable
         }
     }
 	
-    public ItemStack onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+	@Override
+    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
     {
         return par1ItemStack;
     }
     
+	@Override
     public EnumAction getItemUseAction(ItemStack par1ItemStack)
     {
         return EnumAction.bow;
     }
     
+	@Override
     public int getMaxItemUseDuration(ItemStack par1ItemStack)
     {
         return 72000;
     }
     
+	@Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
     {
         if (par1ItemStack.getItemDamage() <= par1ItemStack.getMaxDamage() - 16)
@@ -79,7 +84,7 @@ public class ItemFrostGun extends ItemBase implements IChargeable
         {
         	if(enchant != null && enchant instanceof FrostEnchantment)
         	{
-        		par3List.add(Item.field_92053_bW.func_92057_a(new EnchantmentData(enchant, enchant.getMaxLevel())));
+        		par3List.add(Item.enchantedBook.func_92111_a(new EnchantmentData(enchant, enchant.getMaxLevel())));
         	}
         }
     }

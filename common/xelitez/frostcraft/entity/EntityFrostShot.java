@@ -42,7 +42,7 @@ public class EntityFrostShot extends Entity
     public EntityFrostShot(World par1World)
     {
         super(par1World);
-        this.setSize(1.0F, 1.0F);
+        this.setSize(0.2F, 0.2F);
     }
 
     protected void entityInit() {}
@@ -63,7 +63,7 @@ public class EntityFrostShot extends Entity
     public EntityFrostShot(World par1World, double par2, double par4, double par6, double par8, double par10, double par12)
     {
         super(par1World);
-        this.setSize(1.0F, 1.0F);
+        this.setSize(0.2F, 0.2F);
         this.setLocationAndAngles(par2, par4, par6, this.rotationYaw, this.rotationPitch);
         this.setPosition(par2, par4, par6);
         double var14 = (double)MathHelper.sqrt_double(par8 * par8 + par10 * par10 + par12 * par12);
@@ -76,7 +76,7 @@ public class EntityFrostShot extends Entity
     {
         super(par1World);
         this.shootingEntity = par2EntityLiving;
-        this.setSize(0.5F, 0.5F);
+        this.setSize(0.2F, 0.2F);
         this.setLocationAndAngles(par2EntityLiving.posX, par2EntityLiving.posY + (double)par2EntityLiving.getEyeHeight(), par2EntityLiving.posZ, par2EntityLiving.rotationYaw, par2EntityLiving.rotationPitch);
         this.setPosition(this.posX, this.posY, this.posZ);
         this.yOffset = 0.0F;
@@ -94,7 +94,7 @@ public class EntityFrostShot extends Entity
     {
         super(par1World);
         this.shootingEntity = par2EntityLiving;
-        this.setSize(0.5F, 0.5F);
+        this.setSize(0.2F, 0.2F);
         this.setLocationAndAngles(par2EntityLiving.posX, par2EntityLiving.posY + (double)par2EntityLiving.getEyeHeight(), par2EntityLiving.posZ, par2EntityLiving.rotationYaw, par2EntityLiving.rotationPitch);
         this.setPosition(this.posX, this.posY, this.posZ);
         this.yOffset = 0.0F;

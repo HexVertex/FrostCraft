@@ -9,6 +9,8 @@ import xelitez.frostcraft.damage.EntityDamageSourceIndirectFrost;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -34,6 +36,10 @@ public class EffectTicker implements ITickHandler
 		{
 			addEffect((EntityLiving)entityHit, potionEffect, obj);
 		}
+		else if(entityHit instanceof EntityDragonPart)
+		{
+			addEffect((EntityLiving)((EntityDragonPart) entityHit).entityDragonObj, potionEffect, obj);
+		}
 	}
 	
 	public boolean hasEntityEffect(EntityLiving entity, Potion potion)
@@ -58,6 +64,7 @@ public class EffectTicker implements ITickHandler
 		{
 			return;
 		}
+		System.out.println(entity);
 		entity.addPotionEffect(effect);
 		Entity fireentity = null;
 		if(firingEntity != null && firingEntity.length >= 2 && firingEntity[1] instanceof Entity)
@@ -244,8 +251,12 @@ public class EffectTicker implements ITickHandler
 						else
 						{
 							var1 = new EntityDamageSourceFrost(entity);
-						}					
+						}	
 						entity.attackEntityFrom(var1 != null ? var1 : DamageSource.cactus, damage);
+						if(entity instanceof EntityDragon)
+						{
+							((EntityDragon)entity).attackEntityFromPart(((EntityDragon)entity).dragonPartBody, var1 != null ? var1 : DamageSource.cactus, damage);
+						}
 					}
 					if(counter >= 20)
 					{

@@ -2,11 +2,10 @@ package xelitez.frostcraft.tileentity;
 
 import xelitez.frostcraft.registry.RecipeRegistry;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.common.ISidedInventory;
 
 public class TileEntityFreezer extends TileEntityThermalMachines implements ISidedInventory
 {
@@ -167,8 +166,8 @@ public class TileEntityFreezer extends TileEntityThermalMachines implements ISid
             ItemStack var1 = RecipeRegistry.registry().getFreezingResult(this.items[0]);
             if (var1 == null) return false;
             if (this.items[1] == null && (this.items[0].getItem().getContainerItemStack(items[0]) == null || (this.items[2] == null || (this.items[2].isItemEqual(var1) && this.items[2].stackSize + 1 < this.items[2].getMaxStackSize())))) return true;
-            if (!this.items[1].isItemEqual(var1)) return false;
-            int result = items[1].stackSize + var1.stackSize;
+            if (this.items[1] != null && !this.items[1].isItemEqual(var1)) return false;
+            int result = items[1] != null ? (items[1].stackSize + var1.stackSize) : 64;
             return (result <= getInventoryStackLimit() && result <= var1.getMaxStackSize());
         }
     }
@@ -273,16 +272,32 @@ public class TileEntityFreezer extends TileEntityThermalMachines implements ISid
 	}
 
 	@Override
-	public int getStartInventorySide(ForgeDirection side) 
+	public boolean isInvNameLocalized() 
 	{
-		if(side == ForgeDirection.UP) return 1;
-		if(side == ForgeDirection.DOWN) return 2;
-		return 0;
+		return false;
 	}
 
 	@Override
-	public int getSizeInventorySide(ForgeDirection side) 
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) 
 	{
-		return 1;
+		return i == 2 ? false : (i == 1 ? false : true);
+	}
+
+	@Override
+	public int[] getSizeInventorySide(int i) 
+	{
+		return i == 0 ? new int[] {1, 2} : new int[] {0};
+	}
+
+	@Override
+	public boolean func_102007_a(int i, ItemStack itemstack, int j) 
+	{
+		return this.isStackValidForSlot(i, itemstack);
+	}
+
+	@Override
+	public boolean func_102008_b(int i, ItemStack itemstack, int j) 
+	{
+		return true;
 	}
 }

@@ -69,7 +69,7 @@ public class WorldGenIcicles implements IWorldGenerator
 						index = list.size() - 1;
 					}
 					posY = list.get(index);
-					world.setBlockWithNotify(posX, posY, posZ, IdMap.blockIcicle.blockID);
+					world.setBlock(posX, posY, posZ, IdMap.blockIcicle.blockID);
 				}
 			}
 		}

@@ -12,6 +12,6 @@ public abstract class BlockBaseContainer extends BlockContainer
 	
     public String getTextureFile()
     {
-        return "/xelitez/frostcraft/textures/Blocks_0.png";
+        return "/mods/FrostCraft/textures/Blocks_0.png";
     }
 }

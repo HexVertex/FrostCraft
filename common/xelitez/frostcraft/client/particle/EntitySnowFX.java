@@ -52,6 +52,7 @@ public class EntitySnowFX extends EntityFX
         this.particleScale = this.smokeParticleScale * var8;
         super.renderParticle(par1Tessellator, par2, par3, par4, par5, par6, par7);
     }
+   
 
     /**
      * Called to update the entity's position/logic.

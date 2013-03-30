@@ -5,6 +5,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -13,6 +14,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -26,11 +28,14 @@ import xelitez.frostcraft.tileentity.*;
 public class BlockThermalMachines extends BlockBaseContainer implements IConnect
 {
 	Random rand = new Random();
+	Icon[] icons;
+	String[] iconNames = new String[] {"FrostCraft:thermal_pump_active", "FrostCraft:thermal_pump_inactive", "FrostCraft:frost_furnace_active", 
+			"FrostCraft:frost_furnace_inactive", "FrostCraft:frost_generator_active", "FrostCraft:frost_generator_inactive", "FrostCraft:freezer_active",
+			"FrostCraft:freezer_inactive", "FrostCraft:frost_enforcer_active", "FrostCraft:frost_enforcer_inactive"};
 	
 	public BlockThermalMachines(int id, Material material) 
 	{
 		super(id, material);
-		this.blockIndexInTexture = 13;
 	}
 
 	@Override
@@ -38,11 +43,13 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
 		return ConnectionTypes.THERMAL;
 	}
 	
+	@Override
     public int idDropped(int par1, Random par2Random, int par3)
     {
     	return IdMap.blockThermalMachines.blockID;
     }
     
+    @Override
     public int damageDropped(int par1)
     {
         return par1;
@@ -91,27 +98,26 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
         }
     }
     
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4)
     {
         super.onBlockAdded(par1World, par2, par3, par4);
         this.setDefaultDirection(par1World, par2, par3, par4);
         if(!par1World.isRemote && par1World.getBlockMetadata(par2, par3, par4) == 0)
         {
-            if (!par1World.isRemote && par1World.getBlockMetadata(par2, par3, par4) == 0)
-            {
-            	TileEntityThermalPump te = (TileEntityThermalPump)par1World.getBlockTileEntity(par2, par3, par4);
-                if (te.isActive && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
-                {
-                    te.setActive(false);
-                }
-                else if (!te.isActive && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
-                {
-                    te.setActive(true);
-                }
-            }
+        	TileEntityThermalPump te = (TileEntityThermalPump)par1World.getBlockTileEntity(par2, par3, par4);
+        	if (te.isActive && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+        	{
+        		te.setActive(false);
+        	}
+        	else if (!te.isActive && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+        	{
+        		te.setActive(true);
+        	}
         }
     }
     
+    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
     {
     	TileEntityThermalMachines var7 = (TileEntityThermalMachines)par1World.getBlockTileEntity(par2, par3, par4);
@@ -142,7 +148,7 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
 
                         if (var9.hasTagCompound())
                         {
-                            var14.func_92014_d().setTagCompound((NBTTagCompound)var9.getTagCompound().copy());
+                            var14.getEntityItem().setTagCompound((NBTTagCompound)var9.getTagCompound().copy());
                         }
 
                         float var15 = 0.05F;
@@ -157,6 +163,7 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
         super.breakBlock(par1World, par2, par3, par4, par5, par6);
     }
     
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         if (!par1World.isRemote && par1World.getBlockMetadata(par2, par3, par4) == 0 && ((TileEntityThermalPump)par1World.getBlockTileEntity(par2, par3, par4)).isActive && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
@@ -165,7 +172,19 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
         }
     }
     
-    public int getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+    @Override
+    public void registerIcons(IconRegister par1IconRegister)
+    {
+    	super.registerIcons(par1IconRegister);
+    	icons = new Icon[iconNames.length];
+    	for(int i = 0; i < iconNames.length;i++)
+    	{
+    		icons[i] = par1IconRegister.registerIcon(iconNames[i]);
+    	}
+    }
+    
+    @Override
+    public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
     	TileEntity te = par1IBlockAccess.getBlockTileEntity(par2, par3, par4);
     	TileEntityThermalMachines tet = null;
@@ -173,7 +192,7 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
     	{
     		tet = (TileEntityThermalMachines)te;
     	}
-    	if(tet != null && !tet.hasData && par5 == 2)
+    	if(tet != null && (!tet.getHasData() || tet.front == 0))
     	{
     		PacketSendManagerClient.requestBlockDataFromServer(tet);
     	}
@@ -181,93 +200,94 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
     	{
     		int var6 = tet.front;
     		int var8 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
-    		int frontTexture = 0;
+    		Icon frontTexture = blockIcon;
     		switch(var8)
     		{
     		case 0:
     			if(tet.isActive)
     			{
-    				frontTexture = 15;
+    				frontTexture = icons[0];
     			}
     			else
     			{
-    				frontTexture = 14;
+    				frontTexture = icons[1];
     			}
     			break;
     		case 1:
     			if(tet.isActive)
     			{
-    				frontTexture = 11;
+    				frontTexture = icons[2];
     			}
     			else
     			{
-    				frontTexture = 12;
+    				frontTexture = icons[3];
     			}
     			break;
     		case 2:
     			if(tet.isActive)
     			{
-    				frontTexture = 9;
+    				frontTexture = icons[4];
     			}
     			else
     			{
-    				frontTexture = 10;
+    				frontTexture = icons[5];
     			}
     			break;
     		case 3:
     			if(tet.isActive)
     			{
-    				frontTexture = 7;
+    				frontTexture = icons[6];
     			}
     			else
     			{
-    				frontTexture = 8;
+    				frontTexture = icons[7];
     			}
     			break;
     		case 4:
     			if(tet.isActive)
     			{
-    				frontTexture = 5;
+    				frontTexture = icons[8];
     			}
     			else
     			{
-    				frontTexture = 6;
+    				frontTexture = icons[9];
     			}
     			break;
     		}
-    		return par5 != var6 ? this.blockIndexInTexture : frontTexture;
+    		return par5 != var6 ? this.blockIcon : frontTexture;
     	}
-    	return this.blockIndexInTexture;
+    	return this.blockIcon;
     }
     
-    public int getBlockTextureFromSideAndMetadata(int par1, int par2)
+    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
     {
-    	int frontTexture;
+    	Icon frontTexture;
         switch(par2)
         {
         case 0:
-        	frontTexture = 14;
+        	frontTexture = icons[1];
         	break;
         case 1:
-        	frontTexture = 12;
+        	frontTexture = icons[3];
         	break;
         case 2:
-        	frontTexture = 10;
+        	frontTexture = icons[5];
         	break;
         case 3:
-        	frontTexture = 8;
+        	frontTexture = icons[7];
         	break;
         case 4:
-        	frontTexture = 6;
+        	frontTexture = icons[9];
         	break;
         default:
-        	frontTexture = 13;
+        	frontTexture = this.blockIcon;
         	break;
         }
 
-        return par1 == 1 ? this.blockIndexInTexture : (par1 == 0 ? this.blockIndexInTexture : (par1 == 3 ? frontTexture : this.blockIndexInTexture));
+        return par1 == 1 ? this.blockIcon : (par1 == 0 ? this.blockIcon : (par1 == 3 ? frontTexture : this.blockIcon));
     }
     
+    @Override
     public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
     	TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
@@ -403,7 +423,8 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
     	}
     }
     
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving)
+    @Override
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
     {
         int var6 = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
     	TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
@@ -436,8 +457,9 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
     	}
     }
     
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
     {
         for (int var4 = 0; var4 < 5; ++var4)
         {
@@ -445,6 +467,7 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
         }
     }
     
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
     {
         if (par1World.isRemote)
@@ -480,6 +503,7 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
         }
     }
     
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
     {
         if (!par1World.isRemote && par1World.getBlockMetadata(par2, par3, par4) == 0)
@@ -499,7 +523,7 @@ public class BlockThermalMachines extends BlockBaseContainer implements IConnect
     
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int meta) 
+	public TileEntity createTileEntity(World var1, int meta) 
 	{
 		switch(meta)
 		{

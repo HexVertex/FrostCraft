@@ -2,6 +2,8 @@ package xelitez.frostcraft.client.model;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.client.FMLClientHandler;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -92,13 +94,12 @@ public class ModelFairy extends ModelBase
         this.fairyHeadwear.render(par7);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_COLOR);
-        ForgeHooksClient.bindTexture(wingTexture, 0);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(wingTexture);
         this.fairyRightWingTop.render(par7);
         this.fairyRightWingBottom.render(par7);
         this.fairyLeftWingTop.render(par7);
         this.fairyLeftWingBottom.render(par7);
         GL11.glDisable(GL11.GL_BLEND);
-        ForgeHooksClient.unbindTexture();
     }
     
     public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)

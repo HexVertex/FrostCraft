@@ -18,7 +18,6 @@ public class BlockIcicle extends BlockBase
 	public BlockIcicle(int id, Material material) 
 	{
 		super(id, material);
-		this.blockIndexInTexture = 16;
         this.setTickRandomly(true);
 		this.setBlockBounds(0.0F, 0.375F, 0.0F, 1.0F, 1.0F, 1.0F);
 		this.setCreativeTab(CreativeTabs.FCMiscItems);
@@ -40,7 +39,7 @@ public class BlockIcicle extends BlockBase
         this.checkIcicleChange(par1World, par2, par3, par4);
         if (par1World.getSavedLightValue(EnumSkyBlock.Block, par2, par3, par4) > 11)
         {
-            par1World.setBlockWithNotify(par2, par3, par4, 0);
+            par1World.setBlock(par2, par3, par4, 0);
         }
     }
     
@@ -55,7 +54,7 @@ public class BlockIcicle extends BlockBase
         if (!this.canBlockStay(par1World, par2, par3, par4))
         {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-            par1World.setBlockWithNotify(par2, par3, par4, 0);
+            par1World.setBlock(par2, par3, par4, 0);
         }
     }
     

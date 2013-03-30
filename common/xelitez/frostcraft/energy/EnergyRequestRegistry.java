@@ -36,16 +36,12 @@ public class EnergyRequestRegistry implements ITickHandler
 		{
 			return -1;
 		}
-		for(int i = 0;i < ids.size();i++)
+		for(int[] id : ids)
 		{
-			if(i < ids.size())
+			if(id != null && id[0] == par1)
 			{
-				int[] id = ids.get(i);
-				if(id != null && id[0] == par1)
-				{
-					par1++;
-					return getAvailableId(par1);
-				}
+				par1++;
+				return getAvailableId(par1);
 			}
 		}	
 		return par1;
@@ -57,15 +53,6 @@ public class EnergyRequestRegistry implements ITickHandler
 		if(id != -1)
 		{
 			int[] set = new int[] {id, request, te.xCoord, te.yCoord, te.zCoord, te.worldObj.provider.dimensionId};
-			for(int i = 0;i < this.ids.size();i++)
-			{
-				int[] dat = ids.get(i);
-				if(dat == null)
-				{
-					ids.set(i, set);
-					return id;
-				}
-			}
 			ids.add(set);
 		}
 		return id;
@@ -73,9 +60,8 @@ public class EnergyRequestRegistry implements ITickHandler
 	
 	public int[] getRequestData(int id)
 	{
-		for(int i = 0;i < ids.size();i++)
+		for(int[] dat : ids)
 		{
-			int[] dat = ids.get(i);
 			if(dat != null && dat[0] == id)
 			{
 				return dat;
@@ -86,20 +72,16 @@ public class EnergyRequestRegistry implements ITickHandler
 	
 	public boolean hasTileEntityRequests(TileEntityThermalMachines te)
 	{
-		for(int i = 0;i < ids.size();i++)
+		for(int[] id : ids)
 		{
-			if(i < ids.size())
+			if(id != null && id[2] == te.xCoord && id[3] == te.yCoord && id[4] == te.zCoord && id[5] == te.worldObj.provider.dimensionId)
 			{
-				int[] id = ids.get(i);
-				if(id != null && id[2] == te.xCoord && id[3] == te.yCoord && id[4] == te.zCoord && id[5] == te.worldObj.provider.dimensionId)
+				if(this.getNumberOfPipesInQueue(id[0]) <= 0)
 				{
-					if(this.getNumberOfPipesInQueue(id[0]) <= 0)
-					{
-						this.removeAll(id[0]);
-						return false;
-					}
-					return true;
+					this.removeAll(id[0]);
+					return false;
 				}
+				return true;
 			}
 		}
 		return false;
@@ -108,33 +90,18 @@ public class EnergyRequestRegistry implements ITickHandler
 	public void setPipeChecked(TileEntityThermalPipe te, int id)
 	{
 		int[] set = new int[] {id, te.xCoord, te.yCoord, te.zCoord, te.worldObj.provider.dimensionId };
-		for(int i = 0;i < checked.size();i++)
-		{
-			if(i < this.checked.size())
-			{
-				if(checked == null)
-				{
-					checked.set(i, set);
-					return;
-				}
-			}
-		}	
 		checked.add(set);
 	}
 	
 	public boolean isPipeChecked(TileEntityThermalPipe te, int id)
 	{
-		for(int i = 0;i < checked.size();i++)
+		for(int[] check : checked)
 		{
-			if(i < checked.size())
+			if(check != null && check[0] == id)
 			{
-				int[] check = checked.get(i);
-				if(check != null && check[0] == id)
+				if(te.xCoord == check[1] && te.yCoord == check[2] && te.zCoord == check[3] && te.worldObj.provider.dimensionId == check[4])
 				{
-					if(te.xCoord == check[1] && te.yCoord == check[2] && te.zCoord == check[3] && te.worldObj.provider.dimensionId == check[4])
-					{
-						return true;
-					}
+					return true;
 				}
 			}
 		}
@@ -144,15 +111,11 @@ public class EnergyRequestRegistry implements ITickHandler
 	private int getDimensionQueue(int dim)
 	{
 		int count = 0;
-		for(int i = 0;i < queue.size();i++)
+		for(int[] dat : queue)
 		{
-			if(i < queue.size())
+			if(dat != null && dat[4] == dim)
 			{
-				int[] dat = queue.get(i);
-				if(dat != null && dat[4] == dim)
-				{
-					count++;
-				}
+				count++;
 			}
 		}
 		return count;
@@ -163,21 +126,6 @@ public class EnergyRequestRegistry implements ITickHandler
 		if(te != null && te instanceof TileEntityThermalPipe && !this.getIsPipeInQueue(id, te))
 		{
 			int[] set = new int[] {id, te.xCoord, te.yCoord, te.zCoord, te.worldObj.provider.dimensionId};
-			for(int i = 0;i < queue.size();i++)
-			{
-				if(i < queue.size())
-				{
-					int[] dat = queue.get(i);
-					if(dat == null)
-					{
-						if(i < queue.size())
-						{
-							queue.set(i, set);
-							return true;
-						}
-					}
-				}
-			}
 			queue.add(set);
 			return true;
 		}
@@ -234,15 +182,11 @@ public class EnergyRequestRegistry implements ITickHandler
 	public int getNumberOfPipesInQueue(int id)
 	{
 		int count = 0;
-		for(int i = 0;i < queue.size();i++)
+		for(int[] dat : queue)
 		{
-			if(i < queue.size())
+			if(dat != null && dat[0] == id)
 			{
-				int[] dat = queue.get(i);
-				if(dat != null && dat[0] == id)
-				{
-					count++;
-				}
+				count++;
 			}
 		}
 		return count;

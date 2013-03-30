@@ -1,10 +1,10 @@
 package xelitez.frostcraft.effect;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import xelitez.frostcraft.registry.Settings;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraftforge.client.ForgeHooksClient;
 
 public class FCPotion extends Potion
 {
@@ -83,7 +83,7 @@ public class FCPotion extends Potion
     
     public int getStatusIconIndex()
     {
-    	ForgeHooksClient.bindTexture("/xelitez/frostcraft/textures/effects.png", 0);
+    	FMLClientHandler.instance().getClient().renderEngine.bindTexture("/mods/FrostCraft/textures/effects.png");
         return this.statusIconIndex;
     }
     

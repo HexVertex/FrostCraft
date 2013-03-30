@@ -36,7 +36,6 @@ public class IdMap
 	
 	public int defaultIdFrostBow = 2300;
 	public int defaultIdFrostGun = 2301;
-	public int defaultIdParticleItem = 2302;
 	public int defaultIdCraftingItems = 2303;
 	public int defaultIdCompiledFrostBlade = 2304;
 	public int defaultIdCompiledFrostSpade = 2305;
@@ -53,7 +52,7 @@ public class IdMap
 	public int defaultIdFrostPickaxe = 2316;
 	public int defaultIdFrostAxe = 2317;
 	public int defaultIdFrostHoe = 2318;
-	public int defaultIdIcicle = 2319;
+	public int defaultIdIcicle = 2302;
 	
 	public int defaultEnforcerToolStartId = 2400;
 	public int enforcerToolStartId;
@@ -65,7 +64,6 @@ public class IdMap
 	
 	public static int IdFrostBow;
 	public static int IdFrostGun;
-	public static int IdParticleItem;
 	public static int IdCraftingItems;
 	public static int IdCompiledFrostBlade;
 	public static int IdCompiledFrostSpade;
@@ -90,7 +88,6 @@ public class IdMap
 	
 	public static Item itemFrostBow;
 	public static Item itemFrostGun;
-	public static Item itemParticleItem;
 	public static Item itemCraftingItems;
 	public static Item itemCompiledFrostBlade;
 	public static Item itemCompiledFrostSpade;
@@ -111,14 +108,16 @@ public class IdMap
 	
 	public static WorldType worldTypeWinterland;
 	
+	public static ISimpleBlockRenderingHandler thermalPipeRenderer;
+	
 	/**
 	 * Initialise all FrostCraft Blocks and additions
 	 */
 	public void initialiseBlocks()
 	{
-		blockThermalPipe = new BlockThermalPipe(IdThermalPipe, Material.iron).setHardness(0.4F).setStepSound(Block.soundMetalFootstep).setBlockName("ThermalPipe");
-		blockThermalMachines = new BlockThermalMachines(IdThermalMachines, Material.iron).setHardness(2.5F).setStepSound(Block.soundMetalFootstep).setBlockName("ThermalMachines").setCreativeTab(CreativeTabs.FCMechanical);
-		blockIcicle = new BlockIcicle(IdBlockIcicle, Material.ice).setHardness(0.2F).setStepSound(Block.soundGlassFootstep).setBlockName("Icicle");
+		blockThermalPipe = new BlockThermalPipe(IdThermalPipe, Material.iron).setHardness(0.4F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("FrostCraft:thermal_pipe");
+		blockThermalMachines = new BlockThermalMachines(IdThermalMachines, Material.iron).setHardness(2.5F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("FrostCraft:thermal_machine_block").setCreativeTab(CreativeTabs.FCMechanical);
+		blockIcicle = new BlockIcicle(IdBlockIcicle, Material.ice).setHardness(0.2F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("FrostCraft:icicle");
 		GameRegistry.registerBlock(blockThermalPipe, "ThermalPipe");
 		GameRegistry.registerBlock(blockThermalMachines, ItemThermalMachines.class, "ThermalPump");
 		GameRegistry.registerBlock(blockIcicle, "Icicle");
@@ -136,30 +135,28 @@ public class IdMap
 	 */
 	public void initialiseItems()
 	{
-		itemFrostBow = new ItemFrostBow(IdFrostBow).setIconIndex(1).setItemName("FrostBow");
-		itemFrostGun = new ItemFrostGun(IdFrostGun).setIconIndex(0).setItemName("FrostGun");
-		itemParticleItem = new DummyParticleItem(IdParticleItem).setItemName("DummyParticleItem");
+		itemFrostBow = new ItemFrostBow(IdFrostBow).setUnlocalizedName("FrostCraft:frost_bow");
+		itemFrostGun = new ItemFrostGun(IdFrostGun).setUnlocalizedName("FrostCraft:frost_gun");
 		itemCraftingItems = new CraftingItems(IdCraftingItems);
-		itemCompiledFrostBlade = new ItemFrostBlade(IdCompiledFrostBlade, FrostToolMaterial.FROST_COMPILED).setIconIndex(4).setItemName("CompieledFrostBlade");
-		itemCompiledFrostSpade = new ItemFrostSpade(IdCompiledFrostSpade, FrostToolMaterial.FROST_COMPILED).setIconIndex(20).setItemName("CompiledFrostSpade");
-		itemCompiledFrostPickaxe = new ItemFrostPickaxe(IdCompiledFrostPickaxe, FrostToolMaterial.FROST_COMPILED).setIconIndex(36).setItemName("CompiledFrostPickaxe");
-		itemCompiledFrostAxe = new ItemFrostAxe(IdCompiledFrostAxe, FrostToolMaterial.FROST_COMPILED).setIconIndex(52).setItemName("CompiledFrostAxe");
-		itemCompiledFrostHoe = new ItemFrostHoe(IdCompiledFrostHoe, FrostToolMaterial.FROST_COMPILED).setIconIndex(68).setItemName("CompiledFrostHoe");
-		itemFrozenFrostBlade = new ItemFrostBlade(IdFrozenFrostBlade, FrostToolMaterial.FROST_FROZEN).setIconIndex(3).setItemName("FrozenFrostBlade");
-		itemFrozenFrostSpade = new ItemFrostSpade(IdFrozenFrostSpade, FrostToolMaterial.FROST_FROZEN).setIconIndex(19).setItemName("FrozenFrostSpade");
-		itemFrozenFrostPickaxe = new ItemFrostPickaxe(IdFrozenFrostPickaxe, FrostToolMaterial.FROST_FROZEN).setIconIndex(35).setItemName("FrozenFrostPickaxe");
-		itemFrozenFrostAxe = new ItemFrostAxe(IdFrozenFrostAxe, FrostToolMaterial.FROST_FROZEN).setIconIndex(51).setItemName("FrozenFrostAxe");
-		itemFrozenFrostHoe = new ItemFrostHoe(IdFrozenFrostHoe, FrostToolMaterial.FROST_FROZEN).setIconIndex(67).setItemName("FrozenFrostHoe");
-		itemFrostBlade = new ItemFrostBlade(IdFrostBlade, FrostToolMaterial.FROST).setIconIndex(2).setItemName("FrostBlade");
-		itemFrostSpade = new ItemFrostSpade(IdFrostSpade, FrostToolMaterial.FROST).setIconIndex(18).setItemName("FrostSpade");
-		itemFrostPickaxe = new ItemFrostPickaxe(IdFrostPickaxe, FrostToolMaterial.FROST).setIconIndex(34).setItemName("FrostPickaxe");
-		itemFrostAxe = new ItemFrostAxe(IdFrostAxe, FrostToolMaterial.FROST).setIconIndex(50).setItemName("FrostAxe");
-		itemFrostHoe = new ItemFrostHoe(IdFrostHoe, FrostToolMaterial.FROST).setIconIndex(66).setItemName("FrostHoe");
-		itemIcicle = new ItemIcicle(IdIcicle).setIconIndex(5).setItemName("Icicle");
+		itemCompiledFrostBlade = new ItemFrostBlade(IdCompiledFrostBlade, FrostToolMaterial.FROST_COMPILED).setUnlocalizedName("FrostCraft:compiled_frost_sword");
+		itemCompiledFrostSpade = new ItemFrostSpade(IdCompiledFrostSpade, FrostToolMaterial.FROST_COMPILED).setUnlocalizedName("FrostCraft:compiled_frost_spade");
+		itemCompiledFrostPickaxe = new ItemFrostPickaxe(IdCompiledFrostPickaxe, FrostToolMaterial.FROST_COMPILED).setUnlocalizedName("FrostCraft:compiled_frost_pickaxe");
+		itemCompiledFrostAxe = new ItemFrostAxe(IdCompiledFrostAxe, FrostToolMaterial.FROST_COMPILED).setUnlocalizedName("FrostCraft:compiled_frost_axe");
+		itemCompiledFrostHoe = new ItemFrostHoe(IdCompiledFrostHoe, FrostToolMaterial.FROST_COMPILED).setUnlocalizedName("FrostCraft:compiled_frost_hoe");
+		itemFrozenFrostBlade = new ItemFrostBlade(IdFrozenFrostBlade, FrostToolMaterial.FROST_FROZEN).setUnlocalizedName("FrostCraft:frost_sword");
+		itemFrozenFrostSpade = new ItemFrostSpade(IdFrozenFrostSpade, FrostToolMaterial.FROST_FROZEN).setUnlocalizedName("FrostCraft:frost_spade");
+		itemFrozenFrostPickaxe = new ItemFrostPickaxe(IdFrozenFrostPickaxe, FrostToolMaterial.FROST_FROZEN).setUnlocalizedName("FrostCraft:frost_pickaxe");
+		itemFrozenFrostAxe = new ItemFrostAxe(IdFrozenFrostAxe, FrostToolMaterial.FROST_FROZEN).setUnlocalizedName("FrostCraft:frost_axe");
+		itemFrozenFrostHoe = new ItemFrostHoe(IdFrozenFrostHoe, FrostToolMaterial.FROST_FROZEN).setUnlocalizedName("FrostCraft:frost_hoe");
+		itemFrostBlade = new ItemFrostBlade(IdFrostBlade, FrostToolMaterial.FROST).setUnlocalizedName("FrostCraft:enforced_frost_blade");
+		itemFrostSpade = new ItemFrostSpade(IdFrostSpade, FrostToolMaterial.FROST).setUnlocalizedName("FrostCraft:enforced_frost_spade");
+		itemFrostPickaxe = new ItemFrostPickaxe(IdFrostPickaxe, FrostToolMaterial.FROST).setUnlocalizedName("FrostCraft:enforced_frost_pickaxe");
+		itemFrostAxe = new ItemFrostAxe(IdFrostAxe, FrostToolMaterial.FROST).setUnlocalizedName("FrostCraft:enforced_frost_axe");
+		itemFrostHoe = new ItemFrostHoe(IdFrostHoe, FrostToolMaterial.FROST).setUnlocalizedName("FrostCraft:enforced_frost_hoe");
+		itemIcicle = new ItemIcicle(IdIcicle).setUnlocalizedName("FrostCraft:icicle");
 		
 		GameRegistry.registerItem(itemFrostBow, "FrostBow");
 		GameRegistry.registerItem(itemFrostGun, "FrostGun");
-		GameRegistry.registerItem(itemParticleItem, "DummyParticleItem");
 		GameRegistry.registerItem(itemCraftingItems, "CraftingItems");
 		GameRegistry.registerItem(itemCompiledFrostBlade, "CompiledFrostBlade");
 		GameRegistry.registerItem(itemCompiledFrostSpade, "CompiledFrostSpade");
@@ -285,8 +282,8 @@ public class IdMap
 				{
 					type = EnumRenderType.HOE;
 				}
-				this.EnforcedTools[i] = new ItemFrostEnforced(this.enforcerToolStartId + i, item, type).setItemName("Enforced" + item.getItemName());
-				GameRegistry.registerItem(this.EnforcedTools[i], "Enforced" + item.getItemName());
+				this.EnforcedTools[i] = new ItemFrostEnforced(this.enforcerToolStartId + i, item, type).setUnlocalizedName("Enforced" + item.getUnlocalizedName());
+				GameRegistry.registerItem(this.EnforcedTools[i], "Enforced" + item.getUnlocalizedName());
 				LanguageRegistry.addName(this.EnforcedTools[i], "Enforced " + StatCollector.translateToLocal(item.getStatName()));
 				RecipeRegistry.addEnforcerRecipe(item, new ItemStack(this.EnforcedTools[i]), true);
 				break;
@@ -300,10 +297,11 @@ public class IdMap
 	@SideOnly(Side.CLIENT)
 	public void initialiseRenderers()
 	{
-		RenderingRegistry.registerBlockHandler(2200, new RendererThermalPipe());
+		thermalPipeRenderer = new RendererThermalPipe(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(thermalPipeRenderer);
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostArrow.class, new RenderFrostArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostShot.class, new RenderFrostShot(0.5f));
 		MinecraftForgeClient.registerItemRenderer(IdMap.itemFrostBow.itemID, new RenderFrostBow());
-		RenderingRegistry.registerEntityRenderingHandler(EntityFairy.class, new RenderFairy(new ModelFairy(0.0F, "/xelitez/frostcraft/textures/icefairywings.png"), 1.0F, 1.0F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityFairy.class, new RenderFairy(new ModelFairy(0.0F, "/mods/FrostCraft/textures/icefairywings.png"), 1.0F, 1.0F));
 	}
 }

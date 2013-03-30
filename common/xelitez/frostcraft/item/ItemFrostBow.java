@@ -2,10 +2,14 @@ package xelitez.frostcraft.item;
 
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import xelitez.frostcraft.registry.IdMap;
 import xelitez.frostcraft.registry.CreativeTabs;
 import xelitez.frostcraft.enchantment.FrostEnchantment;
 import xelitez.frostcraft.entity.EntityFrostArrow;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,10 +17,13 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 public class ItemFrostBow extends ItemBow
 {
+    private Icon[] icons;
+    		
 	public ItemFrostBow(int par1) 
 	{
 		super(par1);
@@ -25,6 +32,7 @@ public class ItemFrostBow extends ItemBow
 		this.setCreativeTab(CreativeTabs.FCEquipment);
 	}
 	
+    @Override
     public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, int par4)
     {
         int var6 = this.getMaxItemUseDuration(par1ItemStack) - par4;
@@ -146,11 +154,13 @@ public class ItemFrostBow extends ItemBow
         return -1;
     }
 
-    public ItemStack onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    @Override
+    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
     {
         return par1ItemStack;
     }
 
+    @Override
     /**
      * How long it takes to use or consume an item
      */
@@ -159,6 +169,7 @@ public class ItemFrostBow extends ItemBow
         return 72000;
     }
 
+    @Override
     /**
      * returns the action that specifies what animation to play when the items is being used
      */
@@ -167,6 +178,7 @@ public class ItemFrostBow extends ItemBow
         return EnumAction.bow;
     }
 
+    @Override
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
@@ -180,6 +192,7 @@ public class ItemFrostBow extends ItemBow
         return par1ItemStack;
     }
 
+    @Override
     /**
      * Return the enchantability factor of the item, most of the time is based on material.
      */
@@ -188,19 +201,45 @@ public class ItemFrostBow extends ItemBow
         return 1;
     }
     
-    public int getIconIndex(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
+    @Override
+    public void updateIcons(IconRegister par1IconRegister)
+    {
+    	super.updateIcons(par1IconRegister);
+    	icons = new Icon[4];
+    	icons[0] = par1IconRegister.registerIcon("FrostCraft:frost_bow");
+    	for(int i = 0;i < 3;i++)
+    	{
+    		icons[i + 1] = par1IconRegister.registerIcon(new StringBuilder().append("FrostCraft:frost_bow_pull_").append(i).toString());
+    	}
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public Icon func_94599_c(int par1)
+    {
+        return this.icons[par1];
+    }
+    
+    @Override
+    public Icon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
     {
         if (usingItem != null && usingItem.getItem().itemID == IdMap.itemFrostBow.itemID)
         {
             int k = usingItem.getMaxItemUseDuration() - useRemaining;
-            if (k >= 18) return 49;
-            if (k >  13) return 33;
-            if (k >   0) return 17;
+            if (k >= 18) return icons[3];
+            if (k >  13) return icons[2];
+            if (k >   0) return icons[1];
         }
         return getIconIndex(stack);
     }
     
+    @Override
+    public Icon getIconFromDamage(int par1)
+    {
+        return icons[0];
+    }
+    
     @SuppressWarnings({ "unchecked", "rawtypes" })
+    @Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
     {
     	if(EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, par1ItemStack) > 0)
@@ -209,19 +248,9 @@ public class ItemFrostBow extends ItemBow
     	}
     }
     
-    public boolean isFull3D()
-    {
-    	return true;
-    }
-    
     @Override
     public boolean shouldRotateAroundWhenRendering()
     {
     	return false;
-    }
-    
-    public String getTextureFile()
-    {
-        return "/xelitez/frostcraft/textures/Items_0.png";
     }
 }

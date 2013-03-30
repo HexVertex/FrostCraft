@@ -37,8 +37,8 @@ import cpw.mods.fml.relauncher.Side;
 @Mod(	
 		modid = "XEZFrostCraft",
 		name = "FrostCraft", 
-		acceptedMinecraftVersions = "[1.4.7]",
-		version = "0.0.1.0")
+		acceptedMinecraftVersions = "[1.5.1]",
+		version = "0.0.2")
 @NetworkMod(
 		clientSideRequired = true,
 		serverSideRequired = false,
@@ -66,9 +66,7 @@ public class FrostCraft
 		
 		if(evt.getSide().isClient())
 		{
-			MinecraftForgeClient.preloadTexture("/xelitez/frostcraft/textures/Blocks_0.png");
-			MinecraftForgeClient.preloadTexture("/xelitez/frostcraft/textures/Items_0.png");
-			MinecraftForgeClient.preloadTexture("/xelitez/frostcraft/textures/effects.png");
+			MinecraftForgeClient.preloadTexture("/mods/FrostCraft/textures/effects.png");
 		}
 		
 		C = new Configuration(new File("XEliteZ/FrostCraft.cfg"));
@@ -114,7 +112,6 @@ public class FrostCraft
 			IdMap.IdFrostAxe = C.get("Equipment", "FrostAxeId", map.defaultIdFrostAxe).getInt(map.defaultIdFrostAxe);
 			IdMap.IdFrostHoe = C.get("Equipment", "FrostHoeId", map.defaultIdFrostHoe).getInt(map.defaultIdFrostHoe);
 			
-			IdMap.IdParticleItem = C.get("Misc", "DummyParticleItemId", map.defaultIdParticleItem).getInt(map.defaultIdParticleItem);
 			IdMap.IdCraftingItems = C.get("Misc", "CraftingItemsId", map.defaultIdCraftingItems).getInt(map.defaultIdCraftingItems);
 			IdMap.IdIcicle = C.get("Misc", "IcicleId", map.defaultIdIcicle).getInt(map.defaultIdIcicle);
 			IdMap.IdBlockIcicle = C.get("Misc", "BlockIcicleId", map.defaultIdBlockIcicle).getInt(map.defaultIdBlockIcicle);

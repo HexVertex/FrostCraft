@@ -223,7 +223,7 @@ public class EnforcerRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public String getGuiTexture() 
 	{
-		return "/xelitez/frostcraft/textures/frostenforcer.png";
+		return "/mods/FrostCraft/textures/frostenforcer.png";
 	}
 	
 	public void drawExtras(GuiContainerManager gui, int recipe)

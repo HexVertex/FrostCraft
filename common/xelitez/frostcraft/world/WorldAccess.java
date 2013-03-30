@@ -2,7 +2,6 @@ package xelitez.frostcraft.world;
 
 import xelitez.frostcraft.client.particle.EntitySnowFX;
 import xelitez.frostcraft.client.render.RenderEffects;
-import xelitez.frostcraft.registry.IdMap;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -55,38 +54,6 @@ public class WorldAccess implements IWorldAccess
         }
     }
     
-	@Override
-	public void markBlockForUpdate(int var1, int var2, int var3) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void markBlockForRenderUpdate(int var1, int var2, int var3) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void markBlockRangeForRenderUpdate(int var1, int var2, int var3,
-			int var4, int var5, int var6) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void playSound(String var1, double var2, double var4, double var6,
-			float var8, float var9) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void playSoundToNearExcept(EntityPlayer var1, String var2,
-			double var3, double var5, double var7, float var9, float var10) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void spawnParticle(String var1, double x, double y,
@@ -107,7 +74,7 @@ public class WorldAccess implements IWorldAccess
             {
             	if(var1.matches("snow"))
             	{
-            		mc.effectRenderer.addEffect(new EntitySnowFX(this.theWorld, x, y, z, mx, my, mz, 1.25f), IdMap.itemParticleItem);
+            		mc.effectRenderer.addEffect(new EntitySnowFX(this.theWorld, x, y, z, mx, my, mz, 1.25f));
             	}
             	if(var1.matches("frostExplosion"))
             	{
@@ -119,39 +86,71 @@ public class WorldAccess implements IWorldAccess
 	}
 
 	@Override
-	public void obtainEntitySkin(Entity var1) {
+	public void markBlockForUpdate(int i, int j, int k) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void releaseEntitySkin(Entity var1) {
+	public void markBlockForRenderUpdate(int i, int j, int k) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void playRecord(String var1, int var2, int var3, int var4) {
+	public void markBlockRangeForRenderUpdate(int i, int j, int k, int l,
+			int i1, int j1) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void broadcastSound(int var1, int var2, int var3, int var4, int var5) {
+	public void playSound(String s, double d0, double d1, double d2, float f,
+			float f1) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void playAuxSFX(EntityPlayer var1, int var2, int var3, int var4,
-			int var5, int var6) {
+	public void playSoundToNearExcept(EntityPlayer entityplayer, String s,
+			double d0, double d1, double d2, float f, float f1) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void destroyBlockPartially(int var1, int var2, int var3, int var4,
-			int var5) {
+	public void onEntityCreate(Entity entity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onEntityDestroy(Entity entity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void playRecord(String s, int i, int j, int k) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void broadcastSound(int i, int j, int k, int l, int i1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void playAuxSFX(EntityPlayer entityplayer, int i, int j, int k,
+			int l, int i1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void destroyBlockPartially(int i, int j, int k, int l, int i1) {
 		// TODO Auto-generated method stub
 		
 	}

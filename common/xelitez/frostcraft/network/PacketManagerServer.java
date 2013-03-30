@@ -11,6 +11,7 @@ import com.google.common.io.ByteStreams;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
@@ -39,8 +40,11 @@ public class PacketManagerServer implements IPacketHandler{
                 int dimension = dat.readInt();
                 if(world.provider.dimensionId == dimension)
                 {
-                	TileEntityThermalMachines tet = (TileEntityThermalMachines)world.getBlockTileEntity(coords[0], coords[1], coords[2]);
-                	PacketSendManagerServer.sendBlockData(tet);
+                	TileEntity tet = world.getBlockTileEntity(coords[0], coords[1], coords[2]);
+                	if(tet != null && tet instanceof TileEntityThermalMachines)
+                	{
+                		PacketSendManagerServer.sendBlockData((TileEntityThermalMachines)tet);
+                	}
                 }
                 return;
             default:

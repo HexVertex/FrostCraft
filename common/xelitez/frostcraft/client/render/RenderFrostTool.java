@@ -5,12 +5,12 @@ import org.lwjgl.opengl.GL11;
 import xelitez.frostcraft.item.ItemFrostEnforced;
 import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.ForgeHooksClient;
+import net.minecraft.util.Icon;
 import net.minecraftforge.client.IItemRenderer;
 
 public class RenderFrostTool implements IItemRenderer{
@@ -33,76 +33,75 @@ public class RenderFrostTool implements IItemRenderer{
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) 
 	{
-		RenderItem renderer= new RenderItem();
+		RenderItem renderer = GuiContainer.itemRenderer;
 		Tessellator tes = Tessellator.instance;
 		if(type == ItemRenderType.INVENTORY)
 		{
-			ForgeHooksClient.bindTexture(item.getItem().getTextureFile(), 0);
-			int index = item.getIconIndex();
-			renderer.renderTexturedQuad(0, 0, index % 16 * 16, index / 16 * 16, 16, 16);
+			Icon icon = item.getIconIndex();
+			GL11.glTranslatef(0.0F, 0.0F, -renderer.zLevel + renderer.zLevel / 3);
+	        renderer.renderIcon(0, 0, icon, 16, 16);
 			if(item.getItem() instanceof ItemFrostEnforced)
 			{
-				ForgeHooksClient.bindTexture("/xelitez/frostcraft/textures/Items_0.png", 0);
+				Icon overlayicon;
 				switch(((ItemFrostEnforced)item.getItem()).getRenderType())
 				{
 				case SWORD:
-					index = 6;
+					overlayicon = ItemFrostEnforced.overlays[0];
 					break;
 				case SHOVEL:
-					index = 22;
+					overlayicon = ItemFrostEnforced.overlays[1];
 					break;
 				case PICKAXE:
-					index = 38;
+					overlayicon = ItemFrostEnforced.overlays[2];
 					break;
 				case AXE:
-					index = 54;
+					overlayicon = ItemFrostEnforced.overlays[3];
 					break;
 				case HOE:
-					index = 70;
+					overlayicon = ItemFrostEnforced.overlays[4];
 					break;
 				default:
-					index = 6;
+					overlayicon = ItemFrostEnforced.overlays[0];
 					break;			
 				}
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_COLOR);
-				renderer.renderTexturedQuad(0, 0, index % 16 * 16, index / 16 * 16, 16, 16);
+    	        renderer.renderIcon(0, 0, overlayicon, 16, 16);
                 GL11.glDisable(GL11.GL_BLEND);
 			}
 		}
 		if(type == ItemRenderType.EQUIPPED)
 		{
-			ForgeHooksClient.bindTexture(item.getItem().getTextureFile(), 0);
-			int index = item.getIconIndex();
-            float var7 = ((float)(index % 16 * 16) + 0.0F) / 256.0F;
-            float var8 = ((float)(index % 16 * 16) + 15.99F) / 256.0F;
-            float var9 = ((float)(index / 16 * 16) + 0.0F) / 256.0F;
-            float var10 = ((float)(index / 16 * 16) + 15.99F) / 256.0F;
-			ItemRenderer.renderItemIn2D(tes, var8, var9, var7, var10, 0.0625F);
+			Icon icon = item.getIconIndex();
+            float f = icon.getMinU();
+            float f1 = icon.getMaxU();
+            float f2 = icon.getMinV();
+            float f3 = icon.getMaxV();
+            ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, icon.getSheetWidth(), icon.getSheetHeight(), 0.0625F);
             if (item != null && item.hasEffect())
             {
                 GL11.glDepthFunc(GL11.GL_EQUAL);
                 GL11.glDisable(GL11.GL_LIGHTING);
-                FMLClientHandler.instance().getClient().renderEngine.bindTexture(FMLClientHandler.instance().getClient().renderEngine.getTexture("%blur%/misc/glint.png"));
+                FMLClientHandler.instance().getClient().renderEngine.bindTexture("%blur%/misc/glint.png");
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
-                float var14 = 0.76F;
-                GL11.glColor4f(0.5F * var14, 0.25F * var14, 0.8F * var14, 1.0F);
+                float f7 = 0.76F;
+                GL11.glColor4f(0.5F * f7, 0.25F * f7, 0.8F * f7, 1.0F);
                 GL11.glMatrixMode(GL11.GL_TEXTURE);
                 GL11.glPushMatrix();
-                float var15 = 0.125F;
-                GL11.glScalef(var15, var15, var15);
-                float var16 = (float)(Minecraft.getSystemTime() % 3000L) / 3000.0F * 8.0F;
-                GL11.glTranslatef(var16, 0.0F, 0.0F);
+                float f8 = 0.125F;
+                GL11.glScalef(f8, f8, f8);
+                float f9 = (float)(Minecraft.getSystemTime() % 3000L) / 3000.0F * 8.0F;
+                GL11.glTranslatef(f9, 0.0F, 0.0F);
                 GL11.glRotatef(-50.0F, 0.0F, 0.0F, 1.0F);
-                ItemRenderer.renderItemIn2D(tes, 0.0F, 0.0F, 1.0F, 1.0F, 0.0625F);
+                ItemRenderer.renderItemIn2D(tes, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
                 GL11.glPopMatrix();
                 GL11.glPushMatrix();
-                GL11.glScalef(var15, var15, var15);
-                var16 = (float)(Minecraft.getSystemTime() % 4873L) / 4873.0F * 8.0F;
-                GL11.glTranslatef(-var16, 0.0F, 0.0F);
+                GL11.glScalef(f8, f8, f8);
+                f9 = (float)(Minecraft.getSystemTime() % 4873L) / 4873.0F * 8.0F;
+                GL11.glTranslatef(-f9, 0.0F, 0.0F);
                 GL11.glRotatef(10.0F, 0.0F, 0.0F, 1.0F);
-                ItemRenderer.renderItemIn2D(tes, 0.0F, 0.0F, 1.0F, 1.0F, 0.0625F);
+                ItemRenderer.renderItemIn2D(tes, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
                 GL11.glPopMatrix();
                 GL11.glMatrixMode(GL11.GL_MODELVIEW);
                 GL11.glDisable(GL11.GL_BLEND);
@@ -111,74 +110,74 @@ public class RenderFrostTool implements IItemRenderer{
             }
 			if(item.getItem() instanceof ItemFrostEnforced)
 			{
+                FMLClientHandler.instance().getClient().renderEngine.bindTexture("/gui/items.png");
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				ForgeHooksClient.bindTexture("/xelitez/frostcraft/textures/Items_0.png", 0);
+				Icon overlayicon;
 				switch(((ItemFrostEnforced)item.getItem()).getRenderType())
 				{
 				case SWORD:
-					index = 6;
+					overlayicon = ItemFrostEnforced.overlays[0];
 					break;
 				case SHOVEL:
-					index = 22;
+					overlayicon = ItemFrostEnforced.overlays[1];
 					break;
 				case PICKAXE:
-					index = 38;
+					overlayicon = ItemFrostEnforced.overlays[2];
 					break;
 				case AXE:
-					index = 54;
+					overlayicon = ItemFrostEnforced.overlays[3];
 					break;
 				case HOE:
-					index = 70;
+					overlayicon = ItemFrostEnforced.overlays[4];
 					break;
 				default:
-					index = 6;
+					overlayicon = ItemFrostEnforced.overlays[0];
 					break;			
 				}
-	            var7 = ((float)(index % 16 * 16) + 0.0F) / 256.0F;
-	            var8 = ((float)(index % 16 * 16) + 15.99F) / 256.0F;
-	            var9 = ((float)(index / 16 * 16) + 0.0F) / 256.0F;
-	            var10 = ((float)(index / 16 * 16) + 15.99F) / 256.0F;
+	            f = overlayicon.getMinU();
+	            f1 = overlayicon.getMaxU();
+	            f2 = overlayicon.getMinV();
+	            f3 = overlayicon.getMaxV();
 	            GL11.glTranslatef(0.0F, 0.0F, 0.015625F);
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_COLOR);
-				ItemRenderer.renderItemIn2D(tes, var8, var9, var7, var10, 0.09375F);
+                ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, overlayicon.getSheetWidth(), overlayicon.getSheetHeight(), 0.09375F);
                 GL11.glDisable(GL11.GL_BLEND);
 			}
 		}
 		if(type == ItemRenderType.ENTITY)
 		{
 			GL11.glTranslatef(-0.5f, 0.0f, 0.0f);
-			ForgeHooksClient.bindTexture(item.getItem().getTextureFile(), 0);
-			int index = item.getIconIndex();
-	        float var7 = (float)(index % 16 * 16 + 0) / 256.0F;
-	        float var8 = (float)(index % 16 * 16 + 16) / 256.0F;
-	        float var9 = (float)(index / 16 * 16 + 0) / 256.0F;
-	        float var10 = (float)(index / 16 * 16 + 16) / 256.0F;
-			ItemRenderer.renderItemIn2D(tes, var8, var9, var7, var10, 0.0625F);
+			Icon icon = item.getIconIndex();
+            float f = icon.getMinU();
+            float f1 = icon.getMaxU();
+            float f2 = icon.getMinV();
+            float f3 = icon.getMaxV();
+            ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, icon.getSheetWidth(), icon.getSheetHeight(), 0.0625F);
             if (item != null && item.hasEffect())
             {
                 GL11.glDepthFunc(GL11.GL_EQUAL);
                 GL11.glDisable(GL11.GL_LIGHTING);
-                RenderManager.instance.renderEngine.bindTexture(RenderManager.instance.renderEngine.getTexture("%blur%/misc/glint.png"));
+                FMLClientHandler.instance().getClient().renderEngine.bindTexture("%blur%/misc/glint.png");
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
-                float var21 = 0.76F;
-                GL11.glColor4f(0.5F * var21, 0.25F * var21, 0.8F * var21, 1.0F);
+                float f7 = 0.76F;
+                GL11.glColor4f(0.5F * f7, 0.25F * f7, 0.8F * f7, 1.0F);
                 GL11.glMatrixMode(GL11.GL_TEXTURE);
                 GL11.glPushMatrix();
-                float var22 = 0.125F;
-                GL11.glScalef(var22, var22, var22);
-                float var23 = (float)(Minecraft.getSystemTime() % 3000L) / 3000.0F * 8.0F;
-                GL11.glTranslatef(var23, 0.0F, 0.0F);
+                float f8 = 0.125F;
+                GL11.glScalef(f8, f8, f8);
+                float f9 = (float)(Minecraft.getSystemTime() % 3000L) / 3000.0F * 8.0F;
+                GL11.glTranslatef(f9, 0.0F, 0.0F);
                 GL11.glRotatef(-50.0F, 0.0F, 0.0F, 1.0F);
-                ItemRenderer.renderItemIn2D(tes, 0.0F, 0.0F, 1.0F, 1.0F, 0.0625F);
+                ItemRenderer.renderItemIn2D(tes, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
                 GL11.glPopMatrix();
                 GL11.glPushMatrix();
-                GL11.glScalef(var22, var22, var22);
-                var23 = (float)(Minecraft.getSystemTime() % 4873L) / 4873.0F * 8.0F;
-                GL11.glTranslatef(-var23, 0.0F, 0.0F);
+                GL11.glScalef(f8, f8, f8);
+                f9 = (float)(Minecraft.getSystemTime() % 4873L) / 4873.0F * 8.0F;
+                GL11.glTranslatef(-f9, 0.0F, 0.0F);
                 GL11.glRotatef(10.0F, 0.0F, 0.0F, 1.0F);
-                ItemRenderer.renderItemIn2D(tes, 0.0F, 0.0F, 1.0F, 1.0F, 0.0625F);
+                ItemRenderer.renderItemIn2D(tes, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
                 GL11.glPopMatrix();
                 GL11.glMatrixMode(GL11.GL_MODELVIEW);
                 GL11.glDisable(GL11.GL_BLEND);
@@ -187,37 +186,38 @@ public class RenderFrostTool implements IItemRenderer{
             }
 			if(item.getItem() instanceof ItemFrostEnforced)
 			{
+	            FMLClientHandler.instance().getClient().renderEngine.bindTexture("/gui/items.png");
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				ForgeHooksClient.bindTexture("/xelitez/frostcraft/textures/Items_0.png", 0);
+				Icon overlayicon;
 				switch(((ItemFrostEnforced)item.getItem()).getRenderType())
 				{
 				case SWORD:
-					index = 6;
+					overlayicon = ItemFrostEnforced.overlays[0];
 					break;
 				case SHOVEL:
-					index = 22;
+					overlayicon = ItemFrostEnforced.overlays[1];
 					break;
 				case PICKAXE:
-					index = 38;
+					overlayicon = ItemFrostEnforced.overlays[2];
 					break;
 				case AXE:
-					index = 54;
+					overlayicon = ItemFrostEnforced.overlays[3];
 					break;
 				case HOE:
-					index = 70;
+					overlayicon = ItemFrostEnforced.overlays[4];
 					break;
 				default:
-					index = 6;
+					overlayicon = ItemFrostEnforced.overlays[0];
 					break;			
 				}
-	            var7 = ((float)(index % 16 * 16) + 0.0F) / 256.0F;
-	            var8 = ((float)(index % 16 * 16) + 15.99F) / 256.0F;
-	            var9 = ((float)(index / 16 * 16) + 0.0F) / 256.0F;
-	            var10 = ((float)(index / 16 * 16) + 15.99F) / 256.0F;
+	            f = overlayicon.getMinU();
+	            f1 = overlayicon.getMaxU();
+	            f2 = overlayicon.getMinV();
+	            f3 = overlayicon.getMaxV();
 	            GL11.glTranslatef(0.0F, 0.0F, 0.015625F);
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_COLOR);
-				ItemRenderer.renderItemIn2D(tes, var8, var9, var7, var10, 0.09375F);
+                ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, overlayicon.getSheetWidth(), overlayicon.getSheetHeight(), 0.09375F);
                 GL11.glDisable(GL11.GL_BLEND);
 			}
 		}

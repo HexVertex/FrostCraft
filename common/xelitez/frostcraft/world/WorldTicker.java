@@ -53,7 +53,7 @@ public class WorldTicker implements ITickHandler
 					int var11 = yPosses.get(index);
 					if (world.isRaining() && this.canSpawnIcicles(world, var9 + var5, var11, var10 + var6) && world.getSavedLightValue(EnumSkyBlock.Block, var9 + var5, var11, var10 + var6) < 11)
 					{
-						world.setBlockWithNotify(var9 + var5, var11, var10 + var6, IdMap.blockIcicle.blockID);
+						world.setBlock(var9 + var5, var11, var10 + var6, IdMap.blockIcicle.blockID);
 					}
 				}
             }

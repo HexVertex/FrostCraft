@@ -6,6 +6,7 @@ import xelitez.frostcraft.registry.IdMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 
 public class ItemThermalMachines extends ItemBlock
 {
@@ -18,17 +19,20 @@ public class ItemThermalMachines extends ItemBlock
         this.setHasSubtypes(true);
 	}
 	
-    public int getIconFromDamage(int par1)
+	@Override
+    public Icon getIconFromDamage(int par1)
     {
         return IdMap.blockThermalMachines.getBlockTextureFromSideAndMetadata(2, par1);
     }
     
+    @Override
     public int getMetadata(int par1)
     {
         return par1;
     }
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
+    @Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
     {
     	if(par1ItemStack.itemID == IdMap.blockThermalMachines.blockID)
@@ -63,7 +67,8 @@ public class ItemThermalMachines extends ItemBlock
     	}
     }
     
-    public String getItemNameIS(ItemStack par1ItemStack)
+    @Override
+    public String getUnlocalizedName(ItemStack par1ItemStack)
     {
         return "XFC." + this.name[par1ItemStack.getItemDamage()];
     }
