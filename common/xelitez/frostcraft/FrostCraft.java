@@ -32,13 +32,14 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.FMLInjectionData;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(	
 		modid = "XEZFrostCraft",
 		name = "FrostCraft", 
 		acceptedMinecraftVersions = "[1.5.1]",
-		version = "0.0.2")
+		version = "0.0.3")
 @NetworkMod(
 		clientSideRequired = true,
 		serverSideRequired = false,
@@ -69,7 +70,7 @@ public class FrostCraft
 			MinecraftForgeClient.preloadTexture("/mods/FrostCraft/textures/effects.png");
 		}
 		
-		C = new Configuration(new File("XEliteZ/FrostCraft.cfg"));
+		C = new Configuration(new File((File)FMLInjectionData.data()[6], "XEliteZ/FrostCraft.cfg"));
 		try
 		{
 			C.load();
