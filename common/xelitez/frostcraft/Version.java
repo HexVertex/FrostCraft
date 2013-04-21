@@ -20,7 +20,7 @@ public class Version
     public static int majorVersion = 0;
     public static int minorVersion = 0;
     public static int majorBuild = 3;
-    public static int minorBuild = 3;
+    public static int minorBuild = 4;
     public static String MC = "MC:1.5.1";
 
     public static String newVersion;
@@ -161,7 +161,7 @@ public class Version
     		newVersion = newVersion + " for MC:" + NMC;
     	}
     	
-    	if (FMLCommonHandler.instance().getSide() == Side.SERVER && registered)
+    	if (FMLCommonHandler.instance().getSide() == Side.SERVER && !registered && available)
     	{
     		FCLog.info("A new version of FrostCraft is available(" + newVersion + ")");
     	}

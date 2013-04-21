@@ -53,7 +53,13 @@ public class Update implements IXEZUpdate
 	@Override
 	public String getDownloadUrl() 
 	{
-		return null;
+		return "http://adf.ly/K3kPs";
+	}
+
+	@Override
+	public String stringToDelete() 
+	{
+		return "FrostCraft";
 	}
 
 }

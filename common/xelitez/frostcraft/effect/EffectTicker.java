@@ -64,7 +64,6 @@ public class EffectTicker implements ITickHandler
 		{
 			return;
 		}
-		System.out.println(entity);
 		entity.addPotionEffect(effect);
 		Entity fireentity = null;
 		if(firingEntity != null && firingEntity.length >= 2 && firingEntity[1] instanceof Entity)
