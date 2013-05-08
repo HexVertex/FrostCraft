@@ -289,23 +289,22 @@ public class TileEntityFrostGenerator extends TileEntityThermalMachines implemen
 		return (i == 0 && itemstack.getItem() instanceof IChargeable) || (i == 1 && RecipeRegistry.registry().getFrostTime(itemstack) != 0);
 	}
 
-
 	@Override
-	public int[] getSizeInventorySide(int i) 
+	public int[] getAccessibleSlotsFromSide(int i) 
 	{
 		return i == 0 ? new int[] {0, 1} : (i == 1 ? new int[] {0} : new int[] {1});
 	}
 
 
 	@Override
-	public boolean func_102007_a(int i, ItemStack itemstack, int j) 
+	public boolean canInsertItem(int i, ItemStack itemstack, int j) 
 	{
 		return isStackValidForSlot(i, itemstack);
 	}
 
 
 	@Override
-	public boolean func_102008_b(int i, ItemStack itemstack, int j) 
+	public boolean canExtractItem(int i, ItemStack itemstack, int j) 
 	{
 		return (i == 0 && itemstack.getItem() instanceof IChargeable ? ((IChargeable)itemstack.getItem()).getMaxCharge() == (itemstack.getItemDamage() + ((IChargeable)itemstack.getItem()).getMaxCharge()) : true) || (i == 1 && RecipeRegistry.registry().getFrostTime(itemstack) == 0);
 	}

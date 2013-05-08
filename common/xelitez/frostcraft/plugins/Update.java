@@ -62,4 +62,10 @@ public class Update implements IXEZUpdate
 		return "FrostCraft";
 	}
 
+	@Override
+	public boolean isCoreMod() 
+	{
+		return false;
+	}
+
 }

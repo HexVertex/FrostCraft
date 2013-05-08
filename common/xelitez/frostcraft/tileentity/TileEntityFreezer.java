@@ -284,20 +284,20 @@ public class TileEntityFreezer extends TileEntityThermalMachines implements ISid
 	}
 
 	@Override
-	public int[] getSizeInventorySide(int i) 
+	public int[] getAccessibleSlotsFromSide(int i) 
 	{
 		return i == 0 ? new int[] {1, 2} : new int[] {0};
 	}
 
 	@Override
-	public boolean func_102007_a(int i, ItemStack itemstack, int j) 
+	public boolean canInsertItem(int i, ItemStack itemstack, int j) 
 	{
-		return this.isStackValidForSlot(i, itemstack);
+		return i == 2 ? false : (i == 1 ? false : true);
 	}
 
 	@Override
-	public boolean func_102008_b(int i, ItemStack itemstack, int j) 
+	public boolean canExtractItem(int i, ItemStack itemstack, int j) 
 	{
-		return true;
+		return i == 0 ? RecipeRegistry.registry().getFreezingResult(itemstack) == null : true;
 	}
 }

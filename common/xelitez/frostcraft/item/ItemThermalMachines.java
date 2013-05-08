@@ -22,7 +22,7 @@ public class ItemThermalMachines extends ItemBlock
 	@Override
     public Icon getIconFromDamage(int par1)
     {
-        return IdMap.blockThermalMachines.getBlockTextureFromSideAndMetadata(2, par1);
+        return IdMap.blockThermalMachines.getIcon(2, par1);
     }
     
     @Override

@@ -202,9 +202,9 @@ public class ItemFrostBow extends ItemBow
     }
     
     @Override
-    public void updateIcons(IconRegister par1IconRegister)
+    public void registerIcons(IconRegister par1IconRegister)
     {
-    	super.updateIcons(par1IconRegister);
+    	super.registerIcons(par1IconRegister);
     	icons = new Icon[4];
     	icons[0] = par1IconRegister.registerIcon("FrostCraft:frost_bow");
     	for(int i = 0;i < 3;i++)

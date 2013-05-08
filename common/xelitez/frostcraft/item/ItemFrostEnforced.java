@@ -40,9 +40,9 @@ public class ItemFrostEnforced extends Item
 	
     @SideOnly(Side.CLIENT)
     @Override
-    public void updateIcons(IconRegister par1IconRegister)
+    public void registerIcons(IconRegister par1IconRegister)
     {
-		iconIndex = parentItem.getIconIndex(new ItemStack(this.itemID, 1, 0));
+    	itemIcon = parentItem.getIconIndex(new ItemStack(this.itemID, 1, 0));
     	for(int i = 0;i < overlayNames.length;i++)
     	{
     		overlays[i] = par1IconRegister.registerIcon(overlayNames[i]);

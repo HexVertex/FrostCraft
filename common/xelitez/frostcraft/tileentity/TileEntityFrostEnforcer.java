@@ -283,19 +283,19 @@ public class TileEntityFrostEnforcer extends TileEntityThermalMachines implement
 	}
 
 	@Override
-	public int[] getSizeInventorySide(int i) 
+	public int[] getAccessibleSlotsFromSide(int i) 
 	{
 		return i != 0 ? new int[] {0} : new int[] {0, 1};
 	}
 
 	@Override
-	public boolean func_102007_a(int i, ItemStack itemstack, int j) 
+	public boolean canInsertItem(int i, ItemStack itemstack, int j) 
 	{
-		return isStackValidForSlot(i, itemstack);
+		return i == 0 ? true : false;
 	}
 
 	@Override
-	public boolean func_102008_b(int i, ItemStack itemstack, int j) 
+	public boolean canExtractItem(int i, ItemStack itemstack, int j) 
 	{
 		return i == 1 || (i == 0 && RecipeRegistry.registry().getEnforcingResult(itemstack) == null);
 	}

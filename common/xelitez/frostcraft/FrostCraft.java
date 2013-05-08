@@ -38,7 +38,6 @@ import cpw.mods.fml.relauncher.Side;
 @Mod(	
 		modid = "XEZFrostCraft",
 		name = "FrostCraft", 
-		acceptedMinecraftVersions = "[1.5.1]",
 		version = "0.0.3")
 @NetworkMod(
 		clientSideRequired = true,
@@ -64,11 +63,6 @@ public class FrostCraft
     {
 		evt.getModMetadata().name = "FrostCraft";
 		evt.getModMetadata().version = Version.getVersion() + "-Alpha for " + Version.MC;
-		
-		if(evt.getSide().isClient())
-		{
-			MinecraftForgeClient.preloadTexture("/mods/FrostCraft/textures/effects.png");
-		}
 		
 		C = new Configuration(new File((File)FMLInjectionData.data()[6], "XEliteZ/FrostCraft.cfg"));
 		try

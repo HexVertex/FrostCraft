@@ -43,7 +43,7 @@ public class CraftingItems extends ItemBase
     }
     
     @Override
-    public void updateIcons(IconRegister par1IconRegister)
+    public void registerIcons(IconRegister par1IconRegister)
     {
     	icons = new Icon[7];
     	icons[0] = par1IconRegister.registerIcon("FrostCraft:iceball");
