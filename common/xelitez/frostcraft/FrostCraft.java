@@ -106,10 +106,20 @@ public class FrostCraft
 			IdMap.IdFrostPickaxe = C.get("Equipment", "FrostPickaxeId", map.defaultIdFrostPickaxe).getInt(map.defaultIdFrostPickaxe);
 			IdMap.IdFrostAxe = C.get("Equipment", "FrostAxeId", map.defaultIdFrostAxe).getInt(map.defaultIdFrostAxe);
 			IdMap.IdFrostHoe = C.get("Equipment", "FrostHoeId", map.defaultIdFrostHoe).getInt(map.defaultIdFrostHoe);
+			IdMap.IdSpear = C.get("Equipment", "SpearId", map.defaultIdSpear).getInt(map.defaultIdSpear);
+			IdMap.IdCrossbow = C.get("Equipment", "CrossbowId", map.defaultIdCrossbow).getInt(map.defaultIdCrossbow);
 			
 			IdMap.IdCraftingItems = C.get("Misc", "CraftingItemsId", map.defaultIdCraftingItems).getInt(map.defaultIdCraftingItems);
 			IdMap.IdIcicle = C.get("Misc", "IcicleId", map.defaultIdIcicle).getInt(map.defaultIdIcicle);
 			IdMap.IdBlockIcicle = C.get("Misc", "BlockIcicleId", map.defaultIdBlockIcicle).getInt(map.defaultIdBlockIcicle);
+			IdMap.IdBlockBlackFrost = C.get("Misc", "BlockBlackFrostId", map.defaultIdBlockBlackFrost).getInt(map.defaultIdBlockBlackFrost);
+			Property stair = C.get("Misc", "BlockBlackFrostStairSetId", map.defaultIdBlockBlackFrostStairSet);
+			stair.comment = "Requires the nest 3 IDs to be free";
+			IdMap.IdBlockBlackFrostStairSet = stair.getInt(map.defaultIdBlockBlackFrostStairSet);
+			IdMap.IdBlockBlackFrostFenceSet = C.get("Misc", "BlockBlackFrostFenceSetId", map.defaultIdBlockBlackFrostFenceSet).getInt(map.defaultIdBlockBlackFrostFenceSet);
+			Property slab = C.get("Misc", "BlockBlackFrostSlabSetId", map.defaultIdBlockBlackFrostSlabSet);
+			slab.comment = "Requires next ID to be free";
+			IdMap.IdBlockBlackFrostSlabSet = slab.getInt(map.defaultIdBlockBlackFrostSlabSet);
 			
 			// Getting configuration about update checker
             Property update = C.get("Updates", "Check for updates", true);

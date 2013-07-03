@@ -1,7 +1,5 @@
 package xelitez.frostcraft.registry;
 
-import java.util.Random;
-
 import xelitez.frostcraft.client.gui.*;
 import xelitez.frostcraft.tileentity.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,8 +8,6 @@ import net.minecraft.world.World;
 
 public class ClientProxy extends CommonProxy
 {
-	Random rand = new Random();
-	
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) 

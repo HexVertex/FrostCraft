@@ -39,10 +39,5 @@ public class ItemFrostBlade extends ItemSword
         }
         return true;
     }
-    
-    public String getTextureFile()
-    {
-        return "/mods/FrostCraft/textures/Items_0.png";
-    }
 
 }

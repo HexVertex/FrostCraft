@@ -10,7 +10,7 @@ import xelitez.frostcraft.client.render.*;
 import xelitez.frostcraft.tileentity.*;
 import xelitez.frostcraft.world.*;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
@@ -33,6 +33,10 @@ public class IdMap
 	public int defaultIdThermalPipe = 2200;
 	public int defaultIdThermalMachines = 2201;
 	public int defaultIdBlockIcicle = 2202;
+	public int defaultIdBlockBlackFrost = 2203;
+	public int defaultIdBlockBlackFrostStairSet = 2204;
+	public int defaultIdBlockBlackFrostFenceSet = 2207;
+	public int defaultIdBlockBlackFrostSlabSet = 2210;
 	
 	public int defaultIdFrostBow = 2300;
 	public int defaultIdFrostGun = 2301;
@@ -53,6 +57,8 @@ public class IdMap
 	public int defaultIdFrostAxe = 2317;
 	public int defaultIdFrostHoe = 2318;
 	public int defaultIdIcicle = 2302;
+	public int defaultIdSpear = 2319;
+	public int defaultIdCrossbow = 2320;
 	
 	public int defaultEnforcerToolStartId = 2400;
 	public int enforcerToolStartId;
@@ -61,6 +67,10 @@ public class IdMap
 	public static int IdThermalPipe;
 	public static int IdThermalMachines;
 	public static int IdBlockIcicle;
+	public static int IdBlockBlackFrost;
+	public static int IdBlockBlackFrostStairSet;
+	public static int IdBlockBlackFrostFenceSet;
+	public static int IdBlockBlackFrostSlabSet;
 	
 	public static int IdFrostBow;
 	public static int IdFrostGun;
@@ -81,10 +91,19 @@ public class IdMap
 	public static int IdFrostAxe;
 	public static int IdFrostHoe;
 	public static int IdIcicle;
+	public static int IdSpear;
+	public static int IdCrossbow;
 	
 	public static Block blockThermalPipe;
 	public static Block blockThermalMachines;
 	public static Block blockIcicle;
+	public static Block blockBlackFrost;
+	public static Block blockBlackFrostStair;
+	public static Block blockBlackFrostStairCobble;
+	public static Block blockBlackFrostStairBrick;
+	public static Block blockBlackFrostFenceSet;
+	public static BlockHalfSlab blockBlackFrostSingleSlabSet;
+	public static BlockHalfSlab blockBlackFrostDoubleSlabSet;
 	
 	public static Item itemFrostBow;
 	public static Item itemFrostGun;
@@ -105,6 +124,8 @@ public class IdMap
 	public static Item itemFrostAxe;
 	public static Item itemFrostHoe;
 	public static Item itemIcicle;
+	public static Item itemSpear;
+	public static Item itemCrossbow;
 	
 	public static WorldType worldTypeWinterland;
 	
@@ -118,9 +139,23 @@ public class IdMap
 		blockThermalPipe = new BlockThermalPipe(IdThermalPipe, Material.iron).setHardness(0.4F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("FrostCraft:thermal_pipe");
 		blockThermalMachines = new BlockThermalMachines(IdThermalMachines, Material.iron).setHardness(2.5F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("FrostCraft:thermal_machine_block").setCreativeTab(CreativeTabs.FCMechanical);
 		blockIcicle = new BlockIcicle(IdBlockIcicle, Material.ice).setHardness(0.2F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("FrostCraft:icicle");
+		blockBlackFrost = new BlockBlackFrost(IdBlockBlackFrost).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("FrostCraft:blackFrost");
+		blockBlackFrostStair = new BlockBlackFrostStairs(IdBlockBlackFrostStairSet, blockBlackFrost, 0).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("FrostCraft:blackFrostStair");
+		blockBlackFrostStairCobble = new BlockBlackFrostStairs(IdBlockBlackFrostStairSet + 1, blockBlackFrost, 1).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("FrostCraft:blackFrostStairCoble");
+		blockBlackFrostStairBrick = new BlockBlackFrostStairs(IdBlockBlackFrostStairSet + 2, blockBlackFrost, 2).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("FrostCraft:blackFrostStairBrick");
+		blockBlackFrostFenceSet = new BlockBlackFrostFence(defaultIdBlockBlackFrostFenceSet, Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("FrostCraft:blackFrostFenceSet");
+		blockBlackFrostSingleSlabSet = (BlockHalfSlab)new BlockBlackFrostSlab(defaultIdBlockBlackFrostSlabSet, false, Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("FrostCraft:blackFrostSingleSlabSet");
+		blockBlackFrostDoubleSlabSet = (BlockHalfSlab)new BlockBlackFrostSlab(defaultIdBlockBlackFrostSlabSet + 1, true, Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("FrostCraft:blackFrostDoubleSlabSet");
 		GameRegistry.registerBlock(blockThermalPipe, "ThermalPipe");
 		GameRegistry.registerBlock(blockThermalMachines, ItemThermalMachines.class, "ThermalPump");
 		GameRegistry.registerBlock(blockIcicle, "Icicle");
+		GameRegistry.registerBlock(blockBlackFrost, ItemBlackFrost.class, "Blackfrost");
+		GameRegistry.registerBlock(blockBlackFrostStair, "BlackfrostStair");
+		GameRegistry.registerBlock(blockBlackFrostStairCobble, "BlackfrostStairCobble");
+		GameRegistry.registerBlock(blockBlackFrostStairBrick, "BlackfrostStairBrick");
+		GameRegistry.registerBlock(blockBlackFrostFenceSet, ItemBlackFrostFences.class, "BlackfrostFences");
+		GameRegistry.registerBlock(blockBlackFrostSingleSlabSet, ItemBlackFrostSlabSingle.class, "BlackfrostSingleSlabs");
+		GameRegistry.registerBlock(blockBlackFrostDoubleSlabSet, ItemBlackFrostSlabDouble.class, "BlackfrostDoubleSlabs");
 		LanguageRegistry.addName(blockThermalPipe, "Thermal Pipe");
 		LanguageRegistry.addName(new ItemStack(blockThermalMachines, 1, 0), "Thermal Pump");
 		LanguageRegistry.addName(new ItemStack(blockThermalMachines, 1, 1), "Frost Furnace");
@@ -128,6 +163,18 @@ public class IdMap
 		LanguageRegistry.addName(new ItemStack(blockThermalMachines, 1, 3), "Freezer");
 		LanguageRegistry.addName(new ItemStack(blockThermalMachines, 1, 4), "Frost Enforcer");
 		LanguageRegistry.addName(blockIcicle, "Icicle");
+		LanguageRegistry.addName(new ItemStack(blockBlackFrost, 1, 0), "Blackfrost");
+		LanguageRegistry.addName(new ItemStack(blockBlackFrost, 1, 1), "Cracked Blackfrost");
+		LanguageRegistry.addName(new ItemStack(blockBlackFrost, 1, 2), "Blackfrost Brick");
+		LanguageRegistry.addName(blockBlackFrostStair, "Blackfrost Stairs");
+		LanguageRegistry.addName(blockBlackFrostStairCobble, "Cracked Blackfrost Stairs");
+		LanguageRegistry.addName(blockBlackFrostStairBrick, "Blackfrost Brick Stairs");
+		LanguageRegistry.addName(new ItemStack(blockBlackFrostFenceSet, 1, 0), "Blackfrost Fence");
+		LanguageRegistry.addName(new ItemStack(blockBlackFrostFenceSet, 1, 1), "Cracked Blackfrost Fence");
+		LanguageRegistry.addName(new ItemStack(blockBlackFrostFenceSet, 1, 2), "Blackfrost Brick Fence");
+		LanguageRegistry.addName(new ItemStack(blockBlackFrostSingleSlabSet, 1, 0), "Blackfrost Slab");
+		LanguageRegistry.addName(new ItemStack(blockBlackFrostSingleSlabSet, 1, 1), "Cracked Blackfrost Slab");
+		LanguageRegistry.addName(new ItemStack(blockBlackFrostSingleSlabSet, 1, 2), "Blackfrost Brick Slab");
 	}
 	
 	/**
@@ -154,6 +201,8 @@ public class IdMap
 		itemFrostAxe = new ItemFrostAxe(IdFrostAxe, FrostToolMaterial.FROST).setUnlocalizedName("FrostCraft:enforced_frost_axe");
 		itemFrostHoe = new ItemFrostHoe(IdFrostHoe, FrostToolMaterial.FROST).setUnlocalizedName("FrostCraft:enforced_frost_hoe");
 		itemIcicle = new ItemIcicle(IdIcicle).setUnlocalizedName("FrostCraft:icicle");
+		itemSpear = new ItemSpear(IdSpear).setUnlocalizedName("FrostCraft:guardians_spear");
+		itemCrossbow = new ItemCrossbow(IdCrossbow).setUnlocalizedName("FrostCraft:guardians_crossbow");
 		
 		GameRegistry.registerItem(itemFrostBow, "FrostBow");
 		GameRegistry.registerItem(itemFrostGun, "FrostGun");
@@ -174,6 +223,8 @@ public class IdMap
 		GameRegistry.registerItem(itemFrostAxe, "FrostAxe");
 		GameRegistry.registerItem(itemFrostHoe, "FrostHoe");
 		GameRegistry.registerItem(itemIcicle, "ItemIcicle");
+		GameRegistry.registerItem(itemSpear, "ItemSpear");
+		GameRegistry.registerItem(itemCrossbow, "ItemCrossbow");
 		
 		LanguageRegistry.addName(itemFrostBow, "Frost Bow");
 		LanguageRegistry.addName(itemFrostGun, "Frost Gun");
@@ -200,6 +251,8 @@ public class IdMap
 		LanguageRegistry.addName(new ItemStack(itemCraftingItems.itemID, 1, 4), "Compressor");
 		LanguageRegistry.addName(new ItemStack(itemCraftingItems.itemID, 1, 5), "Frost Sprayer");
 		LanguageRegistry.addName(new ItemStack(itemCraftingItems.itemID, 1, 6), "CFU Storage Handler");
+		LanguageRegistry.addName(itemSpear, "Guardian's Spear");
+		LanguageRegistry.addName(itemCrossbow, "Guardian's Crossbow");
 	}
 
 	/**
