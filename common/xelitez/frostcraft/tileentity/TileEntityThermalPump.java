@@ -255,7 +255,7 @@ public class TileEntityThermalPump extends TileEntityThermalMachines implements 
 	}
 
 	@Override
-	public boolean isStackValidForSlot(int i, ItemStack itemstack) 
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
 	{
 		return itemstack.getItem() instanceof IChargeable;
 	}
@@ -269,7 +269,7 @@ public class TileEntityThermalPump extends TileEntityThermalMachines implements 
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, int j) 
 	{
-		return isStackValidForSlot(i, itemstack);
+		return isItemValidForSlot(i, itemstack);
 	}
 
 	@Override

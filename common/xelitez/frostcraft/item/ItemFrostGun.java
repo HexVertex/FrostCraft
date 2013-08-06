@@ -84,7 +84,7 @@ public class ItemFrostGun extends ItemBase implements IChargeable
         {
         	if(enchant != null && enchant instanceof FrostEnchantment)
         	{
-        		par3List.add(Item.enchantedBook.func_92111_a(new EnchantmentData(enchant, enchant.getMaxLevel())));
+        		par3List.add(Item.enchantedBook.getEnchantedItemStack(new EnchantmentData(enchant, enchant.getMaxLevel())));
         	}
         }
     }

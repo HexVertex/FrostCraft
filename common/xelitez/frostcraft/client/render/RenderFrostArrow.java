@@ -6,6 +6,8 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -14,9 +16,11 @@ import xelitez.frostcraft.entity.EntityFrostArrow;
 @SideOnly(Side.CLIENT)
 public class RenderFrostArrow extends Render
 {
+    private static final ResourceLocation texture = new ResourceLocation("textures/entity/arrow.png");
+    
     public void renderFrostArrow(EntityFrostArrow par1EntityFrostArrow, double par2, double par4, double par6, float par8, float par9)
     {
-        this.loadTexture("/item/arrows.png");
+        this.func_110777_b(par1EntityFrostArrow);
         GL11.glPushMatrix();
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
         GL11.glRotatef(par1EntityFrostArrow.prevRotationYaw + (par1EntityFrostArrow.rotationYaw - par1EntityFrostArrow.prevRotationYaw) * par9 - 90.0F, 0.0F, 1.0F, 0.0F);
@@ -85,4 +89,10 @@ public class RenderFrostArrow extends Render
     {
         this.renderFrostArrow((EntityFrostArrow)par1Entity, par2, par4, par6, par8, par9);
     }
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) 
+	{
+		return texture;
+	}
 }

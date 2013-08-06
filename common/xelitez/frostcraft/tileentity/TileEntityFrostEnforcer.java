@@ -277,12 +277,6 @@ public class TileEntityFrostEnforcer extends TileEntityThermalMachines implement
 	}
 
 	@Override
-	public boolean isStackValidForSlot(int i, ItemStack itemstack) 
-	{
-		return i == 1 ? false : true;
-	}
-
-	@Override
 	public int[] getAccessibleSlotsFromSide(int i) 
 	{
 		return i != 0 ? new int[] {0} : new int[] {0, 1};
@@ -298,6 +292,12 @@ public class TileEntityFrostEnforcer extends TileEntityThermalMachines implement
 	public boolean canExtractItem(int i, ItemStack itemstack, int j) 
 	{
 		return i == 1 || (i == 0 && RecipeRegistry.registry().getEnforcingResult(itemstack) == null);
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
+	{
+		return i == 1 ? false : true;
 	}
 }
 

@@ -2,8 +2,10 @@ package xelitez.frostcraft.client.render;
 
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 import xelitez.frostcraft.entity.EntityFrostShot;
 import xelitez.frostcraft.registry.IdMap;
 import org.lwjgl.opengl.GL11;
@@ -26,7 +28,7 @@ public class RenderFrostShot extends Render
         float var10 = this.field_77002_a;
         GL11.glScalef(var10 / 1.0F, var10 / 1.0F, var10 / 1.0F);
         Icon icon = IdMap.itemCraftingItems.getIconFromDamage(0);
-        this.loadTexture("/gui/items.png");
+        this.func_110777_b(par1EntityFrostShot);
         Tessellator var12 = Tessellator.instance;
         float f3 = icon.getMinU();
         float f4 = icon.getMaxU();
@@ -58,4 +60,10 @@ public class RenderFrostShot extends Render
     {
         this.doRenderFrostShot((EntityFrostShot)par1Entity, par2, par4, par6, par8, par9);
     }
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) 
+	{
+		return TextureMap.field_110576_c;
+	}
 }

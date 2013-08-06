@@ -11,7 +11,7 @@ import xelitez.util.DegMath;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
@@ -31,7 +31,7 @@ public class EntityFrostShot extends Entity
     private int zTile = -1;
     private int inTile = 0;
     private boolean inGround = false;
-    public EntityLiving shootingEntity;
+    public EntityLivingBase shootingEntity;
     private int ticksAlive;
     private int ticksInAir = 0;
     public double accelerationX;
@@ -72,12 +72,12 @@ public class EntityFrostShot extends Entity
         this.accelerationZ = par12 / var14 * 0.1D;
     }
 
-    public EntityFrostShot(World par1World, EntityLiving par2EntityLiving, double par3, double par5, double par7)
+    public EntityFrostShot(World par1World, EntityLivingBase par2EntityLivingBase, double par3, double par5, double par7)
     {
         super(par1World);
-        this.shootingEntity = par2EntityLiving;
+        this.shootingEntity = par2EntityLivingBase;
         this.setSize(0.2F, 0.2F);
-        this.setLocationAndAngles(par2EntityLiving.posX, par2EntityLiving.posY + (double)par2EntityLiving.getEyeHeight(), par2EntityLiving.posZ, par2EntityLiving.rotationYaw, par2EntityLiving.rotationPitch);
+        this.setLocationAndAngles(par2EntityLivingBase.posX, par2EntityLivingBase.posY + (double)par2EntityLivingBase.getEyeHeight(), par2EntityLivingBase.posZ, par2EntityLivingBase.rotationYaw, par2EntityLivingBase.rotationPitch);
         this.setPosition(this.posX, this.posY, this.posZ);
         this.yOffset = 0.0F;
         this.motionX = this.motionY = this.motionZ = 0.0D;
@@ -90,12 +90,12 @@ public class EntityFrostShot extends Entity
         this.accelerationZ = par7 / var9 * 0.1D;
     }
     
-    public EntityFrostShot(World par1World, EntityLiving par2EntityLiving)
+    public EntityFrostShot(World par1World, EntityLivingBase par2EntityLivingBase)
     {
         super(par1World);
-        this.shootingEntity = par2EntityLiving;
+        this.shootingEntity = par2EntityLivingBase;
         this.setSize(0.2F, 0.2F);
-        this.setLocationAndAngles(par2EntityLiving.posX, par2EntityLiving.posY + (double)par2EntityLiving.getEyeHeight(), par2EntityLiving.posZ, par2EntityLiving.rotationYaw, par2EntityLiving.rotationPitch);
+        this.setLocationAndAngles(par2EntityLivingBase.posX, par2EntityLivingBase.posY + (double)par2EntityLivingBase.getEyeHeight(), par2EntityLivingBase.posZ, par2EntityLivingBase.rotationYaw, par2EntityLivingBase.rotationPitch);
         this.setPosition(this.posX, this.posY, this.posZ);
         this.yOffset = 0.0F;
         this.motionX = this.motionY = this.motionZ = 0.0D;
@@ -185,7 +185,7 @@ public class EntityFrostShot extends Entity
 
             Vec3 var15 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
             Vec3 var2 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-            MovingObjectPosition var3 = this.worldObj.rayTraceBlocks(var15, var2);
+            MovingObjectPosition var3 = this.worldObj.clip(var15, var2);
             var15 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
             var2 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 

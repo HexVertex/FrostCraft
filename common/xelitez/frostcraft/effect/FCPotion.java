@@ -5,6 +5,7 @@ import xelitez.frostcraft.registry.Settings;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 
 public class FCPotion extends Potion
 {
@@ -15,6 +16,8 @@ public class FCPotion extends Potion
     private String name = "";
     
     private boolean usable;
+    
+    private static final ResourceLocation texture = new ResourceLocation("frostcraft:textures/effects.png");
 	
 	protected FCPotion(int par1, boolean par2, int par3) 
 	{
@@ -83,7 +86,7 @@ public class FCPotion extends Potion
     
     public int getStatusIconIndex()
     {
-    	FMLClientHandler.instance().getClient().renderEngine.bindTexture("/mods/FrostCraft/textures/effects.png");
+    	FMLClientHandler.instance().getClient().func_110434_K().func_110577_a(texture);
         return this.statusIconIndex;
     }
     

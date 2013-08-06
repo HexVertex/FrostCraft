@@ -34,9 +34,4 @@ public class ItemFrostHoe extends ItemHoe
         }
         return true;
     }
-    
-    public String getTextureFile()
-    {
-        return "/mods/FrostCraft/textures/Items_0.png";
-    }
 }

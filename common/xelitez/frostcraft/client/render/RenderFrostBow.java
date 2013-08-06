@@ -8,14 +8,19 @@ import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
-public class RenderFrostBow implements IItemRenderer{
+public class RenderFrostBow implements IItemRenderer
+{
 
+    private static final ResourceLocation effectTexture = new ResourceLocation("textures/misc/enchanted_item_glint.png");
+	
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) 
 	{
@@ -34,6 +39,7 @@ public class RenderFrostBow implements IItemRenderer{
 	{
 		if(type == ItemRenderType.EQUIPPED)
 		{
+	        TextureManager texturemanager = FMLClientHandler.instance().getClient().func_110434_K();
 			if(FMLClientHandler.instance().getClient().gameSettings.thirdPersonView != 0 || !data[1].equals(FMLClientHandler.instance().getClient().thePlayer))
 			{
 	            GL11.glScalef(1.0f / 0.375f, 1.0f / 0.375f, 1.0f / 0.375f);
@@ -44,7 +50,7 @@ public class RenderFrostBow implements IItemRenderer{
 	            GL11.glRotatef(-0f, 1.0f, 0.0f, 0.0f);
 	            GL11.glRotatef(-45f, 0.0f, 0.0f, 1.0f);
 	            Tessellator var5 = Tessellator.instance;
-	            EntityLiving entity = (EntityLiving)data[1];
+	            EntityLivingBase entity = (EntityLivingBase)data[1];
 	            int texture = 0;
 	            if(entity instanceof EntityPlayer)
 	            {
@@ -55,12 +61,12 @@ public class RenderFrostBow implements IItemRenderer{
 	            float f1 = icon.getMaxU();
 	            float f2 = icon.getMinV();
 	            float f3 = icon.getMaxV();
-	            ItemRenderer.renderItemIn2D(var5, f1, f2, f, f3, icon.getSheetWidth(), icon.getSheetHeight(), 0.0625F);
-	            if (item != null && item.hasEffect())
+	            ItemRenderer.renderItemIn2D(var5, f1, f2, f, f3, icon.getOriginX(), icon.getOriginY(), 0.0625F);
+	            if (item != null && item.hasEffect(texture))
 	            {
 	                GL11.glDepthFunc(GL11.GL_EQUAL);
 	                GL11.glDisable(GL11.GL_LIGHTING);
-	                FMLClientHandler.instance().getClient().renderEngine.bindTexture("%blur%/misc/glint.png");
+	                texturemanager.func_110577_a(effectTexture);
 	                GL11.glEnable(GL11.GL_BLEND);
 	                GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
 	                float var14 = 0.76F;
@@ -90,7 +96,7 @@ public class RenderFrostBow implements IItemRenderer{
 			else
 			{
 	            Tessellator tessellator = Tessellator.instance;
-	            EntityLiving entity = (EntityLiving)data[1];
+	            EntityLivingBase entity = (EntityLivingBase)data[1];
 	            int texture = 0;
 	            if(entity instanceof EntityPlayer)
 	            {
@@ -102,13 +108,13 @@ public class RenderFrostBow implements IItemRenderer{
 	            float f2 = icon.getMinV();
 	            float f3 = icon.getMaxV();
 	            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-	            ItemRenderer.renderItemIn2D(tessellator, f1, f2, f, f3, icon.getSheetWidth(), icon.getSheetHeight(), 0.0625F);
+	            ItemRenderer.renderItemIn2D(tessellator, f1, f2, f, f3, icon.getOriginX(), icon.getOriginY(), 0.0625F);
 
-	            if (item != null && item.hasEffect())
+	            if (item != null && item.hasEffect(texture))
 	            {
 	                GL11.glDepthFunc(GL11.GL_EQUAL);
 	                GL11.glDisable(GL11.GL_LIGHTING);
-	                FMLClientHandler.instance().getClient().renderEngine.bindTexture("%blur%/misc/glint.png");
+	                texturemanager.func_110577_a(effectTexture);
 	                GL11.glEnable(GL11.GL_BLEND);
 	                GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
 	                float f7 = 0.76F;

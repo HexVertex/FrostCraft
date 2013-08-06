@@ -284,7 +284,7 @@ public class TileEntityFrostGenerator extends TileEntityThermalMachines implemen
 
 
 	@Override
-	public boolean isStackValidForSlot(int i, ItemStack itemstack) 
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
 	{
 		return (i == 0 && itemstack.getItem() instanceof IChargeable) || (i == 1 && RecipeRegistry.registry().getFrostTime(itemstack) != 0);
 	}
@@ -299,7 +299,7 @@ public class TileEntityFrostGenerator extends TileEntityThermalMachines implemen
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, int j) 
 	{
-		return isStackValidForSlot(i, itemstack);
+		return isItemValidForSlot(i, itemstack);
 	}
 
 

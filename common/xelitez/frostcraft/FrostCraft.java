@@ -15,7 +15,7 @@ import xelitez.frostcraft.energy.EnergyRequestRegistry;
 import xelitez.frostcraft.network.NetworkManager;
 import xelitez.frostcraft.network.PacketManagerClient;
 import xelitez.frostcraft.network.PacketManagerServer;
-import xelitez.frostcraft.plugins.NEIFCLoader;
+//import xelitez.frostcraft.plugins.NEIFCLoader;
 import xelitez.frostcraft.plugins.Update;
 import xelitez.frostcraft.registry.CommonProxy;
 import xelitez.frostcraft.registry.IdMap;
@@ -25,9 +25,7 @@ import xelitez.frostcraft.world.WorldTicker;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.*;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -38,7 +36,7 @@ import cpw.mods.fml.relauncher.Side;
 @Mod(	
 		modid = "XEZFrostCraft",
 		name = "FrostCraft", 
-		version = "0.0.3")
+		version = "0.0.4")
 @NetworkMod(
 		clientSideRequired = true,
 		serverSideRequired = false,
@@ -58,7 +56,7 @@ public class FrostCraft
 	
 	public Version version = new Version();
 	
-	@PreInit
+	@EventHandler
     public void preload(FMLPreInitializationEvent evt)
     {
 		evt.getModMetadata().name = "FrostCraft";
@@ -141,7 +139,7 @@ public class FrostCraft
 		}
     }
 	
-    @Init
+	@EventHandler
     public void load(FMLInitializationEvent evt)
     {
     	map.initialiseBlocks();
@@ -182,18 +180,22 @@ public class FrostCraft
         }
     }
     
-	@PostInit
+	@EventHandler
     public void postload(FMLPostInitializationEvent evt)
     {
-		try
-		{
-			Class.forName("codechicken.nei.api.API");
-			NEIFCLoader.register();
-		} 
-		catch(Exception e)
-		{
-			
-		}
+/*
+ * 
+ * 		try
+ * 		{
+ *			Class.forName("codechicken.nei.api.API");
+ *			NEIFCLoader.register();
+ *		} 
+ *		catch(Exception e)
+ *		{
+ *			
+ *		}
+ */
+
 		map.initialiseEnfrocerItems();
 		if(evt.getSide().isClient())
 		{

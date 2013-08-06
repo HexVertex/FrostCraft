@@ -312,7 +312,7 @@ public class TileEntityFrostFurnace extends TileEntityThermalMachines implements
 	}
 
 	@Override
-	public boolean isStackValidForSlot(int i, ItemStack itemstack) 
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
 	{
 		return i == 1 ? false : true;
 	}
@@ -326,7 +326,7 @@ public class TileEntityFrostFurnace extends TileEntityThermalMachines implements
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, int j) 
 	{
-		return isStackValidForSlot(i, itemstack);
+		return isItemValidForSlot(i, itemstack);
 	}
 
 	@Override
@@ -334,4 +334,5 @@ public class TileEntityFrostFurnace extends TileEntityThermalMachines implements
 	{
 		return i == 1 || (i == 0 && FurnaceRecipes.smelting().getSmeltingResult(itemstack) == null);
 	}
+
 }

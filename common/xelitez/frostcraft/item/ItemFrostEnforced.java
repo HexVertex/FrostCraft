@@ -1,5 +1,7 @@
 package xelitez.frostcraft.item;
 
+import com.google.common.collect.Multimap;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import xelitez.frostcraft.effect.EffectTicker;
@@ -10,8 +12,9 @@ import xelitez.frostcraft.registry.CreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
@@ -63,31 +66,41 @@ public class ItemFrostEnforced extends Item
     }
     
     @Override
-    public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving)
+    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
     {
         int var1 = EnchantmentHelper.getEnchantmentLevel(FrostEnchantment.freeze.effectId, par1ItemStack);
         if(var1 > 0)
         {
-        	EffectTicker.addEffect(par2EntityLiving, new PotionEffect(FCPotion.freeze.id, 5 * var1, 0), par3EntityLiving);
+        	EffectTicker.addEffect(par2EntityLivingBase, new PotionEffect(FCPotion.freeze.id, 5 * var1, 0), par3EntityLivingBase);
         }
         int var2 = EnchantmentHelper.getEnchantmentLevel(FrostEnchantment.frostburn.effectId, par1ItemStack);
         if(var2 > 0)
         {
-        	EffectTicker.addEffect(par2EntityLiving, new PotionEffect(FCPotion.frostburn.id, 60, var2 - 1), par3EntityLiving);
+        	EffectTicker.addEffect(par2EntityLivingBase, new PotionEffect(FCPotion.frostburn.id, 60, var2 - 1), par3EntityLivingBase);
         }
-    	return parentItem.hitEntity(par1ItemStack, par2EntityLiving, par3EntityLiving);
+    	return parentItem.hitEntity(par1ItemStack, par2EntityLivingBase, par3EntityLivingBase);
     }
     
     @Override
-    public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLiving par7EntityLiving)
+    public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLivingBase par7EntityLivingBase)
     {
-    	return parentItem.onBlockDestroyed(par1ItemStack, par2World, par3, par4, par5, par6, par7EntityLiving);
+    	return parentItem.onBlockDestroyed(par1ItemStack, par2World, par3, par4, par5, par6, par7EntityLivingBase);
     }
- 
-    @Override
-    public int getDamageVsEntity(Entity par1Entity)
+    
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public Multimap func_111205_h()
     {
-    	return parentItem.getDamageVsEntity(par1Entity) + parentItem.getDamageVsEntity(par1Entity) / 10;
+        Multimap multimap = parentItem.func_111205_h();
+        AttributeModifier am = null;
+        Multimap mm = super.func_111205_h();
+        if(!multimap.get(SharedMonsterAttributes.field_111264_e.func_111108_a()).isEmpty())
+        {
+        	am = (AttributeModifier) multimap.get(SharedMonsterAttributes.field_111264_e.func_111108_a()).toArray()[0];
+            double damage = am.func_111164_d();
+            damage += damage / 4;
+            mm.put(SharedMonsterAttributes.field_111264_e.func_111108_a(), new AttributeModifier(field_111210_e, "Tool modifier", damage, 0));
+        }
+        return mm;
     }
     
     @Override

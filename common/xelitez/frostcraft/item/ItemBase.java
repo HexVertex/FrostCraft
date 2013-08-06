@@ -8,9 +8,4 @@ public class ItemBase extends Item{
 	{
 		super(par1);
 	}
-	
-    public String getTextureFile()
-    {
-        return "/mods/FrostCraft/textures/Items_0.png";
-    }
 }

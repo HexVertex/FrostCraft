@@ -9,9 +9,4 @@ public abstract class BlockBaseContainer extends BlockContainer
 	protected BlockBaseContainer(int par1, Material par2Material) {
 		super(par1, par2Material);
 	}
-	
-    public String getTextureFile()
-    {
-        return "/mods/FrostCraft/textures/Blocks_0.png";
-    }
 }

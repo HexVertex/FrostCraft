@@ -20,8 +20,8 @@ public class Version
     public static int majorVersion = 0;
     public static int minorVersion = 0;
     public static int majorBuild = 4;
-    public static int minorBuild = 4;
-    public static String MC = "MC:1.5.2";
+    public static int minorBuild = 5;
+    public static String MC = "MC:1.6.2";
 
     public static String newVersion;
     public static boolean available = false;
@@ -146,7 +146,7 @@ public class Version
     			}
     		}
     	}
-			
+		available = false;
     	if ((!getVersion().matches(produceVersion(MV, mV, MB, mB)) || !MC.matches("MC:" + NMC)) && !produceVersion(MV, mV, MB, mB).matches("0"))
     	{
     		if ((Settings.ignoreMC && MC.matches("MC:" + NMC) || (!Settings.ignoreMC && !MC.matches("MC:" + NMC))) || ((Settings.ignoremB && !produceVersion(MV, mV, MB, 0).matches(produceVersion(majorVersion, minorVersion, majorBuild, 0))) || (!Settings.ignoremB && !getVersion().matches(produceVersion(MV, mV, MB, mB)))))

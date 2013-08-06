@@ -6,7 +6,9 @@ import xelitez.frostcraft.entity.EntityFairy;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
 
 public class RenderFairy extends RenderLiving
 {
@@ -23,8 +25,13 @@ public class RenderFairy extends RenderLiving
         GL11.glScalef(this.scale, this.scale, this.scale);
     }
 
-    protected void preRenderCallback(EntityLiving par1EntityLiving, float par2)
+    protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
     {
-        this.preRenderScale((EntityFairy)par1EntityLiving, par2);
+        this.preRenderScale((EntityFairy)par1EntityLivingBase, par2);
     }
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		return null;
+	}
 }

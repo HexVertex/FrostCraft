@@ -7,11 +7,14 @@ import xelitez.frostcraft.tileentity.TileEntityFrostGenerator;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 public class GuiFrostGenerator extends GuiContainer
 {
 	private TileEntityFrostGenerator generator;
+	
+    private static final ResourceLocation texture = new ResourceLocation("frostcraft:textures/frostgenerator.png");
 	
 	public GuiFrostGenerator(InventoryPlayer par1InventoryPlayer, TileEntityFrostGenerator par2TileEntityFrostGenerator) 
 	{
@@ -32,7 +35,7 @@ public class GuiFrostGenerator extends GuiContainer
 			int var3) 
 	{
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture("/mods/FrostCraft/textures/frostgenerator.png");
+        this.mc.func_110434_K().func_110577_a(texture);
         int var5 = (this.width - this.xSize) / 2;
         int var6 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);

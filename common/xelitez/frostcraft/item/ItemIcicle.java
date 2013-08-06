@@ -1,7 +1,7 @@
 package xelitez.frostcraft.item;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -19,14 +19,14 @@ public class ItemIcicle extends ItemBase
         this.setCreativeTab(CreativeTabs.FCMiscItems);
 	}
 	
-    public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving)
+    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
     {
-        if(par3EntityLiving instanceof EntityPlayer)
+        if(par3EntityLivingBase instanceof EntityPlayer)
         {
-        	((EntityPlayer) par3EntityLiving).inventory.consumeInventoryItem(par1ItemStack.itemID);
+        	((EntityPlayer) par3EntityLivingBase).inventory.consumeInventoryItem(par1ItemStack.itemID);
         }
-        EffectTicker.addEffect(par2EntityLiving, new PotionEffect(FCPotion.freeze.id, 40));
-        EffectTicker.addEffect(par2EntityLiving, new PotionEffect(FCPotion.frostburn.id, 40), par3EntityLiving);
+        EffectTicker.addEffect(par2EntityLivingBase, new PotionEffect(FCPotion.freeze.id, 40));
+        EffectTicker.addEffect(par2EntityLivingBase, new PotionEffect(FCPotion.frostburn.id, 40), par3EntityLivingBase);
         return true;
     }
     

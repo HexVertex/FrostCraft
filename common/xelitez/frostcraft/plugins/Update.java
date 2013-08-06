@@ -41,7 +41,7 @@ public class Update implements IXEZUpdate
 	@Override
 	public String getModIcon() 
 	{
-		return "/mods/FrostCraft/textures/xezmods.png";
+		return "frostcraft:textures/xezmods.png";
 	}
 
 	@Override

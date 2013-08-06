@@ -94,7 +94,7 @@ public class ModelFairy extends ModelBase
         this.fairyHeadwear.render(par7);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_COLOR);
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(wingTexture);
+//        FMLClientHandler.instance().getClient().renderEngine.bindTexture(wingTexture);
         this.fairyRightWingTop.render(par7);
         this.fairyRightWingBottom.render(par7);
         this.fairyLeftWingTop.render(par7);

@@ -5,20 +5,25 @@ import org.lwjgl.opengl.GL11;
 import xelitez.frostcraft.item.ItemFrostEnforced;
 import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
-public class RenderFrostTool implements IItemRenderer{
+public class RenderFrostTool implements IItemRenderer
+{
+	
+    private static final ResourceLocation effectTexture = new ResourceLocation("textures/misc/enchanted_item_glint.png");
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type)
 	{
-		if(type == ItemRenderType.INVENTORY || type == ItemRenderType.EQUIPPED || type == ItemRenderType.ENTITY) return true;
+		if(type == ItemRenderType.INVENTORY || type == ItemRenderType.EQUIPPED || type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.ENTITY) return true;
 		return false;
 	}
 
@@ -33,8 +38,9 @@ public class RenderFrostTool implements IItemRenderer{
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) 
 	{
-		RenderItem renderer = GuiContainer.itemRenderer;
+		RenderItem renderer = new RenderItem();
 		Tessellator tes = Tessellator.instance;
+        TextureManager texturemanager = FMLClientHandler.instance().getClient().func_110434_K();
 		if(type == ItemRenderType.INVENTORY)
 		{
 			Icon icon = item.getIconIndex();
@@ -70,19 +76,19 @@ public class RenderFrostTool implements IItemRenderer{
                 GL11.glDisable(GL11.GL_BLEND);
 			}
 		}
-		if(type == ItemRenderType.EQUIPPED)
+		if(type == ItemRenderType.EQUIPPED_FIRST_PERSON)
 		{
 			Icon icon = item.getIconIndex();
             float f = icon.getMinU();
             float f1 = icon.getMaxU();
             float f2 = icon.getMinV();
             float f3 = icon.getMaxV();
-            ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, icon.getSheetWidth(), icon.getSheetHeight(), 0.0625F);
-            if (item != null && item.hasEffect())
+            ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, icon.getOriginX(), icon.getOriginY(), 0.0625F);
+            if (item != null && item.hasEffect(0))
             {
                 GL11.glDepthFunc(GL11.GL_EQUAL);
                 GL11.glDisable(GL11.GL_LIGHTING);
-                FMLClientHandler.instance().getClient().renderEngine.bindTexture("%blur%/misc/glint.png");
+                texturemanager.func_110577_a(effectTexture);
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
                 float f7 = 0.76F;
@@ -110,7 +116,7 @@ public class RenderFrostTool implements IItemRenderer{
             }
 			if(item.getItem() instanceof ItemFrostEnforced)
 			{
-                FMLClientHandler.instance().getClient().renderEngine.bindTexture("/gui/items.png");
+	            FMLClientHandler.instance().getClient().func_110434_K().func_110577_a(TextureMap.field_110576_c);
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				Icon overlayicon;
 				switch(((ItemFrostEnforced)item.getItem()).getRenderType())
@@ -141,7 +147,7 @@ public class RenderFrostTool implements IItemRenderer{
 	            GL11.glTranslatef(0.0F, 0.0F, 0.015625F);
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_COLOR);
-                ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, overlayicon.getSheetWidth(), overlayicon.getSheetHeight(), 0.09375F);
+                ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, overlayicon.getOriginX(), overlayicon.getOriginY(), 0.09375F);
                 GL11.glDisable(GL11.GL_BLEND);
 			}
 		}
@@ -153,12 +159,12 @@ public class RenderFrostTool implements IItemRenderer{
             float f1 = icon.getMaxU();
             float f2 = icon.getMinV();
             float f3 = icon.getMaxV();
-            ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, icon.getSheetWidth(), icon.getSheetHeight(), 0.0625F);
-            if (item != null && item.hasEffect())
+            ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, icon.getOriginX(), icon.getOriginY(), 0.0625F);
+            if (item != null && item.hasEffect(0))
             {
                 GL11.glDepthFunc(GL11.GL_EQUAL);
                 GL11.glDisable(GL11.GL_LIGHTING);
-                FMLClientHandler.instance().getClient().renderEngine.bindTexture("%blur%/misc/glint.png");
+                texturemanager.func_110577_a(effectTexture);
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
                 float f7 = 0.76F;
@@ -186,7 +192,7 @@ public class RenderFrostTool implements IItemRenderer{
             }
 			if(item.getItem() instanceof ItemFrostEnforced)
 			{
-	            FMLClientHandler.instance().getClient().renderEngine.bindTexture("/gui/items.png");
+	            FMLClientHandler.instance().getClient().func_110434_K().func_110577_a(TextureMap.field_110576_c);
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				Icon overlayicon;
 				switch(((ItemFrostEnforced)item.getItem()).getRenderType())
@@ -217,7 +223,7 @@ public class RenderFrostTool implements IItemRenderer{
 	            GL11.glTranslatef(0.0F, 0.0F, 0.015625F);
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_COLOR);
-                ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, overlayicon.getSheetWidth(), overlayicon.getSheetHeight(), 0.09375F);
+                ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, overlayicon.getOriginX(), overlayicon.getOriginY(), 0.09375F);
                 GL11.glDisable(GL11.GL_BLEND);
 			}
 		}

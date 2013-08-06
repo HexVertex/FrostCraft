@@ -1,5 +1,6 @@
 package xelitez.frostcraft.block;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import xelitez.frostcraft.energy.EnergyRequestRegistry;
 import xelitez.frostcraft.enums.ConnectionTypes;
 import xelitez.frostcraft.interfaces.IConnect;
@@ -202,7 +203,14 @@ public class BlockThermalPipe extends BlockBase implements IConnect, ITileEntity
 	@Override
     public int getRenderType()
     {
-        return IdMap.thermalPipeRenderer.getRenderId();
+		if(FMLCommonHandler.instance().getSide().isClient())
+		{
+			return IdMap.thermalPipeRenderer.getRenderId();
+		}
+		else
+		{
+			return 0;
+		}
     }
 
 	@Override
