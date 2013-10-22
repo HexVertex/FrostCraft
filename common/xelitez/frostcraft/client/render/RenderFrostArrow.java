@@ -20,7 +20,7 @@ public class RenderFrostArrow extends Render
     
     public void renderFrostArrow(EntityFrostArrow par1EntityFrostArrow, double par2, double par4, double par6, float par8, float par9)
     {
-        this.func_110777_b(par1EntityFrostArrow);
+        this.bindEntityTexture(par1EntityFrostArrow);
         GL11.glPushMatrix();
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
         GL11.glRotatef(par1EntityFrostArrow.prevRotationYaw + (par1EntityFrostArrow.rotationYaw - par1EntityFrostArrow.prevRotationYaw) * par9 - 90.0F, 0.0F, 1.0F, 0.0F);
@@ -91,7 +91,7 @@ public class RenderFrostArrow extends Render
     }
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) 
+	protected ResourceLocation getEntityTexture(Entity entity) 
 	{
 		return texture;
 	}

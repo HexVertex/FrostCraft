@@ -1,7 +1,9 @@
 package xelitez.frostcraft.damage;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.StatCollector;
 
@@ -28,9 +30,9 @@ public class EntityDamageSourceIndirectFrost extends EntityDamageSource
     /**
      * Returns the message to be displayed on player death.
      */
-    public String getDeathMessage(EntityPlayer par1EntityPlayer)
+    public ChatMessageComponent getDeathMessage(EntityLivingBase par1EntityLivingBase)
     {
-        return par1EntityPlayer.username + " got killed by frost effect " + (this.indirectEntity != null ? this.indirectEntity instanceof EntityPlayer ? "from " + ((EntityPlayer)this.indirectEntity).username : "from " + StatCollector.translateToLocal(this.indirectEntity.getEntityName()) : "from " + StatCollector.translateToLocal(this.damageSourceEntity.getEntityName()));
+        return ChatMessageComponent.createFromText(par1EntityLivingBase.getTranslatedEntityName() + " got killed by frost effect " + (this.indirectEntity != null ? this.indirectEntity instanceof EntityPlayer ? "from " + ((EntityPlayer)this.indirectEntity).username : "from " + StatCollector.translateToLocal(this.indirectEntity.getEntityName()) : "from " + StatCollector.translateToLocal(this.damageSourceEntity.getEntityName())));
     }
 
 }

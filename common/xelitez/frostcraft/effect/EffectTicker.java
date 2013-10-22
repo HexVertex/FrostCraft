@@ -8,7 +8,7 @@ import xelitez.frostcraft.damage.EntityDamageSourceFrost;
 import xelitez.frostcraft.damage.EntityDamageSourceIndirectFrost;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.potion.Potion;
@@ -32,17 +32,17 @@ public class EffectTicker implements ITickHandler
 	
 	public static void addEffect(Entity entityHit, PotionEffect potionEffect, Object... obj) 
 	{
-		if(entityHit instanceof EntityLiving)
+		if(entityHit instanceof EntityLivingBase)
 		{
-			addEffect((EntityLiving)entityHit, potionEffect, obj);
+			addEffect((EntityLivingBase)entityHit, potionEffect, obj);
 		}
 		else if(entityHit instanceof EntityDragonPart)
 		{
-			addEffect((EntityLiving)((EntityDragonPart) entityHit).entityDragonObj, potionEffect, obj);
+			addEffect((EntityLivingBase)((EntityDragonPart) entityHit).entityDragonObj, potionEffect, obj);
 		}
 	}
 	
-	public boolean hasEntityEffect(EntityLiving entity, Potion potion)
+	public boolean hasEntityEffect(EntityLivingBase entity, Potion potion)
 	{
 		for(int i = 0;i< EffectTicker.entities.size();i++)
 		{
@@ -58,7 +58,7 @@ public class EffectTicker implements ITickHandler
 		return false;
 	}
 	
-	public static void addEffect(EntityLiving entity, PotionEffect effect, Object... firingEntity)
+	public static void addEffect(EntityLivingBase entity, PotionEffect effect, Object... firingEntity)
 	{	
 		if(entity.worldObj.isRemote)
 		{
@@ -165,7 +165,7 @@ public class EffectTicker implements ITickHandler
 
 	private static class Effect
 	{
-		public EntityLiving entity;
+		public EntityLivingBase entity;
 		public Entity firingentity;
 		public Entity source;
 		public int potionId = -1;
@@ -180,7 +180,7 @@ public class EffectTicker implements ITickHandler
 		
 		public int counter = 0;
 		
-		public Effect(EntityLiving entity, PotionEffect effect)
+		public Effect(EntityLivingBase entity, PotionEffect effect)
 		{
 			this.entity = entity;
 			this.potionId = effect.getPotionID();

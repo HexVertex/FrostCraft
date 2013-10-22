@@ -40,7 +40,7 @@ public class RenderFrostTool implements IItemRenderer
 	{
 		RenderItem renderer = new RenderItem();
 		Tessellator tes = Tessellator.instance;
-        TextureManager texturemanager = FMLClientHandler.instance().getClient().func_110434_K();
+        TextureManager texturemanager = FMLClientHandler.instance().getClient().getTextureManager();
 		if(type == ItemRenderType.INVENTORY)
 		{
 			Icon icon = item.getIconIndex();
@@ -83,12 +83,12 @@ public class RenderFrostTool implements IItemRenderer
             float f1 = icon.getMaxU();
             float f2 = icon.getMinV();
             float f3 = icon.getMaxV();
-            ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, icon.getOriginX(), icon.getOriginY(), 0.0625F);
+            ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, icon.getIconWidth(), icon.getIconWidth(), 0.0625F);
             if (item != null && item.hasEffect(0))
             {
                 GL11.glDepthFunc(GL11.GL_EQUAL);
                 GL11.glDisable(GL11.GL_LIGHTING);
-                texturemanager.func_110577_a(effectTexture);
+                texturemanager.bindTexture(effectTexture);
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
                 float f7 = 0.76F;
@@ -116,7 +116,7 @@ public class RenderFrostTool implements IItemRenderer
             }
 			if(item.getItem() instanceof ItemFrostEnforced)
 			{
-	            FMLClientHandler.instance().getClient().func_110434_K().func_110577_a(TextureMap.field_110576_c);
+	            FMLClientHandler.instance().getClient().getTextureManager().bindTexture(TextureMap.locationItemsTexture);
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				Icon overlayicon;
 				switch(((ItemFrostEnforced)item.getItem()).getRenderType())
@@ -147,7 +147,7 @@ public class RenderFrostTool implements IItemRenderer
 	            GL11.glTranslatef(0.0F, 0.0F, 0.015625F);
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_COLOR);
-                ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, overlayicon.getOriginX(), overlayicon.getOriginY(), 0.09375F);
+                ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, overlayicon.getIconWidth(), overlayicon.getIconHeight(), 0.09375F);
                 GL11.glDisable(GL11.GL_BLEND);
 			}
 		}
@@ -159,12 +159,12 @@ public class RenderFrostTool implements IItemRenderer
             float f1 = icon.getMaxU();
             float f2 = icon.getMinV();
             float f3 = icon.getMaxV();
-            ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, icon.getOriginX(), icon.getOriginY(), 0.0625F);
+            ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, icon.getIconWidth(), icon.getIconWidth(), 0.0625F);
             if (item != null && item.hasEffect(0))
             {
                 GL11.glDepthFunc(GL11.GL_EQUAL);
                 GL11.glDisable(GL11.GL_LIGHTING);
-                texturemanager.func_110577_a(effectTexture);
+                texturemanager.bindTexture(effectTexture);
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
                 float f7 = 0.76F;
@@ -192,7 +192,7 @@ public class RenderFrostTool implements IItemRenderer
             }
 			if(item.getItem() instanceof ItemFrostEnforced)
 			{
-	            FMLClientHandler.instance().getClient().func_110434_K().func_110577_a(TextureMap.field_110576_c);
+	            FMLClientHandler.instance().getClient().getTextureManager().bindTexture(TextureMap.locationItemsTexture);
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				Icon overlayicon;
 				switch(((ItemFrostEnforced)item.getItem()).getRenderType())
@@ -223,7 +223,7 @@ public class RenderFrostTool implements IItemRenderer
 	            GL11.glTranslatef(0.0F, 0.0F, 0.015625F);
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_COLOR);
-                ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, overlayicon.getOriginX(), overlayicon.getOriginY(), 0.09375F);
+                ItemRenderer.renderItemIn2D(tes, f1, f2, f, f3, overlayicon.getIconWidth(), overlayicon.getIconHeight(), 0.09375F);
                 GL11.glDisable(GL11.GL_BLEND);
 			}
 		}

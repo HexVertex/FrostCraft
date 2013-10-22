@@ -28,7 +28,7 @@ public class RenderFrostShot extends Render
         float var10 = this.field_77002_a;
         GL11.glScalef(var10 / 1.0F, var10 / 1.0F, var10 / 1.0F);
         Icon icon = IdMap.itemCraftingItems.getIconFromDamage(0);
-        this.func_110777_b(par1EntityFrostShot);
+        this.bindEntityTexture(par1EntityFrostShot);
         Tessellator var12 = Tessellator.instance;
         float f3 = icon.getMinU();
         float f4 = icon.getMaxU();
@@ -62,8 +62,8 @@ public class RenderFrostShot extends Render
     }
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) 
+	protected ResourceLocation getEntityTexture(Entity entity) 
 	{
-		return TextureMap.field_110576_c;
+		return TextureMap.locationItemsTexture;
 	}
 }

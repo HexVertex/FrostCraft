@@ -90,15 +90,15 @@ public class ItemFrostEnforced extends Item
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	public Multimap func_111205_h()
     {
-        Multimap multimap = parentItem.func_111205_h();
+        Multimap multimap = parentItem.getItemAttributeModifiers();
         AttributeModifier am = null;
-        Multimap mm = super.func_111205_h();
-        if(!multimap.get(SharedMonsterAttributes.field_111264_e.func_111108_a()).isEmpty())
+        Multimap mm = super.getItemAttributeModifiers();
+        if(!multimap.get(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName()).isEmpty())
         {
-        	am = (AttributeModifier) multimap.get(SharedMonsterAttributes.field_111264_e.func_111108_a()).toArray()[0];
-            double damage = am.func_111164_d();
+        	am = (AttributeModifier) multimap.get(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName()).toArray()[0];
+            double damage = am.getAmount();
             damage += damage / 4;
-            mm.put(SharedMonsterAttributes.field_111264_e.func_111108_a(), new AttributeModifier(field_111210_e, "Tool modifier", damage, 0));
+            mm.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", damage, 0));
         }
         return mm;
     }

@@ -15,7 +15,7 @@ import xelitez.frostcraft.energy.EnergyRequestRegistry;
 import xelitez.frostcraft.network.NetworkManager;
 import xelitez.frostcraft.network.PacketManagerClient;
 import xelitez.frostcraft.network.PacketManagerServer;
-//import xelitez.frostcraft.plugins.NEIFCLoader;
+import xelitez.frostcraft.plugins.NEIFCLoader;
 import xelitez.frostcraft.plugins.Update;
 import xelitez.frostcraft.registry.CommonProxy;
 import xelitez.frostcraft.registry.IdMap;
@@ -182,19 +182,16 @@ public class FrostCraft
     
 	@EventHandler
     public void postload(FMLPostInitializationEvent evt)
-    {
-/*
- * 
- * 		try
- * 		{
- *			Class.forName("codechicken.nei.api.API");
- *			NEIFCLoader.register();
- *		} 
- *		catch(Exception e)
- *		{
- *			
- *		}
- */
+    { 
+		try
+  		{
+			Class.forName("codechicken.nei.api.API");
+ 			NEIFCLoader.register();
+  		} 
+ 		catch(Exception e)
+ 		{
+ 			
+ 		}
 
 		map.initialiseEnfrocerItems();
 		if(evt.getSide().isClient())

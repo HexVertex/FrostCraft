@@ -136,16 +136,16 @@ public class IdMap
 	 */
 	public void initialiseBlocks()
 	{
-		blockThermalPipe = new BlockThermalPipe(IdThermalPipe, Material.iron).setHardness(0.4F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("thermal_pipe").func_111022_d("frostcraft:thermal_pipe");
-		blockThermalMachines = new BlockThermalMachines(IdThermalMachines, Material.iron).setHardness(2.5F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("thermal_machine_block").setCreativeTab(CreativeTabs.FCMechanical).func_111022_d("frostcraft:thermal_machine_block");
-		blockIcicle = new BlockIcicle(IdBlockIcicle, Material.ice).setHardness(0.2F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("icicle").func_111022_d("frostcraft:icicle");
-		blockBlackFrost = new BlockBlackFrost(IdBlockBlackFrost).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrost").func_111022_d("frostcraft:blackFrost");
-		blockBlackFrostStair = new BlockBlackFrostStairs(IdBlockBlackFrostStairSet, blockBlackFrost, 0).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrostStair").func_111022_d("frostcraft:blackFrostStair");
-		blockBlackFrostStairCobble = new BlockBlackFrostStairs(IdBlockBlackFrostStairSet + 1, blockBlackFrost, 1).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrostStairCoble").func_111022_d("frostcraft:blackFrostStairCoble");
-		blockBlackFrostStairBrick = new BlockBlackFrostStairs(IdBlockBlackFrostStairSet + 2, blockBlackFrost, 2).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrostStairBrick").func_111022_d("frostcraft:blackFrostStairBrick");
-		blockBlackFrostFenceSet = new BlockBlackFrostFence(defaultIdBlockBlackFrostFenceSet, Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrostFenceSet").func_111022_d("frostcraft:blackFrostFenceSet");
-		blockBlackFrostSingleSlabSet = (BlockHalfSlab)new BlockBlackFrostSlab(defaultIdBlockBlackFrostSlabSet, false, Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrostSingleSlabSet").func_111022_d("frostcraft:blackFrost");
-		blockBlackFrostDoubleSlabSet = (BlockHalfSlab)new BlockBlackFrostSlab(defaultIdBlockBlackFrostSlabSet + 1, true, Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrostDoubleSlabSet").func_111022_d("frostcraft:blackFrost");
+		blockThermalPipe = new BlockThermalPipe(IdThermalPipe, Material.iron).setHardness(0.4F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("thermal_pipe").setTextureName("frostcraft:thermal_pipe");
+		blockThermalMachines = new BlockThermalMachines(IdThermalMachines, Material.iron).setHardness(2.5F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("thermal_machine_block").setCreativeTab(CreativeTabs.FCMechanical).setTextureName("frostcraft:thermal_machine_block");
+		blockIcicle = new BlockIcicle(IdBlockIcicle, Material.ice).setHardness(0.2F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("icicle").setTextureName("frostcraft:icicle");
+		blockBlackFrost = new BlockBlackFrost(IdBlockBlackFrost).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrost").setTextureName("frostcraft:blackFrost");
+		blockBlackFrostStair = new BlockBlackFrostStairs(IdBlockBlackFrostStairSet, blockBlackFrost, 0).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrostStair").setTextureName("frostcraft:blackFrostStair");
+		blockBlackFrostStairCobble = new BlockBlackFrostStairs(IdBlockBlackFrostStairSet + 1, blockBlackFrost, 1).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrostStairCoble").setTextureName("frostcraft:blackFrostStairCoble");
+		blockBlackFrostStairBrick = new BlockBlackFrostStairs(IdBlockBlackFrostStairSet + 2, blockBlackFrost, 2).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrostStairBrick").setTextureName("frostcraft:blackFrostStairBrick");
+		blockBlackFrostFenceSet = new BlockBlackFrostFence(defaultIdBlockBlackFrostFenceSet, Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrostFenceSet").setTextureName("frostcraft:blackFrostFenceSet");
+		blockBlackFrostSingleSlabSet = (BlockHalfSlab)new BlockBlackFrostSlab(defaultIdBlockBlackFrostSlabSet, false, Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrostSingleSlabSet").setTextureName("frostcraft:blackFrost");
+		blockBlackFrostDoubleSlabSet = (BlockHalfSlab)new BlockBlackFrostSlab(defaultIdBlockBlackFrostSlabSet + 1, true, Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrostDoubleSlabSet").setTextureName("frostcraft:blackFrost");
 		GameRegistry.registerBlock(blockThermalPipe, "ThermalPipe");
 		GameRegistry.registerBlock(blockThermalMachines, ItemThermalMachines.class, "ThermalPump");
 		GameRegistry.registerBlock(blockIcicle, "Icicle");
@@ -182,27 +182,27 @@ public class IdMap
 	 */
 	public void initialiseItems()
 	{
-		itemFrostBow = new ItemFrostBow(IdFrostBow).setUnlocalizedName("frost_bow").func_111206_d("frostcraft:frost_bow");
-		itemFrostGun = new ItemFrostGun(IdFrostGun).setUnlocalizedName("frost_gun").func_111206_d("frostcraft:frost_gun");
+		itemFrostBow = new ItemFrostBow(IdFrostBow).setUnlocalizedName("frost_bow").setTextureName("frostcraft:frost_bow");
+		itemFrostGun = new ItemFrostGun(IdFrostGun).setUnlocalizedName("frost_gun").setTextureName("frostcraft:frost_gun");
 		itemCraftingItems = new CraftingItems(IdCraftingItems);
-		itemCompiledFrostBlade = new ItemFrostBlade(IdCompiledFrostBlade, FrostToolMaterial.FROST_COMPILED).setUnlocalizedName("compiled_frost_sword").func_111206_d("frostcraft:compiled_frost_sword");
-		itemCompiledFrostSpade = new ItemFrostSpade(IdCompiledFrostSpade, FrostToolMaterial.FROST_COMPILED).setUnlocalizedName("compiled_frost_spade").func_111206_d("frostcraft:compiled_frost_spade");
-		itemCompiledFrostPickaxe = new ItemFrostPickaxe(IdCompiledFrostPickaxe, FrostToolMaterial.FROST_COMPILED).setUnlocalizedName("compiled_frost_pickaxe").func_111206_d("frostcraft:compiled_frost_pickaxe");
-		itemCompiledFrostAxe = new ItemFrostAxe(IdCompiledFrostAxe, FrostToolMaterial.FROST_COMPILED).setUnlocalizedName("compiled_frost_axe").func_111206_d("frostcraft:compiled_frost_axe");
-		itemCompiledFrostHoe = new ItemFrostHoe(IdCompiledFrostHoe, FrostToolMaterial.FROST_COMPILED).setUnlocalizedName("compiled_frost_hoe").func_111206_d("frostcraft:compiled_frost_hoe");
-		itemFrozenFrostBlade = new ItemFrostBlade(IdFrozenFrostBlade, FrostToolMaterial.FROST_FROZEN).setUnlocalizedName("frost_sword").func_111206_d("frostcraft:frost_sword");
-		itemFrozenFrostSpade = new ItemFrostSpade(IdFrozenFrostSpade, FrostToolMaterial.FROST_FROZEN).setUnlocalizedName("frost_spade").func_111206_d("frostcraft:frost_spade");
-		itemFrozenFrostPickaxe = new ItemFrostPickaxe(IdFrozenFrostPickaxe, FrostToolMaterial.FROST_FROZEN).setUnlocalizedName("frost_pickaxe").func_111206_d("frostcraft:frost_pickaxe");
-		itemFrozenFrostAxe = new ItemFrostAxe(IdFrozenFrostAxe, FrostToolMaterial.FROST_FROZEN).setUnlocalizedName("frost_axe").func_111206_d("frostcraft:frost_axe");
-		itemFrozenFrostHoe = new ItemFrostHoe(IdFrozenFrostHoe, FrostToolMaterial.FROST_FROZEN).setUnlocalizedName("frost_hoe").func_111206_d("frostcraft:frost_hoe");
-		itemFrostBlade = new ItemFrostBlade(IdFrostBlade, FrostToolMaterial.FROST).setUnlocalizedName("enforced_frost_blade").func_111206_d("frostcraft:enforced_frost_blade");
-		itemFrostSpade = new ItemFrostSpade(IdFrostSpade, FrostToolMaterial.FROST).setUnlocalizedName("enforced_frost_spade").func_111206_d("frostcraft:enforced_frost_spade");
-		itemFrostPickaxe = new ItemFrostPickaxe(IdFrostPickaxe, FrostToolMaterial.FROST).setUnlocalizedName("enforced_frost_pickaxe").func_111206_d("frostcraft:enforced_frost_pickaxe");
-		itemFrostAxe = new ItemFrostAxe(IdFrostAxe, FrostToolMaterial.FROST).setUnlocalizedName("enforced_frost_axe").func_111206_d("frostcraft:enforced_frost_axe");
-		itemFrostHoe = new ItemFrostHoe(IdFrostHoe, FrostToolMaterial.FROST).setUnlocalizedName("enforced_frost_hoe").func_111206_d("frostcraft:enforced_frost_hoe");
-		itemIcicle = new ItemIcicle(IdIcicle).setUnlocalizedName("icicle").func_111206_d("frostcraft:icicle");
-		itemSpear = new ItemSpear(IdSpear).setUnlocalizedName("guardians_spear").func_111206_d("frostcraft:guardians_spear");
-		itemCrossbow = new ItemCrossbow(IdCrossbow).setUnlocalizedName("guardians_crossbow").func_111206_d("frostcraft:guardians_crossbow");
+		itemCompiledFrostBlade = new ItemFrostBlade(IdCompiledFrostBlade, FrostToolMaterial.FROST_COMPILED).setUnlocalizedName("compiled_frost_sword").setTextureName("frostcraft:compiled_frost_sword");
+		itemCompiledFrostSpade = new ItemFrostSpade(IdCompiledFrostSpade, FrostToolMaterial.FROST_COMPILED).setUnlocalizedName("compiled_frost_spade").setTextureName("frostcraft:compiled_frost_spade");
+		itemCompiledFrostPickaxe = new ItemFrostPickaxe(IdCompiledFrostPickaxe, FrostToolMaterial.FROST_COMPILED).setUnlocalizedName("compiled_frost_pickaxe").setTextureName("frostcraft:compiled_frost_pickaxe");
+		itemCompiledFrostAxe = new ItemFrostAxe(IdCompiledFrostAxe, FrostToolMaterial.FROST_COMPILED).setUnlocalizedName("compiled_frost_axe").setTextureName("frostcraft:compiled_frost_axe");
+		itemCompiledFrostHoe = new ItemFrostHoe(IdCompiledFrostHoe, FrostToolMaterial.FROST_COMPILED).setUnlocalizedName("compiled_frost_hoe").setTextureName("frostcraft:compiled_frost_hoe");
+		itemFrozenFrostBlade = new ItemFrostBlade(IdFrozenFrostBlade, FrostToolMaterial.FROST_FROZEN).setUnlocalizedName("frost_sword").setTextureName("frostcraft:frost_sword");
+		itemFrozenFrostSpade = new ItemFrostSpade(IdFrozenFrostSpade, FrostToolMaterial.FROST_FROZEN).setUnlocalizedName("frost_spade").setTextureName("frostcraft:frost_spade");
+		itemFrozenFrostPickaxe = new ItemFrostPickaxe(IdFrozenFrostPickaxe, FrostToolMaterial.FROST_FROZEN).setUnlocalizedName("frost_pickaxe").setTextureName("frostcraft:frost_pickaxe");
+		itemFrozenFrostAxe = new ItemFrostAxe(IdFrozenFrostAxe, FrostToolMaterial.FROST_FROZEN).setUnlocalizedName("frost_axe").setTextureName("frostcraft:frost_axe");
+		itemFrozenFrostHoe = new ItemFrostHoe(IdFrozenFrostHoe, FrostToolMaterial.FROST_FROZEN).setUnlocalizedName("frost_hoe").setTextureName("frostcraft:frost_hoe");
+		itemFrostBlade = new ItemFrostBlade(IdFrostBlade, FrostToolMaterial.FROST).setUnlocalizedName("enforced_frost_blade").setTextureName("frostcraft:enforced_frost_blade");
+		itemFrostSpade = new ItemFrostSpade(IdFrostSpade, FrostToolMaterial.FROST).setUnlocalizedName("enforced_frost_spade").setTextureName("frostcraft:enforced_frost_spade");
+		itemFrostPickaxe = new ItemFrostPickaxe(IdFrostPickaxe, FrostToolMaterial.FROST).setUnlocalizedName("enforced_frost_pickaxe").setTextureName("frostcraft:enforced_frost_pickaxe");
+		itemFrostAxe = new ItemFrostAxe(IdFrostAxe, FrostToolMaterial.FROST).setUnlocalizedName("enforced_frost_axe").setTextureName("frostcraft:enforced_frost_axe");
+		itemFrostHoe = new ItemFrostHoe(IdFrostHoe, FrostToolMaterial.FROST).setUnlocalizedName("enforced_frost_hoe").setTextureName("frostcraft:enforced_frost_hoe");
+		itemIcicle = new ItemIcicle(IdIcicle).setUnlocalizedName("icicle").setTextureName("frostcraft:icicle");
+		itemSpear = new ItemSpear(IdSpear).setUnlocalizedName("guardians_spear").setTextureName("frostcraft:guardians_spear");
+		itemCrossbow = new ItemCrossbow(IdCrossbow).setUnlocalizedName("guardians_crossbow").setTextureName("frostcraft:guardians_crossbow");
 		
 		GameRegistry.registerItem(itemFrostBow, "FrostBow");
 		GameRegistry.registerItem(itemFrostGun, "FrostGun");

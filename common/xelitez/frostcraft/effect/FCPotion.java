@@ -86,7 +86,7 @@ public class FCPotion extends Potion
     
     public int getStatusIconIndex()
     {
-    	FMLClientHandler.instance().getClient().func_110434_K().func_110577_a(texture);
+    	FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
         return this.statusIconIndex;
     }
     

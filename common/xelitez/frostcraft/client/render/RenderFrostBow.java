@@ -39,7 +39,7 @@ public class RenderFrostBow implements IItemRenderer
 	{
 		if(type == ItemRenderType.EQUIPPED)
 		{
-	        TextureManager texturemanager = FMLClientHandler.instance().getClient().func_110434_K();
+	        TextureManager texturemanager = FMLClientHandler.instance().getClient().getTextureManager();
 			if(FMLClientHandler.instance().getClient().gameSettings.thirdPersonView != 0 || !data[1].equals(FMLClientHandler.instance().getClient().thePlayer))
 			{
 	            GL11.glScalef(1.0f / 0.375f, 1.0f / 0.375f, 1.0f / 0.375f);
@@ -61,12 +61,12 @@ public class RenderFrostBow implements IItemRenderer
 	            float f1 = icon.getMaxU();
 	            float f2 = icon.getMinV();
 	            float f3 = icon.getMaxV();
-	            ItemRenderer.renderItemIn2D(var5, f1, f2, f, f3, icon.getOriginX(), icon.getOriginY(), 0.0625F);
+	            ItemRenderer.renderItemIn2D(var5, f1, f2, f, f3, icon.getIconWidth(), icon.getIconHeight(), 0.0625F);
 	            if (item != null && item.hasEffect(texture))
 	            {
 	                GL11.glDepthFunc(GL11.GL_EQUAL);
 	                GL11.glDisable(GL11.GL_LIGHTING);
-	                texturemanager.func_110577_a(effectTexture);
+	                texturemanager.bindTexture(effectTexture);
 	                GL11.glEnable(GL11.GL_BLEND);
 	                GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
 	                float var14 = 0.76F;
@@ -108,13 +108,13 @@ public class RenderFrostBow implements IItemRenderer
 	            float f2 = icon.getMinV();
 	            float f3 = icon.getMaxV();
 	            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-	            ItemRenderer.renderItemIn2D(tessellator, f1, f2, f, f3, icon.getOriginX(), icon.getOriginY(), 0.0625F);
+	            ItemRenderer.renderItemIn2D(tessellator, f1, f2, f, f3, icon.getIconWidth(), icon.getIconHeight(), 0.0625F);
 
 	            if (item != null && item.hasEffect(texture))
 	            {
 	                GL11.glDepthFunc(GL11.GL_EQUAL);
 	                GL11.glDisable(GL11.GL_LIGHTING);
-	                texturemanager.func_110577_a(effectTexture);
+	                texturemanager.bindTexture(effectTexture);
 	                GL11.glEnable(GL11.GL_BLEND);
 	                GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
 	                float f7 = 0.76F;
