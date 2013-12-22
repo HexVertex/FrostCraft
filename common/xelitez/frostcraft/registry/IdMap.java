@@ -5,7 +5,7 @@ import xelitez.frostcraft.block.*;
 import xelitez.frostcraft.item.*;
 import xelitez.frostcraft.entity.*;
 import xelitez.frostcraft.enums.*;
-import xelitez.frostcraft.client.model.ModelFairy;
+import xelitez.frostcraft.client.model.*;
 import xelitez.frostcraft.client.render.*;
 import xelitez.frostcraft.tileentity.*;
 import xelitez.frostcraft.world.*;
@@ -37,6 +37,7 @@ public class IdMap
 	public int defaultIdBlockBlackFrostStairSet = 2204;
 	public int defaultIdBlockBlackFrostFenceSet = 2207;
 	public int defaultIdBlockBlackFrostSlabSet = 2210;
+	public int defaultIdBlockStatue = 2213;
 	
 	public int defaultIdFrostBow = 2300;
 	public int defaultIdFrostGun = 2301;
@@ -71,6 +72,7 @@ public class IdMap
 	public static int IdBlockBlackFrostStairSet;
 	public static int IdBlockBlackFrostFenceSet;
 	public static int IdBlockBlackFrostSlabSet;
+	public static int IdBlockStatue;
 	
 	public static int IdFrostBow;
 	public static int IdFrostGun;
@@ -104,6 +106,7 @@ public class IdMap
 	public static Block blockBlackFrostFenceSet;
 	public static BlockHalfSlab blockBlackFrostSingleSlabSet;
 	public static BlockHalfSlab blockBlackFrostDoubleSlabSet;
+	public static Block blockStatue;
 	
 	public static Item itemFrostBow;
 	public static Item itemFrostGun;
@@ -131,6 +134,8 @@ public class IdMap
 	
 	public static ISimpleBlockRenderingHandler thermalPipeRenderer;
 	
+	public static final float FrostWingSize = 2.5F;
+	
 	/**
 	 * Initialise all FrostCraft Blocks and additions
 	 */
@@ -146,6 +151,7 @@ public class IdMap
 		blockBlackFrostFenceSet = new BlockBlackFrostFence(defaultIdBlockBlackFrostFenceSet, Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrostFenceSet").setTextureName("frostcraft:blackFrostFenceSet");
 		blockBlackFrostSingleSlabSet = (BlockHalfSlab)new BlockBlackFrostSlab(defaultIdBlockBlackFrostSlabSet, false, Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrostSingleSlabSet").setTextureName("frostcraft:blackFrost");
 		blockBlackFrostDoubleSlabSet = (BlockHalfSlab)new BlockBlackFrostSlab(defaultIdBlockBlackFrostSlabSet + 1, true, Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrostDoubleSlabSet").setTextureName("frostcraft:blackFrost");
+		blockStatue = new BlockStatue(defaultIdBlockStatue, Material.rock).setBlockUnbreakable().setStepSound(Block.soundStoneFootstep).setUnlocalizedName("statue").setTextureName("stone");
 		GameRegistry.registerBlock(blockThermalPipe, "ThermalPipe");
 		GameRegistry.registerBlock(blockThermalMachines, ItemThermalMachines.class, "ThermalPump");
 		GameRegistry.registerBlock(blockIcicle, "Icicle");
@@ -156,6 +162,7 @@ public class IdMap
 		GameRegistry.registerBlock(blockBlackFrostFenceSet, ItemBlackFrostFences.class, "BlackfrostFences");
 		GameRegistry.registerBlock(blockBlackFrostSingleSlabSet, ItemBlackFrostSlabSingle.class, "BlackfrostSingleSlabs");
 		GameRegistry.registerBlock(blockBlackFrostDoubleSlabSet, ItemBlackFrostSlabDouble.class, "BlackfrostDoubleSlabs");
+		GameRegistry.registerBlock(blockStatue, "Statue");
 		LanguageRegistry.addName(blockThermalPipe, "Thermal Pipe");
 		LanguageRegistry.addName(new ItemStack(blockThermalMachines, 1, 0), "Thermal Pump");
 		LanguageRegistry.addName(new ItemStack(blockThermalMachines, 1, 1), "Frost Furnace");
@@ -175,6 +182,7 @@ public class IdMap
 		LanguageRegistry.addName(new ItemStack(blockBlackFrostSingleSlabSet, 1, 0), "Blackfrost Slab");
 		LanguageRegistry.addName(new ItemStack(blockBlackFrostSingleSlabSet, 1, 1), "Cracked Blackfrost Slab");
 		LanguageRegistry.addName(new ItemStack(blockBlackFrostSingleSlabSet, 1, 2), "Blackfrost Brick Slab");
+		LanguageRegistry.addName(blockStatue, "Frost Wing Statue");
 	}
 	
 	/**
@@ -267,12 +275,18 @@ public class IdMap
 		GameRegistry.registerTileEntity(TileEntityFrostGenerator.class, "Frost Generator");
 		GameRegistry.registerTileEntity(TileEntityFreezer.class, "Freezer");
 		GameRegistry.registerTileEntity(TileEntityFrostEnforcer.class, "Frost Enforcer");
+		GameRegistry.registerTileEntity(TileEntityStatue.class, "Frost Wing Statue");
 		EntityRegistry.registerGlobalEntityID(EntityFrostArrow.class, "FrostArrow", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntityFrostArrow.class, "FrostArrow", 0, FrostCraft.instance, 64, 20, false);
 		EntityRegistry.registerGlobalEntityID(EntityFrostShot.class, "FrostShot", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntityFrostShot.class, "FrostShot", 1, FrostCraft.instance, 64, 20, false);
-		//EntityRegistry.registerGlobalEntityID(EntityFairy.class, "IceFairy", EntityRegistry.findGlobalUniqueEntityId(), 0x0000FF, 0x00FFFF);
-		//EntityRegistry.registerModEntity(EntityFairy.class, "IceFairy", 2, FrostCraft.instance, 64, 20, true);
+		EntityRegistry.registerGlobalEntityID(EntityFrostWing.class, "FrostWing", EntityRegistry.findGlobalUniqueEntityId(), 0x0000FF, 0x00FFFF);
+		EntityRegistry.registerModEntity(EntityFrostWing.class, "FrostWing", 2, FrostCraft.instance, 80, 3, true);
+		LanguageRegistry.instance().addStringLocalization(new EntityFrostWing().getEntityName(), "Frost Wing");
+		EntityRegistry.registerGlobalEntityID(EntityFrostWingIcicleDropping.class, "IcicleDropping", EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerModEntity(EntityFrostWingIcicleDropping.class, "IcicleDropping", 3, FrostCraft.instance, 64, 20, false);
+		EntityRegistry.registerGlobalEntityID(EntityFrostBall.class, "FrostBall", EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerModEntity(EntityFrostBall.class, "FrostBall", 4, FrostCraft.instance, 64, 1, false);
 	}
 	
 	public void initialiseWorld()
@@ -355,6 +369,9 @@ public class IdMap
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostArrow.class, new RenderFrostArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostShot.class, new RenderFrostShot(0.5f));
 		MinecraftForgeClient.registerItemRenderer(IdMap.itemFrostBow.itemID, new RenderFrostBow());
-		RenderingRegistry.registerEntityRenderingHandler(EntityFairy.class, new RenderFairy(new ModelFairy(0.0F, "frostcraft:textures/icefairywings.png"), 1.0F, 1.0F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityFrostWing.class, new RenderForstWing(new ModelFrostWingLow(), 1.0F, FrostWingSize));
+		RenderingRegistry.registerEntityRenderingHandler(EntityFrostWingIcicleDropping.class, new RenderIcicle());
+		RenderingRegistry.registerEntityRenderingHandler(EntityFrostBall.class, new RenderFrostBall());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStatue.class, new TileEntityFrostStatueRenderer());
 	}
 }

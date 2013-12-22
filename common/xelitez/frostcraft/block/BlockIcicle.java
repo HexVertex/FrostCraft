@@ -12,7 +12,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public class BlockIcicle extends BlockBase 
+public class BlockIcicle extends Block
 {
 
 	public BlockIcicle(int id, Material material) 

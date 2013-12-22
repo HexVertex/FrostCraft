@@ -119,6 +119,8 @@ public class FrostCraft
 			slab.comment = "Requires next ID to be free";
 			IdMap.IdBlockBlackFrostSlabSet = slab.getInt(map.defaultIdBlockBlackFrostSlabSet);
 			
+			IdMap.IdBlockStatue = C.get("Misc", "BlockStatueId", map.defaultIdBlockStatue).getInt(map.defaultIdBlockStatue);
+			
 			// Getting configuration about update checker
             Property update = C.get("Updates", "Check for updates", true);
             Property ignoreMinorBuilds = C.get("Updates", "Ignore minor builds", true);

@@ -88,7 +88,8 @@ public class ItemFrostEnforced extends Item
     }
     
     @SuppressWarnings({ "rawtypes", "unchecked" })
-	public Multimap func_111205_h()
+    @Override
+	public Multimap getItemAttributeModifiers()
     {
         Multimap multimap = parentItem.getItemAttributeModifiers();
         AttributeModifier am = null;

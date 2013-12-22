@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -25,7 +26,7 @@ import xelitez.frostcraft.network.PacketSendManagerClient;
 import xelitez.frostcraft.registry.IdMap;
 import xelitez.frostcraft.tileentity.*;
 
-public class BlockThermalMachines extends BlockBaseContainer implements IConnect
+public class BlockThermalMachines extends BlockContainer implements IConnect
 {
 	Random rand = new Random();
 	Icon[] icons;

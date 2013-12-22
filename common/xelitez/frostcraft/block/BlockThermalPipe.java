@@ -17,7 +17,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockThermalPipe extends BlockBase implements IConnect, ITileEntityProvider
+public class BlockThermalPipe extends Block implements IConnect, ITileEntityProvider
 {
 	private Icon outertexture;
 	public Icon innertexture;

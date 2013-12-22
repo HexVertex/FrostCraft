@@ -3,6 +3,7 @@ package xelitez.frostcraft.block;
 import java.util.List;
 
 import xelitez.frostcraft.registry.CreativeTabs;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.ItemStack;
@@ -11,7 +12,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public class BlockBlackFrost extends BlockBase
+public class BlockBlackFrost extends Block
 {
 	public Icon[] icons;
 	public String[] iconStrings = new String[] {"blackfrost", "blackfrost_cracked", "blackfrost_brick"};

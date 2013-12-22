@@ -2,8 +2,6 @@ package xelitez.frostcraft.damage;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.StatCollector;
@@ -25,6 +23,6 @@ public class EntityDamageSourceFrost extends EntityDamageSource
      */
     public ChatMessageComponent getDeathMessage(EntityLivingBase par1EntityLivingBase)
     {
-        return ChatMessageComponent.createFromText(par1EntityLivingBase.getTranslatedEntityName() + "dide of frost from" + StatCollector.translateToLocal(this.damageSourceEntity.getEntityName()));
+        return ChatMessageComponent.createFromText(par1EntityLivingBase.getTranslatedEntityName() + " died of frost from " + StatCollector.translateToLocal(this.damageSourceEntity.getEntityName()));
     }
 }
