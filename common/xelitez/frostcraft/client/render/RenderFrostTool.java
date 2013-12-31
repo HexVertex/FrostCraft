@@ -74,9 +74,26 @@ public class RenderFrostTool implements IItemRenderer
                 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_COLOR);
     	        renderer.renderIcon(0, 0, overlayicon, 16, 16);
                 GL11.glDisable(GL11.GL_BLEND);
+                if (item.hasEffect(0))
+                {
+                    GL11.glDepthFunc(GL11.GL_GREATER);
+                    GL11.glDisable(GL11.GL_LIGHTING);
+                    GL11.glDepthMask(false);
+                    texturemanager.bindTexture(effectTexture);
+                    renderer.zLevel -= 50.0F;
+                    GL11.glEnable(GL11.GL_BLEND);
+                    GL11.glBlendFunc(GL11.GL_DST_COLOR, GL11.GL_DST_COLOR);
+                    GL11.glColor4f(0.5F, 0.25F, 0.8F, 1.0F);
+                    this.renderGlint(renderer, 431278612 + 32178161, -2, -2, 20, 20);
+                    GL11.glDisable(GL11.GL_BLEND);
+                    GL11.glDepthMask(true);
+                    renderer.zLevel += 50.0F;
+                    GL11.glEnable(GL11.GL_LIGHTING);
+                    GL11.glDepthFunc(GL11.GL_LEQUAL);
+                }
 			}
 		}
-		if(type == ItemRenderType.EQUIPPED_FIRST_PERSON)
+		if(type == ItemRenderType.EQUIPPED || type == ItemRenderType.EQUIPPED_FIRST_PERSON)
 		{
 			Icon icon = item.getIconIndex();
             float f = icon.getMinU();
@@ -228,5 +245,40 @@ public class RenderFrostTool implements IItemRenderer
 			}
 		}
 	}
+	
+    private void renderGlint(RenderItem renderer, int par1, int par2, int par3, int par4, int par5)
+    {
+        for (int j1 = 0; j1 < 2; ++j1)
+        {
+            if (j1 == 0)
+            {
+                GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
+            }
+
+            if (j1 == 1)
+            {
+                GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
+            }
+
+            float f = 0.00390625F;
+            float f1 = 0.00390625F;
+            float f2 = (float)(Minecraft.getSystemTime() % (long)(3000 + j1 * 1873)) / (3000.0F + (float)(j1 * 1873)) * 256.0F;
+            float f3 = 0.0F;
+            Tessellator tessellator = Tessellator.instance;
+            float f4 = 4.0F;
+
+            if (j1 == 1)
+            {
+                f4 = -1.0F;
+            }
+
+            tessellator.startDrawingQuads();
+            tessellator.addVertexWithUV((double)(par2 + 0), (double)(par3 + par5), (double)renderer.zLevel, (double)((f2 + (float)par5 * f4) * f), (double)((f3 + (float)par5) * f1));
+            tessellator.addVertexWithUV((double)(par2 + par4), (double)(par3 + par5), (double)renderer.zLevel, (double)((f2 + (float)par4 + (float)par5 * f4) * f), (double)((f3 + (float)par5) * f1));
+            tessellator.addVertexWithUV((double)(par2 + par4), (double)(par3 + 0), (double)renderer.zLevel, (double)((f2 + (float)par4) * f), (double)((f3 + 0.0F) * f1));
+            tessellator.addVertexWithUV((double)(par2 + 0), (double)(par3 + 0), (double)renderer.zLevel, (double)((f2 + 0.0F) * f), (double)((f3 + 0.0F) * f1));
+            tessellator.draw();
+        }
+    }
 
 }

@@ -24,7 +24,7 @@ public class GuiFrostGenerator extends GuiContainer
 	
     protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
-        this.fontRenderer.drawString(StatCollector.translateToLocal("Thermal Pump"), 55, 6, 4210752);
+        this.fontRenderer.drawString(StatCollector.translateToLocal("Frost Generator"), 55, 6, 4210752);
         this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
         this.fontRenderer.drawString(new StringBuilder().append(generator.storage).toString(), 95, this.ySize - 135, 4210752);
         this.fontRenderer.drawString(new StringBuilder().append("/").append(generator.capacity).append(" CFU").toString(), 80, this.ySize - 125, 4210752);

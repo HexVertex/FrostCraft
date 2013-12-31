@@ -3,13 +3,14 @@ package xelitez.frostcraft.item;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import xelitez.frostcraft.effect.EffectTicker;
 import xelitez.frostcraft.effect.FCPotion;
 import xelitez.frostcraft.registry.CreativeTabs;
 
-public class ItemIcicle extends ItemBase
+public class ItemIcicle extends Item
 {
 
 	public ItemIcicle(int par1) 

@@ -11,7 +11,7 @@ import xelitez.frostcraft.client.model.ModelFrostWingStatue;
 
 public class TileEntityFrostStatueRenderer extends TileEntitySpecialRenderer
 {
-	private static final ResourceLocation frostWingTexture = new ResourceLocation("frostcraft:textures/entities/frostwing.png");
+	private static final ResourceLocation frostWingTexture = new ResourceLocation("frostcraft:textures/entities/frostwing_gs.png");
 	private static final ResourceLocation statueBaseTexture = new ResourceLocation("frostcraft:textures/blocks/statue.png");
 	
 	private ModelFrostWingStatue model = new ModelFrostWingStatue();

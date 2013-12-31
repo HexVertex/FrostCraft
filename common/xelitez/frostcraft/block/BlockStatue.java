@@ -1,24 +1,27 @@
 package xelitez.frostcraft.block;
 
 import xelitez.frostcraft.entity.EntityFrostWing;
-import xelitez.frostcraft.registry.CreativeTabs;
 import xelitez.frostcraft.tileentity.TileEntityStatue;
+import xelitez.frostcraft.world.WorldGenFrostWingTower;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class BlockStatue extends BlockContainer{
 
-	public BlockStatue(int par1, Material par2Material) {
+	public BlockStatue(int par1, Material par2Material) 
+	{
 		super(par1, par2Material);
-		this.setCreativeTab(CreativeTabs.FCMiscItems);
 	}
 
 	@Override
@@ -120,7 +123,6 @@ public class BlockStatue extends BlockContainer{
         		{
         			if(obj instanceof EntityFrostWing && ((Entity)obj).isEntityAlive())
         			{
-        				System.out.println(((Entity)obj).posX);
         				flag = true;
         			}
         		}
@@ -130,28 +132,30 @@ public class BlockStatue extends BlockContainer{
         		}
         		else
         		{
-        			EntityFrostWing entity = new EntityFrostWing(par1World);
+        			par5EntityPlayer.inventory.consumeInventoryItem(Item.diamond.itemID);
+        			EntityFrostWing entity = new EntityFrostWing(par1World, par2, par3, par4);
         			int x = par2;
         			int z = par4;
-        			int y = par3 + 1;
-        			if(par1World.getBlockMetadata(par2, par3, par4) == 0)
-        			{
-        				z--;
-        			}
-        			if(par1World.getBlockMetadata(par2, par3, par4) == 1)
-        			{
-        				x++;
-        			}
-        			if(par1World.getBlockMetadata(par2, par3, par4) == 2)
-        			{
-        				z++;
-        			}
-        			if(par1World.getBlockMetadata(par2, par3, par4) == 3)
-        			{
-        				x--;
-        			}
+        			int y = par1World.getActualHeight() - 24;
         			entity.setPosition(x, y, z);
+        			WorldGenFrostWingTower.generateFrostWingCylinder(par1World, x, z);
         			par1World.spawnEntityInWorld(entity);
+        			for(Object obj : par1World.playerEntities)
+        			{
+        				if(obj instanceof EntityPlayerMP)
+        				{
+        					EntityPlayerMP player = (EntityPlayerMP)obj;
+        					int dx = par2 - (int)Math.floor(player.posX);
+        					int dy = par3 - (int)Math.floor(player.posY);
+        					int dz = par4 - (int)Math.floor(player.posZ);
+        					if(Math.sqrt(dx * dx + dy * dy + dz * dz) < 10.0D)
+        					{
+        						player.mountEntity(null);
+        						player.addPotionEffect(new PotionEffect(Potion.resistance.id, 100, 4));
+        						player.setPositionAndUpdate(x, y, z);
+        					}
+        				}
+        			}
         		}
         	}
         	return true;

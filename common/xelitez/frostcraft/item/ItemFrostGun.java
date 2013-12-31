@@ -14,7 +14,7 @@ import xelitez.frostcraft.entity.EntityFrostShot;
 import xelitez.frostcraft.interfaces.IChargeable;
 import xelitez.frostcraft.registry.CreativeTabs;
 
-public class ItemFrostGun extends ItemBase implements IChargeable
+public class ItemFrostGun extends Item implements IChargeable
 {
 
 	public ItemFrostGun(int par1) 

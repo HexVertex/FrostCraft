@@ -60,6 +60,8 @@ public class IdMap
 	public int defaultIdIcicle = 2302;
 	public int defaultIdSpear = 2319;
 	public int defaultIdCrossbow = 2320;
+	public int defaultIdFrostOrb = 2321;
+	public int defaultIdIcePop = 2322;
 	
 	public int defaultEnforcerToolStartId = 2400;
 	public int enforcerToolStartId;
@@ -95,6 +97,8 @@ public class IdMap
 	public static int IdIcicle;
 	public static int IdSpear;
 	public static int IdCrossbow;
+	public static int IdFrostOrb;
+	public static int IdIcePop;
 	
 	public static Block blockThermalPipe;
 	public static Block blockThermalMachines;
@@ -129,12 +133,16 @@ public class IdMap
 	public static Item itemIcicle;
 	public static Item itemSpear;
 	public static Item itemCrossbow;
+	public static Item itemFrostOrb;
+	public static Item itemIcePop;
 	
 	public static WorldType worldTypeWinterland;
 	
 	public static ISimpleBlockRenderingHandler thermalPipeRenderer;
 	
 	public static final float FrostWingSize = 2.5F;
+	
+	public static final String[] testers = new String[] {"lord_kalvin", "XEliteZSjors", "sea_hawk"};
 	
 	/**
 	 * Initialise all FrostCraft Blocks and additions
@@ -151,7 +159,7 @@ public class IdMap
 		blockBlackFrostFenceSet = new BlockBlackFrostFence(defaultIdBlockBlackFrostFenceSet, Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrostFenceSet").setTextureName("frostcraft:blackFrostFenceSet");
 		blockBlackFrostSingleSlabSet = (BlockHalfSlab)new BlockBlackFrostSlab(defaultIdBlockBlackFrostSlabSet, false, Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrostSingleSlabSet").setTextureName("frostcraft:blackFrost");
 		blockBlackFrostDoubleSlabSet = (BlockHalfSlab)new BlockBlackFrostSlab(defaultIdBlockBlackFrostSlabSet + 1, true, Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blackFrostDoubleSlabSet").setTextureName("frostcraft:blackFrost");
-		blockStatue = new BlockStatue(defaultIdBlockStatue, Material.rock).setBlockUnbreakable().setStepSound(Block.soundStoneFootstep).setUnlocalizedName("statue").setTextureName("stone");
+		blockStatue = new BlockStatue(defaultIdBlockStatue, Material.rock).setBlockUnbreakable().setResistance(6000000.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("statue").setTextureName("stone");
 		GameRegistry.registerBlock(blockThermalPipe, "ThermalPipe");
 		GameRegistry.registerBlock(blockThermalMachines, ItemThermalMachines.class, "ThermalPump");
 		GameRegistry.registerBlock(blockIcicle, "Icicle");
@@ -211,6 +219,8 @@ public class IdMap
 		itemIcicle = new ItemIcicle(IdIcicle).setUnlocalizedName("icicle").setTextureName("frostcraft:icicle");
 		itemSpear = new ItemSpear(IdSpear).setUnlocalizedName("guardians_spear").setTextureName("frostcraft:guardians_spear");
 		itemCrossbow = new ItemCrossbow(IdCrossbow).setUnlocalizedName("guardians_crossbow").setTextureName("frostcraft:guardians_crossbow");
+		itemFrostOrb = new ItemFrostOrb(IdFrostOrb).setUnlocalizedName("frost_orb").setTextureName("frostcraft:frost_orb");
+		itemIcePop = new ItemIcePop(IdIcePop);
 		
 		GameRegistry.registerItem(itemFrostBow, "FrostBow");
 		GameRegistry.registerItem(itemFrostGun, "FrostGun");
@@ -233,6 +243,8 @@ public class IdMap
 		GameRegistry.registerItem(itemIcicle, "ItemIcicle");
 		GameRegistry.registerItem(itemSpear, "ItemSpear");
 		GameRegistry.registerItem(itemCrossbow, "ItemCrossbow");
+		GameRegistry.registerItem(itemFrostOrb, "FrostOrb");
+		GameRegistry.registerItem(itemIcePop, "IcePop");
 		
 		LanguageRegistry.addName(itemFrostBow, "Frost Bow");
 		LanguageRegistry.addName(itemFrostGun, "Frost Gun");
@@ -259,8 +271,15 @@ public class IdMap
 		LanguageRegistry.addName(new ItemStack(itemCraftingItems.itemID, 1, 4), "Compressor");
 		LanguageRegistry.addName(new ItemStack(itemCraftingItems.itemID, 1, 5), "Frost Sprayer");
 		LanguageRegistry.addName(new ItemStack(itemCraftingItems.itemID, 1, 6), "CFU Storage Handler");
+		LanguageRegistry.addName(new ItemStack(itemCraftingItems.itemID, 1, 7), "Stick in Water");
+		LanguageRegistry.addName(new ItemStack(itemCraftingItems.itemID, 1, 8), "Stick in Apple Juice");
+		LanguageRegistry.addName(new ItemStack(itemCraftingItems.itemID, 1, 9), "Stick in Chocolate");
 		LanguageRegistry.addName(itemSpear, "Guardian's Spear");
 		LanguageRegistry.addName(itemCrossbow, "Guardian's Crossbow");
+		LanguageRegistry.addName(itemFrostOrb, "Frost Orb");
+		LanguageRegistry.addName(new ItemStack(itemIcePop.itemID, 1, 0), "Ice Pop");
+		LanguageRegistry.addName(new ItemStack(itemIcePop.itemID, 1, 1), "Apple Ice Pop");
+		LanguageRegistry.addName(new ItemStack(itemIcePop.itemID, 1, 2), "Chocolate Ice Pop");
 	}
 
 	/**
@@ -280,7 +299,7 @@ public class IdMap
 		EntityRegistry.registerModEntity(EntityFrostArrow.class, "FrostArrow", 0, FrostCraft.instance, 64, 20, false);
 		EntityRegistry.registerGlobalEntityID(EntityFrostShot.class, "FrostShot", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntityFrostShot.class, "FrostShot", 1, FrostCraft.instance, 64, 20, false);
-		EntityRegistry.registerGlobalEntityID(EntityFrostWing.class, "FrostWing", EntityRegistry.findGlobalUniqueEntityId(), 0x0000FF, 0x00FFFF);
+		EntityRegistry.registerGlobalEntityID(EntityFrostWing.class, "FrostWing", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntityFrostWing.class, "FrostWing", 2, FrostCraft.instance, 80, 3, true);
 		LanguageRegistry.instance().addStringLocalization(new EntityFrostWing().getEntityName(), "Frost Wing");
 		EntityRegistry.registerGlobalEntityID(EntityFrostWingIcicleDropping.class, "IcicleDropping", EntityRegistry.findGlobalUniqueEntityId());
@@ -292,6 +311,7 @@ public class IdMap
 	public void initialiseWorld()
 	{
 		GameRegistry.registerWorldGenerator(WorldGenIcicles.getInstance());
+		GameRegistry.registerWorldGenerator(WorldGenFrostWingTower.getInstance());
 		worldTypeWinterland = new WorldTypeWinterLand(Settings.EndlessWinterID != -1 ? Settings.EndlessWinterID : WorldTypeBase.getFreeId(), "Endless Winter");
 	}
 	

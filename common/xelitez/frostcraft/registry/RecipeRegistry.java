@@ -47,6 +47,9 @@ public class RecipeRegistry
 		RecipeRegistry.addFreezerRecipe(IdMap.itemCompiledFrostPickaxe, new ItemStack(IdMap.itemFrozenFrostPickaxe), 1.0F);
 		RecipeRegistry.addFreezerRecipe(IdMap.itemCompiledFrostAxe, new ItemStack(IdMap.itemFrozenFrostAxe), 1.0F);
 		RecipeRegistry.addFreezerRecipe(IdMap.itemCompiledFrostHoe, new ItemStack(IdMap.itemFrozenFrostHoe), 1.0F);
+		RecipeRegistry.addFreezerRecipe(IdMap.itemCraftingItems, 7, new ItemStack(IdMap.itemIcePop, 1, 0), 0.33F);
+		RecipeRegistry.addFreezerRecipe(IdMap.itemCraftingItems, 8, new ItemStack(IdMap.itemIcePop, 1, 1), 0.33F);
+		RecipeRegistry.addFreezerRecipe(IdMap.itemCraftingItems, 9, new ItemStack(IdMap.itemIcePop, 1, 2), 0.33F);
 		
 		RecipeRegistry.addEnforcerRecipe(IdMap.itemCompiledFrostBlade, new ItemStack(IdMap.itemFrostBlade), true);
 		RecipeRegistry.addEnforcerRecipe(IdMap.itemCompiledFrostSpade, new ItemStack(IdMap.itemFrostSpade), true);
@@ -81,6 +84,11 @@ public class RecipeRegistry
 		GameRegistry.addRecipe(new ItemStack(IdMap.blockThermalMachines, 1, 2), new Object[] {"XXX", "CEO", "XFX", 'X', Item.ingotIron, 'C', new ItemStack(IdMap.itemCraftingItems, 1, 2), 'E', Block.chest, 'O', new ItemStack(IdMap.itemCraftingItems, 1, 4), 'F', Block.furnaceIdle});
 		GameRegistry.addRecipe(new ItemStack(IdMap.blockThermalMachines, 1, 3), new Object[] {"XXX", "C S", "XPX", 'X', Item.ingotIron, 'C', new ItemStack(IdMap.itemCraftingItems, 1, 2), 'S', new ItemStack(IdMap.itemCraftingItems, 1, 6), 'P', new ItemStack(IdMap.itemCraftingItems, 1, 5)});
 		GameRegistry.addRecipe(new ItemStack(IdMap.blockThermalMachines, 1, 4), new Object[] {"XPX", "COS", "XFX", 'X', Item.ingotIron, 'C', new ItemStack(IdMap.itemCraftingItems, 1, 2), 'O', new ItemStack(IdMap.itemCraftingItems, 1, 4), 'S', new ItemStack(IdMap.itemCraftingItems, 1, 6), 'F', Block.furnaceIdle, 'P', new ItemStack(IdMap.itemCraftingItems, 1, 5)});
+		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 1, 7), new Object[] {"S", "B", 'S', Item.stick, 'B', Item.bucketWater});
+		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 1, 8), new Object[] {"S", "B", 'S', Item.appleRed, 'B', new ItemStack(IdMap.itemCraftingItems, 1, 7)});
+		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 1, 8), new Object[] {"A", "S", "B", 'A', Item.appleRed, 'S', Item.stick, 'B', Item.bucketWater});
+		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 1, 9), new Object[] {"S", "B", 'S', new ItemStack(Item.dyePowder, 1, 3), 'B', new ItemStack(IdMap.itemCraftingItems, 1, 7)});
+		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 1, 9), new Object[] {"C", "S", "B", 'C', new ItemStack(Item.dyePowder, 1, 3), 'S', Item.stick, 'B', Item.bucketWater});
 	}
 	
 	private static void addFrostValue(ItemStack item, int time)

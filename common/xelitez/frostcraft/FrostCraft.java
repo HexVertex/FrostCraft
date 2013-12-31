@@ -8,6 +8,8 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Property;
 import xelitez.frostcraft.client.render.RenderFrostTool;
+import xelitez.frostcraft.command.CommandGenerate;
+import xelitez.frostcraft.command.CommandJoinFight;
 import xelitez.frostcraft.effect.EffectTicker;
 import xelitez.frostcraft.effect.FCPotion;
 import xelitez.frostcraft.enchantment.FrostEnchantment;
@@ -36,11 +38,11 @@ import cpw.mods.fml.relauncher.Side;
 @Mod(	
 		modid = "XEZFrostCraft",
 		name = "FrostCraft", 
-		version = "0.0.4")
+		version = "1.0.2")
 @NetworkMod(
 		clientSideRequired = true,
 		serverSideRequired = false,
-		versionBounds = "[0.0.0,0.1)",
+		versionBounds = "[1.0,1.1)",
 		clientPacketHandlerSpec = @SidedPacketHandler(channels = {"XFCC"}, packetHandler = PacketManagerClient.class ),
 		serverPacketHandlerSpec = @SidedPacketHandler(channels = {"XFCS"}, packetHandler = PacketManagerServer.class ))
 public class FrostCraft 
@@ -60,7 +62,7 @@ public class FrostCraft
     public void preload(FMLPreInitializationEvent evt)
     {
 		evt.getModMetadata().name = "FrostCraft";
-		evt.getModMetadata().version = Version.getVersion() + "-Alpha for " + Version.MC;
+		evt.getModMetadata().version = Version.getVersion() + " for " + Version.MC;
 		
 		C = new Configuration(new File((File)FMLInjectionData.data()[6], "XEliteZ/FrostCraft.cfg"));
 		try
@@ -118,8 +120,9 @@ public class FrostCraft
 			Property slab = C.get("Misc", "BlockBlackFrostSlabSetId", map.defaultIdBlockBlackFrostSlabSet);
 			slab.comment = "Requires next ID to be free";
 			IdMap.IdBlockBlackFrostSlabSet = slab.getInt(map.defaultIdBlockBlackFrostSlabSet);
-			
 			IdMap.IdBlockStatue = C.get("Misc", "BlockStatueId", map.defaultIdBlockStatue).getInt(map.defaultIdBlockStatue);
+			IdMap.IdFrostOrb = C.get("Misc", "FrostOrbId", map.defaultIdFrostOrb).getInt(map.defaultIdFrostOrb);
+			IdMap.IdIcePop = C.get("Misc", "IcePopId", map.defaultIdIcePop).getInt(map.defaultIdIcePop);
 			
 			// Getting configuration about update checker
             Property update = C.get("Updates", "Check for updates", true);
@@ -208,4 +211,11 @@ public class FrostCraft
 		}
         proxy.registerSidedElements();
     }
+	
+	@EventHandler
+	public void onServerStart(FMLServerStartingEvent evt)
+	{
+		evt.registerServerCommand(new CommandGenerate());
+		evt.registerServerCommand(new CommandJoinFight());
+	}
 }

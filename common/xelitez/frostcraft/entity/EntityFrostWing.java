@@ -18,8 +18,10 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -45,6 +47,8 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
     
     private boolean pathSet = false;
     private Vec3 path = null;
+    
+    private ChunkCoordinates ck = new ChunkCoordinates(0, 0, 0);
     
 	public EntityFrostWing() 
 	{
@@ -93,6 +97,12 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
 			this.jumpMovementFactor = 0.15F;
 		}
 	}
+	
+	public EntityFrostWing(World par1World, int statX, int statY, int statZ)
+	{
+		this(par1World);
+		ck = new ChunkCoordinates(statX, statY, statZ);
+	}
     
     protected void jump()
     {
@@ -107,9 +117,9 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
 	
     public void onLivingUpdate()
     {
-    	System.out.println(this.posX);
         if (!this.worldObj.isRemote)
         {
+        	if(this.posY <= 0.0D) this.setDead();
         	if(this.ticksExisted == Integer.MAX_VALUE) this.ticksExisted = 0;
         	++this.ticksExisted;
         	if(this.ticksExisted % 50 == 0 && !this.isDead && this.getHealth() > 0.0F)
@@ -479,7 +489,7 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
     		this.attackCooldown = 0;
     		this.dataWatcher.updateObject(17, 5);
     	}
-    	if(this.getAttackTarget().getDistanceToEntity(this) > 19.0D)
+    	if(this.getAttackTarget() != null && this.getAttackTarget().getDistanceToEntity(this) > 19.0D)
     	{
     		this.attackCooldown = 0;
     		this.dataWatcher.updateObject(17, 5);
@@ -802,5 +812,49 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
 	{
 		return new ItemStack[0];
 	}
+	
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    {
+    	super.writeEntityToNBT(par1NBTTagCompound);
+    	par1NBTTagCompound.setInteger("Attack", this.getAttack());
+    	par1NBTTagCompound.setInteger("ATime", this.getAttackTime());
+    	par1NBTTagCompound.setInteger("AttackCooldown", this.attackCooldown);
+    	
+    	par1NBTTagCompound.setInteger("StatueX", this.ck.posX);
+    	par1NBTTagCompound.setInteger("StatueY", this.ck.posY);
+    	par1NBTTagCompound.setInteger("StatueZ", this.ck.posZ);
+    }
+    
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    {
+    	super.readEntityFromNBT(par1NBTTagCompound);
+    	
+    	this.dataWatcher.updateObject(16, par1NBTTagCompound.getInteger("Attack"));
+    	this.dataWatcher.updateObject(17, par1NBTTagCompound.getInteger("ATime"));
+    	this.attackCooldown = par1NBTTagCompound.getInteger("AttackCooldown");
+    	
+    	int x = par1NBTTagCompound.getInteger("StatueX");
+    	int y = par1NBTTagCompound.getInteger("StatueY");
+    	int z = par1NBTTagCompound.getInteger("StatueZ");
+    	
+    	this.ck = new ChunkCoordinates(x, y, z);
+    }
+    
+    protected void dropFewItems(boolean par1, int par2)
+    {
+    	if(!(this.ck.posX == 0 && this.ck.posY == 0 && ck.posZ == 0))
+    	{
+    		ItemStack itemOrb = new ItemStack(IdMap.itemFrostOrb);
+    		if(itemOrb.stackTagCompound == null)
+    		{
+    			itemOrb.stackTagCompound = new NBTTagCompound("tag");
+    		}
+    		itemOrb.getTagCompound().setInteger("xCoord", ck.posX);
+    		itemOrb.getTagCompound().setInteger("yCoord", ck.posY);
+    		itemOrb.getTagCompound().setInteger("zCoord", ck.posZ);
+    		itemOrb.getTagCompound().setBoolean("removed", false);
+    		this.entityDropItem(itemOrb, 0.0F);
+    	}
+    }
 
 }

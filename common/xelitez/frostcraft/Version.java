@@ -17,10 +17,10 @@ import cpw.mods.fml.relauncher.Side;
 
 public class Version
 {
-    public static int majorVersion = 0;
+    public static int majorVersion = 1;
     public static int minorVersion = 0;
-    public static int majorBuild = 4;
-    public static int minorBuild = 6;
+    public static int majorBuild = 2;
+    public static int minorBuild = 9;
     public static String MC = "MC:1.6.4";
 
     public static String newVersion;

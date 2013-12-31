@@ -3,6 +3,7 @@ package xelitez.frostcraft;
 import xelitez.frostcraft.world.WorldAccess;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldProviderSurface;
 import net.minecraftforge.event.Event;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.IEventListener;
@@ -21,8 +22,15 @@ public class EventListener implements IEventListener
 			{
 				WorldAccess.instance().setWorldAndLoadRenderers((WorldClient)world);
 			}
+			if(world.provider instanceof WorldProviderSurface)
+			{
+				SaveHandler.getTagCompound(world, true);
+			}
 		}
-		
+		if(event instanceof WorldEvent.Save)
+		{
+			SaveHandler.saveTagCompound(((WorldEvent.Save)event).world);
+		}	
 	}
 
 }

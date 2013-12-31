@@ -96,6 +96,7 @@ public class FreezerRecipeHandler extends TemplateRecipeHandler
 			for(Entry<List<Integer>, ItemStack> recipe : recipes.entrySet())
 			{
 				ItemStack item = recipe.getValue();
+				System.out.println(recipe.getKey().get(0));
 				arecipes.add(new FreezingPair(new ItemStack(recipe.getKey().get(0), 1, recipe.getKey().get(1)), item, new ItemStack(recipe.getKey().get(0), 1, recipe.getKey().get(1)).getItem().getContainerItemStack(new ItemStack(recipe.getKey().get(0), 1, recipe.getKey().get(1)))));
 			}
 		}
