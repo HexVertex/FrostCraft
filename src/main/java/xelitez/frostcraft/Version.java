@@ -20,7 +20,7 @@ public class Version
     public static int majorVersion = 1;
     public static int minorVersion = 0;
     public static int majorBuild = 3;
-    public static int minorBuild = 10;
+    public static int minorBuild = 11;
     public static String MC = "MC:1.7.2";
 
     public static String newVersion;
@@ -74,7 +74,7 @@ public class Version
 			
     	try
     	{
-    		URL url = new URL("https://raw.github.com/XEZKalvin/Frostcraft/master/common/xelitez/frostcraft/Version.java");
+    		URL url = new URL("https://raw2.github.com/XEZKalvin/FrostCraft/master/src/main/java/xelitez/frostcraft/Version.java");
     		URLConnection connect = url.openConnection();
     		connect.setConnectTimeout(5000);
     		connect.setReadTimeout(5000);
