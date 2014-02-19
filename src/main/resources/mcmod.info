@@ -1,0 +1,16 @@
+[
+{
+  "modid": "XEZFrostcraft",
+  "name": "Frostcraft",
+  "description": "Frostcraft is a mod that adds some new machines, equipment, mobs and a new worldtype to extend you gameplay experience to a new level \r\n have fun!!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["XEZKalvin"],
+  "credits": "XEliteZ Kalvin",
+  "logoFile": "assets/frostcraft/textures/xezmods.png",
+  "screenshots": [],
+  "dependencies": ["XEZUpdateUtility(optional)"]
+}
+]

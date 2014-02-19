@@ -96,6 +96,7 @@ public class FreezerRecipeHandler extends TemplateRecipeHandler
 			for(Entry<List<Integer>, ItemStack> recipe : recipes.entrySet())
 			{
 				ItemStack item = recipe.getValue();
+				System.out.println(recipe.getKey().get(0));
 				arecipes.add(new FreezingPair(new ItemStack(recipe.getKey().get(0), 1, recipe.getKey().get(1)), item, new ItemStack(recipe.getKey().get(0), 1, recipe.getKey().get(1)).getItem().getContainerItemStack(new ItemStack(recipe.getKey().get(0), 1, recipe.getKey().get(1)))));
 			}
 		}
@@ -185,13 +186,13 @@ public class FreezerRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public String getGuiTexture() 
 	{
-		return "/mods/FrostCraft/textures/freezer.png";
+		return "frostcraft:textures/freezer.png";
 	}
 	
 	public void drawExtras(GuiContainerManager gui, int recipe)
 	{
-		drawProgressBar(gui, 49, 25, 176, 0, 14, 14, 48, 7);
-		drawProgressBar(gui, 71, 23, 176, 14, 24, 16, 48, 0);
+		drawProgressBar(49, 25, 176, 0, 14, 14, 48, 7);
+		drawProgressBar(71, 23, 176, 14, 24, 16, 48, 0);
 	}
 
 }

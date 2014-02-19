@@ -138,7 +138,7 @@ public class EnforcerRecipeHandler extends TemplateRecipeHandler
 			for(Entry<Integer, ItemStack> recipe : recipesIdOnly.entrySet())
 			{
 				ItemStack item = recipe.getValue();
-				if(NEIClientUtils.areStacksSameType(item, result))
+				if(item.itemID == result.itemID)
 				{
 					arecipes.add(new EnforcingPair(new ItemStack(recipe.getKey(), 1, -1), item));
 				}
@@ -223,13 +223,13 @@ public class EnforcerRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public String getGuiTexture() 
 	{
-		return "/mods/FrostCraft/textures/frostenforcer.png";
+		return "frostcraft:textures/frostenforcer.png";
 	}
 	
 	public void drawExtras(GuiContainerManager gui, int recipe)
 	{
-		drawProgressBar(gui, 52, 26, 176, 0, 14, 14, 48, 7);
-		drawProgressBar(gui, 74, 23, 176, 14, 24, 16, 48, 0);
+		drawProgressBar(52, 26, 176, 0, 14, 14, 48, 7);
+		drawProgressBar(74, 23, 176, 14, 24, 16, 48, 0);
 	}
 
 }

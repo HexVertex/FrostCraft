@@ -1,0 +1,66 @@
+enchantment.freeze=Freeze
+enchantment.frostburn=FrostBurn
+
+generator.Endless Winter=Endless Winter
+
+itemGroup.Frostcraft Mechanical=Frostcraft Mechanical
+itemGroup.Frostcraft Equipment=Frostcraft Equipment
+itemGroup.Frostcraft Misc=Frostcraft Misc
+
+tile.thermal_pipe.name=Thermal Pipe
+tile.icicle.name=Icicles
+tile.blackFrostStair.name=Black Frost Stairs
+tile.blackFrostStairCoble.name=Cracked Black Frost Stairs
+tile.blackFrostStairBrick.name=Black Frost Brick Stairs
+tile.blackFrostSingleSlabSet.BlackFrost.name=Black Frost Slab
+tile.blackFrostSingleSlabSet.CrackedBlackFrost.name=Cracked Black Frost Slab
+tile.blackFrostSingleSlabSet.BlackFrostBrick.name=Black Frost Brick Slab
+tile.statue.name=Frost Wing Statue
+
+XFC.ThermalPump.name=Thermal Pump
+XFC.FrostFurnace.name=Frost Furnace
+XFC.FrostGenerator.name=Frost Generator
+XFC.Freezer.name=Freezer
+XFC.FrostEnforcer.name=Frost Enforcer
+XFC.BlackFrost.name=Black Frost
+XFC.CrackedBlackFrost.name=Cracked Black Frost
+XFC.BlackFrostBrick.name=Black Frost Bricks
+XFC.BlackFrostFence.name=Black Frost Fence
+XFC.CrackedBlackFrostFence.name=Cracked Black Frost Fence
+XFC.BlackFrostBrickFence.name=Black Frost Brick Fence
+
+item.frost_bow.name=Frost Bow
+item.frost_gun.name=Frost Gun
+item.compiled_frost_sword.name=Compiled Frost Sword
+item.compiled_frost_spade.name=Compiled Frost Shovel
+item.compiled_frost_pickaxe.name=Compiled Frost Pickaxe
+item.compiled_frost_axe.name=Compiled Frost Axe
+item.compiled_frost_hoe.name=Compiled Frost Hoe
+item.frost_sword.name=Frost Sword
+item.frost_spade.name=Frost Shovel
+item.frost_pickaxe.name=Frost Pickaxe
+item.frost_axe.name=Frost Axe
+item.frost_hoe.name=Frost Hoe
+item.enforced_frost_blade.name=Enforced Frost Blade
+item.enforced_frost_spade.name=Enforced Frost Shovel
+item.enforced_frost_pickaxe.name=Enforced Frost Pickaxe
+item.enforced_frost_axe.name=Enforced Frost Axe
+item.enforced_frost_hoe.name=Enforced Frost Hoe
+item.guardians_spear.name=Guardian's Spear
+item.guardians_crossbow.name=Guardian's Crossbow
+item.icicle.name=Icicle
+item.frost_orb.name=Frost Orb
+
+XFC.Iceball.name=Iceball
+XFC.Ice-Covered String.name=Ice-Covered String
+XFC.CFU Handler.name=CFU Handler
+XFC.Frost Transformer.name=Frost Transformer
+XFC.Compressor.name=Compressor
+XFC.Frost Sprayer.name=Frost Sprayer
+XFC.CFU Storage Handler.name=CFU Storage Handler
+XFC.Stick in Water.name=Stick in Water
+XFC.Stick in Apple Juice.name=Stick in Apple Juice
+XFC.Stick in Chocolate.name=Stick in Chocolate
+XFC.Ice Pop.name=Ice Pop
+XFC.Apple Ice Pop.name=Apple Ice Pop
+XFC.Chocolate Ice Pop.name=Chocolate Ice Pop
