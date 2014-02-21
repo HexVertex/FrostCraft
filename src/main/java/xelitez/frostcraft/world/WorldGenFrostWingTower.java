@@ -33,8 +33,8 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 	{
 		biomeList.add(BiomeGenBase.iceMountains);
 		biomeList.add(BiomeGenBase.icePlains);
-		biomeList.add(BiomeGenBase.taiga);
-		biomeList.add(BiomeGenBase.taigaHills);
+		biomeList.add(BiomeGenBase.coldTaiga);
+		biomeList.add(BiomeGenBase.coldTaigaHills);
 	}
 	
 	public static List<Integer> getPossibleYPos(World world, int x, int z)
@@ -69,7 +69,7 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 		NBTTagList list = null;
 		if(nbt.hasKey("Castles"))
 		{
-			list = nbt.getTagList("Castles", 0);
+			list = nbt.getTagList("Castles", 10);
 		}
 		if(list == null)
 		{
