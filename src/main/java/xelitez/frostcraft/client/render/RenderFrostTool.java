@@ -47,8 +47,6 @@ public class RenderFrostTool implements IItemRenderer
 			IIcon icon = item.getIconIndex();
 			GL11.glTranslatef(0.0F, 0.0F, -renderer.zLevel + renderer.zLevel / 3);
 	        renderer.renderIcon(0, 0, icon, 16, 16);
-            GL11.glDisable(GL11.GL_ALPHA_TEST);
-            GL11.glEnable(GL11.GL_LIGHTING);
 			if(item.getItem() instanceof ItemFrostEnforced)
 			{
 				IIcon overlayicon;
@@ -74,8 +72,12 @@ public class RenderFrostTool implements IItemRenderer
 					break;			
 				}
     	        GL11.glPushMatrix();
-                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.9F);
+                GL11.glEnable(GL11.GL_ALPHA_TEST);
+                GL11.glEnable(GL11.GL_BLEND);
+                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_COLOR);
     	        renderer.renderIcon(0, 0, overlayicon, 16, 16);
+                GL11.glDisable(GL11.GL_BLEND);
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				GL11.glPopMatrix();
                 if (item.hasEffect(1))
