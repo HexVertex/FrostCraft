@@ -1,7 +1,9 @@
 enchantment.freeze=Freeze
-enchantment.frostburn=FrostBurn
+enchantment.frostburn=Frostburn
 
 generator.Endless Winter=Endless Winter
+
+entity.FrostWing.name=Frost Wing
 
 itemGroup.Frostcraft Mechanical=Frostcraft Mechanical
 itemGroup.Frostcraft Equipment=Frostcraft Equipment
