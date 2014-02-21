@@ -12,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import xelitez.frostcraft.effect.EffectTicker;
 import xelitez.frostcraft.effect.FCPotion;
@@ -161,7 +162,7 @@ public class ItemFrostEnforced extends Item
     @Override
     public String getUnlocalizedName(ItemStack item)
     {
-    	return "Enforced " + this.parentItem.getUnlocalizedName();
+    	return "Enforced " + StatCollector.translateToLocal(this.parentItem.getUnlocalizedNameInefficiently(new ItemStack(this.parentItem)) + ".name");
     }
     
 }
