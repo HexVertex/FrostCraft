@@ -20,7 +20,7 @@ public class Version
     public static int majorVersion = 1;
     public static int minorVersion = 0;
     public static int majorBuild = 4;
-    public static int minorBuild = 12;
+    public static int minorBuild = 13;
     public static String MC = "MC:1.7.2";
 
     public static String newVersion;
