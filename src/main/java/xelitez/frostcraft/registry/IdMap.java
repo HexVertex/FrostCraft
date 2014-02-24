@@ -27,6 +27,7 @@ import xelitez.frostcraft.block.BlockStatue;
 import xelitez.frostcraft.block.BlockThermalMachines;
 import xelitez.frostcraft.block.BlockThermalPipe;
 import xelitez.frostcraft.client.model.ModelFrostWingLow;
+import xelitez.frostcraft.client.render.RenderCrossbow;
 import xelitez.frostcraft.client.render.RenderForstWing;
 import xelitez.frostcraft.client.render.RenderFrostArrow;
 import xelitez.frostcraft.client.render.RenderFrostBall;
@@ -388,5 +389,6 @@ public class IdMap
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostWingIcicleDropping.class, new RenderIcicle());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostBall.class, new RenderFrostBall());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStatue.class, new TileEntityFrostStatueRenderer());
+		MinecraftForgeClient.registerItemRenderer(IdMap.itemCrossbow, new RenderCrossbow());
 	}
 }
