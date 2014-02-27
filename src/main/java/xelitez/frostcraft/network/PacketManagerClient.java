@@ -64,6 +64,7 @@ public class PacketManagerClient
 	            	entity.rotationPitch = dat.readFloat();
 	            	entity.prevRotationYaw = dat.readFloat();
 	            	entity.prevRotationPitch = dat.readFloat();
+	            	entity.setPositionAndRotation(entity.posX, entity.posY, entity.posZ, entity.rotationYaw, entity.rotationPitch);
             	}
             	return;
             case 3:

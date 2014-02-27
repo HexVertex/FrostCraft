@@ -1,13 +1,13 @@
 package xelitez.frostcraft;
 
-import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.common.eventhandler.IEventListener;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import xelitez.frostcraft.world.WorldAccess;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderSurface;
 import net.minecraftforge.event.world.WorldEvent;
+import xelitez.frostcraft.world.WorldAccess;
+import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.IEventListener;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class EventListener implements IEventListener
 {

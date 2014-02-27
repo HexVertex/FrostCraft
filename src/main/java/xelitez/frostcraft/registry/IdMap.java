@@ -28,6 +28,7 @@ import xelitez.frostcraft.block.BlockThermalMachines;
 import xelitez.frostcraft.block.BlockThermalPipe;
 import xelitez.frostcraft.client.model.ModelFrostWingLow;
 import xelitez.frostcraft.client.render.RenderCrossbow;
+import xelitez.frostcraft.client.render.RenderCrossbowBolt;
 import xelitez.frostcraft.client.render.RenderForstWing;
 import xelitez.frostcraft.client.render.RenderFrostArrow;
 import xelitez.frostcraft.client.render.RenderFrostBall;
@@ -36,6 +37,7 @@ import xelitez.frostcraft.client.render.RenderFrostShot;
 import xelitez.frostcraft.client.render.RenderIcicle;
 import xelitez.frostcraft.client.render.RendererThermalPipe;
 import xelitez.frostcraft.client.render.TileEntityFrostStatueRenderer;
+import xelitez.frostcraft.entity.EntityCrossbowBolt;
 import xelitez.frostcraft.entity.EntityFrostArrow;
 import xelitez.frostcraft.entity.EntityFrostBall;
 import xelitez.frostcraft.entity.EntityFrostShot;
@@ -294,6 +296,8 @@ public class IdMap
 		EntityRegistry.registerModEntity(EntityFrostWingIcicleDropping.class, "IcicleDropping", 3, Frostcraft.instance, 64, 20, false);
 		EntityRegistry.registerGlobalEntityID(EntityFrostBall.class, "FrostBall", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntityFrostBall.class, "FrostBall", 4, Frostcraft.instance, 64, 1, false);
+		EntityRegistry.registerGlobalEntityID(EntityCrossbowBolt.class, "CrossbowBolt", EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerModEntity(EntityCrossbowBolt.class, "CrossbowBolt", 5, Frostcraft.instance, 64, 20, false);
 		
 //		LanguageRegistry.instance().addStringLocalization(new EntityFrostWing().getCommandSenderName(), "Frost Wing");
 	}
@@ -390,5 +394,6 @@ public class IdMap
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostBall.class, new RenderFrostBall());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStatue.class, new TileEntityFrostStatueRenderer());
 		MinecraftForgeClient.registerItemRenderer(IdMap.itemCrossbow, new RenderCrossbow());
+		RenderingRegistry.registerEntityRenderingHandler(EntityCrossbowBolt.class, new RenderCrossbowBolt());
 	}
 }
