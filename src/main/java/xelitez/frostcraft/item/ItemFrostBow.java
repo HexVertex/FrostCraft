@@ -36,7 +36,7 @@ public class ItemFrostBow extends ItemBow
 
         boolean var5 = par3EntityPlayer.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, par1ItemStack) > 0;
 
-        if (var5 || (par3EntityPlayer.inventory.hasItem(Items.arrow) && this.hasPlayerItem(par3EntityPlayer, new ItemStack(IdMap.itemCraftingItems, 1, 0))))
+        if (var5 || (par3EntityPlayer.inventory.hasItem(Items.arrow) && ItemHelper.hasPlayerItem(par3EntityPlayer, new ItemStack(IdMap.itemCraftingItems, 1, 0))))
         {
             float var7 = (float)var6 / 20.0F;
             var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
@@ -103,7 +103,7 @@ public class ItemFrostBow extends ItemBow
             else
             {
                 par3EntityPlayer.inventory.consumeInventoryItem(Items.arrow);
-                this.consumeItemFromPlayer(par3EntityPlayer, new ItemStack(IdMap.itemCraftingItems, 1 ,0));
+                ItemHelper.consumeItemFromPlayer(par3EntityPlayer, new ItemStack(IdMap.itemCraftingItems, 1 ,0));
             }
 
             if (!par2World.isRemote)
@@ -111,44 +111,6 @@ public class ItemFrostBow extends ItemBow
             	par2World.spawnEntityInWorld(var8);
             }
         }
-    }
-    
-    private boolean hasPlayerItem(EntityPlayer player, ItemStack item)
-    {
-        int var2 = this.getInventorySlotContainItem(player, item);
-        return var2 >= 0;
-    }
-    
-    private boolean consumeItemFromPlayer(EntityPlayer player, ItemStack item)
-    {
-        int var2 = this.getInventorySlotContainItem(player, item);
-
-        if (var2 < 0)
-        {
-            return false;
-        }
-        else
-        {
-            if (--player.inventory.mainInventory[var2].stackSize <= 0)
-            {
-            	player.inventory.mainInventory[var2] = null;
-            }
-
-            return true;
-        }
-    }
-    
-    private int getInventorySlotContainItem(EntityPlayer player, ItemStack item)
-    {
-        for (int var2 = 0; var2 < player.inventory.mainInventory.length; ++var2)
-        {
-            if (player.inventory.mainInventory[var2] != null && player.inventory.mainInventory[var2] == item && player.inventory.mainInventory[var2].getItemDamage() == item.getItemDamage())
-            {
-                return var2;
-            }
-        }
-
-        return -1;
     }
 
     @Override
@@ -181,7 +143,7 @@ public class ItemFrostBow extends ItemBow
      */
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
     {
-        if (par3EntityPlayer.capabilities.isCreativeMode || (par3EntityPlayer.inventory.hasItem(Items.arrow) && this.hasPlayerItem(par3EntityPlayer, new ItemStack(IdMap.itemCraftingItems, 1, 0))))
+        if (par3EntityPlayer.capabilities.isCreativeMode || (par3EntityPlayer.inventory.hasItem(Items.arrow) && ItemHelper.hasPlayerItem(par3EntityPlayer, new ItemStack(IdMap.itemCraftingItems, 1, 0))))
         {
             par3EntityPlayer.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
         }

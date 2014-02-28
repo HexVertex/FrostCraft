@@ -5,7 +5,6 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import xelitez.frostcraft.entity.EntityCrossbowBolt;
 import xelitez.frostcraft.registry.FrostcraftCreativeTabs;
+import xelitez.frostcraft.registry.IdMap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -64,8 +64,12 @@ public class ItemCrossbow extends Item
 			compound = new NBTTagCompound();
 		}
 		boolean loaded = compound.hasKey("loaded") ? compound.getBoolean("loaded") : false;
-		if(!loaded)
+		if(!loaded && (par3EntityPlayer.inventory.hasItemStack(new ItemStack(IdMap.itemCraftingItems, 1, 10)) || par3EntityPlayer.capabilities.isCreativeMode))
 		{
+			if(!par3EntityPlayer.capabilities.isCreativeMode)
+			{
+				ItemHelper.consumeItemFromPlayer(par3EntityPlayer, new ItemStack(IdMap.itemCraftingItems, 1, 10));
+			}
 			compound.setBoolean("loaded", true);
 			compound.setInteger("loadCooldown", 10);
 		}
@@ -148,7 +152,7 @@ public class ItemCrossbow extends Item
     		}
     	}
     	
-    	if (!compound.getBoolean("loaded") && (par3EntityPlayer.capabilities.isCreativeMode || par3EntityPlayer.inventory.hasItem(Items.arrow)))
+    	if (!compound.getBoolean("loaded") && (par3EntityPlayer.capabilities.isCreativeMode || par3EntityPlayer.inventory.hasItemStack(new ItemStack(IdMap.itemCraftingItems, 1, 10))))
         {
             par3EntityPlayer.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
         }

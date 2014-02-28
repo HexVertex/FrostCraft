@@ -13,7 +13,7 @@ public class CraftingItems extends Item
 {
 	String[] name = new String[] {"Iceball", "Ice-Covered String", "CFU Handler",
 			"Frost Transformer", "Compressor", "Frost Sprayer", "CFU Storage Handler",
-			"Stick in Water", "Stick in Apple Juice", "Stick in Chocolate"};
+			"Stick in Water", "Stick in Apple Juice", "Stick in Chocolate", "Crossbow Bolt"};
 	IIcon[] icons;
 	
 	public CraftingItems() 
@@ -28,7 +28,7 @@ public class CraftingItems extends Item
     @Override
 	public void getSubItems(Item par1, net.minecraft.creativetab.CreativeTabs par2CreativeTabs, List par3List)
     {
-    	for(int i = 0;i < 10;i++)
+    	for(int i = 0;i < name.length;i++)
     	{
     		par3List.add(new ItemStack(par1, 1, i));
     	}
@@ -49,7 +49,7 @@ public class CraftingItems extends Item
     @Override
     public void registerIcons(IIconRegister par1IconRegister)
     {
-    	icons = new IIcon[10];
+    	icons = new IIcon[name.length];
     	icons[0] = par1IconRegister.registerIcon("Frostcraft:iceball");
     	icons[1] = par1IconRegister.registerIcon("Frostcraft:ice_covered_string");
     	icons[2] = par1IconRegister.registerIcon("Frostcraft:cfu_handler");
@@ -60,6 +60,7 @@ public class CraftingItems extends Item
     	icons[7] = par1IconRegister.registerIcon("Frostcraft:stick_in_water");
     	icons[8] = par1IconRegister.registerIcon("Frostcraft:stick_in_applejuice");
     	icons[9] = par1IconRegister.registerIcon("Frostcraft:stick_in_chocolate");
+    	icons[10] = par1IconRegister.registerIcon("arrow");
     }
     
     @Override
