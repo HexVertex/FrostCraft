@@ -1,11 +1,13 @@
 package xelitez.frostcraft.world;
 
-import java.lang.reflect.Field;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
@@ -20,6 +22,7 @@ public class WorldTicker
 {	
     protected int updateLCG = (new Random()).nextInt();
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@SubscribeEvent
 	public void tickEnd(TickEvent.WorldTickEvent evt) 
 	{
@@ -28,12 +31,24 @@ public class WorldTicker
 			World world = evt.world;
 			try
 			{
-				Set<?> set = null;
-				Class<? extends World> clazz = world.getClass();
-				Field field = clazz.getFields()[35];
-				field.setAccessible(true);
-				set = (Set<?>) field.get(null);
-		        Iterator<?> var3 = set.iterator();
+				Set set = new HashSet();
+				set.addAll(world.getPersistentChunks().keySet());
+		        for (int i = 0; i < world.playerEntities.size(); ++i)
+		        {
+		            EntityPlayer entityplayer = (EntityPlayer)world.playerEntities.get(i);
+		            int j = MathHelper.floor_double(entityplayer.posX / 16.0D);
+		            int k = MathHelper.floor_double(entityplayer.posZ / 16.0D);
+		            byte b0 = 7;
+
+		            for (int l = -b0; l <= b0; ++l)
+		            {
+		                for (int i1 = -b0; i1 <= b0; ++i1)
+		                {
+		                    set.add(new ChunkCoordIntPair(l + j, i1 + k));
+		                }
+		            }
+		        }
+				Iterator var3 = set.iterator();
 		        while (var3.hasNext())
 		        {
 		            ChunkCoordIntPair var4 = (ChunkCoordIntPair)var3.next();
@@ -65,7 +80,7 @@ public class WorldTicker
 			}
 	        catch(Exception e)
 	        {
-	        	
+	        	e.printStackTrace();
 	        }
 		}
 	}
