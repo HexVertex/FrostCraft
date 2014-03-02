@@ -60,7 +60,7 @@ public class CraftingItems extends Item
     	icons[7] = par1IconRegister.registerIcon("Frostcraft:stick_in_water");
     	icons[8] = par1IconRegister.registerIcon("Frostcraft:stick_in_applejuice");
     	icons[9] = par1IconRegister.registerIcon("Frostcraft:stick_in_chocolate");
-    	icons[10] = par1IconRegister.registerIcon("arrow");
+    	icons[10] = par1IconRegister.registerIcon("Frostcraft:crossbow_bolt");
     }
     
     @Override

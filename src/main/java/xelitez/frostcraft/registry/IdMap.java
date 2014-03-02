@@ -287,7 +287,7 @@ public class IdMap
 		GameRegistry.registerTileEntity(TileEntityFrostEnforcer.class, "Frost Enforcer");
 		GameRegistry.registerTileEntity(TileEntityStatue.class, "Frost Wing Statue");
 		EntityRegistry.registerGlobalEntityID(EntityFrostArrow.class, "FrostArrow", EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerModEntity(EntityFrostArrow.class, "FrostArrow", 0, Frostcraft.instance, 64, 20, false);
+		EntityRegistry.registerModEntity(EntityFrostArrow.class, "FrostArrow", 0, Frostcraft.instance, 64, 100, false);
 		EntityRegistry.registerGlobalEntityID(EntityFrostShot.class, "FrostShot", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntityFrostShot.class, "FrostShot", 1, Frostcraft.instance, 64, 20, false);
 		EntityRegistry.registerGlobalEntityID(EntityFrostWing.class, "FrostWing", EntityRegistry.findGlobalUniqueEntityId());
@@ -297,7 +297,7 @@ public class IdMap
 		EntityRegistry.registerGlobalEntityID(EntityFrostBall.class, "FrostBall", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntityFrostBall.class, "FrostBall", 4, Frostcraft.instance, 64, 1, false);
 		EntityRegistry.registerGlobalEntityID(EntityCrossbowBolt.class, "CrossbowBolt", EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerModEntity(EntityCrossbowBolt.class, "CrossbowBolt", 5, Frostcraft.instance, 64, 20, false);
+		EntityRegistry.registerModEntity(EntityCrossbowBolt.class, "CrossbowBolt", 5, Frostcraft.instance, 64, 100, false);
 		
 //		LanguageRegistry.instance().addStringLocalization(new EntityFrostWing().getCommandSenderName(), "Frost Wing");
 	}
