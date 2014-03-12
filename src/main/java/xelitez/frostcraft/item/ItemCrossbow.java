@@ -5,6 +5,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -185,6 +186,11 @@ public class ItemCrossbow extends Item
     public int getItemEnchantability()
     {
         return 1;
+    }
+    
+    public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
+    {
+        return Item.getItemFromBlock(Blocks.planks) == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
     }
 
 }

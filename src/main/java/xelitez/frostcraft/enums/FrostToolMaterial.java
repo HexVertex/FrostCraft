@@ -13,7 +13,7 @@ public class FrostToolMaterial
 	public static ToolMaterial FROST_FROZEN = EnumHelper.addToolMaterial("Frozen Frost", 1, 100, 5.5F, 1, 17);
 	public static ToolMaterial GUARDIAN = EnumHelper.addToolMaterial("Guardian", 2, 91, 6.0F, 2, 22);
 	
-	public FrostToolMaterial()
+	static
 	{
 		FROST.customCraftingMaterial = FROST_COMPILED.customCraftingMaterial = FROST_FROZEN.customCraftingMaterial = Item.getItemFromBlock(Blocks.ice);
 		GUARDIAN.customCraftingMaterial = Items.gold_ingot;
