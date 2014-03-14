@@ -2,7 +2,6 @@ package xelitez.frostcraft.entity;
 
 import java.util.List;
 
-import xelitez.frostcraft.damage.EntityDamageSourceIcicle;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
@@ -11,6 +10,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import xelitez.frostcraft.damage.EntityDamageSourceIcicle;
 
 public class EntityFrostWingIcicleDropping extends EntityFrostWingIcicle
 {	

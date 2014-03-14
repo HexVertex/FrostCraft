@@ -1,10 +1,18 @@
 package xelitez.frostcraft.registry;
 
-import xelitez.frostcraft.client.gui.*;
-import xelitez.frostcraft.tileentity.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import xelitez.frostcraft.client.gui.GuiFreezer;
+import xelitez.frostcraft.client.gui.GuiFrostEnforcer;
+import xelitez.frostcraft.client.gui.GuiFrostFurnace;
+import xelitez.frostcraft.client.gui.GuiFrostGenerator;
+import xelitez.frostcraft.client.gui.GuiThermalPump;
+import xelitez.frostcraft.tileentity.TileEntityFreezer;
+import xelitez.frostcraft.tileentity.TileEntityFrostEnforcer;
+import xelitez.frostcraft.tileentity.TileEntityFrostFurnace;
+import xelitez.frostcraft.tileentity.TileEntityFrostGenerator;
+import xelitez.frostcraft.tileentity.TileEntityThermalPump;
 
 public class ClientProxy extends CommonProxy
 {

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xelitez.frostcraft.registry.Settings;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 

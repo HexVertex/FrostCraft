@@ -1,9 +1,5 @@
 package xelitez.frostcraft.client.render;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import xelitez.frostcraft.entity.EntityFrostWingIcicle;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
@@ -11,6 +7,11 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
+import xelitez.frostcraft.entity.EntityFrostWingIcicle;
+import cpw.mods.fml.client.FMLClientHandler;
 
 public class RenderIcicle extends Render
 {

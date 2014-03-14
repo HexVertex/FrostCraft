@@ -1,15 +1,15 @@
 package xelitez.frostcraft.world;
 
-import xelitez.frostcraft.client.particle.EntitySnowFX;
-import xelitez.frostcraft.client.render.RenderEffects;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.IWorldAccess;
+import xelitez.frostcraft.client.particle.EntitySnowFX;
+import xelitez.frostcraft.client.render.RenderEffects;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class WorldAccess implements IWorldAccess

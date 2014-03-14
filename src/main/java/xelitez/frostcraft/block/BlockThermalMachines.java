@@ -25,7 +25,12 @@ import xelitez.frostcraft.enums.ConnectionTypes;
 import xelitez.frostcraft.interfaces.IConnect;
 import xelitez.frostcraft.network.PacketSendManagerClient;
 import xelitez.frostcraft.registry.IdMap;
-import xelitez.frostcraft.tileentity.*;
+import xelitez.frostcraft.tileentity.TileEntityFreezer;
+import xelitez.frostcraft.tileentity.TileEntityFrostEnforcer;
+import xelitez.frostcraft.tileentity.TileEntityFrostFurnace;
+import xelitez.frostcraft.tileentity.TileEntityFrostGenerator;
+import xelitez.frostcraft.tileentity.TileEntityThermalMachines;
+import xelitez.frostcraft.tileentity.TileEntityThermalPump;
 
 public class BlockThermalMachines extends BlockContainer implements IConnect
 {

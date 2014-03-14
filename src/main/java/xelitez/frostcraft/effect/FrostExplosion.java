@@ -2,14 +2,13 @@ package xelitez.frostcraft.effect;
 
 import java.util.List;
 
-import xelitez.frostcraft.entity.EntityFrostShot;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import xelitez.frostcraft.entity.EntityFrostShot;
 
 public class FrostExplosion 
 {

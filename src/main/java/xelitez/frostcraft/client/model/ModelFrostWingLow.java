@@ -1,13 +1,12 @@
 package xelitez.frostcraft.client.model;
 
-import cpw.mods.fml.client.FMLClientHandler;
-
-import xelitez.frostcraft.entity.EntityFrostWing;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
+import xelitez.frostcraft.entity.EntityFrostWing;
+import cpw.mods.fml.client.FMLClientHandler;
 
 public class ModelFrostWingLow extends ModelBase
 {

@@ -1,9 +1,9 @@
 package xelitez.frostcraft.inventory;
 
-import xelitez.frostcraft.interfaces.IChargeable;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import xelitez.frostcraft.interfaces.IChargeable;
 
 public class SlotChargeable extends Slot{
 

@@ -1,14 +1,14 @@
 package xelitez.frostcraft.inventory;
 
-import xelitez.frostcraft.interfaces.IChargeable;
-import xelitez.frostcraft.registry.RecipeRegistry;
-import xelitez.frostcraft.tileentity.TileEntityFrostGenerator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import xelitez.frostcraft.interfaces.IChargeable;
+import xelitez.frostcraft.registry.RecipeRegistry;
+import xelitez.frostcraft.tileentity.TileEntityFrostGenerator;
 
 public class ContainerFrostGenerator extends Container
 {

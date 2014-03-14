@@ -1,8 +1,8 @@
 package xelitez.frostcraft.enchantment;
 
-import xelitez.frostcraft.item.ItemFrostBow;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.item.ItemStack;
+import xelitez.frostcraft.item.ItemFrostBow;
 
 public class EnchantmentFrostburn extends FrostEnchantment{
 

@@ -3,12 +3,12 @@ package xelitez.frostcraft.command;
 import java.util.List;
 import java.util.Random;
 
-import xelitez.frostcraft.registry.IdMap;
-import xelitez.frostcraft.world.WorldGenFrostWingTower;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.util.ChunkCoordinates;
+import xelitez.frostcraft.registry.IdMap;
+import xelitez.frostcraft.world.WorldGenFrostWingTower;
 
 public class CommandGenerate extends CommandBase
 {

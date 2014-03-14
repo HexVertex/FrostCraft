@@ -3,10 +3,17 @@ package xelitez.frostcraft.registry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import xelitez.frostcraft.inventory.ContainerFreezer;
+import xelitez.frostcraft.inventory.ContainerFrostEnforcer;
+import xelitez.frostcraft.inventory.ContainerFrostFurnace;
+import xelitez.frostcraft.inventory.ContainerFrostGenerator;
+import xelitez.frostcraft.inventory.ContainerThermalPump;
+import xelitez.frostcraft.tileentity.TileEntityFreezer;
+import xelitez.frostcraft.tileentity.TileEntityFrostEnforcer;
+import xelitez.frostcraft.tileentity.TileEntityFrostFurnace;
+import xelitez.frostcraft.tileentity.TileEntityFrostGenerator;
+import xelitez.frostcraft.tileentity.TileEntityThermalPump;
 import cpw.mods.fml.common.network.IGuiHandler;
-
-import xelitez.frostcraft.inventory.*;
-import xelitez.frostcraft.tileentity.*;
 
 public class CommonProxy implements IGuiHandler
 {

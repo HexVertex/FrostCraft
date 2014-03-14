@@ -1,14 +1,14 @@
 package xelitez.frostcraft.client.gui;
 
-import org.lwjgl.opengl.GL11;
-
-import xelitez.frostcraft.inventory.ContainerFrostGenerator;
-import xelitez.frostcraft.tileentity.TileEntityFrostGenerator;
-
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+
+import org.lwjgl.opengl.GL11;
+
+import xelitez.frostcraft.inventory.ContainerFrostGenerator;
+import xelitez.frostcraft.tileentity.TileEntityFrostGenerator;
 
 public class GuiFrostGenerator extends GuiContainer
 {

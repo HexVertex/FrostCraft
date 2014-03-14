@@ -7,6 +7,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemHoe;
@@ -33,6 +34,7 @@ import xelitez.frostcraft.client.render.RenderForstWing;
 import xelitez.frostcraft.client.render.RenderFrostArrow;
 import xelitez.frostcraft.client.render.RenderFrostBall;
 import xelitez.frostcraft.client.render.RenderFrostBow;
+import xelitez.frostcraft.client.render.RenderFrostGuard;
 import xelitez.frostcraft.client.render.RenderFrostShot;
 import xelitez.frostcraft.client.render.RenderIcicle;
 import xelitez.frostcraft.client.render.RendererThermalPipe;
@@ -40,6 +42,7 @@ import xelitez.frostcraft.client.render.TileEntityFrostStatueRenderer;
 import xelitez.frostcraft.entity.EntityCrossbowBolt;
 import xelitez.frostcraft.entity.EntityFrostArrow;
 import xelitez.frostcraft.entity.EntityFrostBall;
+import xelitez.frostcraft.entity.EntityFrostGuard;
 import xelitez.frostcraft.entity.EntityFrostShot;
 import xelitez.frostcraft.entity.EntityFrostWing;
 import xelitez.frostcraft.entity.EntityFrostWingIcicleDropping;
@@ -298,6 +301,8 @@ public class IdMap
 		EntityRegistry.registerModEntity(EntityFrostBall.class, "FrostBall", 4, Frostcraft.instance, 64, 1, false);
 		EntityRegistry.registerGlobalEntityID(EntityCrossbowBolt.class, "CrossbowBolt", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntityCrossbowBolt.class, "CrossbowBolt", 5, Frostcraft.instance, 64, 100, false);
+		EntityRegistry.registerGlobalEntityID(EntityFrostGuard.class, "FrostGuard", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00CCFF);
+		EntityRegistry.registerModEntity(EntityFrostGuard.class, "FrostGuard", 6, Frostcraft.instance, 80, 3, true);
 		
 //		LanguageRegistry.instance().addStringLocalization(new EntityFrostWing().getCommandSenderName(), "Frost Wing");
 	}
@@ -395,5 +400,6 @@ public class IdMap
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStatue.class, new TileEntityFrostStatueRenderer());
 		MinecraftForgeClient.registerItemRenderer(IdMap.itemCrossbow, new RenderCrossbow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityCrossbowBolt.class, new RenderCrossbowBolt());
+		RenderingRegistry.registerEntityRenderingHandler(EntityFrostGuard.class, new RenderFrostGuard(new ModelBiped(), 0.5F));
 	}
 }

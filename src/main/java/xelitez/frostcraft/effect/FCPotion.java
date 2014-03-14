@@ -1,11 +1,11 @@
 package xelitez.frostcraft.effect;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import xelitez.frostcraft.registry.Settings;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
+import xelitez.frostcraft.registry.Settings;
+import cpw.mods.fml.client.FMLClientHandler;
 
 public class FCPotion extends Potion
 {

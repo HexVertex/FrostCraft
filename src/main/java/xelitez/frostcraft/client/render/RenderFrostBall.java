@@ -1,15 +1,15 @@
 package xelitez.frostcraft.client.render;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.FMLClientHandler;
-
-import xelitez.frostcraft.entity.EntityFrostBall;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
+import xelitez.frostcraft.entity.EntityFrostBall;
+import cpw.mods.fml.client.FMLClientHandler;
 
 public class RenderFrostBall extends Render
 {
