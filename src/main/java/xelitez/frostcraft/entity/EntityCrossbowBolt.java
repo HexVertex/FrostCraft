@@ -98,7 +98,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
             double var18 = var10 / var12;
             this.setLocationAndAngles(par2EntityLivingBase.posX + var16, this.posY, par2EntityLivingBase.posZ + var18, var14, var15);
             this.yOffset = 0.0F;
-            float var20 = (float)var12 * 0.2F;
+            float var20 = (float)var12 * 0.1F;
             this.setThrowableHeading(var6, var8 + (double)var20, var10, par4, par5);
         }
     }
