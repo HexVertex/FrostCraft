@@ -39,8 +39,8 @@ import cpw.mods.fml.relauncher.FMLInjectionData;
 @Mod(	
 		modid = "XEZFrostcraft",
 		name = "Frostcraft", 
-		version = "1.1.0",
-		acceptableRemoteVersions = "[1.1,1.2)")
+		version = "1.2.0",
+		acceptableRemoteVersions = "[1.2,1.3)")
 public class Frostcraft 
 {
 	@Instance(value = "XEZFrostcraft")
