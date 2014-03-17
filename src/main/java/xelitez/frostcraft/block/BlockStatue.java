@@ -127,7 +127,7 @@ public class BlockStatue extends BlockContainer{
         }
         else
         {
-        	if(par5EntityPlayer.getCurrentEquippedItem().getItem() == Items.diamond)
+        	if(par5EntityPlayer.getCurrentEquippedItem() != null && par5EntityPlayer.getCurrentEquippedItem().getItem() == Items.diamond)
         	{
         		boolean flag = false;
         		for(Object obj : par1World.loadedEntityList)
@@ -139,7 +139,7 @@ public class BlockStatue extends BlockContainer{
         		}
         		if(flag)
         		{
-        			par5EntityPlayer.addChatComponentMessage(new ChatComponentText("<Statue> There can only be one Frost Wing and it is already being fought somewhere."));
+        			par5EntityPlayer.addChatComponentMessage(new ChatComponentText("<Statue> There can only be one Frost Wing and it is already being fought somewhere"));
         		}
         		else
         		{
@@ -168,6 +168,10 @@ public class BlockStatue extends BlockContainer{
         				}
         			}
         		}
+        	}
+        	else
+        	{
+        		par5EntityPlayer.addChatComponentMessage(new ChatComponentText("<Statue> It is required to pay to summon Frost Wing"));
         	}
         	return true;
         }
