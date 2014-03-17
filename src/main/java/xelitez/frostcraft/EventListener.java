@@ -47,7 +47,7 @@ public class EventListener implements IEventListener
 				{
 					EntityPlayer player = (EntityPlayer) evt.entity;
 					ItemStack item = player.inventory.getCurrentItem();
-					if(IdMap.itemCrossbow == item.getItem())
+					if(item != null && IdMap.itemCrossbow == item.getItem())
 					{
 						NBTTagCompound tag = item.getTagCompound();
 						if(tag == null)
@@ -71,7 +71,7 @@ public class EventListener implements IEventListener
 							model.heldItemRight = 2;
 						}
 					}
-					if(IdMap.itemSpear == item.getItem())
+					if(item != null && IdMap.itemSpear == item.getItem())
 					{
 						Class<?> clazz = evt.renderer.getClass();
 						Field field = clazz.getDeclaredFields()[1];

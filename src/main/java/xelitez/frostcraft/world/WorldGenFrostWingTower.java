@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -295,6 +296,10 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 		world.setBlock(xCoord, yCoord + 18, zCoord - 6, IdMap.blockStatue, 2, 2);
 		world.setBlock(xCoord, yCoord + 19, zCoord - 6, IdMap.blockStatue, 4, 2);
 		world.setBlock(xCoord, yCoord + 20, zCoord - 6, IdMap.blockStatue, 5, 2);
+		world.setBlock(xCoord, yCoord - 1, zCoord, Blocks.mob_spawner, 0, 2);
+		((TileEntityMobSpawner)world.getTileEntity(xCoord, yCoord - 1, zCoord)).func_145881_a().setEntityName("FrostGuard");
+		world.setBlock(xCoord, yCoord + 17, zCoord, Blocks.mob_spawner, 0, 2);
+		((TileEntityMobSpawner)world.getTileEntity(xCoord, yCoord + 17, zCoord)).func_145881_a().setEntityName("FrostGuard");
 	}
 	
 	private void generateFloor(World world, int x, int yStart, int z)
@@ -519,6 +524,10 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 				world.setBlock(xCoord, yCoord + 18, zCoord - 6, IdMap.blockStatue, 2, 2);
 				world.setBlock(xCoord, yCoord + 19, zCoord - 6, IdMap.blockStatue, 4, 2);
 				world.setBlock(xCoord, yCoord + 20, zCoord - 6, IdMap.blockStatue, 5, 2);
+				world.setBlock(xCoord, yCoord - 1, zCoord, Blocks.mob_spawner, 0, 2);
+				((TileEntityMobSpawner)world.getTileEntity(xCoord, yCoord - 1, zCoord)).func_145881_a().setEntityName("FrostGuard");
+				world.setBlock(xCoord, yCoord + 17, zCoord, Blocks.mob_spawner, 0, 2);
+				((TileEntityMobSpawner)world.getTileEntity(xCoord, yCoord + 17, zCoord)).func_145881_a().setEntityName("FrostGuard");
 			}
 			
 			private void generateFloor(World world, int x, int yStart, int z)

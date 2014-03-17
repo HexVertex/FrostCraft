@@ -11,7 +11,7 @@ public class FrostToolMaterial
 	public static ToolMaterial FROST = EnumHelper.addToolMaterial("Frost", 2, 400, 7.0F, 2, 17);
 	public static ToolMaterial FROST_COMPILED = EnumHelper.addToolMaterial("Compiled Frost", 1, 1, 7.0F, 2, 17);
 	public static ToolMaterial FROST_FROZEN = EnumHelper.addToolMaterial("Frozen Frost", 1, 100, 5.5F, 1, 17);
-	public static ToolMaterial GUARDIAN = EnumHelper.addToolMaterial("Guardian", 2, 91, 6.0F, 2, 22);
+	public static ToolMaterial GUARDIAN = EnumHelper.addToolMaterial("Guardian", 2, 284, 6.0F, 2, 22);
 	
 	static
 	{

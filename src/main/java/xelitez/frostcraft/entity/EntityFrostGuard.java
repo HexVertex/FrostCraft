@@ -1,5 +1,6 @@
 package xelitez.frostcraft.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -25,6 +26,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import xelitez.frostcraft.entity.ai.EntityAIAttackNearestAttackableTargetInCastle;
 import xelitez.frostcraft.entity.ai.EntityAIAttackUsingWeapon;
+import xelitez.frostcraft.entity.ai.EntityAIWalkBackToLastBlackfrost;
 import xelitez.frostcraft.entity.ai.EntityAIWanderInCastle;
 import xelitez.frostcraft.enums.EnumWeaponClass;
 import xelitez.frostcraft.registry.IdMap;
@@ -47,19 +49,20 @@ public class EntityFrostGuard extends EntityCreature implements IRangedAttackMob
         this.tasks.addTask(3, new EntityAIAttackUsingWeapon(this, EntityAnimal.class, 1.2D, false, IdMap.itemSpear, EnumWeaponClass.MELEE));
         this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityAnimal.class, 1.2D, false));
         this.tasks.addTask(5, new EntityAIWanderInCastle(this, 1.0D));
-        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(6, new EntityAILookIdle(this));
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+        this.tasks.addTask(6, new EntityAIWalkBackToLastBlackfrost(this, 1.1D));
+        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(7, new EntityAILookIdle(this));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
         this.targetTasks.addTask(2, new EntityAIAttackNearestAttackableTargetInCastle(this, EntityPlayer.class, 0, false));
         this.targetTasks.addTask(3, new EntityAIAttackNearestAttackableTargetInCastle(this, EntityMob.class, 0, false));
-        this.targetTasks.addTask(4, new EntityAIAttackNearestAttackableTargetInCastle(this, EntityAnimal.class, 0, false));
+        this.targetTasks.addTask(3, new EntityAIAttackNearestAttackableTargetInCastle(this, EntityAnimal.class, 0, false));
 	}
 	
 	
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(80.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(160.0D);
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.attackDamage);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
@@ -82,7 +85,7 @@ public class EntityFrostGuard extends EntityCreature implements IRangedAttackMob
     
     public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
     {
-		this.setCurrentItemOrArmor(0, rand.nextFloat() < 0.25F ? new ItemStack(IdMap.itemSpear) : new ItemStack(IdMap.itemCrossbow));
+		this.setCurrentItemOrArmor(0, rand.nextFloat() < 0.75F ? new ItemStack(IdMap.itemSpear) : new ItemStack(IdMap.itemCrossbow));
 		this.setEquipmentDropChance(0, 0.125F);
 		this.setEquipmentDropChance(1, 0.025F);
 		this.setEquipmentDropChance(2, 0.025F);
@@ -99,14 +102,7 @@ public class EntityFrostGuard extends EntityCreature implements IRangedAttackMob
         {
         	for(i = 0;i < 3;i++)
         	{
-        		this.setCurrentItemOrArmor(i + 1, new ItemStack(getArmorItemForSlot(i + 1, 4)));
-        	}
-        }
-        else
-        {
-        	for(i = 0;i < 3;i++)
-        	{
-        		this.setCurrentItemOrArmor(i + 1, new ItemStack(getArmorItemForSlot(i + 1, 1)));
+        		this.setCurrentItemOrArmor(i + 1, new ItemStack(getArmorItemForSlot(i + 1, 2)));
         	}
         }
     }
@@ -273,7 +269,7 @@ public class EntityFrostGuard extends EntityCreature implements IRangedAttackMob
                 this.worldObj.skylightSubtracted = i1;
             }
 
-            return l <= this.rand.nextInt(8);
+            return l <= this.rand.nextInt(13);
         }
     }
 
@@ -324,5 +320,25 @@ public class EntityFrostGuard extends EntityCreature implements IRangedAttackMob
 		}
 		this.getHeldItem().setTagCompound(compound);
 	}
+    
+    public boolean getCanSpawnHere()
+    {
+    	if(this.isValidBlock(worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ))))
+    	{
+    		return super.getCanSpawnHere();
+    	}
+    	return false;
+    }
+	
+    private boolean isValidBlock(Block block)
+    {
+    	if(block == IdMap.blockBlackFrost) return true;
+    	if(block == IdMap.blockBlackFrostStair) return true;
+    	if(block == IdMap.blockBlackFrostStairBrick) return true;
+    	if(block == IdMap.blockBlackFrostStairCobble) return true;
+    	if(block == IdMap.blockBlackFrostSingleSlabSet) return true;
+    	if(block == IdMap.blockBlackFrostDoubleSlabSet) return true;
+    	return false;
+    }
 	
 }

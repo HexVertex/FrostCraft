@@ -31,19 +31,29 @@ public class EntityAIWanderInCastle extends EntityAIBase
         {
             return false;
         }
-        else if (this.entity.getRNG().nextInt(120) != 0)
+        else if (this.entity.getRNG().nextInt(60) != 0)
         {
             return false;
         }
         else
         {
-            Vec3 vec3 = RandomPositionGenerator.findRandomTarget(this.entity, 10, 7);
+        	Vec3 vec3 = null;
+			for(int i = 0;i < 50;i++)
+			{
+				vec3 = RandomPositionGenerator.findRandomTarget(this.entity, 10, 7);
+				if(!this.isValidBlock(entity.worldObj.getBlock((int)vec3.xCoord, (int)vec3.yCoord, (int)vec3.zCoord)))
+				{
+					vec3 = null;
+					continue;
+				}
+				break;
+			}
 
             if (vec3 == null)
             {
                 return false;
             }
-            else if(!this.isValidBlock(entity.worldObj.getBlock((int)vec3.xCoord, (int)vec3.yCoord - 1, (int)vec3.zCoord)))
+            else if(!this.isValidBlock(entity.worldObj.getBlock((int)vec3.xCoord, (int)vec3.yCoord, (int)vec3.zCoord)))
             {
             	return false;
             }

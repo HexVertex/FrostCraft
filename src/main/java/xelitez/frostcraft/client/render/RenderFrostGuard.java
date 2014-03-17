@@ -11,7 +11,7 @@ import xelitez.frostcraft.entity.EntityFrostGuard;
 
 public class RenderFrostGuard extends RenderBiped
 {
-	public ResourceLocation texture = new ResourceLocation("/texture.png");
+	public ResourceLocation texture = new ResourceLocation("frostcraft:textures/entities/frostguard.png");
 	
 	
 	public RenderFrostGuard(ModelBase par1ModelBase, float par2) 

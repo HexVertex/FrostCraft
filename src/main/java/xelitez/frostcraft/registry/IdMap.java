@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemHoe;
@@ -17,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraft.world.WorldType;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.client.MinecraftForgeClient;
 import xelitez.frostcraft.Frostcraft;
 import xelitez.frostcraft.block.BlockBlackFrost;
@@ -294,7 +296,7 @@ public class IdMap
 		EntityRegistry.registerGlobalEntityID(EntityFrostShot.class, "FrostShot", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntityFrostShot.class, "FrostShot", 1, Frostcraft.instance, 64, 20, false);
 		EntityRegistry.registerGlobalEntityID(EntityFrostWing.class, "FrostWing", EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerModEntity(EntityFrostWing.class, "FrostWing", 2, Frostcraft.instance, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityFrostWing.class, "FrostWing", 2, Frostcraft.instance, 80, 1, true);
 		EntityRegistry.registerGlobalEntityID(EntityFrostWingIcicleDropping.class, "IcicleDropping", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntityFrostWingIcicleDropping.class, "IcicleDropping", 3, Frostcraft.instance, 64, 20, false);
 		EntityRegistry.registerGlobalEntityID(EntityFrostBall.class, "FrostBall", EntityRegistry.findGlobalUniqueEntityId());
@@ -302,7 +304,16 @@ public class IdMap
 		EntityRegistry.registerGlobalEntityID(EntityCrossbowBolt.class, "CrossbowBolt", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntityCrossbowBolt.class, "CrossbowBolt", 5, Frostcraft.instance, 64, 100, false);
 		EntityRegistry.registerGlobalEntityID(EntityFrostGuard.class, "FrostGuard", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00CCFF);
-		EntityRegistry.registerModEntity(EntityFrostGuard.class, "FrostGuard", 6, Frostcraft.instance, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityFrostGuard.class, "FrostGuard", 6, Frostcraft.instance, 80, 1, true);
+        List<BiomeGenBase> listBiomes = new ArrayList<BiomeGenBase>();
+		for (BiomeGenBase biome : BiomeGenBase.getBiomeGenArray())
+        {
+			if(biome != null)
+			{
+				listBiomes.add(biome);
+			}
+        }
+		EntityRegistry.addSpawn(EntityFrostGuard.class, 150, 2, 3, EnumCreatureType.monster, listBiomes.toArray(new BiomeGenBase[listBiomes.size()]));
 		
 //		LanguageRegistry.instance().addStringLocalization(new EntityFrostWing().getCommandSenderName(), "Frost Wing");
 	}
