@@ -39,4 +39,5 @@ public class RenderFrostGuard extends RenderBiped
     {
         this.renderEquippedItems((EntityFrostGuard)par1EntityLiving, par2);
     }
+
 }

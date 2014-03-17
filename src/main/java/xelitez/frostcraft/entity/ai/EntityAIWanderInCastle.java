@@ -1,11 +1,11 @@
 package xelitez.frostcraft.entity.ai;
 
-import xelitez.frostcraft.registry.IdMap;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.Vec3;
+import xelitez.frostcraft.registry.IdMap;
 
 public class EntityAIWanderInCastle extends EntityAIBase
 {

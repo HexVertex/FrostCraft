@@ -33,6 +33,8 @@ import xelitez.frostcraft.registry.IdMap;
 
 public class EntityFrostGuard extends EntityCreature implements IRangedAttackMob
 {
+	public boolean loaded = false;
+	
 	public EntityFrostGuard(World par1World) 
 	{
 		super(par1World);
@@ -85,7 +87,7 @@ public class EntityFrostGuard extends EntityCreature implements IRangedAttackMob
     
     public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
     {
-		this.setCurrentItemOrArmor(0, rand.nextFloat() < 0.75F ? new ItemStack(IdMap.itemSpear) : new ItemStack(IdMap.itemCrossbow));
+		this.setCurrentItemOrArmor(0, rand.nextFloat() < 0.67F ? new ItemStack(IdMap.itemSpear) : new ItemStack(IdMap.itemCrossbow));
 		this.setEquipmentDropChance(0, 0.125F);
 		this.setEquipmentDropChance(1, 0.025F);
 		this.setEquipmentDropChance(2, 0.025F);
@@ -312,10 +314,12 @@ public class EntityFrostGuard extends EntityCreature implements IRangedAttackMob
 	
 	        this.playSound("random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 1.2F) + 0.75F);
 	        this.worldObj.spawnEntityInWorld(entitycrossbowbolt);
+	        loaded = false;
 			compound.setBoolean("loaded", false);
     	}
 		else
 		{
+			loaded = true;
 			compound.setBoolean("loaded", true);
 		}
 		this.getHeldItem().setTagCompound(compound);
