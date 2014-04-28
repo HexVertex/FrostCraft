@@ -93,9 +93,9 @@ public class ItemFrostEnforced extends Item
     @Override
 	public Multimap getItemAttributeModifiers()
     {
-        Multimap multimap = parentItem.getItemAttributeModifiers();
+        Multimap multimap = parentItem.getAttributeModifiers(new ItemStack(this.parentItem));
         AttributeModifier am = null;
-        Multimap mm = super.getItemAttributeModifiers();
+        Multimap mm = super.getAttributeModifiers(new ItemStack(this.parentItem));
         if(!multimap.get(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName()).isEmpty())
         {
         	am = (AttributeModifier) multimap.get(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName()).toArray()[0];

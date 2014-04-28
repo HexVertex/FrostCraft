@@ -143,7 +143,7 @@ public class RenderCrossbow implements IItemRenderer
 			GL11.glRotatef(-90.0F, 0.0F, 0.0F, 1.0F);
 			GL11.glTranslatef(0.1F, 0.1F, -0.1F);
 			GL11.glColor3f(110.0F / 255.0F, 60.0F / 255.0F, 0.0F);
-			RenderHelper.renderTriangle(90.0F, 0.4F, 0.2F, 0.4F, true);
+			RenderHelper.renderTriangle(90.0F, 0.4F, 0.2F, 0.4F, false);
 			GL11.glPopMatrix();
 			//ammo
 			if(loaded)
@@ -160,11 +160,11 @@ public class RenderCrossbow implements IItemRenderer
 				GL11.glRotatef(-90.0F, 0.0F, 0.0F, 1.0F);
 				GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
 				GL11.glColor3f(125.0F / 255.0F, 0.0F / 255.0F, 0.0F / 255.0F);
-				RenderHelper.renderTriangle(-20.0F, 0.075F, 0.005F, 0.1F, true);
+				RenderHelper.renderTriangle(-20.0F, 0.075F, 0.005F, 0.1F, false);
 				GL11.glRotatef(120.0F, 1.0F, 0.0F, 0.0F);
-				RenderHelper.renderTriangle(-20.0F, 0.075F, 0.005F, 0.1F, true);
+				RenderHelper.renderTriangle(-20.0F, 0.075F, 0.005F, 0.1F, false);
 				GL11.glRotatef(120.0F, 1.0F, 0.0F, 0.0F);
-				RenderHelper.renderTriangle(-20.0F, 0.075F, 0.005F, 0.1F, true);
+				RenderHelper.renderTriangle(-20.0F, 0.075F, 0.005F, 0.1F, false);
 				GL11.glPopMatrix();
 			}
 		}

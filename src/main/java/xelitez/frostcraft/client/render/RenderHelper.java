@@ -194,10 +194,10 @@ public class RenderHelper
 		for(int i = 0;i < 3;i++)
 		{
 			GL11.glBegin(GL11.GL_QUADS);
-			GL11.glVertex3f(verteces[i][0], verteces[i][1], verteces[i][2]);
 			GL11.glVertex3f(verteces[(i + 1) % 3][0], verteces[(i + 1) % 3][1], verteces[(i + 1) % 3][2]);
-			GL11.glVertex3f(verteces[(i + 1) % 3 + 3][0], verteces[(i + 1) % 3 + 3][1], verteces[(i + 1) % 3 + 3][2]);
+			GL11.glVertex3f(verteces[i][0], verteces[i][1], verteces[i][2]);
 			GL11.glVertex3f(verteces[i + 3][0], verteces[i + 3][1], verteces[i + 3][2]);
+			GL11.glVertex3f(verteces[(i + 1) % 3 + 3][0], verteces[(i + 1) % 3 + 3][1], verteces[(i + 1) % 3 + 3][2]);
 			GL11.glEnd();
 		}
 		GL11.glEnable(GL11.GL_TEXTURE_2D);

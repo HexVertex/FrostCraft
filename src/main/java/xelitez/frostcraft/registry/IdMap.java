@@ -329,7 +329,7 @@ public class IdMap
 	{
 		this.EnforcedTools = new Item[Settings.MaxEnfrocerItems];
 		List<Item> items = new ArrayList<Item>();
-		Iterator<?> iterator = GameData.itemRegistry.iterator();
+		Iterator<?> iterator = GameData.getItemRegistry().iterator();
 		boolean isLeft = true;
 		while(iterator.hasNext())
 		{
