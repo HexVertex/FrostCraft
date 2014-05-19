@@ -70,11 +70,12 @@ public class RecipeRegistry
 		GameRegistry.addRecipe(new ItemStack(IdMap.itemCompiledFrostSpade), new Object[] {"B", "X", "X", 'B', new ItemStack(IdMap.itemCraftingItems, 1, 0), 'X', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(IdMap.itemCompiledFrostHoe), new Object [] {"IC", " X", " X", 'I', IdMap.itemIcicle, 'C', Blocks.ice, 'X', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(IdMap.itemCompiledFrostHoe), new Object [] {"CI", "X ", "X ", 'I', IdMap.itemIcicle, 'C', Blocks.ice, 'X', Items.stick});
-		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 1, 2), new Object[] {"XSX", "BRB", "XSX", 'X', Items.iron_ingot, 'S', Items.snowball, 'B', Blocks.snow, 'R', Items.redstone});
-		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 1, 3), new Object[] {"XCX", "#D#", "XIX", 'X', Items.iron_ingot, 'C', Items.coal, '#', new ItemStack(IdMap.itemCraftingItems, 1, 0), 'D', Items.diamond, 'I', Blocks.ice});
-		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 1, 4), new Object[] {"XSX", "P P", "XSX", 'X', Items.iron_ingot, 'S', Items.snowball, 'P', Blocks.piston});
-		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 1, 5), new Object[] {"X X", "BSB", "XPX", 'X', Items.iron_ingot, 'S', Items.snowball, 'B', Items.water_bucket, 'P', Blocks.piston});
-		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 1, 6), new Object[] {"XIX", "CEC", "XBX", 'X', Items.iron_ingot, 'I', IdMap.itemIcicle, 'C', new ItemStack(IdMap.itemCraftingItems, 1, 0), 'B', Blocks.ice, 'E', Blocks.chest});
+		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 4, 11), new Object[] {"X X", "   ", "X X", 'X', Items.iron_ingot});
+		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 1, 2), new Object[] {"RSR", "BXB", "RSR", 'X', new ItemStack(IdMap.itemCraftingItems, 1, 11), 'S', Items.snowball, 'B', Blocks.snow, 'R', Items.redstone});
+		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 1, 3), new Object[] {" C ", "#X#", " I ", 'X', new ItemStack(IdMap.itemCraftingItems, 1, 11), 'C', Items.coal, '#', new ItemStack(IdMap.itemCraftingItems, 1, 0), 'I', Blocks.ice});
+		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 1, 4), new Object[] {" S ", "PXP", " S ", 'X', new ItemStack(IdMap.itemCraftingItems, 1, 11), 'S', Items.snowball, 'P', Blocks.piston});
+		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 1, 5), new Object[] {" S ", "BXB", " P ", 'X', new ItemStack(IdMap.itemCraftingItems, 1, 11), 'S', Items.snowball, 'B', Items.water_bucket, 'P', Blocks.piston});
+		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 1, 6), new Object[] {" B ", "CXC", "IEI", 'X', new ItemStack(IdMap.itemCraftingItems, 1, 11), 'I', IdMap.itemIcicle, 'C', Items.snowball, 'B', Blocks.snow, 'E', Blocks.chest});
 		GameRegistry.addRecipe(new ItemStack(IdMap.itemFrostBow), new Object[] {" IS", "B S", " IS", 'I', IdMap.itemIcicle, 'B', Blocks.ice, 'S', new ItemStack(IdMap.itemCraftingItems, 1, 1)});
 		GameRegistry.addRecipe(new ItemStack(IdMap.itemFrostBow), new Object[] {"SI ", "S B", "SI ", 'I', IdMap.itemIcicle, 'B', Blocks.ice, 'S', new ItemStack(IdMap.itemCraftingItems, 1, 1)});
 		GameRegistry.addRecipe(new ItemStack(IdMap.itemFrostGun, 1, 1024), new Object[] {"XCS", "IBX", "XLX", 'X', Items.iron_ingot, 'B', Blocks.ice, 'L', Items.leather, 'C', new ItemStack(IdMap.itemCraftingItems, 1, 2), 'S', new ItemStack(IdMap.itemCraftingItems, 1, 6), 'I', IdMap.itemIcicle});

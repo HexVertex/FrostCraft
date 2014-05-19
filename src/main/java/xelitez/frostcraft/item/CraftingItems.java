@@ -13,7 +13,8 @@ public class CraftingItems extends Item
 {
 	String[] name = new String[] {"Iceball", "Ice-Covered String", "CFU Handler",
 			"Frost Transformer", "Compressor", "Frost Sprayer", "CFU Storage Handler",
-			"Stick in Water", "Stick in Apple Juice", "Stick in Chocolate", "Crossbow Bolt"};
+			"Stick in Water", "Stick in Apple Juice", "Stick in Chocolate", "Crossbow Bolt",
+			"Empty Augment"};
 	IIcon[] icons;
 	
 	public CraftingItems() 
@@ -61,6 +62,7 @@ public class CraftingItems extends Item
     	icons[8] = par1IconRegister.registerIcon("Frostcraft:stick_in_applejuice");
     	icons[9] = par1IconRegister.registerIcon("Frostcraft:stick_in_chocolate");
     	icons[10] = par1IconRegister.registerIcon("Frostcraft:crossbow_bolt");
+    	icons[11] = par1IconRegister.registerIcon("Frostcraft:empty_augment");
     }
     
     @Override
