@@ -41,7 +41,7 @@ public class BlockIcicle extends Block
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         this.checkIcicleChange(par1World, par2, par3, par4);
-        if (par1World.getSavedLightValue(EnumSkyBlock.Block, par2, par3, par4) > 11)
+        if (par1World.getSavedLightValue(EnumSkyBlock.Block, par2, par3, par4) > 8)
         {
             par1World.setBlockToAir(par2, par3, par4);
         }

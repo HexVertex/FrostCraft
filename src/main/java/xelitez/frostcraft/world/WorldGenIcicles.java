@@ -6,6 +6,7 @@ import java.util.Random;
 
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.material.Material;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -39,11 +40,14 @@ public class WorldGenIcicles implements IWorldGenerator
 	public static List<Integer> getPossibleYPos(World world, int x, int z)
 	{
 		List<Integer> list = new ArrayList<Integer>();
-		for(int i = 30;i < world.getActualHeight() - 60;i++)
+		for(int i = 50;i < world.getActualHeight() - 60;i++)
 		{
 			if(world.getBlock(x, i, z) != null && (world.getBlock(x, i, z).isSideSolid(world, x, i, z, ForgeDirection.DOWN) || world.getBlock(x, i, z) instanceof BlockLeaves) && world.getBlock(x, i - 1, z).getMaterial() == Material.air)
 			{
-				list.add(i - 1);
+		        if (world.getSavedLightValue(EnumSkyBlock.Block, x, i, z) <= 8)
+		        {
+					list.add(i - 1);
+		        }
 			}
 		}
 		return list;
