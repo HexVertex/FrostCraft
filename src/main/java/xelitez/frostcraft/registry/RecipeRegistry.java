@@ -91,6 +91,7 @@ public class RecipeRegistry
 		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 1, 8), new Object[] {"A", "S", "B", 'A', Items.apple, 'S', Items.stick, 'B', Items.water_bucket});
 		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 1, 9), new Object[] {"S", "B", 'S', new ItemStack(Items.dye, 1, 3), 'B', new ItemStack(IdMap.itemCraftingItems, 1, 7)});
 		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 1, 9), new Object[] {"C", "S", "B", 'C', new ItemStack(Items.dye, 1, 3), 'S', Items.stick, 'B', Items.water_bucket});
+		GameRegistry.addRecipe(new ItemStack(IdMap.itemCraftingItems, 6, 10), new Object[] {"I", "F", 'I', Items.iron_ingot, 'F', Items.feather});
 	}
 	
 	private static void addFrostValue(ItemStack item, int time)
