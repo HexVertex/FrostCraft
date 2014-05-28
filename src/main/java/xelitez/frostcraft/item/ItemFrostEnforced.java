@@ -90,8 +90,8 @@ public class ItemFrostEnforced extends Item
     }
     
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    @Override
-	public Multimap getItemAttributeModifiers()
+	@Override
+	public Multimap getAttributeModifiers(ItemStack item)
     {
         Multimap multimap = parentItem.getAttributeModifiers(new ItemStack(this.parentItem));
         AttributeModifier am = null;

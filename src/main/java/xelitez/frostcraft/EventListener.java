@@ -1,9 +1,11 @@
 package xelitez.frostcraft;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,6 +21,8 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class EventListener implements IEventListener
 {
+	private HashMap<EntityPlayer, ModelBiped[]> modelCache = new HashMap<EntityPlayer, ModelBiped[]>();
+	
 	@SubscribeEvent
 	public void invoke(Event event) 
 	{
@@ -56,36 +60,18 @@ public class EventListener implements IEventListener
 						}
 						if(tag.hasKey("loaded") && tag.getBoolean("loaded"))
 						{
-							Class<?> clazz = evt.renderer.getClass();
-							Field field = clazz.getDeclaredFields()[1];
-							field.setAccessible(true);
-							ModelBiped model = (ModelBiped) field.get(evt.renderer);
-							model.heldItemRight = 2;
-							field = clazz.getDeclaredFields()[2];
-							field.setAccessible(true);
-							model = (ModelBiped) field.get(evt.renderer);
-							model.heldItemRight = 2;
-							field = clazz.getDeclaredFields()[3];
-							field.setAccessible(true);
-							model = (ModelBiped) field.get(evt.renderer);
-							model.heldItemRight = 2;
+							ModelBiped[] models = this.getModelCache((EntityPlayer)evt.entity, (RenderPlayer)evt.renderer);
+							models[0].heldItemRight = 2;
+							models[1].heldItemRight = 2;
+							models[2].heldItemRight = 2;
 						}
 					}
 					if(item != null && IdMap.itemSpear == item.getItem())
 					{
-						Class<?> clazz = evt.renderer.getClass();
-						Field field = clazz.getDeclaredFields()[1];
-						field.setAccessible(true);
-						ModelBiped model = (ModelBiped) field.get(evt.renderer);
-						model.heldItemRight = 4;
-						field = clazz.getDeclaredFields()[2];
-						field.setAccessible(true);
-						model = (ModelBiped) field.get(evt.renderer);
-						model.heldItemRight = 4;
-						field = clazz.getDeclaredFields()[3];
-						field.setAccessible(true);
-						model = (ModelBiped) field.get(evt.renderer);
-						model.heldItemRight = 4;
+						ModelBiped[] models = this.getModelCache((EntityPlayer)evt.entity, (RenderPlayer)evt.renderer);
+						models[0].heldItemRight = 4;
+						models[1].heldItemRight = 4;
+						models[2].heldItemRight = 4;
 					}
 				}
 			}
@@ -93,6 +79,35 @@ public class EventListener implements IEventListener
 			{
 				e.printStackTrace();
 			}
+		}
+	}
+	
+	private ModelBiped[] getModelCache(EntityPlayer entity, RenderPlayer renderer)
+	{
+		if(modelCache.containsKey(entity))
+		{
+			return modelCache.get(entity);
+		}
+		else
+		{
+			ModelBiped[] model = new ModelBiped[3];
+			try {
+				Class<?> clazz = renderer.getClass();
+				Field field = clazz.getDeclaredFields()[1];
+				field.setAccessible(true);
+				model[0] = (ModelBiped) field.get(renderer);
+				field = clazz.getDeclaredFields()[2];
+				field.setAccessible(true);
+				model[1] = (ModelBiped) field.get(renderer);
+				field = clazz.getDeclaredFields()[3];
+				field.setAccessible(true);
+				model[2] = (ModelBiped) field.get(renderer);
+				modelCache.put(entity, model);
+			} 
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+			return model;
 		}
 	}
 
