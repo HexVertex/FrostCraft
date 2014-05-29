@@ -12,13 +12,13 @@ import org.lwjgl.opengl.GL11;
 
 import xelitez.frostcraft.entity.EntityFrostWing;
 
-public class RenderForstWing extends RenderLiving
+public class RenderFrostWing extends RenderLiving
 {
     private float scale;
 	
     private static final ResourceLocation texture = new ResourceLocation("frostcraft:textures/entities/frostwing.png");
 
-	public RenderForstWing(ModelBase par1ModelBase, float par2, float par3) 
+	public RenderFrostWing(ModelBase par1ModelBase, float par2, float par3) 
 	{
         super(par1ModelBase, (par2 * par3) / 2);
         this.scale = par3;
@@ -50,7 +50,7 @@ public class RenderForstWing extends RenderLiving
     public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
     {
         BossStatus.setBossStatus((EntityFrostWing)par1Entity, true);
-        this.doRender((EntityLiving)par1Entity, par2, par4, par6, par8, par9);
+        super.doRender((EntityLiving)par1Entity, par2, par4, par6, par8, par9);
     }
 
 }

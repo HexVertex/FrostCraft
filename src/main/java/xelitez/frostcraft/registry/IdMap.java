@@ -32,7 +32,7 @@ import xelitez.frostcraft.block.BlockThermalPipe;
 import xelitez.frostcraft.client.model.ModelFrostWingLow;
 import xelitez.frostcraft.client.render.RenderCrossbow;
 import xelitez.frostcraft.client.render.RenderCrossbowBolt;
-import xelitez.frostcraft.client.render.RenderForstWing;
+import xelitez.frostcraft.client.render.RenderFrostWing;
 import xelitez.frostcraft.client.render.RenderFrostArrow;
 import xelitez.frostcraft.client.render.RenderFrostBall;
 import xelitez.frostcraft.client.render.RenderFrostBow;
@@ -405,7 +405,7 @@ public class IdMap
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostArrow.class, new RenderFrostArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostShot.class, new RenderFrostShot(0.5f));
 		MinecraftForgeClient.registerItemRenderer(IdMap.itemFrostBow, new RenderFrostBow());
-		RenderingRegistry.registerEntityRenderingHandler(EntityFrostWing.class, new RenderForstWing(new ModelFrostWingLow(), 1.0F, FrostWingSize));
+		RenderingRegistry.registerEntityRenderingHandler(EntityFrostWing.class, new RenderFrostWing(new ModelFrostWingLow(), 1.0F, FrostWingSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostWingIcicleDropping.class, new RenderIcicle());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostBall.class, new RenderFrostBall());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStatue.class, new TileEntityFrostStatueRenderer());
