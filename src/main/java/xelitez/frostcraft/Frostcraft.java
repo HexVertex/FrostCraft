@@ -113,6 +113,10 @@ public class Frostcraft
 	@EventHandler
     public void load(FMLInitializationEvent evt)
     {
+		if(evt.getSide().isClient())
+		{
+	    	MinecraftForge.EVENT_BUS.register(new EventListenerClient());
+		}
     	FCPotion.RegisterPotionEffects();
     	FrostEnchantment.registerFrostEnchantments();
     	NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);

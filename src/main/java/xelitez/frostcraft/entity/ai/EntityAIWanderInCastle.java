@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import xelitez.frostcraft.registry.IdMap;
 
@@ -41,7 +42,7 @@ public class EntityAIWanderInCastle extends EntityAIBase
 			for(int i = 0;i < 50;i++)
 			{
 				vec3 = RandomPositionGenerator.findRandomTarget(this.entity, 10, 7);
-				if(!this.isValidBlock(entity.worldObj.getBlock((int)vec3.xCoord, (int)vec3.yCoord, (int)vec3.zCoord)))
+				if(!this.isValidBlock(entity.worldObj.getBlock(MathHelper.floor_double(vec3.xCoord), MathHelper.floor_double(vec3.yCoord), MathHelper.floor_double(vec3.zCoord))))
 				{
 					vec3 = null;
 					continue;
@@ -53,7 +54,7 @@ public class EntityAIWanderInCastle extends EntityAIBase
             {
                 return false;
             }
-            else if(!this.isValidBlock(entity.worldObj.getBlock((int)vec3.xCoord, (int)vec3.yCoord, (int)vec3.zCoord)))
+            else if(!this.isValidBlock(entity.worldObj.getBlock(MathHelper.floor_double(vec3.xCoord), MathHelper.floor_double(vec3.yCoord), MathHelper.floor_double(vec3.zCoord))))
             {
             	return false;
             }

@@ -298,8 +298,6 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 		world.setBlock(xCoord, yCoord + 20, zCoord - 6, IdMap.blockStatue, 5, 2);
 		world.setBlock(xCoord, yCoord - 1, zCoord, Blocks.mob_spawner, 0, 2);
 		((TileEntityMobSpawner)world.getTileEntity(xCoord, yCoord - 1, zCoord)).func_145881_a().setEntityName("FrostGuard");
-		world.setBlock(xCoord, yCoord + 17, zCoord, Blocks.mob_spawner, 0, 2);
-		((TileEntityMobSpawner)world.getTileEntity(xCoord, yCoord + 17, zCoord)).func_145881_a().setEntityName("FrostGuard");
 	}
 	
 	private void generateFloor(World world, int x, int yStart, int z)
@@ -526,8 +524,6 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 				world.setBlock(xCoord, yCoord + 20, zCoord - 6, IdMap.blockStatue, 5, 2);
 				world.setBlock(xCoord, yCoord - 1, zCoord, Blocks.mob_spawner, 0, 2);
 				((TileEntityMobSpawner)world.getTileEntity(xCoord, yCoord - 1, zCoord)).func_145881_a().setEntityName("FrostGuard");
-				world.setBlock(xCoord, yCoord + 17, zCoord, Blocks.mob_spawner, 0, 2);
-				((TileEntityMobSpawner)world.getTileEntity(xCoord, yCoord + 17, zCoord)).func_145881_a().setEntityName("FrostGuard");
 			}
 			
 			private void generateFloor(World world, int x, int yStart, int z)

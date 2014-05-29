@@ -141,7 +141,7 @@ public class EntityAIAttackUsingWeapon extends EntityAIBase
     public boolean continueExecuting()
     {
     	followTicks++;
-    	if(this.attacker.getAttackTarget() != null && this.isValidBlock(this.attacker.getAttackTarget().worldObj.getBlock((int)this.attacker.getAttackTarget().posX, (int)this.attacker.getAttackTarget().posY - 1, (int)this.attacker.getAttackTarget().posZ)))
+    	if(this.attacker.getAttackTarget() != null && this.isValidBlock(this.attacker.getAttackTarget().worldObj.getBlock(MathHelper.floor_double(this.attacker.getAttackTarget().posX), MathHelper.floor_double(this.attacker.getAttackTarget().posY) - 1, MathHelper.floor_double(this.attacker.getAttackTarget().posZ))))
     	{
     		followTicks = 0;
     	}

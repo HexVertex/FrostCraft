@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import xelitez.frostcraft.registry.IdMap;
 
@@ -27,7 +28,7 @@ public class EntityAIWalkBackToLastBlackfrost extends EntityAIBase
 	@Override
 	public boolean shouldExecute() 
 	{
-		if(this.isValidBlock(entity.worldObj.getBlock((int)Math.floor(entity.posX), (int)Math.floor(entity.posY) - 1, (int)Math.floor(entity.posZ))))
+		if(this.isValidBlock(entity.worldObj.getBlock(MathHelper.floor_double(entity.posX), MathHelper.floor_double(entity.posY) - 1, MathHelper.floor_double(entity.posZ))))
 		{
 			vec3 = Vec3.createVectorHelper(entity.prevPosX, entity.prevPosY, entity.prevPosZ);
 			return false;
@@ -45,7 +46,7 @@ public class EntityAIWalkBackToLastBlackfrost extends EntityAIBase
 			for(int i = 0;i < 20;i++)
 			{
 				vec3 = RandomPositionGenerator.findRandomTarget(this.entity, 10, 7);
-				if(!this.isValidBlock(entity.worldObj.getBlock((int)vec3.xCoord, (int)vec3.yCoord - 1, (int)vec3.zCoord)))
+				if(!this.isValidBlock(entity.worldObj.getBlock(MathHelper.floor_double(vec3.xCoord), MathHelper.floor_double(vec3.yCoord) - 1, MathHelper.floor_double(vec3.zCoord))))
 				{
 					vec3 = null;
 					continue;

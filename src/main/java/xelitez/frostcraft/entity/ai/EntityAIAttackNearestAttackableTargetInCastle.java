@@ -11,6 +11,7 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAITarget;
+import net.minecraft.util.MathHelper;
 import xelitez.frostcraft.registry.IdMap;
 
 public class EntityAIAttackNearestAttackableTargetInCastle extends EntityAITarget
@@ -82,7 +83,7 @@ public class EntityAIAttackNearestAttackableTargetInCastle extends EntityAITarge
             	for(int i = 0;i < list.size();i++)
             	{
             		EntityLivingBase entity = (EntityLivingBase)list.get(i);
-            		if(this.isValidBlock(entity.worldObj.getBlock((int)entity.posX, (int)entity.posY - 1, (int)entity.posZ)))
+            		if(this.isValidBlock(entity.worldObj.getBlock(MathHelper.floor_double(entity.posX), MathHelper.floor_double(entity.posY) - 1, MathHelper.floor_double(entity.posZ))))
             		{
             			this.targetEntity = entity;
             			return true;
