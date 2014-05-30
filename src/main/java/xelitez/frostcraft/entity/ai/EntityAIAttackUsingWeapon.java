@@ -85,7 +85,7 @@ public class EntityAIAttackUsingWeapon extends EntityAIBase
     {
         EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
 
-        if(this.WeaponItem != null && this.WeaponItem != attacker.getHeldItem().getItem())
+        if(this.WeaponItem != null && attacker.getHeldItem() != null && this.WeaponItem != attacker.getHeldItem().getItem())
         {
         	return false;
         }

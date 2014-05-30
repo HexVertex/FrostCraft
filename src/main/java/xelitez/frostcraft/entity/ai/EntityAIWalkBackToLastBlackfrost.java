@@ -28,17 +28,17 @@ public class EntityAIWalkBackToLastBlackfrost extends EntityAIBase
 	@Override
 	public boolean shouldExecute() 
 	{
-		if(this.isValidBlock(entity.worldObj.getBlock(MathHelper.floor_double(entity.posX), MathHelper.floor_double(entity.posY) - 1, MathHelper.floor_double(entity.posZ))))
-		{
-			vec3 = Vec3.createVectorHelper(entity.prevPosX, entity.prevPosY, entity.prevPosZ);
-			return false;
-		}
 		if(this.entity.getAttackTarget() != null)
 		{
 			return false;
 		}
 		if(!this.entity.getNavigator().noPath())
 		{
+			return false;
+		}
+		if(this.isValidBlock(entity.worldObj.getBlock(MathHelper.floor_double(entity.posX), MathHelper.floor_double(entity.posY) - 1, MathHelper.floor_double(entity.posZ))))
+		{
+			vec3 = Vec3.createVectorHelper(entity.prevPosX, entity.prevPosY, entity.prevPosZ);
 			return false;
 		}
 		if(this.vec3 == null)

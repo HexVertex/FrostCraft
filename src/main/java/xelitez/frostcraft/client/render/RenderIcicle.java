@@ -96,7 +96,7 @@ public class RenderIcicle extends Render
 		{
 			if(entity.worldObj.getBlock((int)entity.posX, var1, (int)entity.posZ) != Blocks.air)
 			{
-				return var1 + 1.0001F;
+				return var1 + entity.worldObj.getBlock((int)entity.posX, var1, (int)entity.posZ).getBlockBoundsMaxY() + 0.0001F;
 			}
 		}
 		return 0;

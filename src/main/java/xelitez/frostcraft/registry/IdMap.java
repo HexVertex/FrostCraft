@@ -32,12 +32,12 @@ import xelitez.frostcraft.block.BlockThermalPipe;
 import xelitez.frostcraft.client.model.ModelFrostWingLow;
 import xelitez.frostcraft.client.render.RenderCrossbow;
 import xelitez.frostcraft.client.render.RenderCrossbowBolt;
-import xelitez.frostcraft.client.render.RenderFrostWing;
 import xelitez.frostcraft.client.render.RenderFrostArrow;
 import xelitez.frostcraft.client.render.RenderFrostBall;
 import xelitez.frostcraft.client.render.RenderFrostBow;
 import xelitez.frostcraft.client.render.RenderFrostGuard;
 import xelitez.frostcraft.client.render.RenderFrostShot;
+import xelitez.frostcraft.client.render.RenderFrostWing;
 import xelitez.frostcraft.client.render.RenderIcicle;
 import xelitez.frostcraft.client.render.RendererThermalPipe;
 import xelitez.frostcraft.client.render.TileEntityFrostStatueRenderer;
@@ -85,7 +85,6 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameData;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -329,7 +328,7 @@ public class IdMap
 	{
 		this.EnforcedTools = new Item[Settings.MaxEnfrocerItems];
 		List<Item> items = new ArrayList<Item>();
-		Iterator<?> iterator = GameData.getItemRegistry().iterator();
+		Iterator<?> iterator = Item.itemRegistry.iterator();
 		boolean isLeft = true;
 		while(iterator.hasNext())
 		{

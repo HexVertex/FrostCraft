@@ -26,16 +26,15 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import xelitez.frostcraft.client.model.ModelFrostWingLow;
+import xelitez.frostcraft.client.model.rotations.EnumAxis;
+import xelitez.frostcraft.client.model.rotations.ModelRotationAssistant;
 import xelitez.frostcraft.effect.EffectTicker;
 import xelitez.frostcraft.effect.FCPotion;
 import xelitez.frostcraft.registry.IdMap;
 
 public class EntityFrostWing extends EntityCreature implements IBossDisplayData, IMob
-{
-	public List<Object[]> rotationList = new ArrayList<Object[]>();
-	
-    public List<Object[]> rotationListModel = new ArrayList<Object[]>();
-	
+{	
     /** ticks until heightOffset is randomized */
     private int heightOffsetUpdateTime;
     
@@ -50,6 +49,8 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
     private Vec3 path = null;
     
     private ChunkCoordinates ck = new ChunkCoordinates(0, 0, 0);
+    
+    public ModelRotationAssistant rotationHelper = new ModelRotationAssistant(ModelFrostWingLow.class);
     
 	public EntityFrostWing() 
 	{
@@ -67,7 +68,7 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(40.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(150.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(250.0D);
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
     }
 	
@@ -87,14 +88,14 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
 			this.yOffset *= IdMap.FrostWingSize;
 			this.setSize(0.8F, 1.3F);
 			this.setSize(this.width * IdMap.FrostWingSize, this.height * IdMap.FrostWingSize);
-			this.addRotationOverTime(0, 0, -0.3F, 1);
-			this.addRotationOverTime(8, 0, -0.3F, 1);
-			this.addRotationOverTime(11, 0, 0.3F, 1);
-			this.addRotationOverTime(12, 0, -0.4F, 1);
-			this.addRotationOverTime(15, 0, -0.4F, 1);
-			this.addRotationOverTime(18, 0, 0.1F, 1);
-			this.addRotationOverTime(21, 0, 0.3F, 1);
-			this.addRotationOverTime(24, 0, 0.3F, 1);
+			this.addRotationOverTime("body", EnumAxis.X, -0.3F, 1);
+			this.addRotationOverTime("wingLeft", EnumAxis.Z, -0.3F, 1);
+			this.addRotationOverTime("wingRight", EnumAxis.Z, 0.3F, 1);
+			this.addRotationOverTime("wingLeftOuter", EnumAxis.X, -0.4F, 1);
+			this.addRotationOverTime("wingRightOuter", EnumAxis.X, -0.4F, 1);
+			this.addRotationOverTime("tailPiece", EnumAxis.X, 0.1F, 1);
+			this.addRotationOverTime("leftLeg", EnumAxis.X, 0.3F, 1);
+			this.addRotationOverTime("rightLeg", EnumAxis.X, 0.3F, 1);
 			this.jumpMovementFactor = 0.15F;
 		}
 	}
@@ -110,10 +111,9 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
     	this.motionY = 0.1D;
     }
 	
-	public void addRotationOverTime(int identifier, int move, float rotateAngle, long milliseconds)
+	public void addRotationOverTime(String entry, EnumAxis axis, float rotateAngle, int milliseconds)
 	{
-		this.removeRotations(identifier);
-		rotationList.add(new Object[] {identifier, move, rotateAngle, milliseconds, System.currentTimeMillis()});
+		this.rotationHelper.getEntryList().getEntry(entry).addRotation(axis, rotateAngle, milliseconds);
 	}
 	
     public void onLivingUpdate()
@@ -123,7 +123,7 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
         	if(this.posY <= 0.0D) this.setDead();
         	if(this.ticksExisted == Integer.MAX_VALUE) this.ticksExisted = 0;
         	++this.ticksExisted;
-        	if(this.ticksExisted % 50 == 0 && !this.isDead && this.getHealth() > 0.0F)
+        	if(this.ticksExisted % 150 == 0 && !this.isDead && this.getHealth() > 0.0F)
         	{
         		this.setHealth(this.getHealth() + 1.0F);
         	}
@@ -153,23 +153,23 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
         
         if(!this.isFlying && !this.onGround && (this.getAttackTime() == 0 || this.getAttack() != 1))
         {
-            this.addRotationOverTime(12, 0, -0.4F, 100);
-            this.addRotationOverTime(15, 0, -0.4F, 100);
-			this.addRotationOverTime(8, 1, -0.7F, 100);
-			this.addRotationOverTime(11, 1, 0.7F, 100);
-			this.addRotationOverTime(14, 1, -0.2F, 100);
-			this.addRotationOverTime(17, 1, 0.2F, 100);
+            this.addRotationOverTime("wingLeftOuter", EnumAxis.X, -0.4F, 100);
+            this.addRotationOverTime("wingRightOuter", EnumAxis.X, -0.4F, 100);
+			this.addRotationOverTime("wingLeft", EnumAxis.Z, -0.7F, 100);
+			this.addRotationOverTime("wingRight", EnumAxis.Z, 0.7F, 100);
+			this.addRotationOverTime("wingLeftOuter", EnumAxis.Z, -0.2F, 100);
+			this.addRotationOverTime("wingRightOuter", EnumAxis.Z, 0.2F, 100);
 	        this.isFlying = !this.onGround;
         }
         if(this.isFlying && this.onGround && (this.getAttackTime() == 0  || this.getAttack() != 1))
         {
-	        this.addRotationOverTime(12, 1, 0.0F, 100);
-	        this.addRotationOverTime(15, 1, 0.0F, 100);
-			this.addRotationOverTime(8, 2, 0.0F, 100);
-			this.addRotationOverTime(11, 2, 0.0F, 100);
-			this.addRotationOverTime(14, 2, 0.0F, 100);
-			this.addRotationOverTime(17, 2, 0.0F, 100);
-			this.addRotationOverTime(0, 1, -0.3F, 25);
+	        this.addRotationOverTime("wingLeftOuter", EnumAxis.X, 0.0F, 100);
+	        this.addRotationOverTime("wingRightOuter", EnumAxis.X, 0.0F, 100);
+			this.addRotationOverTime("wingLeft", EnumAxis.Z, 0.0F, 100);
+			this.addRotationOverTime("wingRight", EnumAxis.Z, 0.0F, 100);
+			this.addRotationOverTime("wingLeftOuter", EnumAxis.Z, 0.0F, 100);
+			this.addRotationOverTime("wingRightOuter", EnumAxis.Z, 0.0F, 100);
+			this.addRotationOverTime("body", EnumAxis.X, -0.3F, 25);
 	        this.isFlying = !this.onGround;
         }
         
@@ -249,13 +249,15 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
     		if(this.getAttackTarget() != null) this.faceEntity(this.getAttackTarget(), 30.0F, 30.0F);
     		if(this.getAttackTime() > 57)
     		{
-    			this.addRotationOverTime(0, 3, -0.5F, 200);
-    			this.addRotationOverTime(8, 3, -0.5F, 200);
-    			this.addRotationOverTime(11, 3, 0.5F, 200);
-    			this.addRotationOverTime(6, 3, -0.05F, 200);
-    			this.addRotationOverTime(9, 3, -0.05F, 200);
-    			this.addRotationOverTime(12, 3, -0.5F, 200);
-    			this.addRotationOverTime(15, 3, -0.5F, 200);
+    			this.addRotationOverTime("body", EnumAxis.X, -0.5F, 200);
+    			this.addRotationOverTime("wingLeft", EnumAxis.Z, -0.5F, 200);
+    			this.addRotationOverTime("wingRight", EnumAxis.Z, 0.5F, 200);
+    			this.addRotationOverTime("wingLeft", EnumAxis.X, -0.05F, 200);
+    			this.addRotationOverTime("wingRight", EnumAxis.X, -0.05F, 200);
+    			this.addRotationOverTime("wingLeftOuter", EnumAxis.X, -0.5F, 200);
+    			this.addRotationOverTime("wingRightOuter", EnumAxis.X, -0.5F, 200);
+    			this.addRotationOverTime("wingLeftOuter", EnumAxis.Z, 0.0F, 200);
+    			this.addRotationOverTime("wingRightOuter", EnumAxis.Z, 0.0F, 200);
     		}
     		if(this.getAttackTime() % 5 == 0 && !this.worldObj.isRemote)
     		{
@@ -294,7 +296,7 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
                     }
                 }
     		}
-    		if(this.getAttackTime() == 1)
+    		if(this.getAttackTime() <= 5)
     		{
     			this.resetRotations(300);
     			this.attackCooldown = 40;
@@ -591,149 +593,98 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
     	return this.dataWatcher.getWatchableObjectInt(17);
     }
 	
-	public void onRotationFinish(int identifier, int move)
+	public void onRotationFinish(String name, EnumAxis axis)
 	{
-		switch(identifier)
+		if(name.matches("wingLeft") && axis == EnumAxis.X)
 		{
-		case 6:
-			switch(move)
+			if(this.rotationHelper.getEntryList().getEntry(name).getRawRotation(axis) == 0.0F)
 			{
-			case 2:
-				if(this.getAttackTime() > 1)
+				if(this.getAttackTime() > 5 && this.getAttack() == 1)
 				{
-	    			this.addRotationOverTime(6, 3, -0.05F, 75);
-	    			this.addRotationOverTime(9, 3, -0.05F, 75);
-	    			this.addRotationOverTime(12, 3, -0.55F, 75);
-	    			this.addRotationOverTime(15, 3, -0.55F, 75);
+	    			this.addRotationOverTime("wingLeft", EnumAxis.X, -0.05F, 75);
+	    			this.addRotationOverTime("wingRight", EnumAxis.X, -0.05F, 75);
+	    			this.addRotationOverTime("wingLeftOuter", EnumAxis.X, -0.55F, 75);
+	    			this.addRotationOverTime("wingRightOuter", EnumAxis.X, -0.55F, 75);
 				}
-    			break;
-			case 3:
-				if(this.getAttackTime() > 1)
-				{
-	    			this.addRotationOverTime(6, 2, -0.0F, 75);
-	    			this.addRotationOverTime(9, 2, -0.0F, 75);
-	    			this.addRotationOverTime(12, 2, -0.5F, 75);
-	    			this.addRotationOverTime(15, 2, -0.5F, 75);
-				}
-    			break;
+    			return;
 			}
-			break;
-		case 8:
-			switch(move)
+			if(this.rotationHelper.getEntryList().getEntry(name).getRawRotation(axis) == -0.05F)
 			{
-			case 0:
-				this.addRotationOverTime(8, 1, -0.7F, 500);
-				this.addRotationOverTime(11, 1, 0.7F, 500);
-				this.addRotationOverTime(14, 1, -0.2F, 500);
-				this.addRotationOverTime(17, 1, 0.2F, 500);
-				this.addRotationOverTime(0, 1, -0.33F, 500);
-				break;
-			case 1:
-				this.addRotationOverTime(8, 0, -0.1F, 250);
-				this.addRotationOverTime(11, 0, 0.1F, 250);
-				this.addRotationOverTime(14, 0, 0.2F, 250);
-				this.addRotationOverTime(17, 0, -0.2F, 250);
-				this.addRotationOverTime(0, 0, -0.27F, 250);
-				break;
+				if(this.getAttackTime() > 5 && this.getAttack() == 1)
+				{
+	    			this.addRotationOverTime("wingLeft", EnumAxis.X, -0.0F, 75);
+	    			this.addRotationOverTime("wingRight", EnumAxis.X, -0.0F, 75);
+	    			this.addRotationOverTime("wingLeftOuter", EnumAxis.X, -0.5F, 75);
+	    			this.addRotationOverTime("wingRightOuter", EnumAxis.X, -0.5F, 75);
+				}
+    			return;
 			}
-			break;
 		}
-		cleanupRotations();
+		if(name.matches("wingLeft") && axis == EnumAxis.Z)
+		{
+			if(this.rotationHelper.getEntryList().getEntry(name).getRawRotation(axis) == -0.1F || this.rotationHelper.getEntryList().getEntry(name).getRawRotation(axis) == -0.3F)
+			{
+				this.addRotationOverTime("wingLeft", EnumAxis.Z, -0.7F, 500);
+				this.addRotationOverTime("wingRight", EnumAxis.Z, 0.7F, 500);
+				this.addRotationOverTime("wingLeftOuter", EnumAxis.Z, -0.2F, 500);
+				this.addRotationOverTime("wingRightOuter", EnumAxis.Z, 0.2F, 500);
+				this.addRotationOverTime("body", EnumAxis.X, -0.33F, 500);
+				return;
+			}
+			if(this.rotationHelper.getEntryList().getEntry(name).getRawRotation(axis) == -0.7F)
+			{
+				this.addRotationOverTime("wingLeft", EnumAxis.Z, -0.1F, 250);
+				this.addRotationOverTime("wingRight", EnumAxis.Z, 0.1F, 250);
+				this.addRotationOverTime("wingLeftOuter", EnumAxis.Z, 0.2F, 250);
+				this.addRotationOverTime("wingRightOuter", EnumAxis.Z, -0.2F, 250);
+				this.addRotationOverTime("body", EnumAxis.X, -0.27F, 250);
+				return;
+			}
+		}
 	}
 	
 	public void resetRotations(int time)
 	{
-		this.addRotationOverTime(0, 0, -0.3F, 1);
-		this.addRotationOverTime(1, 0, 0.0F, time);
-		this.addRotationOverTime(2, 0, 0.0F, time);
-		this.addRotationOverTime(3, 0, 0.0F, time);
-		this.addRotationOverTime(4, 0, 0.0F, time);
-		this.addRotationOverTime(5, 0, 0.0F, time);
-		this.addRotationOverTime(6, 0, 0.0F, time);
-		this.addRotationOverTime(7, 0, 0.0F, time);
-		this.addRotationOverTime(9, 0, 0.0F, time);
-		this.addRotationOverTime(10, 0, 0.0F, time);
-		this.addRotationOverTime(13, 0, 0.0F, time);
-		this.addRotationOverTime(16, 0, 0.0F, time);
-		this.addRotationOverTime(18, 0, 0.1F, time);
-		this.addRotationOverTime(19, 0, 0.0F, time);
-		this.addRotationOverTime(20, 0, 0.0F, time);
-		this.addRotationOverTime(21, 0, 0.3F, time);
-		this.addRotationOverTime(22, 0, 0.0F, time);
-		this.addRotationOverTime(23, 0, 0.0F, time);
-		this.addRotationOverTime(24, 0, 0.3F, time);
-		this.addRotationOverTime(25, 0, 0.0F, time);
-		this.addRotationOverTime(26, 0, 0.0F, time);
+		this.addRotationOverTime("body", EnumAxis.X, -0.3F, 1);
+		this.addRotationOverTime("body", EnumAxis.Y, 0.0F, time);
+		this.addRotationOverTime("body", EnumAxis.Z, 0.0F, time);
+		this.addRotationOverTime("head", EnumAxis.X, 0.0F, time);
+		this.addRotationOverTime("head", EnumAxis.Y, 0.0F, time);
+		this.addRotationOverTime("head", EnumAxis.Z, 0.0F, time);
+		this.addRotationOverTime("wingLeft", EnumAxis.X, 0.0F, time);
+		this.addRotationOverTime("wingLeft", EnumAxis.Y, 0.0F, time);
+		this.addRotationOverTime("wingRight", EnumAxis.X, 0.0F, time);
+		this.addRotationOverTime("wingRight", EnumAxis.Y, 0.0F, time);
+		this.addRotationOverTime("wingLeftOuter", EnumAxis.Y, 0.0F, time);
+		this.addRotationOverTime("wingRightOuter", EnumAxis.Y, 0.0F, time);
+		this.addRotationOverTime("tailPiece", EnumAxis.X, 0.1F, time);
+		this.addRotationOverTime("tailPiece", EnumAxis.Y, 0.0F, time);
+		this.addRotationOverTime("tailPiece", EnumAxis.Z, 0.0F, time);
+		this.addRotationOverTime("leftLeg", EnumAxis.X, 0.3F, time);
+		this.addRotationOverTime("leftLeg", EnumAxis.Y, 0.0F, time);
+		this.addRotationOverTime("leftLeg", EnumAxis.Z, 0.0F, time);
+		this.addRotationOverTime("rightLeg", EnumAxis.X, 0.3F, time);
+		this.addRotationOverTime("rightLeg", EnumAxis.Y, 0.0F, time);
+		this.addRotationOverTime("rightLeg", EnumAxis.Z, 0.0F, time);
 		if(this.isFlying)
 		{
-            this.addRotationOverTime(12, 0, -0.4F, 100);
-            this.addRotationOverTime(15, 0, -0.4F, 100);
-			this.addRotationOverTime(8, 1, -0.7F, 100);
-			this.addRotationOverTime(11, 1, 0.7F, 100);
-			this.addRotationOverTime(14, 1, -0.2F, 100);
-			this.addRotationOverTime(17, 1, 0.2F, 100);
+            this.addRotationOverTime("wingLeftOuter", EnumAxis.X, -0.4F, 100);
+            this.addRotationOverTime("wingRightOuter", EnumAxis.X, -0.4F, 100);
+			this.addRotationOverTime("wingLeft", EnumAxis.Z, -0.7F, 100);
+			this.addRotationOverTime("wingRight", EnumAxis.Z, 0.7F, 100);
+			this.addRotationOverTime("wingLeftOuter", EnumAxis.Z, -0.2F, 100);
+			this.addRotationOverTime("wingRightOuter", EnumAxis.Z, 0.2F, 100);
 		}
 		else
 		{
-	        this.addRotationOverTime(12, 1, 0.0F, 100);
-	        this.addRotationOverTime(15, 1, 0.0F, 100);
-			this.addRotationOverTime(8, 2, 0.0F, 100);
-			this.addRotationOverTime(11, 2, 0.0F, 100);
-			this.addRotationOverTime(14, 2, 0.0F, 100);
-			this.addRotationOverTime(17, 2, 0.0F, 100);
-			this.addRotationOverTime(0, 1, -0.3F, 25);
+	        this.addRotationOverTime("wingLeftOuter", EnumAxis.X, 0.0F, 100);
+	        this.addRotationOverTime("wingRightOuter", EnumAxis.X, 0.0F, 100);
+			this.addRotationOverTime("wingLeft", EnumAxis.Z, 0.0F, 100);
+			this.addRotationOverTime("wingRight", EnumAxis.Z, 0.0F, 100);
+			this.addRotationOverTime("wingLeftOuter", EnumAxis.Z, 0.0F, 100);
+			this.addRotationOverTime("wingRightOuter", EnumAxis.Z, 0.0F, 100);
+			this.addRotationOverTime("body", EnumAxis.X, -0.3F, 25);
 		}
-	}
-	
-	private void removeRotations(int identifier)
-	{
-		for(int var1 = 0;var1 < rotationList.size();var1++)
-		{
-			if((Integer)rotationList.get(var1)[0] == identifier)
-			{
-				rotationList.remove(var1);
-				removeRotations(identifier);
-				return;
-			}
-		}
-	}
-	
-	private void cleanupRotations()
-	{
-		for(int var1 = 0;var1 < rotationList.size();var1++)
-		{
-			Object[] obj = rotationList.get(var1);
-			if((Long)obj[3] + (Long)obj[4] < System.currentTimeMillis())
-			{
-				rotationList.remove(var1);
-				cleanupRotations();
-				return;
-			}
-		}
-	}
-	
-	public Object[] getList(int identifier)
-	{
-		for(Object[] list : rotationList)
-		{
-			if((Integer)list[0] == identifier)
-			{
-				return list;
-			}
-		}
-		return null;
-	}
-	
-	public Object[] getList(int identifier, int move)
-	{
-		for(Object[] list : rotationList)
-		{
-			if((Integer)list[0] == identifier && (Integer)list[1] == move)
-			{
-				return list;
-			}
-		}
-		return null;
 	}
     
     protected boolean canDespawn()
@@ -800,7 +751,7 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
     
     public int getTotalArmorValue()
     {
-    	return 10;
+    	return 5;
     }
     
     /**
