@@ -2,6 +2,7 @@ package xelitez.frostcraft.client.model.rotations;
 
 import java.lang.reflect.Field;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
@@ -11,19 +12,22 @@ public class ModelRotationAssistant
 	
 	public ModelRotationAssistant(Class<? extends ModelBase> model)
 	{
-		entries = new EntryList();
-		for(Field field : model.getFields())
+		if(FMLCommonHandler.instance().getSide().isClient())
 		{
-			if(field.getType() == ModelRenderer.class || field.getType().isAssignableFrom(ModelRenderer.class))
+			entries = new EntryList();
+			for(Field field : model.getFields())
 			{
-				entries.addEntry(field.getName());
+				if(field.getType() == ModelRenderer.class || field.getType().isAssignableFrom(ModelRenderer.class))
+				{
+					entries.addEntry(field.getName());
+				}
 			}
-		}
-		for(Field field : model.getDeclaredFields())
-		{
-			if(field.getType() == ModelRenderer.class || field.getType().isAssignableFrom(ModelRenderer.class))
+			for(Field field : model.getDeclaredFields())
 			{
-				entries.addEntry(field.getName());
+				if(field.getType() == ModelRenderer.class || field.getType().isAssignableFrom(ModelRenderer.class))
+				{
+					entries.addEntry(field.getName());
+				}
 			}
 		}
 	}

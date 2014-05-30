@@ -32,6 +32,7 @@ import xelitez.frostcraft.client.model.rotations.ModelRotationAssistant;
 import xelitez.frostcraft.effect.EffectTicker;
 import xelitez.frostcraft.effect.FCPotion;
 import xelitez.frostcraft.registry.IdMap;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class EntityFrostWing extends EntityCreature implements IBossDisplayData, IMob
 {	
@@ -113,7 +114,10 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
 	
 	public void addRotationOverTime(String entry, EnumAxis axis, float rotateAngle, int milliseconds)
 	{
-		this.rotationHelper.getEntryList().getEntry(entry).addRotation(axis, rotateAngle, milliseconds);
+		if(FMLCommonHandler.instance().getSide().isClient())
+		{
+			this.rotationHelper.getEntryList().getEntry(entry).addRotation(axis, rotateAngle, milliseconds);
+		}
 	}
 	
     public void onLivingUpdate()
