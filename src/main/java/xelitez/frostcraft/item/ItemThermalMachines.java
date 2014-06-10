@@ -64,7 +64,7 @@ public class ItemThermalMachines extends ItemBlock
     			break;
     		case 4:
     			par3List.add("\u00a7oA Frost Enforcer enforces certain tools");
-    			par3List.add("\u00a7oto become more efficient and durable");
+    			par3List.add("\u00a7oto become more efficient and durable.");
     		}
     	}
     }

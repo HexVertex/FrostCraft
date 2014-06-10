@@ -475,7 +475,7 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
 	    		int x = this.rand.nextInt(10) - 5 + (int)this.posX;
 	    		int z = this.rand.nextInt(10) - 5 + (int)this.posZ;
 	    		int y = this.rand.nextInt(10) - 5 + (int)this.posY;
-	    		if(this.getAttackTarget().getDistance(this.posX, this.posY, this.posZ) + 3.0D < this.getAttackTarget().getDistance((double)x, (double)y, (double)z) && this.worldObj.getBlock(x, y, z).getMaterial() == Material.air)
+	    		if(this.getAttackTarget() != null && this.getAttackTarget().getDistance(this.posX, this.posY, this.posZ) + 3.0D < this.getAttackTarget().getDistance((double)x, (double)y, (double)z) && this.worldObj.getBlock(x, y, z).getMaterial() == Material.air)
 	    		{
 	    			this.path = Vec3.createVectorHelper(x, y, z);
 	    			if(this.path != null) 
