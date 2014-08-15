@@ -93,14 +93,17 @@ public class Version
     	catch (MalformedURLException e)
     	{
     		checkForUpdatesOld();
+    		return;
     	}
     	catch (ConnectException e)
     	{
     		checkForUpdatesOld();
+    		return;
     	}
     	catch (IOException e)
     	{
     		checkForUpdatesOld();
+    		return;
     	}
     	
     	for (int i = 0; i < strings.size(); i++)
