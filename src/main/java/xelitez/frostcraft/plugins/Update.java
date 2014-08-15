@@ -100,9 +100,9 @@ public class Update implements IXEZUpdate
 	}
 
 	@Override
-	public String stringToDelete() 
+	public String[] stringsToDelete() 
 	{
-		return "Frostcraft";
+		return new String[] {"Frostcraft"};
 	}
 
 }
