@@ -16,11 +16,17 @@ import cpw.mods.fml.relauncher.Side;
 
 public class Version
 {
+	@Deprecated
     public static int majorVersion = 1;
+	@Deprecated
     public static int minorVersion = 3;
-    public static int majorBuild = 3;
-    public static int minorBuild = 24;
-    public static String MC = "MC:1.7.2";
+	@Deprecated
+    public static int majorBuild = 4;
+	@Deprecated
+    public static int minorBuild = 25;
+    public static final String version = "#mod_version#";
+    //public static String MC = "MC:1.7.10";
+    public static final String MC = "#mc_version#";
 
     public static String newVersion;
     public static boolean available = false;
@@ -28,12 +34,13 @@ public class Version
     public static boolean notify = true;
     
     public static boolean registered = false;
-
+    
     public static String getVersion()
     {
-        return produceVersion(majorVersion, minorVersion, majorBuild, minorBuild);
+        return version;
     }
 
+    @Deprecated
     private static String produceVersion(int var1, int var2, int var3, int var4)
     {
         StringBuilder Str1 = new StringBuilder();
@@ -63,6 +70,78 @@ public class Version
     }
     
     public void checkForUpdates()
+    {
+    	List<String> strings = new ArrayList<String>();
+    	String NV = "";
+    	String NMC = "";
+    	try
+    	{
+    		URL url = new URL("https://raw2.github.com/XEZKalvin/FrostCraft/master/build.properties");
+    		URLConnection connect = url.openConnection();
+    		connect.setConnectTimeout(5000);
+    		connect.setReadTimeout(5000);
+    		BufferedReader in = new BufferedReader(new InputStreamReader(connect.getInputStream()));
+    		String str;
+    		
+    		while ((str = in.readLine()) != null)
+    		{
+    			strings.add(str);
+    		}
+    		
+    		in.close();
+    	}
+    	catch (MalformedURLException e)
+    	{
+    		checkForUpdatesOld();
+    	}
+    	catch (ConnectException e)
+    	{
+    		checkForUpdatesOld();
+    	}
+    	catch (IOException e)
+    	{
+    		checkForUpdatesOld();
+    	}
+    	
+    	for (int i = 0; i < strings.size(); i++)
+    	{
+    		String line = "";
+    		
+    		if (strings.get(i) != null)
+    		{
+    			line = (String)strings.get(i);
+    		}
+    		
+    		if (line != null && !line.matches(""))
+    		{
+    			if (line.contains("mod_version"))
+    			{
+    				NV = line.substring(line.indexOf("'") + 1, line.lastIndexOf("'"));
+    			}
+    			if (line.contains("mc_version"))
+    			{
+    				NMC = line.substring(line.indexOf("'") + 1, line.lastIndexOf("'"));
+    			}
+    		}
+    	}
+		available = false;
+		if( (!NV.matches("") && !version.matches(NV)) || (!NMC.matches("") && !MC.matches(NMC)))
+		{
+			available = true;
+		}
+		
+    	if (!NMC.matches(""))
+    	{
+    		newVersion = NV + " for MC:" + NMC;
+    	}
+    	
+    	if (FMLCommonHandler.instance().getSide() == Side.SERVER && !registered && available)
+    	{
+    		FCLog.info("A new version of Frostcraft is available(" + newVersion + ")");
+    	}
+    }
+    
+    public void checkForUpdatesOld()
     {
     	List<String> strings = new ArrayList<String>();
     	int MV = 0;

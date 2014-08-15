@@ -39,8 +39,7 @@ import cpw.mods.fml.relauncher.FMLInjectionData;
 @Mod(	
 		modid = "XEZFrostcraft",
 		name = "Frostcraft", 
-		version = "1.3.3",
-		acceptableRemoteVersions = "[1.3,1.4)")
+		version = Version.version)
 public class Frostcraft 
 {
 	@Instance(value = "XEZFrostcraft")
@@ -141,7 +140,7 @@ public class Frostcraft
         catch (Exception E)
         {
         	FCLog.log(Level.INFO, "Frostcraft failed to register to the XEZUpdateUtility");
-        	FCLog.log(Level.INFO, "It isn't required but you should download it if possible");
+        	FCLog.log(Level.INFO, "It isn't required but highly recommended");
             if (Settings.checkForUpdates)
             {
                 version.checkForUpdatesNoUtility();
