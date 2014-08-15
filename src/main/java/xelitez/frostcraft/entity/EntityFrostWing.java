@@ -87,7 +87,14 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
 			this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityAnimal.class, 0, true));
 			this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityMob.class, 0, true));
 			this.yOffset *= IdMap.FrostWingSize;
-			this.setSize(0.8F, 1.3F);
+			if(worldObj.isRemote)
+			{
+				this.setSize(0.75F, 1.3F);
+			}
+			else
+			{
+				this.setSize(0.8F, 1.3F);
+			}
 			this.setSize(this.width * IdMap.FrostWingSize, this.height * IdMap.FrostWingSize);
 			this.addRotationOverTime("body", EnumAxis.X, -0.3F, 1);
 			this.addRotationOverTime("wingLeft", EnumAxis.Z, -0.3F, 1);
@@ -185,17 +192,16 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
         {
         	this.flyingTime = 0;
         }
-        
         this.executeAttack();
         if(this.getAttackTarget() != null)
         {
-        	if(this.getAttackTarget().getDistanceToEntity(this) < 14.0F)
+        	if((this.getAttackTarget().getDistanceToEntity(this) < 14.0F && this.path == null) || this.getAttackTarget().getDistanceToEntity(this) < 10.0F)
         	{
         		if(this.amountOfAttacks > 0 && this.attackCooldown == 0 && this.getAttack() == 0)
         		{
 	        		this.getNavigator().clearPathEntity();
 	        		this.path = null;
-		        	performAttack(this.getAttackByChance(rand.nextInt(this.getTotalAttackChance() + 1)));
+		        	performAttack(this.getAttackByChance(rand.nextInt(this.getTotalAttackChance()) + 1));
 		        	this.attackCooldown = 10;
         		}
         	}
@@ -272,7 +278,7 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
                 int var29 = MathHelper.floor_double(this.posY + size + 1.0D);
                 int var7 = MathHelper.floor_double(this.posZ - size - 1.0D);
                 int var30 = MathHelper.floor_double(this.posZ + size + 1.0D);
-                List<?> var9 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getAABBPool().getAABB((double)var3, (double)var5, (double)var7, (double)var4, (double)var29, (double)var30));
+                List<?> var9 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getBoundingBox((double)var3, (double)var5, (double)var7, (double)var4, (double)var29, (double)var30));
 
                 for (int var11 = 0; var11 < var9.size(); ++var11)
                 {
@@ -338,7 +344,7 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
                 int var29 = MathHelper.floor_double(this.posY + size + 1.0D);
                 int var7 = MathHelper.floor_double(this.posZ - size - 1.0D);
                 int var30 = MathHelper.floor_double(this.posZ + size + 1.0D);
-                List<?> var9 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getAABBPool().getAABB((double)var3, (double)var5, (double)var7, (double)var4, (double)var29, (double)var30));
+                List<?> var9 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getBoundingBox((double)var3, (double)var5, (double)var7, (double)var4, (double)var29, (double)var30));
                 
                 List<Entity> var10 = new ArrayList<Entity>();
                 
@@ -395,20 +401,25 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
     	case 5:
     		if(!this.onGround)
     		{
+    			if(this.getAttackTime() == 30)
+    			{
+        			this.worldObj.spawnParticle("frostTrail", this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+    			}
     			this.motionX = 0.0D;
-    			this.motionY = -1.0D;
+    			this.motionY = -1.5D;
     			this.motionZ = 0.0D;
     		}
     		else
     		{
-    			double size = 7.5D;
+    			this.worldObj.spawnParticle("frostNova", this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+    			double size = 10D;
             	int var3 = MathHelper.floor_double(this.posX - size - 1.0D);
                 int var4 = MathHelper.floor_double(this.posX + size + 1.0D);
                 int var5 = MathHelper.floor_double(this.posY - size - 1.0D);
                 int var29 = MathHelper.floor_double(this.posY + size + 1.0D);
                 int var7 = MathHelper.floor_double(this.posZ - size - 1.0D);
                 int var30 = MathHelper.floor_double(this.posZ + size + 1.0D);
-                List<?> var9 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getAABBPool().getAABB((double)var3, (double)var5, (double)var7, (double)var4, (double)var29, (double)var30));
+                List<?> var9 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getBoundingBox((double)var3, (double)var5, (double)var7, (double)var4, (double)var29, (double)var30));
 
                 for (int var11 = 0; var11 < var9.size(); ++var11)
                 {
@@ -432,6 +443,10 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
                         }
                     }
                 }
+            	if(this.getAttackTime() > 1) 
+            	{
+            		this.dataWatcher.updateObject(17, 1);
+            	}
     		}	
     	}
     	
@@ -565,7 +580,7 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
     	case 4:
     		return 2;
     	case 5:
-    		if(this.isFlying && this.flyingTime > 70 && this.getAttackTarget() != null && this.getAttackTarget().onGround && this.getAttackTarget().getDistance(this.posX, this.getAttackTarget().posY, this.posY) < 5.0D) return 3;
+    		if(this.isFlying && this.flyingTime > 70 && this.getAttackTarget() != null && this.getAttackTarget().onGround && this.getAttackTarget().getDistance(this.posX, this.getAttackTarget().posY, this.posY) < 9.0D) return 3;
     		if(this.isFlying && this.flyingTime > 70)return 2;
     		return 0;
     	default:
@@ -576,23 +591,23 @@ public class EntityFrostWing extends EntityCreature implements IBossDisplayData,
     private int getAttackByChance(int chance)
     {
     	int counter = 0;
-    	for(int i = 0;i < this.amountOfAttacks;i++)
+    	for(int i = 1;i < this.amountOfAttacks + 1;i++)
     	{
-    		counter += this.getAttackChance(i + 1);
+    		counter += this.getAttackChance(i);
     		if(chance <= counter)
     		{
-    			return i + 1;
+    			return i;
     		}
     	}
     	return 0;
     }
     
-    private int getAttack()
+    public int getAttack()
     {
     	return this.dataWatcher.getWatchableObjectInt(16);
     }
     
-    private int getAttackTime()
+    public int getAttackTime()
     {
     	return this.dataWatcher.getWatchableObjectInt(17);
     }

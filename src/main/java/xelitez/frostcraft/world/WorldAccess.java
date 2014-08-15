@@ -5,7 +5,9 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.IWorldAccess;
+import xelitez.frostcraft.client.particle.EntityFrostNovaFX;
 import xelitez.frostcraft.client.particle.EntitySnowFX;
+import xelitez.frostcraft.client.particle.EntityTrailFX;
 import xelitez.frostcraft.client.render.RenderEffects;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -79,6 +81,14 @@ public class WorldAccess implements IWorldAccess
             	if(var1.matches("frostExplosion"))
             	{
                     RenderEffects.spawnFrostExplosion(this.theWorld, 4, x, y, z, mc.effectRenderer);
+            	}
+            	if(var1.matches("frostNova"))
+            	{
+            		mc.effectRenderer.addEffect(new EntityFrostNovaFX(this.theWorld, x, y, z));
+            	}
+            	if(var1.matches("frostTrail"))
+            	{
+            		mc.effectRenderer.addEffect(new EntityTrailFX(this.theWorld, x, y, z));
             	}
             }
 		}
