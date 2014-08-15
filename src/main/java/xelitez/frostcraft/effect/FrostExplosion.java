@@ -38,7 +38,7 @@ public class FrostExplosion
         int var29 = MathHelper.floor_double(this.explosionY + (double)this.explosionSize + 1.0D);
         int var7 = MathHelper.floor_double(this.explosionZ - (double)this.explosionSize - 1.0D);
         int var30 = MathHelper.floor_double(this.explosionZ + (double)this.explosionSize + 1.0D);
-        List<?> var9 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this.exploder, AxisAlignedBB.getAABBPool().getAABB((double)var3, (double)var5, (double)var7, (double)var4, (double)var29, (double)var30));
+        List<?> var9 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this.exploder, AxisAlignedBB.getBoundingBox((double)var3, (double)var5, (double)var7, (double)var4, (double)var29, (double)var30));
 
         for (int var11 = 0; var11 < var9.size(); ++var11)
         {

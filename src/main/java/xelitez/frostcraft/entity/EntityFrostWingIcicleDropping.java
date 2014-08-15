@@ -50,10 +50,10 @@ public class EntityFrostWingIcicleDropping extends EntityFrostWingIcicle
     {      
     	if(!this.worldObj.isRemote)
     	{
-            Vec3 vec1 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
-            Vec3 var2 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+            Vec3 vec1 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
+            Vec3 var2 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
             MovingObjectPosition var1 = this.worldObj.rayTraceBlocks(vec1, var2);          
-            var2 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+            var2 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
             if (var1 != null)
             {
@@ -64,7 +64,7 @@ public class EntityFrostWingIcicleDropping extends EntityFrostWingIcicle
                 int var29 = MathHelper.floor_double(this.posY + size + 1.0D);
                 int var7 = MathHelper.floor_double(this.posZ - size - 1.0D);
                 int var30 = MathHelper.floor_double(this.posZ + size + 1.0D);
-                List<?> var9 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this.castingEntity, AxisAlignedBB.getAABBPool().getAABB((double)var3, (double)var5, (double)var7, (double)var4, (double)var29, (double)var30));
+                List<?> var9 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this.castingEntity, AxisAlignedBB.getBoundingBox((double)var3, (double)var5, (double)var7, (double)var4, (double)var29, (double)var30));
 
                 for (int var11 = 0; var11 < var9.size(); ++var11)
                 {

@@ -1,9 +1,12 @@
 package xelitez.frostcraft.block;
 
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -57,6 +60,73 @@ public class BlockThermalPipe extends Block implements IConnect, ITileEntityProv
     public void onBlockAdded(World par1World, int par2, int par3, int par4)
     {
     	((TileEntityThermalPipe)par1World.getTileEntity(par2, par3, par4)).updateConnections(par1World, par2, par3, par4);
+    }
+	
+	@SuppressWarnings("rawtypes")
+	@Override
+    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB p_149743_5_, List p_149743_6_, Entity p_149743_7_)
+    {
+    	boolean canConnectTop = par1World.getBlock(par2, par3 + 1, par4) instanceof IConnect && ((IConnect)par1World.getBlock(par2, par3 + 1, par4)).getConnectionType() == this.getConnectionType();
+    	boolean canConnectBottom = par1World.getBlock(par2, par3 - 1, par4) instanceof IConnect && ((IConnect)par1World.getBlock(par2, par3 - 1, par4)).getConnectionType() == this.getConnectionType();
+        boolean canConnectLeft = par1World.getBlock(par2 + 1, par3, par4) instanceof IConnect && ((IConnect)par1World.getBlock(par2 + 1, par3, par4)).getConnectionType() == this.getConnectionType();
+        boolean canConnectRight = par1World.getBlock(par2 - 1, par3, par4) instanceof IConnect && ((IConnect)par1World.getBlock(par2 - 1, par3, par4)).getConnectionType() == this.getConnectionType();
+        boolean canConnectFront = par1World.getBlock(par2, par3, par4 + 1) instanceof IConnect && ((IConnect)par1World.getBlock(par2, par3, par4 + 1)).getConnectionType() == this.getConnectionType();
+        boolean canConnectBack = par1World.getBlock(par2, par3, par4 - 1) instanceof IConnect && ((IConnect)par1World.getBlock(par2, par3, par4 - 1)).getConnectionType() == this.getConnectionType();
+        float minX = 0.3125F;
+        float minY = 0.3125F;
+        float minZ = 0.3125F;
+        float maxX = 0.6875F;
+        float maxY = 0.6875F;
+        float maxZ = 0.6875F;
+        if (canConnectTop)
+        {
+            maxY = 1.0F;
+        }
+
+        if (canConnectBottom)
+        {
+            minY = 0.0F;
+        }
+        
+        if (canConnectTop || canConnectBottom)
+        {
+            this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
+            super.addCollisionBoxesToList(par1World, par2, par3, par4, p_149743_5_, p_149743_6_, p_149743_7_);
+        }
+        
+        if (canConnectRight)
+        {
+            minX = 0.0F;
+        }
+
+        if (canConnectLeft)
+        {
+            maxX = 1.0F;
+        }
+        
+        if (canConnectRight || canConnectLeft)
+        {
+            this.setBlockBounds(minX, 0.3125F, minZ, maxX, 0.6875F, maxZ);
+            super.addCollisionBoxesToList(par1World, par2, par3, par4, p_149743_5_, p_149743_6_, p_149743_7_);
+        }
+        
+        if (canConnectBack)
+        {
+            minZ = 0.0F;
+        }
+
+        if (canConnectFront)
+        {
+            maxZ = 1.0F;
+        }
+        
+        if (canConnectBack || canConnectFront || !canConnectTop && !canConnectBottom && !canConnectRight && !canConnectLeft)
+        {
+        	this.setBlockBounds(0.3125F, 0.3125F, minZ, 0.6875F, 0.6875F, maxZ);
+        	super.addCollisionBoxesToList(par1World, par2, par3, par4, p_149743_5_, p_149743_6_, p_149743_7_);
+        }
+        
+        this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
     }
 	
 	@Override
@@ -154,7 +224,7 @@ public class BlockThermalPipe extends Block implements IConnect, ITileEntityProv
             maxZ = 1.0F;
         }
 
-        return AxisAlignedBB.getAABBPool().getAABB((double)((float)par2 + minX), (double)((float)par3 + minY), (double)((float)par4 + minZ), (double)((float)par2 + maxX), (double)((float)par3 + maxY), (double)((float)par4 + maxZ));
+        return AxisAlignedBB.getBoundingBox((double)((float)par2 + minX), (double)((float)par3 + minY), (double)((float)par4 + minZ), (double)((float)par2 + maxX), (double)((float)par3 + maxY), (double)((float)par4 + maxZ));
     }
     
 	@Override
