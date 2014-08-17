@@ -387,7 +387,7 @@ public class IdMap
 				this.EnforcedTools[i] = new ItemFrostEnforced(item, type).setUnlocalizedName("Enforced" + item.getUnlocalizedName());
 				GameRegistry.registerItem(this.EnforcedTools[i], "Enforced" + item.getUnlocalizedName());
 //				LanguageRegistry.addName(this.EnforcedTools[i], "Enforced " + StatCollector.translateToLocal(item.getUnlocalizedName()));
-				RecipeRegistry.addEnforcerRecipe(item, new ItemStack(this.EnforcedTools[i]), true);
+				RecipeRegistry.addEnforcerRecipe(item, new ItemStack(this.EnforcedTools[i]), false);
 				break;
 			}
 		}

@@ -52,16 +52,16 @@ public class RecipeRegistry
 		RecipeRegistry.addFreezerRecipe(IdMap.itemCraftingItems, 8, new ItemStack(IdMap.itemIcePop, 1, 1), 0.33F);
 		RecipeRegistry.addFreezerRecipe(IdMap.itemCraftingItems, 9, new ItemStack(IdMap.itemIcePop, 1, 2), 0.33F);
 		
-		RecipeRegistry.addEnforcerRecipe(IdMap.itemCompiledFrostBlade, new ItemStack(IdMap.itemFrostBlade), true);
-		RecipeRegistry.addEnforcerRecipe(IdMap.itemCompiledFrostSpade, new ItemStack(IdMap.itemFrostSpade), true);
-		RecipeRegistry.addEnforcerRecipe(IdMap.itemCompiledFrostPickaxe, new ItemStack(IdMap.itemFrostPickaxe), true);
-		RecipeRegistry.addEnforcerRecipe(IdMap.itemCompiledFrostAxe, new ItemStack(IdMap.itemFrostAxe), true);
-		RecipeRegistry.addEnforcerRecipe(IdMap.itemCompiledFrostHoe, new ItemStack(IdMap.itemFrostHoe), true);
-		RecipeRegistry.addEnforcerRecipe(IdMap.itemFrozenFrostBlade, new ItemStack(IdMap.itemFrostBlade), true);
-		RecipeRegistry.addEnforcerRecipe(IdMap.itemFrozenFrostSpade, new ItemStack(IdMap.itemFrostSpade), true);
-		RecipeRegistry.addEnforcerRecipe(IdMap.itemFrozenFrostPickaxe, new ItemStack(IdMap.itemFrostPickaxe), true);
-		RecipeRegistry.addEnforcerRecipe(IdMap.itemFrozenFrostAxe, new ItemStack(IdMap.itemFrostAxe), true);
-		RecipeRegistry.addEnforcerRecipe(IdMap.itemFrozenFrostHoe, new ItemStack(IdMap.itemFrostHoe), true);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemCompiledFrostBlade, new ItemStack(IdMap.itemFrostBlade), false);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemCompiledFrostSpade, new ItemStack(IdMap.itemFrostSpade), false);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemCompiledFrostPickaxe, new ItemStack(IdMap.itemFrostPickaxe), false);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemCompiledFrostAxe, new ItemStack(IdMap.itemFrostAxe), false);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemCompiledFrostHoe, new ItemStack(IdMap.itemFrostHoe), false);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemFrozenFrostBlade, new ItemStack(IdMap.itemFrostBlade), false);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemFrozenFrostSpade, new ItemStack(IdMap.itemFrostSpade), false);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemFrozenFrostPickaxe, new ItemStack(IdMap.itemFrostPickaxe), false);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemFrozenFrostAxe, new ItemStack(IdMap.itemFrostAxe), false);
+		RecipeRegistry.addEnforcerRecipe(IdMap.itemFrozenFrostHoe, new ItemStack(IdMap.itemFrostHoe), false);
 		
 		GameRegistry.addRecipe(new ItemStack(IdMap.itemCompiledFrostBlade), new Object[] {"I", "C", "X", 'I', IdMap.itemIcicle, 'C', Blocks.ice, 'X', Items.stick} );
 		GameRegistry.addRecipe(new ItemStack(IdMap.itemCompiledFrostAxe), new Object[] {"BC", "IX", " X", 'B', new ItemStack(IdMap.itemCraftingItems, 1, 0), 'C', Blocks.ice, 'I', IdMap.itemIcicle, 'X', Items.stick});
