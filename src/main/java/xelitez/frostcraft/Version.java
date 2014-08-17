@@ -119,11 +119,11 @@ public class Version
     		{
     			if (line.contains("mod_version"))
     			{
-    				NV = line.substring(line.indexOf("'") + 1, line.lastIndexOf("'"));
+    				NV = line.substring(line.indexOf("=") + 1);
     			}
     			if (line.contains("mc_version"))
     			{
-    				NMC = line.substring(line.indexOf("'") + 1, line.lastIndexOf("'"));
+    				NMC = line.substring(line.indexOf("=") + 1);
     			}
     		}
     	}
@@ -146,6 +146,7 @@ public class Version
     
     public void checkForUpdatesOld()
     {
+    	FCLog.warning("Failed to check for updates, using old method now...");
     	List<String> strings = new ArrayList<String>();
     	int MV = 0;
     	int mV = 0;
