@@ -135,7 +135,7 @@ public class Version
 		
     	if (!NMC.matches(""))
     	{
-    		newVersion = NV + " for MC:" + NMC;
+    		newVersion = NV + " for " + NMC;
     	}
     	
     	if (FMLCommonHandler.instance().getSide() == Side.SERVER && !registered && available)

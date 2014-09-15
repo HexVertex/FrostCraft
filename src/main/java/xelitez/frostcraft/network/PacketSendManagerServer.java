@@ -15,7 +15,7 @@ public class PacketSendManagerServer
 {
 	private static void sendPacket(Packet packet)
 	{
-		Frostcraft.PIPELINE.sendToAll(packet);
+		Frostcraft.network.sendToAll(packet);
 	}
 	
     public static void sendBlockData(TileEntityThermalMachines tilet)

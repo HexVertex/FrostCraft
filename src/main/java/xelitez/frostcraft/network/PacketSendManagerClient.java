@@ -13,7 +13,7 @@ public class PacketSendManagerClient
 {
 	private static void sendPacket(Packet packet)
 	{
-		Frostcraft.PIPELINE.sendToServer(packet);;
+		Frostcraft.network.sendToServer(packet);;
 	}
 	
 	public static void requestBlockDataFromServer(TileEntityThermalMachines tet)

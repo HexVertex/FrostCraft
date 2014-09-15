@@ -8,7 +8,6 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderCrossbow implements IItemRenderer
 {
-
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) 
 	{
@@ -141,7 +140,7 @@ public class RenderCrossbow implements IItemRenderer
 			GL11.glPopMatrix();
 			GL11.glPushMatrix();
 			GL11.glRotatef(-90.0F, 0.0F, 0.0F, 1.0F);
-			GL11.glTranslatef(0.1F, 0.1F, -0.1F);
+			GL11.glTranslatef(0.15F, 0.1F, -0.1F);
 			GL11.glColor3f(110.0F / 255.0F, 60.0F / 255.0F, 0.0F);
 			RenderHelper.renderTriangle(90.0F, 0.4F, 0.2F, 0.4F, false);
 			GL11.glPopMatrix();

@@ -17,8 +17,10 @@ import xelitez.frostcraft.effect.EffectTicker;
 import xelitez.frostcraft.effect.FCPotion;
 import xelitez.frostcraft.enchantment.FrostEnchantment;
 import xelitez.frostcraft.energy.EnergyRequestRegistry;
-import xelitez.frostcraft.netty.Pipeline;
+import xelitez.frostcraft.netty.PacketCustomData;
+import xelitez.frostcraft.netty.PacketHandler;
 import xelitez.frostcraft.network.NetworkManager;
+import xelitez.frostcraft.plugins.NEIFCLoader;
 import xelitez.frostcraft.registry.CommonProxy;
 import xelitez.frostcraft.registry.IdMap;
 import xelitez.frostcraft.registry.RecipeRegistry;
@@ -34,7 +36,9 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.FMLInjectionData;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(	
 		modid = "XEZFrostcraft",
@@ -53,7 +57,7 @@ public class Frostcraft
 	
 	public Version version = new Version();
 	
-	public static Pipeline PIPELINE = new Pipeline();
+	public static SimpleNetworkWrapper network;
 	
 	@EventHandler
     public void preload(FMLPreInitializationEvent evt)
@@ -125,7 +129,9 @@ public class Frostcraft
     	FMLCommonHandler.instance().bus().register(new NetworkManager());
     	RecipeRegistry.registry().registerRecipes();
     	MinecraftForge.EVENT_BUS.register(new EventListener());
-    	PIPELINE.initalise();
+    	network = NetworkRegistry.INSTANCE.newSimpleChannel("XFC");
+    	network.registerMessage(PacketHandler.class, PacketCustomData.class, 0, Side.CLIENT);
+    	network.registerMessage(PacketHandler.class, PacketCustomData.class, 1, Side.SERVER);
         try
         {
             if (Settings.checkForUpdates)
@@ -151,15 +157,15 @@ public class Frostcraft
 	@EventHandler
     public void postload(FMLPostInitializationEvent evt)
     { 
-//		try
-//  		{
-//			Class.forName("codechicken.nei.api.API");
-// 			NEIFCLoader.register();
-//  		} 
-// 		catch(Exception e)
-// 		{
-// 			
-// 		}
+		try
+  		{
+			Class.forName("codechicken.nei.api.API");
+ 			NEIFCLoader.register();
+  		} 
+ 		catch(Exception e)
+ 		{
+ 			
+ 		}
 
 		if(evt.getSide().isClient())
 		{
@@ -172,7 +178,6 @@ public class Frostcraft
 			}
 		}
         proxy.registerSidedElements();
-        PIPELINE.postInitialise();
     }
 	
 	@EventHandler
