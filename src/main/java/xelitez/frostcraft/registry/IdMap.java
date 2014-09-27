@@ -304,15 +304,6 @@ public class IdMap
 		EntityRegistry.registerModEntity(EntityCrossbowBolt.class, "CrossbowBolt", 5, Frostcraft.instance, 64, 100, false);
 		EntityRegistry.registerGlobalEntityID(EntityFrostGuard.class, "FrostGuard", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00CCFF);
 		EntityRegistry.registerModEntity(EntityFrostGuard.class, "FrostGuard", 6, Frostcraft.instance, 80, 1, true);
-        List<BiomeGenBase> listBiomes = new ArrayList<BiomeGenBase>();
-		for (BiomeGenBase biome : BiomeGenBase.getBiomeGenArray())
-        {
-			if(biome != null)
-			{
-				listBiomes.add(biome);
-			}
-        }
-		EntityRegistry.addSpawn(EntityFrostGuard.class, 150, 2, 3, EnumCreatureType.monster, listBiomes.toArray(new BiomeGenBase[listBiomes.size()]));
 		
 //		LanguageRegistry.instance().addStringLocalization(new EntityFrostWing().getCommandSenderName(), "Frost Wing");
 	}
