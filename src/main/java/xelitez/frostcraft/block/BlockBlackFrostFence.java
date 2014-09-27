@@ -8,11 +8,12 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import xelitez.frostcraft.registry.FrostcraftCreativeTabs;
 import xelitez.frostcraft.registry.IdMap;
 
-public class BlockBlackFrostFence extends BlockFence{
+public class BlockBlackFrostFence extends BlockFence implements IBlackFrost{
 
 	public BlockBlackFrostFence(Material par3Material) 
 	{
@@ -54,4 +55,11 @@ public class BlockBlackFrostFence extends BlockFence{
     {
     	return true;
     }
+
+	@Override
+	public boolean getsIgnoredByRenderEffects(IBlockAccess access, int par1, int par2, int par3, int side) 
+	{
+		return true;
+	}
+	
 }

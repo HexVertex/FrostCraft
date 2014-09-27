@@ -14,7 +14,7 @@ import xelitez.frostcraft.registry.FrostcraftCreativeTabs;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockBlackFrost extends Block
+public class BlockBlackFrost extends Block implements IBlackFrost
 {
 	public IIcon[] icons;
 	public String[] iconStrings = new String[] {"blackfrost", "blackfrost_cracked", "blackfrost_brick"};
@@ -94,6 +94,12 @@ public class BlockBlackFrost extends Block
     public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
         Block i1 = par1IBlockAccess.getBlock(par2, par3, par4);
-        return i1 == this ? false : super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5);
+        return i1 instanceof IBlackFrost && !((IBlackFrost)i1).getsIgnoredByRenderEffects(par1IBlockAccess, par2, par3, par4, par5) ? false : super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5);
     }
+
+	@Override
+	public boolean getsIgnoredByRenderEffects(IBlockAccess access, int par1, int par2, int par3, int side) 
+	{
+		return false;
+	}
 }
