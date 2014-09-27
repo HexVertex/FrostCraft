@@ -8,6 +8,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.util.ChunkCoordinates;
 import xelitez.frostcraft.registry.IdMap;
+import xelitez.frostcraft.world.StructureCastlePieces;
 import xelitez.frostcraft.world.WorldGenFrostWingTower;
 
 public class CommandGenerate extends CommandBase
@@ -44,9 +45,21 @@ public class CommandGenerate extends CommandBase
 			{
 				if(astring[0].equals("castle"))
 				{
-					ChunkCoordinates ck = icommandsender.getPlayerCoordinates();
-					WorldGenFrostWingTower.generateAt(new Random(), ck.posX, ck.posY, ck.posZ, icommandsender.getEntityWorld());
-					return;
+					StructureCastlePieces piece = new StructureCastlePieces();
+					if(piece.getComponentFromString(astring[1]) != piece.getComponentFromString("Default"))
+					{
+						ChunkCoordinates ck = icommandsender.getPlayerCoordinates();
+						piece.setOffset(ck.posX, ck.posY, ck.posZ);
+						if(astring.length > 2 && Integer.parseInt(astring[2]) < 4)
+						{
+							piece.setRotateOffset((byte)Integer.parseInt(astring[2]));
+						}
+						piece.getComponentFromString(astring[1]).addComponentParts(icommandsender.getEntityWorld(), new Random(), null);
+						return;
+					}
+//					ChunkCoordinates ck = icommandsender.getPlayerCoordinates();
+//					WorldGenFrostWingTower.generateAt(new Random(), ck.posX, ck.posY, ck.posZ, icommandsender.getEntityWorld());
+//					return;
 				}
 				if(astring[0].equals("cylinder"))
 				{
