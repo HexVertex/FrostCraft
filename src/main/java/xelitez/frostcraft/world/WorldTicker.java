@@ -55,7 +55,7 @@ public class WorldTicker
 		            int var5 = var4.chunkXPos * 16;
 		            int var6 = var4.chunkZPos * 16;
 		            Chunk var7 = world.getChunkFromChunkCoords(var4.chunkXPos, var4.chunkZPos);
-		            if (world.provider.canDoRainSnowIce(var7) && world.rand.nextInt(48) == 0)
+		            if (world.provider.canDoRainSnowIce(var7) && world.rand.nextInt(250) == 0)
 		            {
 		                this.updateLCG = this.updateLCG * 3 + 1013904223;
 		                int var8 = this.updateLCG >> 2;
