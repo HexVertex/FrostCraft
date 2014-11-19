@@ -76,7 +76,7 @@ public class Version
     	String NMC = "";
     	try
     	{
-    		URL url = new URL("https://raw2.github.com/XEZKalvin/FrostCraft/master/build.properties");
+    		URL url = new URL("https://raw.githubusercontent.com/XEZKalvin/FrostCraft/master/build.properties");
     		URLConnection connect = url.openConnection();
     		connect.setConnectTimeout(5000);
     		connect.setReadTimeout(5000);
