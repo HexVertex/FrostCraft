@@ -1,6 +1,7 @@
 package xelitez.frostcraft.world;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -10,6 +11,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.MapGenStructure;
+import net.minecraft.world.gen.structure.StructureBoundingBox;
+import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
 import net.minecraftforge.common.util.ForgeDirection;
 import xelitez.frostcraft.SaveHandler;
@@ -133,12 +136,30 @@ public class MapGenCastle extends MapGenStructure
 	
 	public static class Start extends StructureStart
 	{
+		StructureCastlePieces pieces;
+		
 		public Start(int x, int y, int z)
 		{
-			StructureCastlePieces pieces = new StructureCastlePieces();
+			pieces = new StructureCastlePieces();
 			pieces.createGrid();
 			pieces.addOffset(x, y, z);
-			pieces.gridToList(components);
+			components = pieces.gridToList(components);
 		}
+		
+		@Override
+	    public void generateStructure(World p_75068_1_, Random p_75068_2_, StructureBoundingBox p_75068_3_)
+	    {
+	        Iterator iterator = this.components.iterator();
+
+	        while (iterator.hasNext())
+	        {
+	        	pieces.setRotateOffset((byte)0);
+	            StructureComponent structurecomponent = (StructureComponent)iterator.next();
+	            if (!structurecomponent.addComponentParts(p_75068_1_, p_75068_2_, structurecomponent.getBoundingBox()))
+	            {
+	                iterator.remove();
+	            }
+	        }
+	    }
 	}
 }

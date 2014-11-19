@@ -7,7 +7,9 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.world.gen.structure.StructureBoundingBox;
 import xelitez.frostcraft.registry.IdMap;
+import xelitez.frostcraft.world.MapGenCastle;
 import xelitez.frostcraft.world.StructureCastlePieces;
 import xelitez.frostcraft.world.WorldGenFrostWingTower;
 
@@ -46,7 +48,7 @@ public class CommandGenerate extends CommandBase
 				if(astring[0].equals("castle"))
 				{
 					StructureCastlePieces piece = new StructureCastlePieces();
-					if(piece.getComponentFromString(astring[1]) != piece.getComponentFromString("Default"))
+					if(astring.length > 1 && piece.getComponentFromString(astring[1]) != piece.getComponentFromString("Default"))
 					{
 						ChunkCoordinates ck = icommandsender.getPlayerCoordinates();
 						piece.setOffset(ck.posX, ck.posY, ck.posZ);
@@ -54,7 +56,18 @@ public class CommandGenerate extends CommandBase
 						{
 							piece.setRotateOffset((byte)Integer.parseInt(astring[2]));
 						}
-						piece.getComponentFromString(astring[1]).addComponentParts(icommandsender.getEntityWorld(), new Random(), null);
+						int type = 0;
+						if(astring.length > 3)
+						{
+							type = Integer.parseInt(astring[3]);
+						}
+						piece.getComponentFromStringWithType(astring[1], type).addComponentParts(icommandsender.getEntityWorld(), new Random(), null);
+						return;
+					}
+					else if(astring.length == 1)
+					{
+						ChunkCoordinates ck = icommandsender.getPlayerCoordinates();
+						new MapGenCastle.Start(ck.posX, ck.posY + 1, ck.posZ).generateStructure(icommandsender.getEntityWorld(), new Random(), StructureBoundingBox.getNewBoundingBox());
 						return;
 					}
 //					ChunkCoordinates ck = icommandsender.getPlayerCoordinates();

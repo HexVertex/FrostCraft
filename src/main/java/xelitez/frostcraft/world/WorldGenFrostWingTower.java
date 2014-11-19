@@ -9,14 +9,12 @@ import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityMobSpawner;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.common.util.ForgeDirection;
 import xelitez.frostcraft.SaveHandler;
 import xelitez.frostcraft.registry.IdMap;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenFrostWingTower implements IWorldGenerator
@@ -49,11 +47,6 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 			}
 		}
 		return list;
-	}
-	
-	private static void sendChatMsg(String Msg)
-	{
-		FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().sendChatMsg(new ChatComponentText("<Frostcraft Generator> " + Msg));
 	}
 
 	@Override
@@ -132,7 +125,7 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 			{
 				for(int y = -1;y <= 20;y++)
 				{
-					if(Math.floor(Math.sqrt(x * x + z * z)) <= 7.0D)
+					if(x * x + z * z <= 7 * 7)
 					{
 						world.setBlockToAir(xCoord + x, yCoord + y, zCoord + z);
 						if(y == -1)
@@ -140,7 +133,7 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 							this.generateFloor(world, xCoord + x, yCoord + y - 1, zCoord + z);
 						}
 					}
-					if(Math.floor(Math.sqrt(x * x + z * z)) == 7.0D)
+					if(x * x + z * z == 7 * 7)
 					{
 						if(!(Math.abs(x) < 2 && z < 0 && y < 3 && y >= 0) && !(x == 0 && y == 3 && z < 0) && y <= 18)
 						{					
@@ -160,14 +153,14 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 					}
 					if(y == -1)
 					{
-						if(Math.floor(Math.sqrt(x * x + z * z)) <= 6.0D)
+						if(x * x + z * z <= 6 * 6)
 						{
 							world.setBlock(xCoord + x, yCoord + y, zCoord + z, IdMap.blockBlackFrost, 2, 2);
-							if(Math.floor(Math.sqrt(x * x + z * z)) == 6.0D)
+							if(x * x + z * z == 6 * 6)
 							{
 								world.setBlock(xCoord + x, yCoord + y, zCoord + z, IdMap.blockBlackFrost, 0, 2);
 							}
-							if(Math.floor(Math.sqrt(x * x + z * z)) == 2.0D)
+							if(x * x + z * z == 2 * 2)
 							{
 								world.setBlock(xCoord + x, yCoord + y, zCoord + z, IdMap.blockBlackFrost, 0, 2);
 							}
@@ -183,12 +176,12 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 					}
 					if(y == 17)
 					{
-						if(Math.floor(Math.sqrt(x * x + z * z)) > 2.0D)
+						if(x * x + z * z > 2 * 2)
 						{
-							if(Math.floor(Math.sqrt(x * x + z * z)) <= 6.0D)
+							if(x * x + z * z <= 6 * 6)
 							{
 								world.setBlock(xCoord + x, yCoord + y, zCoord + z, IdMap.blockBlackFrost, 2, 2);
-								if(Math.floor(Math.sqrt(x * x + z * z)) == 6.0D)
+								if(x * x + z * z == 6 * 6)
 								{
 									world.setBlock(xCoord + x, yCoord + y, zCoord + z, IdMap.blockBlackFrost, 0, 2);
 								}
@@ -207,7 +200,7 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 					{
 						world.setBlock(xCoord + x, yCoord + y, zCoord + z, IdMap.blockBlackFrost, 0, 2);
 					}
-					if(Math.floor(Math.sqrt(x * x + z * z)) <= 2.0D && y >= 0 && y <= 17)
+					if(x * x + z * z <= 2 * 2 && y >= 0 && y <= 17)
 					{
 						if(y % 4 == 0)
 						{
@@ -238,7 +231,7 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 							{
 								world.setBlock(xCoord + x, yCoord + y, zCoord + z, IdMap.blockBlackFrostStairBrick, 6, 2);
 							}
-							if(y == 17 && Math.floor(Math.sqrt(x * x + z * z)) == 2.0D)
+							if(y == 17 && x * x + z * z == 2 * 2)
 							{
 								if(z > 0 && x > 0)
 								{
@@ -358,7 +351,7 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 					{
 						for(int y = -1;y <= 20;y++)
 						{
-							if(Math.floor(Math.sqrt(x * x + z * z)) <= 7.0D)
+							if(x * x + z * z <= 7 * 7)
 							{
 								world.setBlockToAir(xCoord + x, yCoord + y, zCoord + z);
 								if(y == -1)
@@ -366,7 +359,7 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 									this.generateFloor(world, xCoord + x, yCoord + y - 1, zCoord + z);
 								}
 							}
-							if(Math.floor(Math.sqrt(x * x + z * z)) == 7.0D)
+							if(x * x + z * z == 7 * 7)
 							{
 								if(!(Math.abs(x) < 2 && z < 0 && y < 3 && y >= 0) && !(x == 0 && y == 3 && z < 0) && y <= 18)
 								{					
@@ -386,14 +379,14 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 							}
 							if(y == -1)
 							{
-								if(Math.floor(Math.sqrt(x * x + z * z)) <= 6.0D)
+								if(x * x + z * z <= 6 * 6)
 								{
 									world.setBlock(xCoord + x, yCoord + y, zCoord + z, IdMap.blockBlackFrost, 2, 2);
-									if(Math.floor(Math.sqrt(x * x + z * z)) == 6.0D)
+									if(x * x + z * z == 6 * 6)
 									{
 										world.setBlock(xCoord + x, yCoord + y, zCoord + z, IdMap.blockBlackFrost, 0, 2);
 									}
-									if(Math.floor(Math.sqrt(x * x + z * z)) == 2.0D)
+									if(x * x + z * z == 2 * 2)
 									{
 										world.setBlock(xCoord + x, yCoord + y, zCoord + z, IdMap.blockBlackFrost, 0, 2);
 									}
@@ -409,12 +402,12 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 							}
 							if(y == 17)
 							{
-								if(Math.floor(Math.sqrt(x * x + z * z)) > 2.0D)
+								if(x * x + z * z > 2 * 2)
 								{
-									if(Math.floor(Math.sqrt(x * x + z * z)) <= 6.0D)
+									if(x * x + z * z <= 6 * 6)
 									{
 										world.setBlock(xCoord + x, yCoord + y, zCoord + z, IdMap.blockBlackFrost, 2, 2);
-										if(Math.floor(Math.sqrt(x * x + z * z)) == 6.0D)
+										if(x * x + z * z == 6 * 6)
 										{
 											world.setBlock(xCoord + x, yCoord + y, zCoord + z, IdMap.blockBlackFrost, 0, 2);
 										}
@@ -433,7 +426,7 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 							{
 								world.setBlock(xCoord + x, yCoord + y, zCoord + z, IdMap.blockBlackFrost, 0, 2);
 							}
-							if(Math.floor(Math.sqrt(x * x + z * z)) <= 2.0D && y >= 0 && y <= 17)
+							if(x * x + z * z <= 2 * 2 && y >= 0 && y <= 17)
 							{
 								if(y % 4 == 0)
 								{
@@ -464,7 +457,7 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 									{
 										world.setBlock(xCoord + x, yCoord + y, zCoord + z, IdMap.blockBlackFrostStairBrick, 6, 2);
 									}
-									if(y == 17 && Math.floor(Math.sqrt(x * x + z * z)) == 2.0D)
+									if(y == 17 && x * x + z * z == 2 * 2)
 									{
 										if(z > 0 && x > 0)
 										{
@@ -572,93 +565,182 @@ public class WorldGenFrostWingTower implements IWorldGenerator
 	
 	public static void generateFrostWingCylinder(World world, int xCoord, int zCoord)
 	{
-		sendChatMsg("Generating Arena... 0%");
 		int yCoord = world.getActualHeight() - 27;
-		for(int x = -25;x <= 25;x++)
+
+		for(int y = 0;y <= 25;y++)
 		{
-			for(int z = -25;z <= 25;z++)
+			int x = 25;
+			int z = 0;
+			int radiusError = 1-x;
+			while(x >= z)
 			{
-				for(int y = 0;y <= 25;y++)
+				world.setBlock(x + xCoord, y + yCoord, z + zCoord, IdMap.blockBlackFrost, 0, 2);
+				world.setBlock(z + xCoord, y + yCoord, x + zCoord, IdMap.blockBlackFrost, 0, 2);
+				world.setBlock(-x + xCoord, y + yCoord, z + zCoord, IdMap.blockBlackFrost, 0, 2);
+				world.setBlock(-z + xCoord, y + yCoord, x + zCoord, IdMap.blockBlackFrost, 0, 2);
+				world.setBlock(-x + xCoord, y + yCoord, -z + zCoord, IdMap.blockBlackFrost, 0, 2);
+				world.setBlock(-z + xCoord, y + yCoord, -x + zCoord, IdMap.blockBlackFrost, 0, 2);
+				world.setBlock(x + xCoord, y + yCoord, -z + zCoord, IdMap.blockBlackFrost, 0, 2);
+				world.setBlock(z + xCoord, y + yCoord, -x + zCoord, IdMap.blockBlackFrost, 0, 2);
+				if(y == 0)
 				{
-					if(x == -15 && y == 5 && z == -15)
+					int i = x - 1;
+					while(i >= z)
 					{
-						sendChatMsg("Generating Arena... 20%");
+						world.setBlock(xCoord + i, y + yCoord, z + zCoord, Blocks.snow);
+						world.setBlock(xCoord - i, y + yCoord, z + zCoord, Blocks.snow);
+						world.setBlock(xCoord + i, y + yCoord, -z + zCoord, Blocks.snow);
+						world.setBlock(xCoord - i, y + yCoord, -z + zCoord, Blocks.snow);
+						world.setBlock(xCoord + z, y + yCoord, i + zCoord, Blocks.snow);
+						world.setBlock(xCoord - z, y + yCoord, i + zCoord, Blocks.snow);
+						world.setBlock(xCoord + z, y + yCoord, -i + zCoord, Blocks.snow);
+						world.setBlock(xCoord - z, y + yCoord, -i + zCoord, Blocks.snow);
+						i--;
 					}
-					if(x == -5 && y == 10 && z == -5)
-					{
-						sendChatMsg("Generating Arena... 40%");
-					}
-					if(x == 5 && y == 15 && z == 5)
-					{
-						sendChatMsg("Generating Arena... 60%");
-					}
-					if(x == 15 && y == 20 && z == 15)
-					{
-						sendChatMsg("Generating Arena... 80%");
-					}
-					if(x == 25 && y == 25 && z == 25)
-					{
-						sendChatMsg("Generating Arena... 100%");
-					}
-					if(y == 0 && Math.floor(Math.sqrt(x * x + z * z)) < 25.0D)
-					{
-						world.setBlock(xCoord + x, yCoord + y, zCoord + z, Blocks.snow, 0, 2);
-					}
-					if(Math.floor(Math.sqrt(x * x + z * z)) == 25.0D)
-					{
-						world.setBlock(xCoord + x, yCoord + y, zCoord + z, IdMap.blockBlackFrost, 0, 2);
-					}
+				}
+				z++;
+				if (radiusError<0)
+				{
+					radiusError += 2 * z + 1;
+				}
+				else
+				{
+					x--;
+					radiusError += 2 * (z - x + 1);
 				}
 			}
 		}
-		sendChatMsg("Generation complete!");
+//		sendChatMsg("Generating Arena... 0%");
+//		int yCoord = world.getActualHeight() - 27;
+//		for(int x = -25;x <= 25;x++)
+//		{
+//			for(int z = -25;z <= 25;z++)
+//			{
+//				for(int y = 0;y <= 25;y++)
+//				{
+//					if(x == -15 && y == 5 && z == -15)
+//					{
+//						sendChatMsg("Generating Arena... 20%");
+//					}
+//					if(x == -5 && y == 10 && z == -5)
+//					{
+//						sendChatMsg("Generating Arena... 40%");
+//					}
+//					if(x == 5 && y == 15 && z == 5)
+//					{
+//						sendChatMsg("Generating Arena... 60%");
+//					}
+//					if(x == 15 && y == 20 && z == 15)
+//					{
+//						sendChatMsg("Generating Arena... 80%");
+//					}
+//					if(x == 25 && y == 25 && z == 25)
+//					{
+//						sendChatMsg("Generating Arena... 100%");
+//					}
+//					if(y == 0 && x * x + z * z < 25 * 25)
+//					{
+//						world.setBlock(xCoord + x, yCoord + y, zCoord + z, Blocks.snow, 0, 2);
+//					}
+//					if(x * x + z * z <= 25 * 25 && x * x + z * z > 24 * 24)
+//					{
+//						world.setBlock(xCoord + x, yCoord + y, zCoord + z, IdMap.blockBlackFrost, 0, 2);
+//					}
+//				}
+//			}
+//		}
+//		sendChatMsg("Generation complete!");
 	}
 	
 	public static void removeCylinder(World world, int xCoord, int zCoord)
 	{
-		if(!world.isRemote)
+		int yCoord = world.getActualHeight() - 27;
+		for(int y = 0;y <= 25;y++)
 		{
-			sendChatMsg("Removing Arena... 0%");
-			int yCoord = world.getActualHeight() - 27;
-			for(int x = -25;x <= 25;x++)
+			int x = 25;
+			int z = 0;
+			int radiusError = 1-x;
+			while(x >= z)
 			{
-				for(int z = -25;z <= 25;z++)
+				world.setBlockToAir(x + xCoord, y + yCoord, z + zCoord);
+				world.setBlockToAir(z + xCoord, y + yCoord, x + zCoord);
+				world.setBlockToAir(-x + xCoord, y + yCoord, z + zCoord);
+				world.setBlockToAir(-z + xCoord, y + yCoord, x + zCoord);
+				world.setBlockToAir(-x + xCoord, y + yCoord, -z + zCoord);
+				world.setBlockToAir(-z + xCoord, y + yCoord, -x + zCoord);
+				world.setBlockToAir(x + xCoord, y + yCoord, -z + zCoord);
+				world.setBlockToAir(z + xCoord, y + yCoord, -x + zCoord);
+				if(y == 0)
 				{
-					for(int y = 0;y <= 25;y++)
+					int i = x - 1;
+					while(i >= z)
 					{
-						if(x == -15 && y == 5 && z == -15)
-						{
-							sendChatMsg("Removing Arena... 20%");
-						}
-						if(x == -5 && y == 10 && z == -5)
-						{
-							sendChatMsg("Removing Arena... 40%");
-						}
-						if(x == 5 && y == 15 && z == 5)
-						{
-							sendChatMsg("Removing Arena... 60%");
-						}
-						if(x == 15 && y == 20 && z == 15)
-						{
-							sendChatMsg("Removing Arena... 80%");
-						}
-						if(x == 25 && y == 25 && z == 25)
-						{
-							sendChatMsg("Removing Arena... 100%");
-						}
-						if(y == 0 && Math.floor(Math.sqrt(x * x + z * z)) < 25.0D)
-						{
-							world.setBlockToAir(xCoord + x, yCoord + y, zCoord + z);
-						}
-						if(Math.floor(Math.sqrt(x * x + z * z)) == 25.0D)
-						{
-							world.setBlockToAir(xCoord + x, yCoord + y, zCoord + z);
-						}
+						world.setBlockToAir(xCoord + i, y + yCoord, z + zCoord);
+						world.setBlockToAir(xCoord - i, y + yCoord, z + zCoord);
+						world.setBlockToAir(xCoord + i, y + yCoord, -z + zCoord);
+						world.setBlockToAir(xCoord - i, y + yCoord, -z + zCoord);
+						world.setBlockToAir(xCoord + z, y + yCoord, i + zCoord);
+						world.setBlockToAir(xCoord - z, y + yCoord, i + zCoord);
+						world.setBlockToAir(xCoord + z, y + yCoord, -i + zCoord);
+						world.setBlockToAir(xCoord - z, y + yCoord, -i + zCoord);
+						i--;
 					}
 				}
+				z++;
+				if (radiusError<0)
+				{
+					radiusError += 2 * z + 1;
+				}
+				else
+				{
+					x--;
+					radiusError += 2 * (z - x + 1);
+				}
 			}
-			sendChatMsg("Removal complete!");
 		}
+//		if(!world.isRemote)
+//		{
+//			sendChatMsg("Removing Arena... 0%");
+//			int yCoord = world.getActualHeight() - 27;
+//			for(int x = -25;x <= 25;x++)
+//			{
+//				for(int z = -25;z <= 25;z++)
+//				{
+//					for(int y = 0;y <= 25;y++)
+//					{
+//						if(x == -15 && y == 5 && z == -15)
+//						{
+//							sendChatMsg("Removing Arena... 20%");
+//						}
+//						if(x == -5 && y == 10 && z == -5)
+//						{
+//							sendChatMsg("Removing Arena... 40%");
+//						}
+//						if(x == 5 && y == 15 && z == 5)
+//						{
+//							sendChatMsg("Removing Arena... 60%");
+//						}
+//						if(x == 15 && y == 20 && z == 15)
+//						{
+//							sendChatMsg("Removing Arena... 80%");
+//						}
+//						if(x == 25 && y == 25 && z == 25)
+//						{
+//							sendChatMsg("Removing Arena... 100%");
+//						}
+//						if(y == 0 && x * x + z * z < 25 * 25)
+//						{
+//							world.setBlockToAir(xCoord + x, yCoord + y, zCoord + z);
+//						}
+//						if(x * x + z * z <= 25 * 25  && x * x + z * z > 24 * 24)
+//						{
+//							world.setBlockToAir(xCoord + x, yCoord + y, zCoord + z);
+//						}
+//					}
+//				}
+//			}
+//			sendChatMsg("Removal complete!");
+//		}
 	}
 	
 }
