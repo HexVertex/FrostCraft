@@ -15,6 +15,7 @@ public class EntityAIWanderInCastle extends EntityAIBase
     private double yPosition;
     private double zPosition;
     private double speed;
+    private int counter = 0;
 
     public EntityAIWanderInCastle(EntityCreature par1EntityCreature, double par2)
     {
@@ -28,6 +29,23 @@ public class EntityAIWanderInCastle extends EntityAIBase
      */
     public boolean shouldExecute()
     {
+    	if(entity.posX == this.xPosition && entity.posY == this.yPosition && entity.posZ == this.zPosition)
+    	{
+    		this.entity.getNavigator().clearPathEntity();
+    	}
+        if(entity.prevPosX == entity.posX && entity.prevPosZ == entity.posZ && !this.entity.getNavigator().noPath())
+        {
+        	counter++;
+        }
+        else
+        {
+        	counter = 0;
+        }
+        if(counter >= 60)
+        {
+        	this.entity.getNavigator().clearPathEntity();
+        	counter = 0;
+        }
         if (this.entity.getAge() >= 100)
         {
             return false;

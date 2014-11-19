@@ -51,7 +51,7 @@ public class EntityFrostGuard extends EntityCreature implements IRangedAttackMob
         this.tasks.addTask(3, new EntityAIAttackUsingWeapon(this, EntityAnimal.class, 1.2D, false, IdMap.itemSpear, EnumWeaponClass.MELEE));
         this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityAnimal.class, 1.2D, false));
         this.tasks.addTask(5, new EntityAIWanderInCastle(this, 1.0D));
-        this.tasks.addTask(6, new EntityAIWalkBackToLastBlackfrost(this, 1.1D));
+//        this.tasks.addTask(6, new EntityAIWalkBackToLastBlackfrost(this, 1.1D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
