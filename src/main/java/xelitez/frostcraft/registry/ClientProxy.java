@@ -3,11 +3,13 @@ package xelitez.frostcraft.registry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.client.ClientCommandHandler;
 import xelitez.frostcraft.client.gui.GuiFreezer;
 import xelitez.frostcraft.client.gui.GuiFrostEnforcer;
 import xelitez.frostcraft.client.gui.GuiFrostFurnace;
 import xelitez.frostcraft.client.gui.GuiFrostGenerator;
 import xelitez.frostcraft.client.gui.GuiThermalPump;
+import xelitez.frostcraft.command.ClientCommandDev;
 import xelitez.frostcraft.tileentity.TileEntityFreezer;
 import xelitez.frostcraft.tileentity.TileEntityFrostEnforcer;
 import xelitez.frostcraft.tileentity.TileEntityFrostFurnace;
@@ -38,6 +40,12 @@ public class ClientProxy extends CommonProxy
 			}
 		}
 		return null;
+	}
+	
+	@Override
+	public void registerSidedElements()
+	{
+        ClientCommandHandler.instance.registerCommand(new ClientCommandDev());
 	}
 	
 }
