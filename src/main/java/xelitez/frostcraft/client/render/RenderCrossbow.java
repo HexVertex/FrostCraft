@@ -165,6 +165,24 @@ public class RenderCrossbow implements IItemRenderer
 				GL11.glRotatef(120.0F, 1.0F, 0.0F, 0.0F);
 				RenderHelper.renderTriangle(-20.0F, 0.075F, 0.005F, 0.1F, false);
 				GL11.glPopMatrix();
+//				Test code
+//				float steps = 50.0F;
+//				float z = 1.0F;
+//				net.minecraft.client.renderer.RenderHelper.enableStandardItemLighting();
+//				GL11.glDisable(GL11.GL_TEXTURE_2D);
+//				GL11.glDisable(GL11.GL_CULL_FACE);
+//				for(float i = 0;i < steps;i += 1.0F)
+//				{
+//					GL11.glColor3f(Math.abs(MathHelper.sin((float)Math.PI * 2.0F / steps * i)) * 0.3F, Math.abs(MathHelper.sin((float)Math.PI * 2.0F / steps * i)) * 0.3F, 1.0F);
+//					GL11.glBegin(GL11.GL_QUADS);
+//					GL11.glVertex3f(MathHelper.sin((float)Math.PI * 2.0F / steps * i), MathHelper.cos((float)Math.PI * 2.0F / steps * i), z);
+//					GL11.glVertex3f(MathHelper.sin((float)Math.PI * 2.0F / steps * i) * 1.1F, MathHelper.cos((float)Math.PI * 2.0F / steps * i) * 1.1F, z);
+//					GL11.glVertex3f(MathHelper.sin((float)Math.PI * 2.0F / steps * (i + 1.0F)) * 1.1F, MathHelper.cos((float)Math.PI * 2.0F / steps * (i + 1.0F)) * 1.1F, z);
+//					GL11.glVertex3f(MathHelper.sin((float)Math.PI * 2.0F / steps * (i + 1.0F)), MathHelper.cos((float)Math.PI * 2.0F / steps * (i + 1.0F)), z);
+//					GL11.glEnd();
+//				}
+//				GL11.glEnable(GL11.GL_TEXTURE_2D);
+//				GL11.glEnable(GL11.GL_CULL_FACE);
 			}
 		}
 		
