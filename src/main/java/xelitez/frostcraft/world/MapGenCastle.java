@@ -10,96 +10,29 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.structure.MapGenStructure;
+import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
 import net.minecraftforge.common.util.ForgeDirection;
 import xelitez.frostcraft.SaveHandler;
+import cpw.mods.fml.common.IWorldGenerator;
 
-public class MapGenCastle extends MapGenStructure
+public class MapGenCastle implements IWorldGenerator
 {
-	private static List<BiomeGenBase> biomeList = new ArrayList<BiomeGenBase>();
+	private List<BiomeGenBase> biomeList = new ArrayList<BiomeGenBase>();
 	
 	private int[] spawnCoords = new int[3];
-	@Override
-	public String func_143025_a() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
-	static
+	public MapGenCastle()
 	{
 		biomeList.add(BiomeGenBase.iceMountains);
 		biomeList.add(BiomeGenBase.icePlains);
 		biomeList.add(BiomeGenBase.coldTaiga);
 		biomeList.add(BiomeGenBase.coldTaigaHills);
 	}
-
-	@Override
-	protected boolean canSpawnStructureAtCoords(int chunkX, int chunkZ) 
-	{
-		Random random = new Random();
-		int centerX = chunkX * 16 + random.nextInt(16);
-		int centerZ = chunkZ * 16 + random.nextInt(16);
-		if(!biomeList.contains(this.worldObj.getBiomeGenForCoords(centerX, centerZ)))
-		{
-			return false;
-		}
-		NBTTagCompound nbt = SaveHandler.getTagCompound(this.worldObj, false);
-		NBTTagList list = null;
-		if(nbt.hasKey("Castles"))
-		{
-			list = nbt.getTagList("Castles", 10);
-		}
-		if(list == null)
-		{
-			list = new NBTTagList();
-		}
-		List<Integer[]> intlist = new ArrayList<Integer[]>();
-		if(list != null)
-		{
-			for(int var0 = 0;var0 < list.tagCount();var0++)
-			{
-				NBTTagCompound nbt1 = (NBTTagCompound)list.getCompoundTagAt(var0);
-				Integer[] coords = new Integer[] {nbt1.getInteger("xCoord"), nbt1.getInteger("yCoord"), nbt1.getInteger("zCoord")};
-				intlist.add(coords);
-			}
-		}
-		
-		int centerY = 0;
-		for(Integer int1 : getPossibleYPos(this.worldObj, centerX, centerZ))
-		{
-			if(int1 > 50 && random.nextInt(6) == 2)
-			{
-				centerY = int1;
-			}
-		}
-
-		if(centerY != 0)
-		{
-			boolean canGenerate = true;
-			for(Integer[] ints : intlist)
-			{
-				int dx = ints[0] - centerX;
-				int dy = ints[1] - centerY;
-				int dz = ints[2] - centerZ;
-				if(Math.sqrt(dx * dx + dy * dy + dz * dz) < 750)
-				{
-					canGenerate = false;
-				}
-			}
-
-			if(canGenerate)
-			{
-				this.spawnCoords = new int[] {centerX, centerY, centerZ};
-				return true;
-			}
-		}
-		return false;
-	}
 	
-	private static List<Integer> getPossibleYPos(World world, int x, int z)
+	private List<Integer> getPossibleYPos(World world, int x, int z)
 	{
 		List<Integer> list = new ArrayList<Integer>();
 		for(int i = 50;i < world.getActualHeight() - 50;i++)
@@ -112,10 +45,9 @@ public class MapGenCastle extends MapGenStructure
 		return list;
 	}
 
-	@Override
-	protected StructureStart getStructureStart(int p_75049_1_, int p_75049_2_) 
+	private Start getStructureStart(World world) 
 	{
-		NBTTagCompound nbt = SaveHandler.getTagCompound(this.worldObj, false);
+		NBTTagCompound nbt = SaveHandler.getTagCompound(world, false);
 		NBTTagList list = null;
 		if(nbt.hasKey("Castles"))
 		{
@@ -146,6 +78,7 @@ public class MapGenCastle extends MapGenStructure
 			components = pieces.gridToList(components);
 		}
 		
+		@SuppressWarnings("rawtypes")
 		@Override
 	    public void generateStructure(World p_75068_1_, Random p_75068_2_, StructureBoundingBox p_75068_3_)
 	    {
@@ -154,12 +87,76 @@ public class MapGenCastle extends MapGenStructure
 	        while (iterator.hasNext())
 	        {
 	        	pieces.setRotateOffset((byte)0);
-	            StructureComponent structurecomponent = (StructureComponent)iterator.next();
-	            if (!structurecomponent.addComponentParts(p_75068_1_, p_75068_2_, structurecomponent.getBoundingBox()))
-	            {
-	                iterator.remove();
-	            }
+	        	StructureComponent structurecomponent = (StructureComponent)iterator.next();
+	        	if (!structurecomponent.addComponentParts(p_75068_1_, p_75068_2_, structurecomponent.getBoundingBox()))
+	        	{
+	        		iterator.remove();
+	        	}
 	        }
 	    }
 	}
+
+	@Override
+	public void generate(Random random, int chunkX, int chunkZ, World world,
+			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
+	{
+		int centerX = chunkX * 16 + random.nextInt(16);
+		int centerZ = chunkZ * 16 + random.nextInt(16);
+		if(!biomeList.contains(world.getBiomeGenForCoords(centerX, centerZ)))
+		{
+			return;
+		}
+		NBTTagCompound nbt = SaveHandler.getTagCompound(world, false);
+		NBTTagList list = null;
+		if(nbt.hasKey("Castles"))
+		{
+			list = nbt.getTagList("Castles", 10);
+		}
+		if(list == null)
+		{
+			list = new NBTTagList();
+		}
+		List<Integer[]> intlist = new ArrayList<Integer[]>();
+		if(list != null)
+		{
+			for(int var0 = 0;var0 < list.tagCount();var0++)
+			{
+				NBTTagCompound nbt1 = (NBTTagCompound)list.getCompoundTagAt(var0);
+				Integer[] coords = new Integer[] {nbt1.getInteger("xCoord"), nbt1.getInteger("yCoord"), nbt1.getInteger("zCoord")};
+				intlist.add(coords);
+			}
+		}
+
+		int centerY = 0;
+		for(Integer int1 : getPossibleYPos(world, centerX, centerZ))
+		{
+			if(int1 > 50 && random.nextInt(6) == 2)
+			{
+				centerY = int1;
+			}
+		}
+
+		if(centerY != 0)
+		{
+			boolean canGenerate = true;
+			for(Integer[] ints : intlist)
+			{
+				int dx = ints[0] - centerX;
+				int dy = ints[1] - centerY;
+				int dz = ints[2] - centerZ;
+				if(Math.sqrt(dx * dx + dy * dy + dz * dz) < 750)
+				{
+					canGenerate = false;
+				}
+			}
+
+			if(canGenerate)
+			{
+				this.spawnCoords = new int[] {centerX, centerY, centerZ};
+				Start start = this.getStructureStart(world);
+				start.generateStructure(world, random, null);
+			}
+		}
+	}
+	
 }

@@ -76,7 +76,7 @@ import xelitez.frostcraft.tileentity.TileEntityStatue;
 import xelitez.frostcraft.tileentity.TileEntityThermalMachines;
 import xelitez.frostcraft.tileentity.TileEntityThermalPipe;
 import xelitez.frostcraft.tileentity.TileEntityThermalPump;
-import xelitez.frostcraft.world.WorldGenFrostWingTower;
+import xelitez.frostcraft.world.MapGenCastle;
 import xelitez.frostcraft.world.WorldGenIcicles;
 import xelitez.frostcraft.world.WorldTypeWinterLand;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -145,13 +145,13 @@ public class IdMap
 		blockThermalPipe = new BlockThermalPipe(Material.iron).setHardness(0.4F).setStepSound(Block.soundTypeMetal).setBlockName("thermal_pipe").setBlockTextureName("frostcraft:thermal_pipe");
 		blockThermalMachines = new BlockThermalMachines( Material.iron).setHardness(2.5F).setStepSound(Block.soundTypeMetal).setBlockName("thermal_machine_block").setCreativeTab(FrostcraftCreativeTabs.FCMechanical).setBlockTextureName("frostcraft:thermal_machine_block");
 		blockIcicle = new BlockIcicle(Material.ice).setHardness(0.2F).setStepSound(Block.soundTypeGlass).setBlockName("icicle").setBlockTextureName("frostcraft:icicle");
-		blockBlackFrost = new BlockBlackFrost().setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundTypeStone).setBlockName("blackFrost").setBlockTextureName("frostcraft:blackFrost");
+		blockBlackFrost = new BlockBlackFrost().setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundTypeStone).setBlockName("blackFrost").setBlockTextureName("frostcraft:blackfrost");
 		blockBlackFrostStair = new BlockBlackFrostStairs(blockBlackFrost, 0).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundTypeStone).setBlockName("blackFrostStair").setBlockTextureName("frostcraft:blackFrostStair");
 		blockBlackFrostStairCobble = new BlockBlackFrostStairs(blockBlackFrost, 1).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundTypeStone).setBlockName("blackFrostStairCoble").setBlockTextureName("frostcraft:blackFrostStairCoble");
 		blockBlackFrostStairBrick = new BlockBlackFrostStairs(blockBlackFrost, 2).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundTypeStone).setBlockName("blackFrostStairBrick").setBlockTextureName("frostcraft:blackFrostStairBrick");
 		blockBlackFrostFenceSet = new BlockBlackFrostFence(Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundTypeStone).setBlockName("blackFrostFenceSet").setBlockTextureName("frostcraft:blackFrostFenceSet");
-		blockBlackFrostSingleSlabSet = (BlockSlab)new BlockBlackFrostSlab(false, Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundTypeStone).setBlockName("blackFrostSingleSlabSet").setBlockTextureName("frostcraft:blackFrost");
-		blockBlackFrostDoubleSlabSet = (BlockSlab)new BlockBlackFrostSlab(true, Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundTypeStone).setBlockName("blackFrostDoubleSlabSet").setBlockTextureName("frostcraft:blackFrost");
+		blockBlackFrostSingleSlabSet = (BlockSlab)new BlockBlackFrostSlab(false, Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundTypeStone).setBlockName("blackFrostSingleSlabSet").setBlockTextureName("frostcraft:blackfrost");
+		blockBlackFrostDoubleSlabSet = (BlockSlab)new BlockBlackFrostSlab(true, Material.ice).setHardness(1.0F).setLightOpacity(7).setStepSound(Block.soundTypeStone).setBlockName("blackFrostDoubleSlabSet").setBlockTextureName("frostcraft:blackfrost");
 		blockStatue = new BlockStatue(Material.rock).setBlockUnbreakable().setResistance(6000000.0F).setStepSound(Block.soundTypeStone).setBlockName("statue").setBlockTextureName("stone");
 		GameRegistry.registerBlock(blockThermalPipe, "ThermalPipe");
 		GameRegistry.registerBlock(blockThermalMachines, ItemThermalMachines.class, "ThermalPump");
@@ -309,7 +309,7 @@ public class IdMap
 	public void initialiseWorld()
 	{
 		GameRegistry.registerWorldGenerator(WorldGenIcicles.getInstance(), 1);
-		GameRegistry.registerWorldGenerator(WorldGenFrostWingTower.getInstance(), 1);
+		GameRegistry.registerWorldGenerator(new MapGenCastle(), 1);
 		worldTypeWinterland = new WorldTypeWinterLand("Endless Winter");
 	}
 	

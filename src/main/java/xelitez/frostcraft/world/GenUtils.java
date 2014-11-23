@@ -18,6 +18,10 @@ public class GenUtils
 	
 	private static int rotationMod = 0;
 	
+	private static boolean groundGen = false;
+	private static Block groundBlock = null;
+	private static int groundMeta = 0;
+	
 	public static void resetMinMax()
 	{
 		minX = Integer.MIN_VALUE;
@@ -40,11 +44,19 @@ public class GenUtils
 		rotationMod = 0;
 	}
 	
+	public static void resetGround()
+	{
+		groundGen = false;
+		groundBlock = null;
+		groundMeta = 0;
+	}
+	
 	public static void resetAll()
 	{
 		resetMinMax();
 		resetOffset();
 		resetRotation();
+		resetGround();
 	}
 	
 	public static void setOffset(int X, int Y, int Z)
@@ -80,9 +92,22 @@ public class GenUtils
 				y = ints[1];
 				z = ints[2];
 			}
+			if(groundGen && groundBlock != null && y == 0)
+			{
+				generateGround(world, x + offsetX, y + offsetY - 1, z + offsetZ);
+			}
 			return world.setBlock(offsetX + x, offsetY + y, offsetZ + z, block, meta, 2);
 		}
 		return false;
+	}
+	
+	private static void generateGround(World world, int x, int y, int z)
+	{
+		while(!world.getBlock(x, y, z).isBlockSolid(world, x, y, z, 0))
+		{
+			world.setBlock(x, y, z, groundBlock, groundMeta, 2);
+			y--;
+		}
 	}
 	
 	public static void generateHCylinder(World world, int height, int radius, Block block, int meta)
@@ -133,21 +158,18 @@ public class GenUtils
 				placeBlock(world, -z, y, -x, block, meta);
 				placeBlock(world, x, y, -z, block, meta);
 				placeBlock(world, z, y, -x, block, meta);
-				if(y == 0)
+				int i = x - 1;
+				while(i >= z)
 				{
-					int i = x - 1;
-					while(i >= z)
-					{
-						placeBlock(world, i, y, z, block, meta);
-						placeBlock(world, -i, y, z, block, meta);
-						placeBlock(world, i, y, -z, block, meta);
-						placeBlock(world, -i, y, -z, block, meta);
-						placeBlock(world, z, y, i, block, meta);
-						placeBlock(world, -z, y, i, block, meta);
-						placeBlock(world, z, y, -i, block, meta);
-						placeBlock(world, -z, y, -i, block, meta);
-						i--;
-					}
+					placeBlock(world, i, y, z, block, meta);
+					placeBlock(world, -i, y, z, block, meta);
+					placeBlock(world, i, y, -z, block, meta);
+					placeBlock(world, -i, y, -z, block, meta);
+					placeBlock(world, z, y, i, block, meta);
+					placeBlock(world, -z, y, i, block, meta);
+					placeBlock(world, z, y, -i, block, meta);
+					placeBlock(world, -z, y, -i, block, meta);
+					i--;
 				}
 				z++;
 				if (radiusError<0)
@@ -161,5 +183,16 @@ public class GenUtils
 				}
 			}
 		}
+	}
+
+	public static void setGroundGeneration(boolean b) 
+	{
+		groundGen = b;
+	}
+
+	public static void setGroundMaterial(Block block, int meta) 
+	{
+		groundBlock = block;
+		groundMeta = meta;
 	}
 }

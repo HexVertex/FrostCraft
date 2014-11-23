@@ -14,14 +14,15 @@ import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraftforge.common.ChestGenHooks;
+import xelitez.frostcraft.block.BlockStatue;
 import xelitez.frostcraft.registry.IdMap;
 
 public class StructureCastlePieces 
@@ -35,7 +36,7 @@ public class StructureCastlePieces
 	
 	private byte rotationMod = 0;
 	
-	private Random RNG = new Random();
+	public Random RNG = new Random();
 	
 	public StructureCastlePieces()
 	{
@@ -153,7 +154,6 @@ public class StructureCastlePieces
 	{
 		for(Entry<Integer[], StructureComponent> entry : grid.entrySet())
 		{
-			System.out.println(entry);
 			entry.getValue().getBoundingBox().offset(entry.getKey()[0] * 9, 0, entry.getKey()[1] * 9);
 			list.add(entry.getValue());
 		}
@@ -184,7 +184,6 @@ public class StructureCastlePieces
 	
 	public boolean placeBlock(World world, int x, int y, int z, Block block, int meta)
 	{
-		System.out.println("placing block");
 		for(int i = 0;i < rotationMod;i++)
 		{
 			int[] ints = new int[] {z, y, -x};
@@ -232,9 +231,25 @@ public class StructureCastlePieces
 					meta = 4 + (meta - 4 - 1) % 4;
 				}
 			}
+			if(block instanceof BlockStatue && meta < 4)
+			{
+				meta = (meta + 3) % 4;
+			}
 		}
-		System.out.println(offsetX);
+		if(y == -1)
+		{
+			this.generateGround(world, x + offsetX, y + offsetY - 1, z + offsetZ);
+		}
 		return world.setBlock(x + offsetX, y + offsetY, z + offsetZ, block, meta, 2);
+	}
+	
+	private void generateGround(World world, int x, int y, int z)
+	{
+		while(!world.getBlock(x, y, z).isBlockSolid(world, x, y, z, 0))
+		{
+			world.setBlock(x, y, z, IdMap.blockBlackFrost, 2, 2);
+			y--;
+		}
 	}
 	
 	public void fillAreaWithBlock(World world, int x, int y, int z, int x2, int y2, int z2, Block block, int meta)
@@ -315,6 +330,60 @@ public class StructureCastlePieces
 			}
 		}
 		return null;
+	}
+	
+	public void generateChest(World world, int x, int y, int z)
+	{
+		placeBlock(world, x, y, z, Blocks.chest);
+		for(int i = 0;i < rotationMod;i++)
+		{
+			int[] ints = new int[] {z, y, -x};
+			x = ints[0];
+			y = ints[1];
+			z = ints[2];
+		}
+		int rm = 0;
+		if(rotationMod == 1)
+		{
+			rm = rotationMod + 1;
+		}
+		else if(rotationMod == 2)
+		{
+			rm = rotationMod - 1;
+		}
+		else
+		{
+			rm = rotationMod;
+		}
+		world.setBlockMetadataWithNotify(offsetX + x, offsetY + y, offsetZ + z, 2 + rm, 3);
+		TileEntityChest te = (TileEntityChest)world.getTileEntity(offsetX + x, offsetY + y, offsetZ + z);
+		if(te != null)
+		{
+			WeightedRandomChestContent.generateChestContents(RNG, ChestGenHooks.getItems(STRONGHOLD_CORRIDOR, RNG), te, ChestGenHooks.getCount(STRONGHOLD_CORRIDOR, RNG));
+		}
+	}
+	
+	public void generateSpawner(World world, int x, int y, int z)
+	{
+		placeBlock(world, x, y, z, Blocks.mob_spawner);
+		for(int i = 0;i < rotationMod;i++)
+		{
+			int[] ints = new int[] {z, y, -x};
+			x = ints[0];
+			y = ints[1];
+			z = ints[2];
+		}
+		TileEntityMobSpawner te = (TileEntityMobSpawner)world.getTileEntity(offsetX + x, offsetY + y, offsetZ + z);
+		if(te != null)
+		{
+			NBTTagCompound nbt = new NBTTagCompound();
+			nbt.setString("EntityId", "FrostGuard");
+			nbt.setShort("Delay", (short)50);
+			nbt.setShort("MaxNearbyEntities", (short)3);
+			nbt.setShort("RequiredPlayerRange", (short)16);
+			nbt.setShort("SpawnRange", (short)8);
+			te.func_145881_a().readFromNBT(nbt);
+		}
 	}
 	
 	public class Castle extends StructureComponent
@@ -407,7 +476,8 @@ public class StructureCastlePieces
 				StructureBoundingBox p_74875_3_) 
 		{
 			super.addComponentParts(p_74875_1_, p_74875_2_, p_74875_3_);
-			
+			//Air
+			pieces.fillAreaWithBlock(p_74875_1_, -4, 0, -10, 4, 13, 5, Blocks.air, 0);
 			//Floor Section
 			pieces.fillAreaWithBlock(p_74875_1_, -5, -1, 4, 5, -1, 6, IdMap.blockBlackFrost, 2);
 			pieces.fillAreaWithBlock(p_74875_1_, -4, -1, -2, -4, -1, 2, IdMap.blockBlackFrost, 2);
@@ -587,6 +657,40 @@ public class StructureCastlePieces
 			//type-specific deco
 			if(this.getType() == 0)
 			{
+				pieces.placeBlocksSwapping(p_74875_1_, -1, 5, 2, 1, 5, 2, IdMap.blockBlackFrostSingleSlabSet, 6, IdMap.blockBlackFrost, 2);
+				pieces.placeBlocksSwapping(p_74875_1_, -1, 6, 2, 1, 6, 2, IdMap.blockBlackFrost, 2, IdMap.blockBlackFrostSingleSlabSet, 2);
+				pieces.placeCandle(p_74875_1_, 0, 6, 1, true);
+				pieces.placeBlocksSwapping(p_74875_1_, -1, 6, -2, 1, 6, -2, IdMap.blockBlackFrostStairBrick, 6, IdMap.blockBlackFrostStairBrick, 3);
+				pieces.placeBlock(p_74875_1_, 0, 5, -2, IdMap.blockBlackFrostStairBrick, 6);
+				pieces.fillAreaWithBlock(p_74875_1_, 0, 6, -4, 0, 6, -3, IdMap.blockBlackFrost, 2);
+				pieces.fillAreaWithBlock(p_74875_1_, -1, 6, -5, 1, 6, -5, IdMap.blockBlackFrost, 2);
+				pieces.fillAreaWithBlock(p_74875_1_, -3, 6, -6, 3, 6, -6, IdMap.blockBlackFrost, 2);
+				pieces.placeBlock(p_74875_1_, -4, 6, -6, IdMap.blockBlackFrostStairBrick, 4);
+				pieces.placeBlock(p_74875_1_, 4, 6, -6, IdMap.blockBlackFrostStairBrick, 5);
+				pieces.fillAreaWithBlock(p_74875_1_, -1, 6, -4, -1, 6, -3, IdMap.blockBlackFrostSingleSlabSet, 6);
+				pieces.fillAreaWithBlock(p_74875_1_, 1, 6, -4, 1, 6, -3, IdMap.blockBlackFrostSingleSlabSet, 6);
+				pieces.placeBlock(p_74875_1_, -2, 6, -5, IdMap.blockBlackFrostSingleSlabSet, 6);
+				pieces.placeBlock(p_74875_1_, 2, 6, -5, IdMap.blockBlackFrostSingleSlabSet, 6);
+				pieces.fillAreaWithBlock(p_74875_1_, -2, 6, -7, 2, 6, -7, IdMap.blockBlackFrostSingleSlabSet, 6);
+				pieces.placeBlock(p_74875_1_, -1, 7, -2, IdMap.blockBlackFrostSingleSlabSet, 2);
+				pieces.placeBlock(p_74875_1_, 1, 7, -2, IdMap.blockBlackFrostSingleSlabSet, 2);
+				pieces.fillAreaWithBlock(p_74875_1_, -1, 7, -4, -1, 7, -3, IdMap.blockBlackFrost, 2);
+				pieces.fillAreaWithBlock(p_74875_1_, 1, 7, -4, 1, 7, -3, IdMap.blockBlackFrost, 2);
+				pieces.placeBlock(p_74875_1_, -2, 7, -5, IdMap.blockBlackFrostSingleSlabSet, 2);
+				pieces.placeBlock(p_74875_1_, 2, 7, -5, IdMap.blockBlackFrostSingleSlabSet, 2);
+				pieces.placeBlock(p_74875_1_, -3, 7, -6, IdMap.blockBlackFrostStairBrick, 1);
+				pieces.placeBlock(p_74875_1_, -4, 8, -6, IdMap.blockBlackFrostStairBrick, 1);
+				pieces.placeBlock(p_74875_1_, -4, 7, -6, IdMap.blockBlackFrost, 2);
+				pieces.placeBlock(p_74875_1_, 3, 7, -6, IdMap.blockBlackFrostStairBrick, 0);
+				pieces.placeBlock(p_74875_1_, 4, 8, -6, IdMap.blockBlackFrostStairBrick, 0);
+				pieces.placeBlock(p_74875_1_, 4, 7, -6, IdMap.blockBlackFrost, 2);
+				pieces.placeBlock(p_74875_1_, -2, 7, -7, IdMap.blockBlackFrostSingleSlabSet, 2);
+				pieces.placeBlock(p_74875_1_, 2, 7, -7, IdMap.blockBlackFrostSingleSlabSet, 2);
+				pieces.fillAreaWithBlock(p_74875_1_, -1, 7, -7, 1, 7, -7, IdMap.blockBlackFrost, 2);
+				pieces.placeBlock(p_74875_1_, 0, 8, -7, IdMap.blockBlackFrostSingleSlabSet, 2);
+				pieces.placeBlock(p_74875_1_, 0, 8, -8, IdMap.blockBlackFrost, 2);
+				pieces.placeBlock(p_74875_1_, 0, 7, -8, IdMap.blockBlackFrostSingleSlabSet, 6);
+				pieces.generateSpawner(p_74875_1_, 0, 7, -6);
 				
 			}
 			else
@@ -623,6 +727,8 @@ public class StructureCastlePieces
 				StructureBoundingBox p_74875_3_) 
 		{
 			super.addComponentParts(p_74875_1_, p_74875_2_, p_74875_3_);
+			//AIR
+			pieces.fillAreaWithBlock(p_74875_1_, -2, 0, -2, 2, 11, 2, Blocks.air, 0);
 			//main structure
 			pieces.fillAreaWithBlock(p_74875_1_, -3, -1, 3, -3, 12, 3, IdMap.blockBlackFrost, 2);
 			pieces.fillAreaWithBlock(p_74875_1_, 3, -1, 3, 3, 12, 3, IdMap.blockBlackFrost, 2);
@@ -707,33 +813,17 @@ public class StructureCastlePieces
 		{
 			pieces.placeBlock(world, -1, yOffset, 2, IdMap.blockBlackFrostStairBrick, 0);
 			pieces.placeBlock(world, 1, yOffset, 2, IdMap.blockBlackFrostStairBrick, 1);
-			pieces.placeBlock(world, 0, yOffset, 2, Blocks.chest);
-//			int x = 0;
-//			int y = yOffset;
-//			int z = 2;
-//			for(int i = 0;i < rotationMod;i++)
-//			{
-//				int[] ints = new int[] {z, y, -x};
-//				x = ints[0];
-//				y = ints[1];
-//				z = ints[2];
-//			}
-//			TileEntityChest te = (TileEntityChest)world.getTileEntity(pieces.offsetX + x, pieces.offsetY + y, pieces.offsetZ + z);
-//			if(te != null)
-//			{
-//				WeightedRandomChestContent.generateChestContents(RNG, ChestGenHooks.getItems(STRONGHOLD_CORRIDOR, RNG), te, ChestGenHooks.getCount(STRONGHOLD_CORRIDOR, RNG));
-//			}
+			pieces.generateChest(world, 0, yOffset, 2);
 		}
 		
 		private void generateSpawner(World world, int yOffset)
 		{
-			pieces.placeBlock(world, 0, yOffset, 2, Blocks.chest);
+			pieces.generateSpawner(world, 0, yOffset, 2);
 		}
 		
 		private void generateTypeSpecificElements(World world, int side, int yOffset)
 		{
 			float toGen = MathHelper.floor_float(((float)this.getType() % (float)(Math.pow(6.0D, (double)side + 1.0D))) / (float)(Math.pow(6.0D, (double)side)));
-			System.out.println(new Integer(side).toString() + " " + new Float(toGen).toString());
 			if(toGen == 0)
 			{
 				this.generateLoot(world, yOffset);
@@ -750,6 +840,8 @@ public class StructureCastlePieces
 		
 		private void generateConnection(World world)
 		{
+			pieces.fillAreaWithBlock(world, -2, 0, 3, 2, 4, 4, Blocks.air, 0);
+			pieces.fillAreaWithBlock(world, -2, 6, 3, 2, 10, 4, Blocks.air, 0);
 			pieces.fillAreaWithBlock(world, -3, 0, 4, -3, 11, 4, IdMap.blockBlackFrost, 2);
 			pieces.fillAreaWithBlock(world, 3, 0, 4, 3, 11, 4, IdMap.blockBlackFrost, 2);
 			pieces.placeBlock(world, -3, 12, 4, IdMap.blockBlackFrostSingleSlabSet, 2);
@@ -758,7 +850,7 @@ public class StructureCastlePieces
 			pieces.fillAreaWithBlock(world, -2, 5, 4, 2, 5, 4, IdMap.blockBlackFrost, 2);
 			pieces.fillAreaWithBlock(world, -2, 11, 4, 2, 11, 4, IdMap.blockBlackFrost, 2);
 			pieces.fillAreaWithBlock(world, -1, -1, 2, -1, -1, 3, IdMap.blockBlackFrost, 0);
-			pieces.fillAreaWithBlock(world, 1, -1, 2, 1, -1, 3, IdMap.blockBlackFrost, 01);
+			pieces.fillAreaWithBlock(world, 1, -1, 2, 1, -1, 3, IdMap.blockBlackFrost, 1);
 			pieces.fillAreaWithBlock(world, -1, 5, 2, -1, 5, 3, IdMap.blockBlackFrost, 0);
 			pieces.fillAreaWithBlock(world, 1, 5, 2, 1, 5, 3, IdMap.blockBlackFrost, 0);
 		}
@@ -785,8 +877,12 @@ public class StructureCastlePieces
 			GenUtils.setOffset(pieces.offsetX, pieces.offsetY - 1, pieces.offsetZ);
 			GenUtils.setRotation(pieces.rotationMod);
 //			GenUtils.setGenLimit(-4, 4, 0, 256, -4, 4);
+			GenUtils.setGroundGeneration(true);
+			GenUtils.setGroundMaterial(IdMap.blockBlackFrost, 2);
+			GenUtils.generateCylinder(p_74875_1_, 24, 4, Blocks.air, 0);
 			GenUtils.generateHCylinder(p_74875_1_, 24, 4, IdMap.blockBlackFrost, 2);
 			GenUtils.generateCylinder(p_74875_1_, 1, 4, IdMap.blockBlackFrost, 2);
+			GenUtils.setGroundGeneration(false);
 			GenUtils.setOffset(pieces.offsetX, pieces.offsetY + 5, pieces.offsetZ);
 			GenUtils.generateCylinder(p_74875_1_, 1, 4, IdMap.blockBlackFrost, 2);
 			GenUtils.setOffset(pieces.offsetX, pieces.offsetY + 23, pieces.offsetZ);
@@ -936,6 +1032,16 @@ public class StructureCastlePieces
 				StructureBoundingBox p_74875_3_) 
 		{
 			super.addComponentParts(p_74875_1_, p_74875_2_, p_74875_3_);
+			//AIR
+			pieces.fillAreaWithBlock(p_74875_1_, -4, 0, -3, 4, 10, 3, Blocks.air, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, -7, 0, -6, 7, 10, -4, Blocks.air, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, -6, 0, -8, 6, 10, -7, Blocks.air, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, -5, 0, -9, 5, 10, -9, Blocks.air, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, -3, 0, -10, 3, 10, -10, Blocks.air, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, -13, 0, 4, 13, 10, 7, Blocks.air, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, -12, 0, 8, 12, 10, 9, Blocks.air, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, -11, 0, 10, 11, 10, 10, Blocks.air, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, -9, 0, 11, 9, 10, 11, Blocks.air, 0);
 			//floors
 			pieces.placeBlocksSwapping(p_74875_1_, -3, -1, -3, 3, -1, 3, IdMap.blockBlackFrost, 0, IdMap.blockBlackFrost, 2);
 			pieces.fillAreaWithBlock(p_74875_1_, -8, -1, -6, 8, -1, -4, IdMap.blockBlackFrost, 2);
@@ -1083,7 +1189,7 @@ public class StructureCastlePieces
 			pieces.placeCandle(p_74875_1_, 7, 0, -5, false);
 			pieces.placeCandle(p_74875_1_, -7, 0, -5, false);
 			pieces.placeCandle(p_74875_1_, 7, 0, 4, true);
-			pieces.placeCandle(p_74875_1_, 7, 0, 4, true);
+			pieces.placeCandle(p_74875_1_, -7, 0, 4, true);
 			pieces.placeCandle(p_74875_1_, 0, 0, 11, true);
 			
 			pieces.fillAreaWithBlock(p_74875_1_, -10, 6, 6, -10, 6, 7, IdMap.blockBlackFrostFenceSet, 0);
@@ -1120,16 +1226,68 @@ public class StructureCastlePieces
 			pieces.placeBlock(p_74875_1_, 5, 13, 6, Blocks.torch);
 			pieces.placeBlock(p_74875_1_, -5, 12, 6, IdMap.blockBlackFrostFenceSet, 0);
 			pieces.placeBlock(p_74875_1_, -5, 13, 6, Blocks.torch);
+			
+			pieces.placeBlocksSwapping(p_74875_1_, -1, 0, -11, -1, 1, -11, Blocks.iron_door, 1, Blocks.iron_door, 8);
+			pieces.placeBlocksSwapping(p_74875_1_, 1, 0, -11, 1, 1, -11, Blocks.iron_door, 1, Blocks.iron_door, 9);
+			//pattern
+			//bottom
+			pieces.fillAreaWithBlock(p_74875_1_, -3, -1, -8, -3, -1, -4, IdMap.blockBlackFrost, 0);
+			pieces.placeBlock(p_74875_1_, -2, -1, -8, IdMap.blockBlackFrost, 0);
+			pieces.placeBlock(p_74875_1_, -1, -1, -4, IdMap.blockBlackFrost, 0);
+			pieces.placeBlock(p_74875_1_, -2, -1, -5, IdMap.blockBlackFrost, 0);
+			pieces.placeBlock(p_74875_1_, -1, -1, -7, IdMap.blockBlackFrost, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, 3, -1, -8, 3, -1, -4, IdMap.blockBlackFrost, 0);
+			pieces.placeBlock(p_74875_1_, 2, -1, -8, IdMap.blockBlackFrost, 0);
+			pieces.placeBlock(p_74875_1_, 1, -1, -4, IdMap.blockBlackFrost, 0);
+			pieces.placeBlock(p_74875_1_, 2, -1, -5, IdMap.blockBlackFrost, 0);
+			pieces.placeBlock(p_74875_1_, 1, -1, -7, IdMap.blockBlackFrost, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, 0, -1, -6, 0, -1, -5, IdMap.blockBlackFrost, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, -2, -1, -9, 2, -1, -9, IdMap.blockBlackFrost, 0);
+			//center
+			pieces.placeBlock(p_74875_1_, -4, -1, -1, IdMap.blockBlackFrost, 0);
+			pieces.placeBlock(p_74875_1_, -4, -1, 1, IdMap.blockBlackFrost, 0);
+			pieces.placeBlock(p_74875_1_, 4, -1, -1, IdMap.blockBlackFrost, 0);
+			pieces.placeBlock(p_74875_1_, 4, -1, 1, IdMap.blockBlackFrost, 0);
+			//top
+			pieces.fillAreaWithBlock(p_74875_1_, -4, -1, 4, -4, -1, 6, IdMap.blockBlackFrost, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, -10, -1, 7, -5, -1, 7, IdMap.blockBlackFrost, 0);
+			pieces.placeBlock(p_74875_1_, -5, -1, 6, IdMap.blockBlackFrost, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, -2, -1, 4, -2, -1, 8, IdMap.blockBlackFrost, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, -4, -1, 9, -3, -1, 9, IdMap.blockBlackFrost, 0);
+			pieces.placeBlock(p_74875_1_, -3, -1, 8, IdMap.blockBlackFrost, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, 4, -1, 4, 4, -1, 6, IdMap.blockBlackFrost, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, 5, -1, 7, 10, -1, 7, IdMap.blockBlackFrost, 0);
+			pieces.placeBlock(p_74875_1_, 5, -1, 6, IdMap.blockBlackFrost, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, 2, -1, 4, 2, -1, 8, IdMap.blockBlackFrost, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, 3, -1, 9, 4, -1, 9, IdMap.blockBlackFrost, 0);
+			pieces.placeBlock(p_74875_1_, 3, -1, 8, IdMap.blockBlackFrost, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, 0, -1, 4, 0, -1, 9, IdMap.blockBlackFrost, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, -1, -1, 10, 1, -1, 10, IdMap.blockBlackFrost, 0);
+			pieces.fillAreaWithBlock(p_74875_1_, -4, -1, 11, 4, -1, 11, IdMap.blockBlackFrost, 0);
 			//platform
 			pieces.fillAreaWithBlock(p_74875_1_, -1, 12, 9, 1, 12, 11, IdMap.blockBlackFrost, 2);
-			pieces.fillAreaWithBlock(p_74875_1_, -1, 12, 8, 1, 12, 8, IdMap.blockBlackFrostStairBrick, 2);
+			pieces.fillAreaWithBlock(p_74875_1_, -2, 12, 8, 2, 12, 8, IdMap.blockBlackFrostStairBrick, 2);
 			pieces.fillAreaWithBlock(p_74875_1_, -2, 12, 9, -2, 12, 11, IdMap.blockBlackFrostStairBrick, 0);
 			pieces.fillAreaWithBlock(p_74875_1_, 2, 12, 9, 2, 12, 11, IdMap.blockBlackFrostStairBrick, 1);
+			pieces.placeBlocksSwapping(p_74875_1_, 0, 13, 11, 0, 15, 11, IdMap.blockStatue, 0, IdMap.blockStatue, 4, IdMap.blockStatue, 5);
 			pieces.placeBlock(p_74875_1_, -1, 13, 11, IdMap.blockBlackFrostFenceSet);
 			pieces.placeBlock(p_74875_1_, 1, 13, 11, IdMap.blockBlackFrostFenceSet);
 			pieces.placeBlock(p_74875_1_, -1, 14, 11, Blocks.torch);
 			pieces.placeBlock(p_74875_1_, 1, 14, 11, Blocks.torch);
+			
+			if(this.getType() == 1)
+			{
+				pieces.placeBlock(p_74875_1_, -1, 6, -5, IdMap.blockBlackFrostStairBrick, 0);
+				pieces.generateChest(p_74875_1_, 0, 6, -5);
+				pieces.placeBlock(p_74875_1_, 1, 6, -5, IdMap.blockBlackFrostStairBrick, 1);
+			}
 			return true;
+		}
+		
+		@Override
+		public int getTypeCount()
+		{
+			return 3;
 		}
 	}
 	
