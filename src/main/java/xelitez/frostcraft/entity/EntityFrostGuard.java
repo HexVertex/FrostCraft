@@ -26,7 +26,6 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import xelitez.frostcraft.entity.ai.EntityAIAttackNearestAttackableTargetInCastle;
 import xelitez.frostcraft.entity.ai.EntityAIAttackUsingWeapon;
-import xelitez.frostcraft.entity.ai.EntityAIWalkBackToLastBlackfrost;
 import xelitez.frostcraft.entity.ai.EntityAIWanderInCastle;
 import xelitez.frostcraft.enums.EnumWeaponClass;
 import xelitez.frostcraft.registry.IdMap;
