@@ -1,5 +1,5 @@
 @ECHO OFF
-cd /d j:\
-cd Modding\Mods\Frostcraft
+cd /d N:\
+cd Mods\Frostcraft
 gradlew.bat build
 pause

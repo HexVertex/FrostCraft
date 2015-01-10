@@ -10,10 +10,11 @@ import java.util.List;
 import xelitez.frostcraft.Frostcraft;
 import xelitez.frostcraft.Version;
 import xelitez.frostcraft.registry.Settings;
-import xelitez.updateutility.IXEZUpdate;
 import xelitez.updateutility.XEZLog;
+import xelitez.updateutility.XEZUpdateBase;
+import xelitez.updateutility.twitter.TwitterInstance;
 
-public class Update implements IXEZUpdate
+public class Update extends XEZUpdateBase
 {
 
 	@Override
@@ -103,6 +104,13 @@ public class Update implements IXEZUpdate
 	public String[] stringsToDelete() 
 	{
 		return new String[] {"Frostcraft"};
+	}
+	
+	public static TwitterInstance TwitterHandler = new TwitterInstance(0, "#Frostcraft", "KalvinFrosted").addUserID(415813796);
+	
+	public TwitterInstance getTInstance()
+	{
+		return TwitterHandler;
 	}
 
 }
